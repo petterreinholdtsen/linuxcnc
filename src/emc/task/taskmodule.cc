@@ -366,7 +366,6 @@ BOOST_PYTHON_MODULE(emctask) {
 	;
 #pragma GCC diagnostic pop
     class_ <EMC_JOINT_STAT, boost::noncopyable>("EMC_JOINT_STAT",no_init)
-	.def_readwrite("units", &EMC_JOINT_STAT::units)
 	.def_readwrite("backlash", &EMC_JOINT_STAT::backlash)
 	.def_readwrite("minPositionLimit", &EMC_JOINT_STAT::minPositionLimit)
 	.def_readwrite("maxPositionLimit" ,&EMC_JOINT_STAT::maxPositionLimit)

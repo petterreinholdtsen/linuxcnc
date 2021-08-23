@@ -2335,91 +2335,6 @@ static int emc_joint_type(ClientData clientdata,
     return TCL_ERROR;
 }
 
-static int emc_joint_units(ClientData clientdata,
-			   Tcl_Interp * interp, int objc,
-			   Tcl_Obj * CONST objv[])
-{
-    int joint;
-
-    CHECKEMC
-    if (objc != 2) {
-	setresult(interp,"emc_joint_units: need exactly 1 non-negative integer");
-	return TCL_ERROR;
-    }
-
-    if (emcUpdateType == EMC_UPDATE_AUTO) {
-	updateStatus();
-    }
-
-    if (TCL_OK == Tcl_GetIntFromObj(0, objv[1], &joint)) {
-	if (joint < 0 || joint >= EMCMOT_MAX_JOINTS) {
-	    setresult(interp,"emc_joint_units: joint out of bounds");
-	    return TCL_ERROR;
-	}
-
-	switch (emcStatus->motion.joint[joint].jointType) {
-	case EMC_LINEAR:
-	    /* try mm */
-	    if (CLOSE(emcStatus->motion.joint[joint].units, 1.0,
-		      LINEAR_CLOSENESS)) {
-		setresult(interp,"mm");
-		return TCL_OK;
-	    }
-	    /* now try inch */
-	    else if (CLOSE
-		     (emcStatus->motion.joint[joint].units, INCH_PER_MM,
-		      LINEAR_CLOSENESS)) {
-		setresult(interp,"inch");
-		return TCL_OK;
-	    }
-	    /* now try cm */
-	    else if (CLOSE(emcStatus->motion.joint[joint].units, CM_PER_MM,
-			   LINEAR_CLOSENESS)) {
-		setresult(interp,"cm");
-		return TCL_OK;
-	    }
-	    /* else it's custom */
-	    setresult(interp,"custom");
-	    return TCL_OK;
-	    break;
-
-	case EMC_ANGULAR:
-	    /* try degrees */
-	    if (CLOSE(emcStatus->motion.joint[joint].units, 1.0,
-		      ANGULAR_CLOSENESS)) {
-		setresult(interp,"deg");
-		return TCL_OK;
-	    }
-	    /* now try radians */
-	    else if (CLOSE
-		     (emcStatus->motion.joint[joint].units, RAD_PER_DEG,
-		      ANGULAR_CLOSENESS)) {
-		setresult(interp,"rad");
-		return TCL_OK;
-	    }
-	    /* now try grads */
-	    else if (CLOSE
-		     (emcStatus->motion.joint[joint].units, GRAD_PER_DEG,
-		      ANGULAR_CLOSENESS)) {
-		setresult(interp,"grad");
-		return TCL_OK;
-	    }
-	    /* else it's custom */
-	    setresult(interp,"custom");
-	    return TCL_OK;
-	    break;
-
-	default:
-	    setresult(interp,"custom");
-	    return TCL_OK;
-	    break;
-	}
-    }
-
-    setresult(interp,"emc_joint_units: invalid joint number");
-    return TCL_ERROR;
-}
-
 static int emc_program_linear_units(ClientData clientdata,
 				    Tcl_Interp * interp, int objc,
 				    Tcl_Obj * CONST objv[])
@@ -3733,9 +3648,6 @@ int Linuxcnc_Init(Tcl_Interp * interp)
 			 (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL);
 
     Tcl_CreateObjCommand(interp, "emc_joint_type", emc_joint_type,
-			 (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL);
-
-    Tcl_CreateObjCommand(interp, "emc_joint_units", emc_joint_units,
 			 (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL);
 
     Tcl_CreateObjCommand(interp, "emc_program_linear_units",

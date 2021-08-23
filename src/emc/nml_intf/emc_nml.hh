@@ -204,24 +204,7 @@ class EMC_JOINT_SET_JOINT:public EMC_JOINT_CMD_MSG {
 };
 
 /**
- * Set the units conversion factor.
- * @see EMC_JOINT_SET_INPUT_SCALE
- */
-class EMC_JOINT_SET_UNITS:public EMC_JOINT_CMD_MSG {
-  public:
-    EMC_JOINT_SET_UNITS():EMC_JOINT_CMD_MSG(EMC_JOINT_SET_UNITS_TYPE,
-					  sizeof(EMC_JOINT_SET_UNITS)) {
-    };
-
-    // For internal NML/CMS use only.
-    void update(CMS * cms);
-
-    // units per mm, deg for linear, angular
-    double units;
-};
-
-/**
- * Set the Axis backlash.
+ * Set the Joint backlash.
  * This command sets the backlash value.
  */
 class EMC_JOINT_SET_BACKLASH:public EMC_JOINT_CMD_MSG {
@@ -514,7 +497,6 @@ class EMC_JOINT_STAT:public EMC_JOINT_STAT_MSG {
 
     // configuration parameters
     unsigned char jointType;	// EMC_JOINT_LINEAR, EMC_JOINT_ANGULAR
-    double units;		// units per mm, deg for linear, angular
     double backlash;
     double minPositionLimit;
     double maxPositionLimit;

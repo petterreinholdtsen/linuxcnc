@@ -54,7 +54,6 @@ extern value_inihal_data old_inihal_data;
   calls:
 
   emcJointSetType(int joint, unsigned char jointType);
-  emcJointSetUnits(int joint, double units);
   emcJointSetBacklash(int joint, double backlash);
   emcJointSetMinPositionLimit(int joint, double limit);
   emcJointSetMaxPositionLimit(int joint, double limit);
@@ -75,7 +74,6 @@ static int loadJoint(int joint, EmcIniFile *jointIniFile)
     char jointString[16];
     const char *inistring;
     EmcJointType jointType;
-    double units;
     double backlash;
     double offset;
     double limit;
@@ -106,16 +104,6 @@ static int loadJoint(int joint, EmcIniFile *jointIniFile)
         jointType = EMC_LINEAR;	// default
         jointIniFile->Find(&jointType, "TYPE", jointString);
         if (0 != emcJointSetType(joint, jointType)) {
-            return -1;
-        }
-
-        // set units
-        if(jointType == EMC_LINEAR){
-            units = emcTrajGetLinearUnits();
-        }else{
-            units = emcTrajGetAngularUnits();
-        }
-        if (0 != emcJointSetUnits(joint, units)) {
             return -1;
         }
 

@@ -331,17 +331,6 @@
   joint_type <joint>
   Returns "linear", "angular", or "custom" for the type of the specified joint
 
-  joint_units <joint>
-  Returns "inch", "mm", "cm", or "deg", "rad", "grad", or "custom",
-  for the corresponding native units of the specified axis. The type
-  of the axis (linear or angular) is used to resolve which type of units
-  are returned. The units are obtained heuristically, based on the
-  EMC_AXIS_STAT::units numerical value of user units per mm or deg.
-  For linear joints, something close to 0.03937 is deemed "inch",
-  1.000 is "mm", 0.1 is "cm", otherwise it's "custom".
-  For angular joints, something close to 1.000 is deemed "deg",
-  PI/180 is "rad", 100/90 is "grad", otherwise it's "custom".
- 
   program_units
   program_linear_units
   Returns "inch", "mm", "cm", or "none", for the corresponding linear 
@@ -434,7 +423,7 @@ typedef enum {
   scAbsCmdPos, scAbsActPos, scRelCmdPos, scRelActPos, scJointPos, scPosOffset,
   scJointLimit, scJointFault, scJointHomed, scMDI, scTskPlanInit, scOpen, scRun,
   scPause, scResume, scStep, scAbort, scProgram, scProgramLine, scProgramStatus,
-  scProgramCodes, scJointType, scJointUnits, scProgramUnits, scProgramLinearUnits,
+  scProgramCodes, scJointType, scProgramUnits, scProgramLinearUnits,
   scProgramAngularUnits, scUserLinearUnits, scUserAngularUnits, scDisplayLinearUnits,
   scDisplayAngularUnits, scLinearUnitConversion,  scAngularUnitConversion, scProbeClear, 
   scProbeTripped, scProbeValue, scProbe, scTeleopEnable, scKinematicsType, scOverrideLimits, 
@@ -1387,7 +1376,6 @@ int commandSet(connectionRecType *context)
     case scProgramStatus: ret = rtStandardError; break;
     case scProgramCodes: ret = rtStandardError; break;
     case scJointType: ret = rtStandardError; break;
-    case scJointUnits: ret = rtStandardError; break;
     case scProgramUnits: 
     case scProgramLinearUnits: ret = rtStandardError; break;
     case scProgramAngularUnits: ret = rtStandardError; break;
@@ -2120,74 +2108,6 @@ static cmdResponseType getJointType(char *s, connectionRecType *context)
   return rtNoError;
 }
 
-static cmdResponseType getJointUnits(char *s, connectionRecType *context)
-{
-  const char *pJointUnits = "JOINT_UNITS";
-  char buf[16];
-  int joint, i;
-  
-  if (s == NULL) {
-    rtapi_strxcpy(context->outBuf, pJointUnits);
-    for (i=0; i<6; i++) {
-      switch (emcStatus->motion.joint[i].jointType) {
-        case EMC_LINEAR: 
-	  if (CLOSE(emcStatus->motion.joint[i].units, 1.0, LINEAR_CLOSENESS))
-	    rtapi_strxcat(context->outBuf, " MM");
-	  else 
-	    if (CLOSE(emcStatus->motion.joint[i].units, INCH_PER_MM,
-	      LINEAR_CLOSENESS)) rtapi_strxcat(context->outBuf, " INCH");
-	    else
-	      if (CLOSE(emcStatus->motion.joint[i].units, CM_PER_MM,
-	        LINEAR_CLOSENESS)) rtapi_strxcat(context->outBuf, " CM");
-	      else rtapi_strxcat(context->outBuf, " CUSTOM");
-	  break;
-	case EMC_ANGULAR:
-	  if (CLOSE(emcStatus->motion.joint[i].units, 1.0, ANGULAR_CLOSENESS))
-	    rtapi_strxcat(context->outBuf, " DEG");
-	  else
-  	    if (CLOSE(emcStatus->motion.joint[i].units, RAD_PER_DEG, ANGULAR_CLOSENESS))
-	      rtapi_strxcat(context->outBuf, " RAD");
-	    else
-	      if (CLOSE(emcStatus->motion.joint[i].units, GRAD_PER_DEG, ANGULAR_CLOSENESS))
-	        rtapi_strxcat(context->outBuf, " GRAD");
-	      else rtapi_strxcat(context->outBuf, " CUSTOM");
-	  break;
-	default: rtapi_strxcat(context->outBuf, " CUSTOM");
-	}
-      }
-    }
-  else {
-      joint = atoi(s);
-      switch (emcStatus->motion.joint[joint].jointType) {
-        case EMC_LINEAR: 
-	  if (CLOSE(emcStatus->motion.joint[joint].units, 1.0, LINEAR_CLOSENESS))
-	    rtapi_strxcpy(buf, "MM");
-	  else 
-	    if (CLOSE(emcStatus->motion.joint[joint].units, INCH_PER_MM,
-	      LINEAR_CLOSENESS)) rtapi_strxcpy(buf, "INCH");
-	    else
-	      if (CLOSE(emcStatus->motion.joint[joint].units, CM_PER_MM,
-	        LINEAR_CLOSENESS)) rtapi_strxcpy(buf, "CM");
-	      else rtapi_strxcpy(buf, "CUSTOM");
-	  break;
-	case EMC_ANGULAR:
-	  if (CLOSE(emcStatus->motion.joint[joint].units, 1.0, ANGULAR_CLOSENESS))
-	    rtapi_strxcpy(buf, "DEG");
-	  else
-  	    if (CLOSE(emcStatus->motion.joint[joint].units, RAD_PER_DEG, ANGULAR_CLOSENESS))
-	      rtapi_strxcpy(buf, "RAD");
-	    else
-	      if (CLOSE(emcStatus->motion.joint[joint].units, GRAD_PER_DEG, ANGULAR_CLOSENESS))
-	        rtapi_strxcpy(buf, "GRAD");
-	      else rtapi_strxcpy(buf, "CUSTOM");
-	  break;
-	default: rtapi_strxcpy(buf, "CUSTOM");
-      snprintf(context->outBuf, sizeof(context->outBuf), "%s %d %s", pJointUnits, joint, buf);
-      }
-    }
-  return rtNoError;
-}
-
 static cmdResponseType getProgramLinearUnits(char *s, connectionRecType *context)
 {
   const char *programUnits = "PROGRAM_UNITS %s";
@@ -2458,7 +2378,6 @@ int commandGet(connectionRecType *context)
     case scProgramStatus: ret = getProgramStatus(pch, context); break;
     case scProgramCodes: ret = getProgramCodes(pch, context); break;
     case scJointType: ret = getJointType(strtok(NULL, delims), context); break;
-    case scJointUnits: ret = getJointUnits(strtok(NULL, delims), context); break;
     case scProgramUnits: 
     case scProgramLinearUnits: ret = getProgramLinearUnits(pch, context); break;
     case scProgramAngularUnits: ret = getProgramAngularUnits(pch, context); break;

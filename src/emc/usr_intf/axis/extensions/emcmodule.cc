@@ -569,7 +569,6 @@ static void dict_add(PyObject *d, const char *name, int v) {
 static PyObject *Stat_joint_one(pyStatChannel *s, int jointno) {
     PyObject *res = PyDict_New();
     F(jointType);
-    F(units);
     F(backlash);
     F2("min_position_limit", minPositionLimit);
     F2("max_position_limit", maxPositionLimit);

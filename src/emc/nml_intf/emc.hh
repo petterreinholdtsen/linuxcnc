@@ -61,7 +61,6 @@ struct PM_CARTESIAN;
 // NML for EMC_JOINT
 
 #define EMC_JOINT_SET_JOINT_TYPE                       ((NMLTYPE) 101)
-#define EMC_JOINT_SET_UNITS_TYPE                      ((NMLTYPE) 102)
 #define EMC_JOINT_SET_MIN_POSITION_LIMIT_TYPE         ((NMLTYPE) 107)
 #define EMC_JOINT_SET_MAX_POSITION_LIMIT_TYPE         ((NMLTYPE) 108)
 #define EMC_JOINT_SET_FERROR_TYPE                     ((NMLTYPE) 111)
@@ -351,7 +350,6 @@ extern int emcAxisUpdate(EMC_AXIS_STAT stat[], int numAxes);
 // implementation functions for EMC_JOINT types
 
 extern int emcJointSetType(int joint, unsigned char jointType);
-extern int emcJointSetUnits(int joint, double units);
 extern int emcJointSetBacklash(int joint, double backlash);
 extern int emcJointSetMinPositionLimit(int joint, double limit);
 extern int emcJointSetMaxPositionLimit(int joint, double limit);

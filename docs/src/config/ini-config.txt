@@ -1121,11 +1121,6 @@ For more information on kinematics modules see the manpage: '$ man kins'
 * 'TYPE = LINEAR' -
     The type of joint, either LINEAR or ANGULAR.
 
-* 'UNITS = INCH' -
-    (((UNITS))) If specified, this setting overrides the related [TRAJ] UNITS setting.
-    (e.g., [TRAJ]LINEAR_UNITS if the TYPE of this joint is LINEAR,
-    [TRAJ]ANGULAR_UNITS if the TYPE of this joint is ANGULAR)
-
 * 'MAX_VELOCITY = 1.2' -
     Maximum velocity for this joint in <<sec:traj-section,machine units>> per second.
 

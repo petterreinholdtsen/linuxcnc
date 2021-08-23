@@ -111,20 +111,6 @@ int emcJointSetType(int joint, unsigned char jointType)
     return 0;
 }
 
-int emcJointSetUnits(int joint, double units)
-{
-    if (joint < 0 || joint >= EMCMOT_MAX_JOINTS) {
-	return 0;
-    }
-
-    JointConfig[joint].Units = units;
-
-    if (emc_debug & EMC_DEBUG_CONFIG) {
-        rcs_print("%s(%d, %.4f)\n", __FUNCTION__, joint, units);
-    }
-    return 0;
-}
-
 int emcJointSetBacklash(int joint, double backlash)
 {
 #ifdef ISNAN_TRAP
@@ -901,7 +887,6 @@ int emcJointUpdate(EMC_JOINT_STAT stat[], int numJoints)
 	joint = &(emcmotStatus.joint_status[joint_num]);
 
 	stat[joint_num].jointType = JointConfig[joint_num].Type;
-	stat[joint_num].units = JointConfig[joint_num].Units;
 	if (new_config) {
 	    stat[joint_num].backlash = joint->backlash;
 	    stat[joint_num].minPositionLimit = joint->min_pos_limit;

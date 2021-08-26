@@ -549,12 +549,6 @@ extern EMC_IO_STAT *emcIoStatus;
 // EMC MOTION status
 extern EMC_MOTION_STAT *emcMotionStatus;
 
-// values for EMC_JOINT_SET_JOINT, jointType
-enum EmcJointType {
-    EMC_LINEAR             = 1,
-    EMC_ANGULAR            = 2,
-};
-
 /**
  * Set the units conversion factor.
  * @see EMC_JOINT_SET_INPUT_SCALE

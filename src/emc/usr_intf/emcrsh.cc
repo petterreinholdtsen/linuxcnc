@@ -423,7 +423,7 @@ typedef enum {
   scAbsCmdPos, scAbsActPos, scRelCmdPos, scRelActPos, scJointPos, scPosOffset,
   scJointLimit, scJointFault, scJointHomed, scMDI, scTskPlanInit, scOpen, scRun,
   scPause, scResume, scStep, scAbort, scProgram, scProgramLine, scProgramStatus,
-  scProgramCodes, scJointType, scProgramUnits, scProgramLinearUnits,
+  scProgramCodes, scProgramUnits, scProgramLinearUnits,
   scProgramAngularUnits, scUserLinearUnits, scUserAngularUnits, scDisplayLinearUnits,
   scDisplayAngularUnits, scLinearUnitConversion,  scAngularUnitConversion, scProbeClear, 
   scProbeTripped, scProbeValue, scProbe, scTeleopEnable, scKinematicsType, scOverrideLimits, 
@@ -1375,7 +1375,6 @@ int commandSet(connectionRecType *context)
     case scProgramLine: ret = rtStandardError; break;
     case scProgramStatus: ret = rtStandardError; break;
     case scProgramCodes: ret = rtStandardError; break;
-    case scJointType: ret = rtStandardError; break;
     case scProgramUnits: 
     case scProgramLinearUnits: ret = rtStandardError; break;
     case scProgramAngularUnits: ret = rtStandardError; break;
@@ -2080,34 +2079,6 @@ static cmdResponseType getProgramCodes(char *s, connectionRecType *context)
   return rtNoError;
 }
 
-static cmdResponseType getJointType(char *s, connectionRecType *context)
-{
-  const char *pJointType = "JOINT_TYPE";
-  char buf[16];
-  int joint, i;
-  
-  if (s == NULL) {
-    rtapi_strxcpy(context->outBuf, pJointType);
-    for (i=0; i<6; i++) {
-      switch (emcStatus->motion.joint[i].jointType) {
-        case EMC_LINEAR: rtapi_strxcat(context->outBuf, " LINEAR"); break;
-	case EMC_ANGULAR: rtapi_strxcat(context->outBuf, " ANGULAR"); break;
-	default: rtapi_strxcat(context->outBuf, "CUSTOM");
-	}
-      }
-    }
-  else {
-      joint = atoi(s);
-      switch (emcStatus->motion.joint[joint].jointType) {
-        case EMC_LINEAR: rtapi_strxcpy(buf, " LINEAR"); break;
-	case EMC_ANGULAR: rtapi_strxcpy(buf, " ANGULAR"); break;
-	default: rtapi_strxcpy(buf, "CUSTOM");
-	}
-      snprintf(context->outBuf, sizeof(context->outBuf), "%s %d %s", pJointType, joint, buf);
-    }
-  return rtNoError;
-}
-
 static cmdResponseType getProgramLinearUnits(char *s, connectionRecType *context)
 {
   const char *programUnits = "PROGRAM_UNITS %s";
@@ -2377,7 +2348,6 @@ int commandGet(connectionRecType *context)
     case scProgramLine: ret = getProgramLine(pch, context); break;
     case scProgramStatus: ret = getProgramStatus(pch, context); break;
     case scProgramCodes: ret = getProgramCodes(pch, context); break;
-    case scJointType: ret = getJointType(strtok(NULL, delims), context); break;
     case scProgramUnits: 
     case scProgramLinearUnits: ret = getProgramLinearUnits(pch, context); break;
     case scProgramAngularUnits: ret = getProgramAngularUnits(pch, context); break;

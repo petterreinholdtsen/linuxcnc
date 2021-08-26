@@ -1288,6 +1288,8 @@ axis.py default for [DISPLAY]GEOMETRY was:"XYZBCUVW",is:"XYZABCUVW"
 Removed unused [JOINT_n]UNITS and support in emcsh.cc,emcrsh.cc
 emcmodule.cc (python-interface)
  
+Removed unused [JOINT_n]TYPE and support in emcsh.cc,emcrsh.cc
+emcmodule.cc (python-interface)
 
 === Code Updates
 

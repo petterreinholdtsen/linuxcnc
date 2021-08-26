@@ -452,11 +452,6 @@ no cero significa en posición.
 *input*:: '(devuelve float)' -
 entrada de posición actual.
 
-*jointType*:: '(devuelve entero)' -
-parámetro del tipo de configuración del eje, refleja
-[JOINT_n]TYPE. LINEAL=1, ANGULAR=2. Ver <<sec:axis-section, configuración 
-ini de articulacion>> para más detalles.
-
 *max_ferror*:: '(devuelve float)' -
 Máximo error de seguimiento. parámetro de configuración,
 refleja [JOINT_n]FERROR.

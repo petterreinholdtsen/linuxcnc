@@ -34,7 +34,6 @@ extern value_inihal_data old_inihal_data;
 
   Loads ini file params for joint, joint = 0, ...
 
-  TYPE <LINEAR ANGULAR>        type of joint
   MAX_VELOCITY <float>         max vel for joint
   MAX_ACCELERATION <float>     max accel for joint
   BACKLASH <float>             backlash
@@ -73,7 +72,6 @@ static int loadJoint(int joint, EmcIniFile *jointIniFile)
 {
     char jointString[16];
     const char *inistring;
-    EmcJointType jointType;
     double backlash;
     double offset;
     double limit;
@@ -100,13 +98,6 @@ static int loadJoint(int joint, EmcIniFile *jointIniFile)
     jointIniFile->EnableExceptions(EmcIniFile::ERR_CONVERSION);
     
     try {
-        // set joint type
-        jointType = EMC_LINEAR;	// default
-        jointIniFile->Find(&jointType, "TYPE", jointString);
-        if (0 != emcJointSetType(joint, jointType)) {
-            return -1;
-        }
-
         // set backlash
         backlash = 0;	                // default
         jointIniFile->Find(&backlash, "BACKLASH", jointString);

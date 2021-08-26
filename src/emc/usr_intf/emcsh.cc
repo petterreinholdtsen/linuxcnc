@@ -2294,47 +2294,6 @@ static int emc_program_codes(ClientData clientdata,
     return TCL_OK;
 }
 
-static int emc_joint_type(ClientData clientdata,
-			  Tcl_Interp * interp, int objc,
-			  Tcl_Obj * CONST objv[])
-{
-    int joint;
-
-    CHECKEMC
-    if (objc != 2) {
-	setresult(interp,"emc_joint_type: need exactly 1 non-negative integer");
-	return TCL_ERROR;
-    }
-
-    if (emcUpdateType == EMC_UPDATE_AUTO) {
-	updateStatus();
-    }
-
-    if (TCL_OK == Tcl_GetIntFromObj(0, objv[1], &joint)) {
-	if (joint < 0 || joint >= EMCMOT_MAX_JOINTS) {
-	    setresult(interp,"emc_joint_type: joint out of bounds");
-	    return TCL_ERROR;
-	}
-
-	switch (emcStatus->motion.joint[joint].jointType) {
-	case EMC_LINEAR:
-	    setresult(interp,"linear");
-	    break;
-	case EMC_ANGULAR:
-	    setresult(interp,"angular");
-	    break;
-	default:
-	    setresult(interp,"custom");
-	    break;
-	}
-
-	return TCL_OK;
-    }
-
-    setresult(interp,"emc_joint_type: invalid joint number");
-    return TCL_ERROR;
-}
-
 static int emc_program_linear_units(ClientData clientdata,
 				    Tcl_Interp * interp, int objc,
 				    Tcl_Obj * CONST objv[])
@@ -3645,9 +3604,6 @@ int Linuxcnc_Init(Tcl_Interp * interp)
 			 (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL);
 
     Tcl_CreateObjCommand(interp, "emc_program_codes", emc_program_codes,
-			 (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL);
-
-    Tcl_CreateObjCommand(interp, "emc_joint_type", emc_joint_type,
 			 (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL);
 
     Tcl_CreateObjCommand(interp, "emc_program_linear_units",

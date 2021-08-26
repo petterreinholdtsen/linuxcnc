@@ -27,7 +27,6 @@ EMC_AXIS_STAT_MSG(EMC_AXIS_STAT_TYPE, sizeof(EMC_AXIS_STAT))
 EMC_JOINT_STAT::EMC_JOINT_STAT():
 EMC_JOINT_STAT_MSG(EMC_JOINT_STAT_TYPE, sizeof(EMC_JOINT_STAT))
 {
-    jointType = EMC_LINEAR;
     backlash = 0.0;
     minPositionLimit = -1.0;
     maxPositionLimit = 1.0;

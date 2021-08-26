@@ -457,11 +457,6 @@ non-zero means in position.
 *input*:: '(returns float)' -
 current input position.
 
-*jointType*:: '(returns integer)' -
-type of axis configuration parameter, reflects
-[JOINT_n]TYPE. LINEAR=1, ANGULAR=2. See <<sec:axis-section, Joint
-ini configuration>> for details.
-
 *max_ferror*:: '(returns float)' -
 maximum following error. configuration
 parameter, reflects [JOINT_n]FERROR.

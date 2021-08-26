@@ -2400,9 +2400,6 @@ PyMODINIT_FUNC PyInit_linuxcnc(void)
     PyModule_AddObject(m, "tool", (PyObject*)&ToolResultType);
     PyModule_AddObject(m, "version", PyUnicode_FromString(PACKAGE_VERSION));
 
-    ENUMX(4, EMC_LINEAR);
-    ENUMX(4, EMC_ANGULAR);
-
     ENUMX(9, EMC_TASK_INTERP_IDLE);
     ENUMX(9, EMC_TASK_INTERP_READING);
     ENUMX(9, EMC_TASK_INTERP_PAUSED);

@@ -9843,6 +9843,124 @@ HOME</string>
                              <property name="verticalSpacing">
                               <number>8</number>
                              </property>
+                             <item row="10" column="1">
+                              <widget class="QLabel" name="kerfcross_periods_lbl">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>110</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>Void Periods</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="9" column="0">
+                              <widget class="DoubleScale" name="kerfcross_slope">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>136</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>176</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                               </property>
+                               <property name="decimals">
+                                <number>0</number>
+                               </property>
+                               <property name="minimum">
+                                <double>1.000000000000000</double>
+                               </property>
+                               <property name="maximum">
+                                <double>10000.000000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="10" column="0">
+                              <widget class="DoubleScale" name="kerfcross_periods">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>136</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>176</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="alignment">
+                                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                               </property>
+                               <property name="decimals">
+                                <number>0</number>
+                               </property>
+                               <property name="minimum">
+                                <double>1.000000000000000</double>
+                               </property>
+                               <property name="maximum">
+                                <double>10.000000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="9" column="1">
+                              <widget class="QLabel" name="kerfcross_slope_lbl">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>110</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>Void Slope</string>
+                               </property>
+                              </widget>
+                             </item>
                              <item row="0" column="0">
                               <widget class="DoubleScale" name="thc_delay">
                                <property name="sizePolicy">
@@ -10056,7 +10174,7 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="3" column="0">
+                             <item row="5" column="0">
                               <widget class="DoubleScale" name="cornerlock_threshold">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -10105,8 +10223,8 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="3" column="1">
-                              <widget class="QLabel" name="label_41">
+                             <item row="5" column="1">
+                              <widget class="QLabel" name="cornerlock_threshold_lbl">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                                  <horstretch>0</horstretch>
@@ -10130,7 +10248,7 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="4" column="0">
+                             <item row="6" column="0">
                               <widget class="DoubleScale" name="kerfcross_override">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -10176,7 +10294,7 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="4" column="1">
+                             <item row="6" column="1">
                               <widget class="QLabel" name="kerfcross_override_lbl">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -10201,7 +10319,7 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="5" column="0">
+                             <item row="3" column="0">
                               <widget class="DoubleScale" name="pid_i_gain">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -10244,32 +10362,7 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="5" column="1">
-                              <widget class="QLabel" name="pid_i_gain_lbl">
-                               <property name="sizePolicy">
-                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                                 <horstretch>0</horstretch>
-                                 <verstretch>0</verstretch>
-                                </sizepolicy>
-                               </property>
-                               <property name="minimumSize">
-                                <size>
-                                 <width>110</width>
-                                 <height>0</height>
-                                </size>
-                               </property>
-                               <property name="maximumSize">
-                                <size>
-                                 <width>150</width>
-                                 <height>16777215</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string>PID-I</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="6" column="0">
+                             <item row="4" column="0">
                               <widget class="DoubleScale" name="pid_d_gain">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -10312,7 +10405,32 @@ HOME</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="6" column="1">
+                             <item row="3" column="1">
+                              <widget class="QLabel" name="pid_i_gain_lbl">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>110</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="text">
+                                <string>PID-I</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="4" column="1">
                               <widget class="QLabel" name="pid_d_gain_lbl">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">

@@ -48,7 +48,6 @@ MAX_VELOCITY = 1.2
 MAX_ACCELERATION = 20.0
 
 [JOINT_0]
-TYPE =                  LINEAR
 MAX_VELOCITY =          1.2
 MAX_ACCELERATION =      20.0
 MIN_LIMIT =             -10.0
@@ -64,7 +63,6 @@ MAX_VELOCITY = 1.2
 MAX_ACCELERATION = 20.0
 
 [JOINT_1]
-TYPE =                  LINEAR
 MAX_VELOCITY =          1.2
 MAX_ACCELERATION =      20.0
 MIN_LIMIT =             -10.0
@@ -80,7 +78,6 @@ MAX_VELOCITY = 1.2
 MAX_ACCELERATION = 20.0
 
 [JOINT_2]
-TYPE =                  LINEAR
 MAX_VELOCITY =          1.2
 MAX_ACCELERATION =      20.0
 MIN_LIMIT =             -2.0
@@ -94,7 +91,6 @@ MAX_VELOCITY = 90.0
 MAX_ACCELERATION = 1200.0
 
 [JOINT_3]
-TYPE =                  ANGULAR
 MAX_VELOCITY =          90.0
 MAX_ACCELERATION =      1200.0
 HOME_SEARCH_VEL =       0.0

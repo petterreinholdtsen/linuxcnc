@@ -54,7 +54,6 @@ MAX_ACCELERATION = 200
 MAX_ACCELERATION = 200
 
 [JOINT_0]
-            TYPE = LINEAR
        MAX_LIMIT =   1e10
        MIN_LIMIT =  -1e10
     MAX_VELOCITY =  10
@@ -72,7 +71,6 @@ MAX_ACCELERATION = 200.0
    HOME_SEQUENCE =   0
 
 [JOINT_2]
-            TYPE = LINEAR
        MAX_LIMIT =   1e10
        MIN_LIMIT =  -1e10
     MAX_VELOCITY =  10

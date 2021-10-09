@@ -46,7 +46,6 @@ KINEMATICS = trivkins
 MAX_ACCELERATION = 50.0
 
 [JOINT_0]
-                   TYPE = LINEAR
                    HOME = 0.000
            MAX_VELOCITY = 5
        MAX_ACCELERATION = 50.0
@@ -65,7 +64,6 @@ MAX_ACCELERATION = 50.0
 MAX_ACCELERATION = 50.0
 
 [JOINT_1]
-                   TYPE = LINEAR
                    HOME = 0.000
            MAX_VELOCITY = 5
        MAX_ACCELERATION = 50.0
@@ -84,7 +82,6 @@ MAX_ACCELERATION = 50.0
 MAX_ACCELERATION = 50.0
 
 [JOINT_2]
-                   TYPE = LINEAR
                    HOME = 0.0
            MAX_VELOCITY = 5
        MAX_ACCELERATION = 50.0

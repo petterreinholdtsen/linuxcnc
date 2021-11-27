@@ -1,3 +1,4 @@
+:lang: en
 [[cha:tooledit-gui]]
 
 = Tool Edit GUI
@@ -38,7 +39,7 @@ following ini file setting:
 
 image::images/tooledit-columns.png[align="center", alt="Tool Edit GUI - Column Selection"]
 
-.INI File Syntax
+\.INI File Syntax
 ----
 [DISPLAY]
 TOOL_EDITOR = tooledit column_name column_name ...
@@ -59,8 +60,10 @@ program. For example, if the program is in the user PATH, typing
 ----
 tooledit
 Usage:
-tooledit filename
-tooledit [column_1 ... column_n] filename
+       tooledit filename
+       tooledit [column_1 ... column_n] filename
+
+Valid column names are: x y z a b c u v w diam front back orien
 ----
 
 To synchronize a standalone 'tooledit' with a running LinuxCNC

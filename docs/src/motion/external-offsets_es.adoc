@@ -1,6 +1,6 @@
 :lang: es
 
-[[cha:external-offsets]]
+[[cha:external-offsets]](((externaloffsets)))
 
 = Offsets Externos de Ejes
 
@@ -27,11 +27,13 @@ Para cada letra de eje (*L* será uno de x,y,z,a,b,c,u,v,w):
 . Si no es cero, OFFSET_AV_RATIO (*r*), ajusta la velocidad y aceleración máxima convencional (planificada)
   para preservar las restricciones en [AXIS_L]:
 
+---
   velocidad máxima planificada   = (1-r) * MAX_VELOCITY
   velocidad de offset externo    = (  r) * MAX_VELOCITY
 
   aceleración máxima planificada = (1-r) * MAX_ACCELERATIOIN
   aceleración de offset externo  = (  r) * MAX_ACCELERATION
+---
 
 == Pines Hal
 
@@ -59,8 +61,7 @@ pines utilizados para volante jog.
 === Cálculo de offset
 
 En cada período servo, el pin 'axis.L.eoffset-count' se compara con
-el valor en el periodo anterior. El aumento o disminución (delta positivo
-o negativo) del pin 'axis.L.eoffset-count' se multiplica
+el valor en el periodo anterior. El aumento o disminución (delta positivo o negativo) del pin 'axis.L.eoffset-count' se multiplica
 por el valor actual del pin 'axis.L.eoffset-scale'. Este producto es
 acumulado en un registro interno y exportado al pin Hal
 'axis.L.eoffset-request'. El registro de acumulación se reinicia
@@ -76,7 +77,7 @@ alcanza un límite soft de la coordenada 'L'.
 Para muchas aplicaciones, el pin 'axis.L.eoffset-scale' es constante
 y la respuesta neta 'axis.L.eoffset-request' a
 'axis.L.eoffset-count' es equivalente al producto del
-valor acumulado de 'axis.L.eoffset-count' y el valor (constante) del pin 
+valor acumulado de 'axis.L.eoffset-count' y el valor (constante) del pin
 'axis.L.eoffset-scale'.
 
 === Máquina apagada/encendida
@@ -109,8 +110,7 @@ Cuando se aplican offsets externos y el movimiento alcanza un límite soft
 (por aumentos de offset externo o jogging teleop o movimiento coordinado),
 se activa el pin hal 'motion.eoffset-limited' y el
 valor del eje se mantiene nominalmente al del límite soft. Este pin hal puede
-ser utilizado por la lógica hal asociada para truncar cuentas de eoffsets adicionales
-o para detener la máquina (conectando a 'halui.machine.off' por
+ser utilizado por la lógica hal asociada para truncar cuentas de eoffsets adicionales o para detener la máquina (conectando a 'halui.machine.off' por
 ejemplo). Si el eje se mueve dentro de los límites soft, el
 pin 'motion.eoffset-limited' se reinicia.
 
@@ -126,7 +126,7 @@ y eoffset-scale. En general, el valor del pin 'axis.L.eoffset'
 retrasa el valor de 'axis.L.eoffset-request' puesto que
 el offset externo está sujeto a un límite de aceleración.
 Cuando se opera en un límite soft, las actualizaciones adicionales de
-'axis.L.eoffset-count' continuará afectando al 
+'axis.L.eoffset-count' continuará afectando al
 offset externo solicitado como se refleja en el pin Hal 'axis.L.eoffset-request'.
 
 Cuando se hace jogging teleop con offsets externos habilitados *y*
@@ -134,7 +134,7 @@ con valores distintos de cero, el movimiento se detendrá al encontrar un límit
 en el eje infractor *sin un intervalo de desaceleración*.
 Del mismo modo, durante el movimiento coordinado con offsets externos
 habilitados, alcanzar un límite soft detendrá el movimiento sin
-fase de desaceleración. Para este caso, no importa si 
+fase de desaceleración. Para este caso, no importa si
 los offsets son cero.
 
 Cuando el movimiento se detiene sin fase de desaceleración,
@@ -161,7 +161,7 @@ para devolver el offset a cero.
 Los offsets externos están diseñados para usarse con offsets 'pequeños' que
 se aplican dentro de los límites soft.
 
-Cuando se aplican offsets externos, se respetan los límites soft tanto para jogging teleop como 
+Cuando se aplican offsets externos, se respetan los límites soft tanto para jogging teleop como
 para movimiento coordinado. Sin embargo, cuando se alcanza un límite soft
 durante el movimiento coordinado, la reduccion del
 offset externo culpable *no produce alejamiento* del límite soft
@@ -207,7 +207,7 @@ $ sim_pin axis.z.eoffset-enable axis.z.eoffset-scale axis.z.eoffset-counts
 
 El uso de offsets externos se facilita mostrando información
 relacionada con los offsets actuales: el valor actual de eoffset y
-el valor de eoffset solicitado, pos-cmd del eje, y (para una 
+el valor de eoffset solicitado, pos-cmd del eje, y (para una
 máquina con cinemática de identidad) pos-cmd y offset del motor de la articulación correspondiente.
 La configuración sim proporcionada (ver más abajo) muestra un ejemplo de panel pyvcp para la gui Axis.
 
@@ -215,7 +215,7 @@ En ausencia de una pantalla personalizada, se puede iniciar *halshow* como
 una aplicación auxiliar con una lista de observación personalizada.
 
 Ejemplo de configuración de archivos ini para simular conexiones del pin hal
-eoffset y mostrar información de eoffset para el eje z (para cinemática 
+eoffset y mostrar información de eoffset para el eje z (para cinemática
 de identidad con z==joint2):
 
 ----
@@ -243,7 +243,7 @@ pin+motion.eoffset-limited
 == Ejemplos
 
 Las configuraciones de simulación proporcionadas demuestran el uso de
-offsets externos como punto de partida para personalización de hardware 
+offsets externos como punto de partida para personalización de hardware
 real del usuario.
 
 Las configuraciones sim utilizan la configuración ini '[HAL]HALFILE = LIB:basic_sim.tcl'
@@ -265,7 +265,7 @@ offsets externos en cualquier eje.
 Se proporcionan pantallas para mostrar todas las posiciones importantes y
 valores de offset.
 
-Una gui sim_pin proporciona controles para los pines de offset del eje: eoffset-scale, 
+Una gui sim_pin proporciona controles para los pines de offset del eje: eoffset-scale,
 eoffset-count (a través de la señal e:<L>counts) y eoffset-clear
 (a través de la señal e:clearall)
 
@@ -290,7 +290,7 @@ a las entradas externas de offset de la coordenada z.
 
 Los LED del panel se proporcionan para mostrar los estados de elementos importantes.
 
-Se proporcionan controles para modificar la configuración del archivo ini para 
+Se proporcionan controles para modificar la configuración del archivo ini para
 velocidad máxima y aceleración máxima del eje Z.
 
 Se proporcionan controles para configurar los parámetros del generador de forma de onda.

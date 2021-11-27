@@ -1,4 +1,6 @@
-[[cha:starting-linuxcnc]]
+:lang: en
+
+[[cha:starting-linuxcnc]](((Starting LinuxCNC)))
 
 = Starting LinuxCNC
 
@@ -22,15 +24,16 @@ GladeVCP objects with HAL pins you must use the postgui HAL file to make any
 connections to those pins. See the <<sec:hal-section,[HAL]>> section of the
 INI configuration for more information.
 
-[[sub:configuration-selector]]
+[[sub:configuration-selector]](((Configuration Selection)))
 
-=== Configuration Selector
+.Configuration Selector
 
-If no ini file is passed to the linuxcnc script it loads the configuration 
+If no ini file is passed to the linuxcnc script it loads the configuration
 selector so you can choose and save a sample configuration. Once a sample
 configuration has been saved it can be modified to suit your application.
 The configuration files are saved in linuxcnc/configs directory.
 
 .Configuration Selector
 
-image::images/configuration-selector.png[align="center", alt="LinuxCNC Configuration Selector"]
+image::images/configuration-selector.png["LinuxCNC Configuration Selector",align="center"]
+

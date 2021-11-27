@@ -91,7 +91,7 @@ This is the input value that will be displayed with the gauge needle and in the 
 It must be set to a value between 0 and the maximum value.
 
 * 'Setpoint' -
-This is a value that determines the location of a small marker on the gauge face. 
+This is a value that determines the location of a small marker on the gauge face.
 It must be set to a value between 0 and the maximum value.
 
 
@@ -258,7 +258,7 @@ qproperty-off_color: #444;
 }
 ----
 
-or for a particular button: 
+or for a particular button:
 ----
 Indicated_PushButton #button_estop{
 qproperty-on_color: black;
@@ -406,12 +406,12 @@ It is based on pyQT's QLabel
 === LCD Number Widget
 
 This widget displays HAL float/s32/bit values in a LCD looking way. +
-It can display numbers in decimal, hexadecimal, binary and octal formats 
+It can display numbers in decimal, hexadecimal, binary and octal formats
 by setting the property 'mode'. +
 When using floats you can set a formatting string. +
 You must set the property 'digitCount' to an appropriate setting to display the largest number. +
 
-==== Properties 
+==== Properties
 
 * 'pin_name': +
 Option string to be used as the HAL pin name. If set to an empty string the widget name will be used. +
@@ -614,7 +614,7 @@ qproperty-off_color: #444;
 }
 ----
 
-or for a particular button: 
+or for a particular button:
 ----
 Indicated_PushButton #button_estop{
 qproperty-on_color: black;
@@ -913,7 +913,7 @@ Typical template for metric mode in true state, might be: 'Metric Mode' +
 
 * 'false_textTemplate' +
 This will be the text set when the option is true. +
-You can use Qt rich text code for different fonts/colours etc. + 
+You can use Qt rich text code for different fonts/colours etc. +
 Typical template for metric mode in false state, might be: 'Imperial Mode' +
 
 It is based on pyQT's QLabel
@@ -1000,7 +1000,7 @@ This uses python formatting rules to set the text output. +
 This is usually used for imperial (G20) or angular numerical settings, though +
 not every option has imperial/metric conversion. +
 One can use %s for no conversion, %d for integer conversion, %f for float conversion. etc +
-You can also use Qt rich text code. + 
+You can also use Qt rich text code. +
 Typical template used for formatting imperial float numbers to text eg. '%9.4f' or '%9.4f inch' +
 
 * 'alt_textTemplate' +
@@ -1067,7 +1067,7 @@ options. This is the preferred way to use these options +
 These properties that can be set in designer, in python handler code or +
 (if appropriate) in stylesheets.
 
-.These include: 
+.These include:
 
 * 'halCompBaseName': +
 If left empty Qtvcp will use the screen's name as the HAL component's basename. +
@@ -1128,7 +1128,7 @@ Color of transparent layer shown when the message dialog is shown.
 
 * 'closeDialog_option': +
 sets up the standard close screen prompt dialog
- 
+
 * 'entryDialog_option': +
 sets up the numerical entry dialog
 
@@ -1232,7 +1232,7 @@ self.w.screen_options.setProperty('play_sounds_option',False)
 ie. In style sheets +
 Here we can reference the widget by QtDesigner user defined name +
 or by widget class name. +
- 
+
 ----
 /* red, green, blue 0-255, alpha 0-100% or 0.0 to 1.0 */
 /* the # sign is used to refer to QtDesigner defined widget name */
@@ -1295,7 +1295,7 @@ Under the heading: 'NOTIFY_OPTIONS'
 [NOTE]
 
 
-In Debian/Ubuntu/Mint based systems these sounds should be available as sound-type entries above: + 
+In Debian/Ubuntu/Mint based systems these sounds should be available as sound-type entries above: +
 (These Sound options require python3-gst1.0 installed.) +
 
 * ERROR
@@ -1420,7 +1420,7 @@ qproperty-flashRate: 150;
 }
 ----
 
-It is based on the LED widget 
+It is based on the LED widget
 
 === StatusAdjustmentBar
 
@@ -1448,14 +1448,14 @@ It is based on pyQT's QToolButton
 .Macrotab
 image::images/qtvcp_macro.png["QTvcp led",scale="25%"]
 
-This Widget allows a user to select and adjust special macro programs for 
+This Widget allows a user to select and adjust special macro programs for
 doing small jobs. +
 It uses images for visual representation of the macro and for an icon. +
 It searches for special macros using the INI definition: +
 [source,INI]
 ----
 [RS274NGC]
-SUBROUTINE_PATH = 
+SUBROUTINE_PATH =
 ----
 The macros are Oword subroutine with special comments to work with the launcher. +
 The first three lines must have the keywords: (The forth is optional) +
@@ -1463,7 +1463,7 @@ Here is a sample for the first four lines in an Oword file: +
 ----
 ; MACROCOMMAND=Entry1,Entry2
 ; MACRODEFAULTS=0,true
-; MACROIMAGE=my_image.svg,Icon layer number, Macro layer number 
+; MACROIMAGE=my_image.svg,Icon layer number, Macro layer number
 ; MACROOPTIONS=load:yes,save:yes,default:default.txt,path:~/macros
 ----
 
@@ -1865,7 +1865,7 @@ the message dict. +
 * 'MESSAGE':'your text'    -Title message text in bold
 * 'MORE':'your more text' - standard text under the heading
 * 'DETAILS':'hidden text' - initial hidden text
-* 'TYPE':'OK' -type can be 'OK', 'YESNO', 'OKCANCEL' 
+* 'TYPE':'OK' -type can be 'OK', 'YESNO', 'OKCANCEL'
 * 'ICON':'INFO' -icon can be 'QUESTION','INFO','CRITICAL','WARNING'
 * 'PINNAME' -not implemented yet
 * 'FOCUSTEXT':None -text to display if focus overlay is used. Use None for no text.
@@ -2082,7 +2082,7 @@ Sets the buttons popup tooltip descriptive text. +
 
 * 'setLight(state)': +
 Sets the highlight indicator to the true color or false color. +
-The set_highlight() function must be used prior to set the indicator to use. +  
+The set_highlight() function must be used prior to set the indicator to use. +
 
 ==== signals
 These signals will be sent when buttons are pressed. +

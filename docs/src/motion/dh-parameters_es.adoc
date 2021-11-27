@@ -1,9 +1,8 @@
 :lang: es
 
-[[cha:dh-parameters]] (((DH parameters Examples)))
+[[cha:dh-parameters]](((DH parameters Examples)))
 
-= Configuración de parámetros "modificados" Denavit-Hartenberg (DH) para
-'genserkins'
+= Configuración de parámetros "modificados" Denavit-Hartenberg (DH) para 'genserkins'
 
 == Preludio
 
@@ -15,19 +14,17 @@ Este documento ilustra un método para configurar los parámetros DH para un rob
 Mitsubishi RV-6SDL en LinuxCNC utilizando la cinemática 'genserkins'.
 
 [NOTE]
-
 Este documento no cubre la creación de un modelo 'vismach' que,
 aunque ciertamente es muy útil, requiere un modelado igual de cuidadoso
 para que coincida con el modelo 'genserkins' derivado en este documento.
 
 [NOTE]
-
 Puede haber errores y/o defectos: ¡use bajo su propio riesgo!
 
 == General
 
 Con la proliferación de robots industriales ha aumentado el
-interés por controlar robots usados ​​con LinuxCNC. Un tipo común de robot
+interés por controlar robots usados con LinuxCNC. Un tipo común de robot
 utilizado en la industria y la fabricación es el "manipulador en serie"
 diseñado como una serie de articulaciones motorizadas conectadas por eslabones rígidos.
 Los robots en serie a menudo tienen seis articulaciones requeridas para los seis grados de
@@ -37,9 +34,9 @@ que se extiende desde una base hasta un efector final.
 
 El control de dicho robot en serie requiere el cálculo de la
 posición y orientación del efector final en relación con un sistema de coordenadas de referencia
-cuando se conocen los ángulos articulares (* cinemática directa*) y también el cálculo inverso, 
+cuando se conocen los ángulos articulares (*cinemática directa*) y también el cálculo inverso,
 más complejo, de los ángulos articulares requeridos para una posición de efector final dada y
-la orientación en relación con el sistema de coordenadas de referencia (* cinematica inversa *). 
+la orientación en relación con el sistema de coordenadas de referencia (*cinematica inversa*).
 Las herramientas matemáticas estándar utilizadas para estos
 cálculos son matrices que son, básicamente, tablas de parámetros y
 fórmulas que facilitan el manejo de rotaciones y traslaciones
@@ -48,12 +45,12 @@ involucrado en cálculos de cinemática directa e inversa.
 No es necesaria familiaridad detallada con las matemáticas para un robot en serie
 ya que LinuxCNC proporciona un módulo de cinemática que implementa un
 algoritmo llamado 'genserkins' para calcular cinemática directa e inversa
-para un robot serie genérico. Para controlar un robot serie específico, 
+para un robot serie genérico. Para controlar un robot serie específico,
 'genserkins' debe contar con datos para que pueda
 construir un modelo matemático de la estructura mecánica del robot y
 así hacer las matemáticas.
 
-Los datos requeridos deben estar en una forma estandarizada, 
+Los datos requeridos deben estar en una forma estandarizada,
 introducida por Jacques Denavit y Richard Hartenberg en los
 años cincuenta y se llaman parámetros DH. Denavit y Hartenberg utilizan
 cuatro parámetros para describir cómo se vincula una articulación con la siguiente.
@@ -66,8 +63,8 @@ Como suele ser el caso, este "estándar" ha sido modificado por otros
 autores que han introducido "parámetros DH modificados" y se debe ser
 muy cuidadoso porque 'genserkins' usa "parámetros DH modificados" como los
 descritos en la publicación "Introducción a la robótica, mecánica y
-Control" de John J. Craig. Tenga en cuenta que se puede encontrar mucha información 
-sobre los 'parámetros DH', pero rara vez el autor define qué convención se usa realmente. 
+Control" de John J. Craig. Tenga en cuenta que se puede encontrar mucha información
+sobre los 'parámetros DH', pero rara vez el autor define qué convención se usa realmente.
 Además, algunas personas han encontrado
 necesario cambiar el parámetro llamado 'a' a 'r' y así hemos agregado
 mas confusión Este documento se adhiere a la convención en la
@@ -87,9 +84,8 @@ Queda claro que para hacer esto, uno debe decidir sobre
 las direcciones positivas de todas las articulaciones antes de comenzar a derivar
 parámetros!
 
-La diferencia entre notaciones "estándar" y "modificadas" está en cómo se asignan
-los parámetros a los enlaces. Usando 
-los parámetros DH  "estándar" en 'genserkins' *no* dará el modelo matemático correcto.
+La diferencia entre notaciones "estándar" y "modificadas" está en cómo se asignan los parámetros a los enlaces.
+Usando los parámetros DH  "estándar" en 'genserkins' *no* dará el modelo matemático correcto.
 
 == Parámetros DH modificados usados en 'genserkins'
 
@@ -101,11 +97,9 @@ imposible definir la posición 0° de nuestras articulaciones de robots de forma
 
 Los tres parámetros configurables son:
 
-. *alpha*: rotación positiva o negativa (en radianes) alrededor del eje X
-del "sistema de coordenadas actual"
+. *alpha*: rotación positiva o negativa (en radianes) alrededor del eje X del "sistema de coordenadas actual"
 
-. *a*: distancia positiva, a lo largo de X, entre dos ejes de articulacion especificados en
-'unidades máquina' (mm o pulgadas) definidas en el archivo ini del sistema.
+. *a*: distancia positiva, a lo largo de X, entre dos ejes de articulacion especificados en 'unidades máquina' (mm o pulgadas) definidas en el archivo ini del sistema.
 
 . *d*: longitud positiva o negativa a lo largo de Z (también en 'unidades máquina')
 
@@ -119,8 +113,8 @@ eje de la siguiente articulación.
 == Numeración de articulaciones y parámetros
 
 La primera articulación en LinuxCNC es joint-0 (porque en el software
-el conteo comienza con 0) mientras que la mayoría de las publicaciones comienzan con el número
-'1'. Eso también se aplica a todos los parámetros. Es decir, la numeración
+el conteo comienza con 0) mientras que la mayoría de las publicaciones comienzan con el número '1'.
+Eso también se aplica a todos los parámetros. Es decir, la numeración
 comienza con a-0, alpha-0, d-0 y termina con a-5, alpha-5 y d-5. Mantener
 esto en mente al seguir una publicación para configurar parámetros 'genserkins'.
 
@@ -130,7 +124,7 @@ La convención debe comenzar colocando el CS de referencia en la base del
 robot con su eje Z coincidiendo con el eje de la primera articulación
 y su eje X apuntando hacia el siguiente eje de articulación.
 
-Esto también dará como resultado que los valores de DRO en LinuxCNC haga referencia a 
+Esto también dará como resultado que los valores de DRO en LinuxCNC haga referencia a
 a ese punto. Una vez hecho esto, establece a-0 y alfa-0 en 0. Lo anterior
 La publicación mencionada (Craig) también establece d-0 a 0, lo cual es confuso
 cuando se necesita un offset de desplazamiento para tener la
@@ -153,50 +147,47 @@ apunte a establecerlo de otra manera que 0.
 
 == Ejemplo detallado (RV-6SL)
 
-A continuación se describe un método para derivar los "Parámetros DH modificados" para un 
-Mitsubishi RV-6SDL y cómo configurar los parámetros en el archivo HAL que se utilizará con la cinemática 'genserkins' en
-LinuxCNC. Las dimensiones necesarias se toman mejor de un dibujo dimensional
-proporcionado por el fabricante del robot.
+A continuación se describe un método para derivar los "Parámetros DH modificados" para un Mitsubishi RV-6SDL y
+cómo configurar los parámetros en el archivo HAL que se utilizará con la cinemática 'genserkins' en LinuxCNC.
+Las dimensiones necesarias se toman mejor de un dibujo dimensional proporcionado por el fabricante del robot.
 
-imagen::rv-6sl/rv-6sl-001.jpg[align="center"]
+image::rv-6sl/rv-6sl-001.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-002.jpg[align="center"]
+image::rv-6sl/rv-6sl-002.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-003.jpg[align="center"]
+image::rv-6sl/rv-6sl-003.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-004.jpg[align="center"]
+image::rv-6sl/rv-6sl-004.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-005.jpg[align="center"]
+image::rv-6sl/rv-6sl-005.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-006.jpg[align="center"]
+image::rv-6sl/rv-6sl-006.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-007.jpg[align="center"]
+image::rv-6sl/rv-6sl-007.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-008.jpg[align="center"]
+image::rv-6sl/rv-6sl-008.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-009.jpg[align="center"]
+image::rv-6sl/rv-6sl-009.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-010.jpg[align="center"]
+image::rv-6sl/rv-6sl-010.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-011.jpg[align="center"]
+image::rv-6sl/rv-6sl-011.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-012.jpg[align="center"]
+image::rv-6sl/rv-6sl-012.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-013.jpg[align="center"]
+image::rv-6sl/rv-6sl-013.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-014.jpg[align="center"]
+image::rv-6sl/rv-6sl-014.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-015.jpg[align="center"]
+image::rv-6sl/rv-6sl-015.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-016.jpg[align="center"]
+image::rv-6sl/rv-6sl-016.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-017.jpg[align="center"]
+image::rv-6sl/rv-6sl-017.jpg[align="center"]
 
-imagen::rv-6sl/rv-6sl-018.jpg[align="center"]
+image::rv-6sl/rv-6sl-018.jpg[align="center"]
 
 == Créditos
 
 Gracias al usuario Aciera por todo el texto y los gráficos.
 para el robot RV-6SL!
-
-

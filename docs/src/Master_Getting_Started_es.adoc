@@ -6,14 +6,6 @@ Primeros Pasos V{lversion}, {date}
 :masterdir: {indir}
 :revdate: 2021-10-28
 
-[NOTE]
-Esta documentación no se ha actualizado desde LinuxCNC versión 2.5,
-lanzada en 2012.
-Está muy desactualizado. Utilice la documentación en inglés.
-Si desea actualizar esta traducción, póngase en contacto con el equipo
-de LinuxCNC a través del foro o la lista de correo.
-
-
 The LinuxCNC Team
 
 :leveloffset: 1

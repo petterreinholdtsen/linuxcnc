@@ -1,12 +1,8 @@
 ﻿:lang: es
 
+[[cha:stepper-diagnostics]](((Stepper Diagnostics)))
+
 = Diagnósticos para steppers
-
-[[cha:stepper-diagnostics]]
-
-:ini:{basebackend@docbook:'':ini}
-:hal:{basebackend@docbook:'':hal}
-:ngc:{basebackend@docbook:'':ngc}
 
 Muchas veces lo que se obtiene no es lo que espera; pero todo es cuestión de
 experiencia. Aprender de la experiencia aumenta la comprensión
@@ -24,7 +20,7 @@ esto es que se han intercambiado las señales de paso y dirección. Si presiona 
 jog hacia adelante y hacia atrás, alternativamente, y el motor se mueve
 un paso cada vez, y en la misma dirección, ahí está la prueba.
 
-=== Los steppers no se mueven en absoluto 
+=== Los steppers no se mueven en absoluto
 
 Muchos drivers tienen un pin de activación o necesitan una bomba de carga para activar
 su salida.
@@ -45,17 +41,17 @@ calcula si puede mantener el cumplimiento del movimiento solicitado y, si no, en
 da un error de seguimiento. Los erroresde seguimiento generalmente son el resultado de
 uno de los siguientes problemas en sistemas paso a paso.
 
- - FERROR demasiado pequeño
- - MIN_FERROR demasiado pequeño
- - MAX_VELOCITY demasiado rápida
- - MAX_ACCELERATION demasiado rápida
- - BASE_PERIOD demasiado largo
- - Backlash agregado a un eje
+- FERROR demasiado pequeño
+- MIN_FERROR demasiado pequeño
+- MAX_VELOCITY demasiado rápida
+- MAX_ACCELERATION demasiado rápida
+- BASE_PERIOD demasiado largo
+- Backlash agregado a un eje
 
 Cualquiera de los anteriores puede hacer que los pulsos en tiempo real no pueda mantenerse conforme
 a la tasa de pasos solicitada. Esto puede suceder si no ejecutó la prueba de latencia
-el tiempo suficiente para obtener un buen número para el Asistente Stepconf,
-o si configura la Velocidad Máxima o la Aceleración Máxima demasiado alta.
+el tiempo suficiente para obtener un buen número para el Asistente Stepconf, o
+si configura la Velocidad Máxima o la Aceleración Máxima demasiado alta.
 
 Si agregó backlash, debe aumentar STEPGEN_MAXACCEL hasta que
 duplique MAX_ACCELERATION en la sección AXIS del archivo INI para
@@ -93,8 +89,8 @@ por segundo si se mostrara más de uno.
 === Temporización de pasos
 
 Si tiene un eje que termina en una ubicación incorrecta durante
-movimientos múltiples, es probable que no tenga los tiempos de mantenimiento de dirección
-o de timing de pasos correctos para sus drivers. En cada cambio de dirección
+movimientos múltiples, es probable que no tenga los tiempos de mantenimiento de dirección o
+de timing de pasos correctos para sus drivers. En cada cambio de dirección
 puede estar perdiendo un paso o más. Si los motores se saturan, es
 también es posible que tenga el conjunto MAX_ACCELERATION o MAX_VELOCITY
 demasiado alto para ese eje.
@@ -115,23 +111,23 @@ líneas G0.
     G20 #1000=100 (bucle 100 veces)
     (este bucle tiene retrasos después de los movimientos)
     (prueba ajustes de velocidad y aceleracion)
-    o100 while [#1000] 
-    G0 Z1.000 
-    G4 P0.250 
-    G0 Z0.500 
-    G4 P0.250 
-    #1000 = [#1000 - 1] 
-    o100 endwhile 
+    o100 while [#1000]
+    G0 Z1.000
+    G4 P0.250
+    G0 Z0.500
+    G4 P0.250
+    #1000 = [#1000 - 1]
+    o100 endwhile
     (msg, prueba 2 de la configuración del eje Z, S para continuar)
     M1 (para aquí)
     #1000=100 (bucle 100 veces)
     (el siguiente ciclo no tiene demoras después de los movimientos)
     (prueba los tiempos de retención de dirección del controlador y también la aceleración máxima)
-    o101 while [#1000]  
-    G0 Z1.000 
-    G0 Z0.500 
-    #1000 = [#1000 - 1] 
-    o101 endwhile 
+    o101 while [#1000]
+    G0 Z1.000
+    G0 Z0.500
+    #1000 = [#1000 - 1]
+    o101 endwhile
     (msg, Listo ... Z debe estar exactamente .5" sobre la mesa)
     M2
 ----

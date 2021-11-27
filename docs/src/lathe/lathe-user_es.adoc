@@ -1,7 +1,7 @@
 :lang: es
 :toc:
 
-[[cha:lathe-user-information]]
+[[cha:lathe-user-information]](((Usuarios de Torno)))
 
 = Informacion para Usuarios de Torno
 
@@ -36,9 +36,9 @@ RS274NGC_STARTUP_CODE = G18 G20 G90
 ---------------------------------------
 
 Si está usando Gmoccapy entonces vea
-<<gmoccapy:lathe-section, la sección Torno de Gmoccapy>>.
+<<gmoccapy:lathe-section,"la sección Torno de Gmoccapy">>.
 
-== Tabla de herramientas de torno[[sec:lathe-tool-table]]
+== Tabla de herramientas de torno
 
 La "Tabla de herramientas" es un archivo de texto que contiene información sobre cada herramienta.
 El archivo se encuentra en el mismo directorio que su configuración y de forma predeterminada se denomina "tool.tbl".
@@ -54,32 +54,28 @@ Simplemente ignore las partes de la tabla de herramientas que no pertenecen a su
 Para obtener más información sobre los detalles del formato de tabla de herramientas,
 vea la sección <<sec:tool-table,Tabla de Herramientas>>.
 
-== Orientacion de la herramienta de torno[[lathe-tool-orientation]]
+== Orientacion de la herramienta de torno
 
-La siguiente figura muestra las orientaciones de la herramienta de torno
-con el ángulo de la línea central (l.c.) de cada orientación e información sobre FRONTANGLE y BACKANGLE.
+La siguiente figura muestra las orientaciones de la herramienta de torno con el ángulo de la línea central (l.c.) de cada orientación e información sobre FRONTANGLE y BACKANGLE.
 FRONTANGLE y BACKANGLE están en el sentido de las agujas del reloj comenzando en una línea paralela a Z+.
 
-.Orientaciones de la herramienta del torno
-
-image::images/tool-positions_es.svg[align="center", alt="Orientaciones herramienta torno"]
+image::images/tool-positions_es.svg["Orientaciones herramienta torno",align="center"]
 
 En AXIS, la siguientes figura muestra cómo se ven las posiciones de las herramientas, tal como se ingresaron en la tabla de herramientas.
 
 .Posiciones 1, 2, 3 y 4
 
-image:images/tool-pos-1_es.svg[alt="Posicion 1"]
-image:images/tool-pos-2_es.svg[alt="Posicion 2"]
-image:images/tool-pos-3_es.svg[alt="Posicion 3"]
-image:images/tool-pos-4_es.svg[alt="Posicion 4"]
+image:images/tool-pos-1_es.svg["Posicion 1"]
+image:images/tool-pos-2_es.svg["Posicion 2"]
+image:images/tool-pos-3_es.svg["Posicion 3"]
+image:images/tool-pos-4_es.svg["Posicion 4"]
 
 .Posiciones 5, 6, 7 y 8
 
-image:images/tool-pos-5_es.svg[alt="Posicion 5"]
-image:images/tool-pos-6_es.svg[alt="Posicion 6"]
-image:images/tool-pos-7_es.svg[alt="Posicion 7"]
-image:images/tool-pos-8_es.svg[alt="Posicion 8"]
-
+image:images/tool-pos-5_es.svg["Posicion 5"]
+image:images/tool-pos-6_es.svg["Posicion 6"]
+image:images/tool-pos-7_es.svg["Posicion 7"]
+image:images/tool-pos-8_es.svg["Posicion 8"]
 
 == Tool Touch Off
 
@@ -211,9 +207,9 @@ normalmente se configura con el eje Y imaginario (+) apuntando al suelo.
 
 Lo siguiente será cierto en este tipo de configuración:
 
- - El eje Z(+) apunta hacia la derecha, alejandose del husillo.
- - El eje X(+) apunta hacia el operador, y cuando está en el lado del operador,
-   los valores de X son positivos.
+- El eje Z(+) apunta hacia la derecha, alejandose del husillo.
+- El eje X(+) apunta hacia el operador, y cuando está en el lado del operador,
+  los valores de X son positivos.
 
 Algunos tornos con herramientas en la parte posterior tienen el eje Y imaginario (+)
 apuntando hacia arriba.
@@ -229,8 +225,8 @@ el arco aparezca en la dirección correcta.
 Al calcular arcos en modo radio solo tiene que recordar la
 dirección de rotación que se aplica a su torno.
 
-Al calcular arcos en el modo de diámetro, X es el diámetro y el offset X
-(I) es el radio incluso si está en el modo de diámetro G7.
+Al calcular arcos en el modo de diámetro, X es el diámetro y el offset X (I)
+es el radio incluso si está en el modo de diámetro G7.
 
 == Ruta de la herramienta
 
@@ -247,7 +243,7 @@ figuras se puede ver cómo el punto de control no sigue el filo de la herramient
 
 .Punto de control
 
-image::images/control-point_es.svg[align="center", alt="Punto de Control"]
+image::images/control-point_es.svg["Punto de Control",align="center"]
 
 === Corte de angulos sin Compensacion
 
@@ -258,7 +254,7 @@ que nos estemos moviendo en la dirección X o Z solamente.
 
 .Rampa de entrada
 
-image::images/ramp-entry_es.svg[align="center", alt="Entrada a Rampa"]
+image::images/ramp-entry_es.svg["Entrada a Rampa",align="center"]
 
 Ahora, a medida que el punto de control avanza a lo largo del camino programado, el
 borde del cortador real no sigue ese camino como se muestra en la
@@ -267,11 +263,10 @@ ajustar la ruta programada para compensar el radio de la punta.
 
 .Rampa de ruta
 
-image::images/ramp-cut_es.svg[align="center", alt="Camino en Rampa"]
+image::images/ramp-cut_es.svg["Camino en Rampa",align="center"]
 
-El ejemplo anterior se podria ajustar la ruta programada a la ruta real deseada 
+El ejemplo anterior se podria ajustar la ruta programada a la ruta real deseada
 moviendo la ruta programada hacia la izquierda del radio de la punta de la herramienta.
-
 
 === Cortando un radio
 
@@ -282,7 +277,7 @@ y la herramienta toca el diametro.
 
 .Torneado exterior
 
-image::images/radius-1_es.svg[align="center", alt="Torneado exterior"]
+image::images/radius-1_es.svg["Torneado exterior",align="center"]
 
 En la siguiente figura puede ver que a medida que la herramienta se acerca al final de la
 pieza, el punto de control todavía sigue el camino pero la punta de la herramienta ha dejado
@@ -291,14 +286,19 @@ la pieza terminará con una esquina cuadrada.
 
 .Corte del radio
 
-image::images/radius-2_es.svg[align="center", alt="Corte del radio"]
+image::images/radius-2_es.svg["Corte del radio",align="center"]
 
 Ahora puede ver como el punto de control sigue el radio programado
 La punta de la herramienta ha dejado la pieza y ahora está al aire.
 
 .Corte del radio
 
-image::images/radius-3_es.svg[align="center", alt="Corte del radio"]
+.MAP THIS
+.MAP THIS
+.MAP THIS
+.MAP THIS
+
+image::images/radius-3_es.svg["Corte del radio",align="center"]
 
 En la figura final podemos ver que la punta de la herramienta terminará de cortar la
 cara pero deja una esquina cuadrada en lugar de un radio. Notese también
@@ -309,7 +309,7 @@ más allá del centro; como minimo, el radio de la punta de la herramienta.
 
 .Corte de la cara
 
-image::images/radius-4_es.svg[align="center", alt="Corte de la cara"]
+image::images/radius-4_es.svg["Corte de la cara",align="center"]
 
 === Usando Compensacion del Cortador
 
@@ -317,7 +317,5 @@ Cuando utilice una herramienta de corte en un torno, piense en el radio de la pu
 radio de un cortador cilindrico (fresa). Cuando se usa una herramienta de corte, el camino debe ser
 suficiente grande para una herramienta cilindrica que no interfiriera en la línea siguiente. Cuando se
 cortan líneas rectas en el torno es posible que no desee utilizar compensacion del cortador.
-Por ejemplo, mandrinar un agujero con una barra demasiado ajustada puede que no le permita suficiente espacio 
+Por ejemplo, mandrinar un agujero con una barra demasiado ajustada puede que no le permita suficiente espacio
 para realizar el movimiento de salida. El movimiento de entrada en un arco con compensacion es importante para obtener los resultados correctos.
-
-

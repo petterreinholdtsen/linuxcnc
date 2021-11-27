@@ -1,4 +1,4 @@
-[[cha:kinematics]]
+[[cha:kinematics]](((kinematics)))
 
 = Kinematics
 
@@ -152,9 +152,11 @@ To illustrate the above, we will analyze a simple kinematics called
 bipod (a simplified version of the tripod, which is a simplified
 version of the hexapod).
 
+////
 .Bipod setup
+////
 
-image::images/bipod.png[alt="Bipod setup"]
+image::images/bipod.png["Bipod setup"]
 
 The Bipod we are talking about is a device that consists of 2 motors
 placed on a wall, from which a device is hung using some wire. The
@@ -179,9 +181,12 @@ trigonometry rules (the right triangles determined by the points (0,0),
 (Dx,0), (Dx,Dy) and the triangle (Dx,0), (Bx,0) and (Dx,Dy).
 
 We can easily see that:
-image:images/kinematics-math-01.png[align="center"],
+
+image::images/kinematics-math-01.png[align="center"],
+
 likewise:
-image:images/kinematics-math-02.png[align="center"]
+
+image::images/kinematics-math-02.png[align="center"]
 
 If we subtract one from the other we will get:
 

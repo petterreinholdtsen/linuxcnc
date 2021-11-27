@@ -1,6 +1,6 @@
 :lang: es
 
-[[cha:kinematics]]
+[[cha:kinematics]](((kinematics)))
 
 = Cinemática
 
@@ -13,7 +13,7 @@ adaptarlo al punto de vista humano del espacio 3D, la mayoría de las máquinas 
 todas) usan un sistema de coordenadas común llamado Sistema de Coordenadas Cartesianas.
 
 El sistema de coordenadas cartesianas se compone de tres ejes (X, Y, Z) cada uno
-perpendicular a los otros dos. footnote:[La palabra "eje" es comúnmente 
+perpendicular a los otros dos. footnote:[La palabra "eje" es comúnmente
 (y erróneamente) usada cuando se habla de máquinas CNC, y se refieren a las direcciones de movimiento de la máquina].
 
 Cuando hablamos de un programa de código G (RS274/NGC) hablamos de un conjunto
@@ -25,7 +25,7 @@ en posiciones que corresponden a la (((cinemática)))Cinemática de la máquina.
 === Articulaciones vs. Ejes
 
 Una articulacion de una máquina CNC es uno de los grados físicos de libertad
-de la máquina. Este podría ser lineal (tornillos de avance) o rotativo (mesas rotativas, 
+de la máquina. Este podría ser lineal (tornillos de avance) o rotativo (mesas rotativas,
 articulaciones de brazo de robot). Puede haber cualquier cantidad de articulaciones en una
 máquina dada. Por ejemplo, un brazo robot tipico tiene 6 articulaciones, y una
 fresadora simple típica tiene solo 3.
@@ -54,7 +54,7 @@ pos->tran.y = joints[1];
 pos->tran.z = joints[2];
 ----
 
-En el fragmento de código de arriba se puede ver cómo se hace la asignación; la 
+En el fragmento de código de arriba se puede ver cómo se hace la asignación; la
 posición X es idéntica a la articulación 0, la posición Y a la de
 articulación 1, etc. Lo anterior se refiere a la cinemática directa (una
 dirección de la transformación).
@@ -98,10 +98,10 @@ joints[7] = pos->v;
 joints[8] = pos->w;
 ----
 
-Es sencillo hacer la transformación para cinematica trivial (cinemática 'trivkins') 
-o máquina cartesiana siempre que no haya omisiones en las letras de eje usadas.
+Es sencillo hacer la transformación para cinematica trivial (cinemática 'trivkins') o
+máquina cartesiana siempre que no haya omisiones en las letras de eje usadas.
 
-Si a la máquina le falta una o más de las letras de eje, se vuelve un poco más complicado. 
+Si a la máquina le falta una o más de las letras de eje, se vuelve un poco más complicado.
 Los problemas de las letras de eje omitidas se tratan utilizando el
 parámetro 'coordinates=' con el módulo trivkins. Los números de articulaciones son
 asignados consecutivamente a cada coordenada especificada. Se puede describir un torno
@@ -117,7 +117,7 @@ letras del eje. footnote:[Históricamente, el módulo trivkins no contemplaba el
 parámetro 'coordinates=' por lo que las configuraciones de torno a menudo se configuraran como
 máquinas XYZ. El eje Y no utilizado se configuró para que 1) hiciera home inmediatamente, 2) usara un
 lazo de realimentacion simple para conectar su pin HAL de comando de posición Hal a su pin HAL
-de retroalimentacion de posición, y 3) estaba oculto en las GUI de pantalla. 
+de retroalimentacion de posición, y 3) estaba oculto en las GUI de pantalla.
 Numerosas configuraciones sim usaron estos métodos para compartir archivos hal comunes.]
 
 El módulo cinemático 'trivkins' también permite especificar la misma coordenada
@@ -146,9 +146,11 @@ Para ilustrar lo anterior, analizaremos una maquina de cinemática simple llamad
 bípode (una versión simplificada del trípode, que es una version simplificada
 del hexápodo).
 
+////
 .Configuración del bípode
+////
 
-image::images/bipod.png[alt="Configuracion de Bipod"]
+image::images/bipod.png["Configuracion de Bipod"]
 
 El Bipod del que estamos hablando es un dispositivo que consta de 2 motores
 colocado en una pared, de la cual cuelga un dispositivo usando un cable. Las
@@ -172,11 +174,11 @@ Para transformar del espacio de articulaciones al espacio cartesiano utilizaremo
 reglas de trigonometría (los triángulos rectángulos determinados por los puntos (0,0),
 (Dx, 0), (Dx, Dy) y el triángulo (Dx, 0), (Bx, 0) y (Dx, Dy).
 
-Podemos ver fácilmente que: 
+Podemos ver fácilmente que:
 
-image::images/kinematics-math-01.png[align="center"]
+image::images/kinematics-math-01.png[align="center"],
 
-asi como: 
+asi como:
 
 image::images/kinematics-math-02.png[align="center"]
 
@@ -242,7 +244,7 @@ latexmath::[\[AD=\sqrt{x^{2}+y^{2}}\]]
 latexmath::[\[BD=\sqrt{(Bx-x)^{2}+y^{2}}\]]
 ////////////////////////////////////////////////
 
-o traducido al código real:
+traducido al código real:
 
 ----
 double x2 = pos->tran.x * pos->tran.x;
@@ -278,7 +280,34 @@ Implementa la función cinemática inversa.
 KINEMATICS_TYPE kinematicsType(void)
 ----
 
-Devuelve el identificador de tipo de cinemática, típicamente 'KINEMATICS_BOTH'.
+Returns the kinematics type identifier:
+
+. KINEMATICS_IDENTITY  (each joint number corresponds to an axis letter)
+. KINEMATICS_BOTH      (forward and inverse kinematics functions are provided)
+. KINEMATICS_FORWARD_ONLY
+. KINEMATICS_INVERSE_ONLY
+
+[NOTE]
+Guis may interpret KINEMATICS_IDENTITY to hide the distinctions
+between joint numbers and axis letters when in joint mode
+(typically prior to homing).
+
+----
+int kinematicsSwitchable(void)
+int kinematicsSwitch(int switchkins_type)
+KINS_NOT_SWITCHABLE
+----
+
+The function kinematicsSwitchable() returns 1 if multiple
+kinematics types are supported.  The function kinematicsSwitch()
+selects the kinematics type.
+See <<cha:switchable-kinematics,Switchable Kinematitcs>>.
+
+[NOTE]
+The majority of provided kinematics modules support a single
+kinematics type and use the directive "*KINS_NOT_SWITCHABLE*" to
+supply defaults for the required kinematicsSwitchable() and
+kinematicsSwitch() functions.
 
 ----
 int kinematicsHome(EmcPose *world, double *joint,
@@ -286,7 +315,7 @@ KINEMATICS_FORWARD_FLAGS *fflags,
 KINEMATICS_INVERSE_FLAGS *iflags)
 ----
 
-La función cinemática home establece todos sus argumentos a 
+La función cinemática home establece todos sus argumentos a
 valores de la posición home conocida. Cuando se llama, estos deben establecerse,
 cuando se conocen, a valores iniciales de, por ejemplo, un archivo INI. Si la cinematica de
 home puede aceptar puntos de partida arbitrarios, estos valores iniciales
@@ -303,4 +332,16 @@ Cuando están contenidos en un solo archivo fuente, los módulos cinemáticos
 pueden ser compilados e instalados por 'halcompile'. Consulte la página de manual de 'halcompile(1)' o
 el manual de HAL para más información.
 
+=== Kinematics module using the userkins.comp template
 
+Another way to create a custom kinematics module is to adapt the
+hal component 'userkins'. This template component can be modified
+locally by a user and can be built using halcompile.
+
+See the userkins man pages for more information.
+
+Note that to create switchable kinematic modules the required
+modifications are somewhat more complicated.
+
+See 'millturn.comp' as an example of a switchable kinematic
+module that was created using the 'userkins.comp' template.

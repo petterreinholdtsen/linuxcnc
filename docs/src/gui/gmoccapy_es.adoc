@@ -7,7 +7,7 @@
 == Introducción
 
 'GMOCCAPY' es una GUI para LinuxCNC, diseñada para ser utilizada con una pantalla táctil,
-pero también se puede usar en pantallas normales con un mouse o botones de hardware y 
+pero también se puede usar en pantallas normales con un mouse o botones de hardware y
 volantes MPG, ya que presenta pines HAL para las necesidades más comunes. Por favor, vea mas
 información a continuación.
 
@@ -18,7 +18,7 @@ Como un buen ejemplo de esto, puede verse.
 http://wiki.linuxcnc.org/cgi-bin/wiki.pl?Gmoccapy_plasma[gmoccapy_plasma]
 
 * gmoccapy 3 soporta hasta 9 ejes y 9 articulaciones. Como el código ha cambiado en gmoccapy 3
-para admitir los cambios articulaciones/ejes en LinuxCNC, ¡NO trabaja en versiones 2.7 o 2.6!
+  para admitir los cambios articulaciones/ejes en LinuxCNC, ¡NO trabaja en versiones 2.7 o 2.6!
 
 Tiene soporte para teclado virtual (onboard o matchbox),
 por lo que no hay necesidad de un teclado o mouse de hardware, pero también se puede usar
@@ -106,7 +106,7 @@ para usar gmoccapy en su máquina: +
 
 [[gmoccapy:display-section]]
 === La sección DISPLAY
- 
+
  [DISPLAY]
  DISPLAY = gmoccapy
  PREFERENCE_FILE_PATH = gmoccapy_preferences
@@ -255,9 +255,9 @@ Agregará el panel manual-example.ui, incluirá un controlador personalizado de 
 hitcounter.py y realizará todas las conexiones después de realizar el panel de acuerdo con manual-example.hal.
 
 [NOTE]
-Si realiza alguna conexión hal al panel de glade personalizado, debe hacerlo en el archivo hal especificado 
+Si realiza alguna conexión hal al panel de glade personalizado, debe hacerlo en el archivo hal especificado
 en la línea EMBEDDED_TAB_COMMAND; de lo contrario, puede obtener un error de que el pin hal no existe.
-Esto se debe a las condiciones de carga de los archivos hal . Las conexiones a pines gmoccapy hal  deben 
+Esto se debe a las condiciones de carga de los archivos hal . Las conexiones a pines gmoccapy hal  deben
 realizarse en el archivo hal postgui especificado en su archivo INI, porque este pin no existe antes de realizar la GUI
 
 Aquí hay unos ejemplos:
@@ -283,7 +283,7 @@ image::images/gmoccapy_with_right_panel_in_MDI_mode.png[align="left"]
 Gmoccapy tiene la capacidad de crear mensajes de usuario desde hal. Para usarlos
 es necesario introducir algunas líneas en la sección [DISPLAY] del archivo INI.
 
-Aquí se muestra cómo configurar 3 cuadros de diálogo de mensaje emergente de usuario. 
+Aquí se muestra cómo configurar 3 cuadros de diálogo de mensaje emergente de usuario.
 Los mensajes admiten el lenguaje de marcado pango. Puede encontrar información detallada sobre el lenguaje de marcado en
 https://developer.gnome.org/pango/stable/PangoMarkupFormat.html[Pango Markup]
 
@@ -293,7 +293,7 @@ MESSAGE_TYPE = "status", "okdialog", "yesnodialog"
 MESSAGE_PINNAME = es el nombre del grupo de pines hal que se creará
 ----
 
- * 'status' : solo mostrará un mensaje como ventana emergente, usando el 
+ * 'status' : solo mostrará un mensaje como ventana emergente, usando el
    sistema de mensajes de gmoccapy
 
  * 'okdialog' : mantendrá el foco en el cuadro de diálogo del mensaje y activará un Hal_Pin OUT
@@ -357,7 +357,7 @@ MACRO = go_to_position X-pos Y-pos Z-pos
 Esto agregará 5 macros a la lista de botones MDI.
 
 [NOTE]
-Como aparecerán un máximo de 16 macros en la GUI, debido a razones de espacio, es posible que deba hacer 
+Como aparecerán un máximo de 16 macros en la GUI, debido a razones de espacio, es posible que deba hacer
 clic en una flecha para cambiar de página y mostrar el botón de macro oculto.
 No es un error colocar más en su archivo INI. El botón de macro se mostrará en el orden de las entradas INI.
 
@@ -366,14 +366,13 @@ image::images/gmoccapy_mdi_hidden_keyboard.png[align="left"]
 El nombre del archivo debe ser *exactamente el mismo* que el nombre dado en la linea MACRO.
 Así, la macro '*i_am_lost*' llamará al archivo '*i_am_lost.ngc*'.
 
-Los archivos de macros deben seguir algunas reglas:
+.Los archivos de macros deben seguir algunas reglas:
 
 * el nombre del archivo debe ser el mismo que el nombre mencionado en la linea MACRO,
   con la extensión ngc
 * El archivo debe contener una subrutina como: '*O<i_am_lost> sub*'; el nombre
   de la subrutina debe coincidir exactamente (*distingue entre mayúsculas y minúsculas*)con el nombre de la macro
-* el archivo debe terminar con un endsub '*O<i_am_lost> endsub*' seguido de un
-  comando '*M2*'
+* el archivo debe terminar con un endsub '*O<i_am_lost> endsub*' seguido de un comando '*M2*'
 * los archivos deben colocarse en una carpeta especificada en su archivo INI en la
   sección [RS274NGC] (ver <<gmocappy:rs274ngc,RS274NGC>>)
 
@@ -391,8 +390,7 @@ Gmoccapy también aceptará macros que soliciten parámetros como:
 go_to_position X-pos Y-pos Z-pos
 ----
 
-Los parámetros deben estar separados por espacios. Esto llama a un archivo
-'go_to_position.ngc' con el siguiente contenido:
+Los parámetros deben estar separados por espacios. Esto llama a un archivo 'go_to_position.ngc' con el siguiente contenido:
 
 ----
 ; Archivo de prueba ir a la posición
@@ -457,8 +455,8 @@ porque no están disponibles antes de cargar la GUI completamente. Es posible
 llamar a varios archivos postgui hal, facilitando la depuración de la configuración. Para ello, use
 un archivo postgui_call_list.hal. Las conexiones al panel de usuario deben hacerse en un
 archivo hal separado, ya que los paneles se cargan después de la GUI.
-Ver <<gmoccapy:configuration-of-tabs-and-side-panels,pestañas y paneles laterales>>
-para detalles.
+
+Ver <<gmoccapy:configuration-of-tabs-and-side-panels,pestañas y paneles laterales>> para detalles.
 
 === Listas de botones derecha e inferior
 
@@ -593,7 +591,7 @@ in tool mode:
 
 in edit mode:
 
-* gmoccapy.h-button.button-0 == 
+* gmoccapy.h-button.button-0 ==
 * gmoccapy.h-button.button-1 == reload file
 * gmoccapy.h-button.button-2 == save
 * gmoccapy.h-button.button-3 == save as
@@ -637,36 +635,34 @@ Este cambio se ha hecho ya que lo pidieron muchos usuarios.
 Para conectar los 'encoders' se exportan los siguientes pines:
 
 [width="80%", options="header", cols="^,<,^"]
-|====================================================================
-|                   PIN                         |  TIPO   |  FUNCION
-|gmoccapy.jog.jog-velocity.counts               | HAL_S32 | velocidad Jog
-|gmoccapy.jog.jog-velocity.count-enable         | HAL_BIT | verdadero habilita conteos
-|gmoccapy.feed.feed-override.counts             | HAL_S32 | porcentaje de alimentacion 
-|gmoccapy.feed.feed-override.count-enable       | HAL_BIT | verdadero habilita conteos
-|gmoccapy.feed.reset-feed-override              | HAL_BIT | restablece alimentación al 100%
-|gmoccapy.spindle.spindle-override.counts       | HAL_S32 | porcentaje del husillo
-|gmoccapy.spindle.spindle-override.count-enable | HAL_BIT | verdadero habilita conteos
-|gmoccapy.spindle.reset-spindle-override        | HAL_BIT | restablece husillo al 100%
-|gmoccapy.rapid.rapid_override.counts           | HAL_S32 | Velocidad máxima de la máquina
-|gmoccapy.rapid.rapid_override.count-enable     | HAL_BIT | verdadero habilita conteos
-|====================================================================
-
+|=====================================================================
+|                    PIN                          |  TIPO   |  FUNCION
+| gmoccapy.jog.jog-velocity.counts                | HAL_S32 | velocidad Jog
+| gmoccapy.jog.jog-velocity.count-enable          | HAL_BIT | verdadero habilita conteos
+| gmoccapy.feed.feed-override.counts              | HAL_S32 | porcentaje de alimentacion
+| gmoccapy.feed.feed-override.count-enable        | HAL_BIT | verdadero habilita conteos
+| gmoccapy.feed.reset-feed-override               | HAL_BIT | restablece alimentación al 100%
+| gmoccapy.spindle.spindle-override.counts        | HAL_S32 | porcentaje del husillo
+| gmoccapy.spindle.spindle-override.count-enable  | HAL_BIT | verdadero habilita conteos
+| gmoccapy.spindle.reset-spindle-override         | HAL_BIT | restablece husillo al 100%
+| gmoccapy.rapid.rapid_override.counts            | HAL_S32 | Velocidad máxima de la máquina
+| gmoccapy.rapid.rapid_override.count-enable      | HAL_BIT | verdadero habilita conteos
+|=====================================================================
 
 Para conectar 'potenciómetros', use los siguientes pines hal:
 
 [width="80%", options="header", cols="^,<,^"]
-|====================================================================
-|                   PIN                          |  TIPO     |  FUNCION
-|gmoccapy.jog.jog-velocity.direct-value          | HAL_FLOAT | velocidad Jog
-|gmoccapy.jog.jog-velocity.analog-enable         | HAL_BIT   | verdadero habilita analogico
-|gmoccapy.feed.feed-override.direct-value        | HAL_FLOAT | porcentaje de alimentacion 
-|gmoccapy.feed.feed-override.analog-enable       | HAL_BIT   | verdadero habilita analogico
-|gmoccapy.spindle.spindle-override.direct-value  | HAL_FLOAT | porcentaje del husillo
-|gmoccapy.spindle.spindle-override.analog-enable | HAL_BIT   | verdadero habilita analogico
-|gmoccapy.rapid.rapid_override.direct-value      | HAL_FLOAT | Velocidad máxima de la máquina
-|gmoccapy.rapid.rapid_override.analog-enable     | HAL_BIT   | verdadero habilita analogico
-|====================================================================
-
+|=======================================================================
+|                    PIN                          |  TIPO     |  FUNCION
+| gmoccapy.jog.jog-velocity.direct-value          | HAL_FLOAT | velocidad Jog
+| gmoccapy.jog.jog-velocity.analog-enable         | HAL_BIT   | verdadero habilita analogico
+| gmoccapy.feed.feed-override.direct-value        | HAL_FLOAT | porcentaje de alimentacion
+| gmoccapy.feed.feed-override.analog-enable       | HAL_BIT   | verdadero habilita analogico
+| gmoccapy.spindle.spindle-override.direct-value  | HAL_FLOAT | porcentaje del husillo
+| gmoccapy.spindle.spindle-override.analog-enable | HAL_BIT   | verdadero habilita analogico
+| gmoccapy.rapid.rapid_override.direct-value      | HAL_FLOAT | Velocidad máxima de la máquina
+| gmoccapy.rapid.rapid_override.analog-enable     | HAL_BIT   | verdadero habilita analogico
+|========================================================================
 
 Además gmoccapy 3 ofrece pines hal adicionales para controlar
 los nuevos widgets deslizantes con pulsadores. Los valores qué daran la rapidez del aumento
@@ -674,34 +670,33 @@ o disminución deben establecerse en el archivo glade. En un lanzamiento futuro 
 estara integrado en la página de configuración.
 
 [width="80%", options="header", cols="^,<,^"]
-|====================================================================
-| PIN                              | TIPO          | FUNCION
-|                                  |               |
-|VELOCIDAD                         |               |
-|gmoccapy.spc_jog_vel.increase     | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
-|gmoccapy.spc_jog_vel.decrease     | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
-|gmoccapy.spc_jog_vel.scale        | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
-|gmoccapy.spc_jog_vel.value        | HAL_FLOAT OUT | valor del widget
-|gmoccapy.spc_jog_vel.scaled-value | HAL_FLOAT OUT | valor escalado del widget
-|ALIMENTACION                      |               | 
-|gmoccapy.spc_feed.increase        | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
-|gmoccapy.spc_feed.decrease        | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
-|gmoccapy.spc_feed.scale           | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
-|gmoccapy.spc_feed.value           | HAL_FLOAT OUT | valor del widget
-|gmoccapy.spc_feed.scaled-value    | HAL_FLOAT OUT | valor escalado del widget
-|HUSILLO                           |               |
-|gmoccapy.spc_spindle.increase     | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
-|gmoccapy.spc_spindle.decrease     | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
-|gmoccapy.spc_spindle.scale        | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
-|gmoccapy.spc_spindle.value        | HAL_FLOAT OUT | valor del widget
-|gmoccapy.spc_spindle.scaled-value | HAL_FLOAT OUT | valor escalado del widget
-|RAPIDOS                           |               |
-|gmoccapy.spc_rapid.increase       | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
-|gmoccapy.spc_rapid.decrease       | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
-|gmoccapy.spc_rapid.scale          | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
-|gmoccapy.spc_rapid.value          | HAL_FLOAT OUT | valor del widget
-|gmoccapy.spc_rapid.scaled-value   | HAL_FLOAT OUT | valor escalado del widget
-|====================================================================
+|============================================================
+|         PIN                       |   TIPO        | FUNCION
+| VELOCIDAD                         |               |
+| gmoccapy.spc_jog_vel.increase     | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
+| gmoccapy.spc_jog_vel.decrease     | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
+| gmoccapy.spc_jog_vel.scale        | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
+| gmoccapy.spc_jog_vel.value        | HAL_FLOAT OUT | valor del widget
+| gmoccapy.spc_jog_vel.scaled-value | HAL_FLOAT OUT | valor escalado del widget
+| ALIMENTACION                      |               |
+| gmoccapy.spc_feed.increase        | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
+| gmoccapy.spc_feed.decrease        | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
+| gmoccapy.spc_feed.scale           | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
+| gmoccapy.spc_feed.value           | HAL_FLOAT OUT | valor del widget
+| gmoccapy.spc_feed.scaled-value    | HAL_FLOAT OUT | valor escalado del widget
+| HUSILLO                           |               |
+| gmoccapy.spc_spindle.increase     | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
+| gmoccapy.spc_spindle.decrease     | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
+| gmoccapy.spc_spindle.scale        | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
+| gmoccapy.spc_spindle.value        | HAL_FLOAT OUT | valor del widget
+| gmoccapy.spc_spindle.scaled-value | HAL_FLOAT OUT | valor escalado del widget
+| RAPIDOS                           |               |
+| gmoccapy.spc_rapid.increase       | HAL_BIT IN    | Si True, el valor del control deslizante aumentará
+| gmoccapy.spc_rapid.decrease       | HAL_BIT IN    | Si True, el valor del control deslizante disminuira
+| gmoccapy.spc_rapid.scale          | HAL_FLOAT IN  | Escalado del valor de salida (util en udes/min a udes/seg.)
+| gmoccapy.spc_rapid.value          | HAL_FLOAT OUT | valor del widget
+| gmoccapy.spc_rapid.scaled-value   | HAL_FLOAT OUT | valor escalado del widget
+|============================================================
 
 Los pines float aceptan valores de 0.0 a 1.0, siendo el valor de porcentaje que
 desea establecer como valor del control deslizante
@@ -799,7 +794,7 @@ jog-inc-0 no se puede cambiar y representará jogging continuo.
 
 === Pin de desbloqueo hardware
 
-Para poder usar un interruptor de llave para desbloquear la página de configuración, 
+Para poder usar un interruptor de llave para desbloquear la página de configuración,
 se exporta siguiente pin:
 
 * gmoccapy.unlock-settings
@@ -1062,14 +1057,14 @@ Debe copiar los siguientes archivos a su directorio de configuración
 Primero cree un directorio 'python' en su carpeta de configuración. Desde
 'su_directorio_linuxcnc-dev/configs/sim/gmoccapy/python' copie:
 'toplevel.py',
-'remap.py' y 
-'stdglue.py' 
+'remap.py' y
+'stdglue.py'
 a su carpeta 'config_dir / python'.
 
 Desde 'su_directorio_linuxcnc-dev/configs/sim/gmoccapy/macros' copie:
-'on_abort.ngc' y 
-'change.ngc' 
-al directorio especificado como SUBROUTINE_PATH. 
+'on_abort.ngc' y
+'change.ngc'
+al directorio especificado como SUBROUTINE_PATH.
 Vea <<gmocappy:rs274ngc, Seccion RS274NGC>>.
 
 Abra 'change.ngc' con un editor y descomente las siguientes líneas
@@ -1105,7 +1100,7 @@ unlinkp iocontrol.0.tool-changed
 unlinkp iocontrol.0.tool-prep-number
 unlinkp iocontrol.0.tool-prepared
 
-# enlace a gmoccapy toolchange, para obtener la ventaja de la descripción en el cuadro de diálogo de cambio de herramienta  
+# enlace a gmoccapy toolchange, para obtener la ventaja de la descripción en el cuadro de diálogo de cambio de herramienta
 net tool-change gmoccapy.toolchange-change <= iocontrol.0.tool-change
 net tool-changed gmoccapy.toolchange-changed <= iocontrol.0.tool-changed
 net tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
@@ -1258,7 +1253,7 @@ permite configurar el tamaño de la fuente DRO; el valor predeterminado es 28; s
 
 'dígitos' +
 establece el número de dígitos del DRO de 1 a 5. +
- 
+
 [NOTE]
 Imperial mostrará un dígito más que métrico; si está en unidades de máquinas imperiales y establece el valor de dígito en 1, no obtendrá ningún dígito en métrico.
 
@@ -1368,7 +1363,7 @@ Ver <<gmoccapy:lathe-section, la sección de Torno>>
  * F2 = Máquina encendida
  * F3 = Modo manual
  * F5 = Modo MDI
- 
+
  * ESC = Abortar
 
 Hay teclas adicionales para el manejo de mensajes, ver
@@ -1414,13 +1409,13 @@ Turtle Jog:: [[sub:turtle_jog]]
 Esta configuración tendrá influencia en las velocidades de jog.
 
 * 'Ocultar boton jog tortuga' ocultará el botón a la derecha del control deslizante de velocidad de jog.
-Si oculta este botón, tenga cuidado de que se muestre el icono conejo,
-de lo contrario no podrá hacer jog más rápido que la velocidad de tortuga,
-que se calcula utilizando el factor jog de tortuga.
+  Si oculta este botón, tenga cuidado de que se muestre el icono conejo,
+  de lo contrario no podrá hacer jog más rápido que la velocidad de tortuga,
+  que se calcula utilizando el factor jog de tortuga.
 
 * 'factor de jog de tortuga' establece la escala para el modo jog tortuga. Si le pone
-un factor de 20, la velocidad máxima de jog será 1/20 de la velocidad máxima de la máquina
-si está en modo tortuga (botón presionado, mostrando la tortuga)
+  un factor de 20, la velocidad máxima de jog será 1/20 de la velocidad máxima de la máquina
+  si está en modo tortuga (botón presionado, mostrando la tortuga)
 
 [NOTE]
 Este botón se puede activar usando el pin hal <<gmoccapy:jog-velocity, turtle-jog>>.
@@ -1441,8 +1436,8 @@ para utilizar la medición de herramienta.
 Verifique <<gmoccapy:auto-tool-measurement, medición automática de herramientas>>
 
 * Usar la medición automática de herramientas: si se marca, después de cada cambio de herramienta
-se realizará la medición. El resultado se almacenará en la tabla de herramientas y se ejecutará un
-G43 después del cambio.
+  se realizará la medición. El resultado se almacenará en la tabla de herramientas y se ejecutará un
+  G43 después del cambio.
 
 .Información de sonda
 
@@ -1517,7 +1512,7 @@ Puedes configurar algunas opciones:
  el mensaje número 11 eliminará el primero, por lo que solo verá los últimos 10.
  * Fuente = la fuente y el tamaño que desea utilizar para mostrar los mensajes
  * usar marcos = Si activa la casilla de verificación, se mostrará cada mensaje
- en un marco, por lo que es mucho más fácil distinguir los mensajes, pero 
+ en un marco, por lo que es mucho más fácil distinguir los mensajes, pero
  se necesitara un poco más de espacio.
  * Lanzamiento de mensaje de prueba solo hará lo que se supone que debe hacer,
  mostrar un mensaje, para que pueda ver los cambios de su configuración sin la necesidad
@@ -1636,7 +1631,7 @@ Si obtienes números extraños en el área de información de gmoccapy como:
 image::images/strange_numbers.png[align="center"]
 
 ha creado su archivo de configuración con una versión anterior de StepConfWizard.
-Este ha hecho una entrada incorrecta en el archivo INI bajo [TRAJ]MAX_LINEAR_VELOCITY = xxx. 
+Este ha hecho una entrada incorrecta en el archivo INI bajo [TRAJ]MAX_LINEAR_VELOCITY = xxx.
 Cambia esa entrada a MAX_VELOCITY = xxx
 
 === Macro no finalizada [[sub:NOT_ENDING_MACROS]]
@@ -1652,7 +1647,7 @@ G40
 
 G10 L20 P0 X0 Y0
 
-o<zeroxy> endsub 
+o<zeroxy> endsub
 m2
 ---------
 
@@ -1672,7 +1667,7 @@ G10 L20 P0 X0 Y0
 
 G4 P0.1
 
-o<zeroxy> endsub 
+o<zeroxy> endsub
 m2
 ---------
 

@@ -1,3 +1,5 @@
+:lang: en
+
 [[cha:plasma-primer]]
 
 = Plasma Cutting Primer for LinuxCNC Users

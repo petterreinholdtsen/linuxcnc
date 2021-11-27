@@ -3,10 +3,8 @@
 [[cha:spindle-control]]
 
 LinuxCNC puede controlar hasta 8 husillos. El número se establece en el archivo INI.
-Todos los ejemplos a continuación se refieren a una configuración de husillo único con
-pines de control del husillo con nombres como spindle.0...
-En el caso de una máquina de husillos múltiples, todo lo que cambia es que
-existen pines adicionales con nombres como spindle.6...
+Todos los ejemplos a continuación se refieren a una configuración de husillo único con pines de control del husillo con nombres como spindle.0...
+En el caso de una máquina de husillos múltiples, todo lo que cambia es que existen pines adicionales con nombres como spindle.6...
 
 = Control de husillo
 
@@ -19,8 +17,7 @@ Si la velocidad de su husillo está controlada por una señal analógica,
 estás usando una tarjeta DAC como la m5i20 para emitir la señal de control:
 
 Primero debe calcular la escala de la velocidad del husillo para controlar la señal.
-Para este ejemplo, la velocidad máxima del eje de 5000 RPM es igual a 10
-voltios
+Para este ejemplo, la velocidad máxima del eje de 5000 RPM es igual a 10 voltios.
 
 image::images/spindle-math.png[align="center"]
 
@@ -31,9 +28,9 @@ la tarjeta no hace escalado.
 ----
 loadrt scale count=1
 addf scale.0 servo-thread
-setp scale.0.gain 0.002    
+setp scale.0.gain 0.002
 net spindle-speed-scale spindle.0.speed-out => scale.0.in
-net spindle-speed-DAC scale.0.out => <su nombre pin DAC>    
+net spindle-speed-DAC scale.0.out => <su nombre pin DAC>
 ----
 
 (((PWM Spindle Speed Example)))
@@ -44,9 +41,9 @@ Si su husillo puede ser controlado por una señal PWM,
 use el componente pwmgen para crear la señal:
 
 ----
-loadrt pwmgen output_type=0 
+loadrt pwmgen output_type=0
 addf pwmgen.update servo-thread
-addf pwmgen.make-pulses base-thread    
+addf pwmgen.make-pulses base-thread
 net spindle-speed-cmd spindle.0.speed-out => pwmgen.0.value
 net spindle-on spindle.0.on => pwmgen.0.enable
 net spindle-pwm pwmgen.0.pwm => parport.0.pin-09-out
@@ -110,18 +107,16 @@ se cambia como se muestra en el siguiente ejemplo:
 .Introducción a los componentes HAL2 limit2 y near:
 *********************************************************************
 En caso de que no los haya visto antes, aquí damos una introducción rápida
-a los dos componentes HAL utilizados en el siguiente ejemplo. 
+a los dos componentes HAL utilizados en el siguiente ejemplo.
 
 * "limit2" es un componente HAL (coma flotante) que acepta un
-   valor de entrada y proporciona una salida que se ha limitado a un
-   rango máximo/mínimo, y también limitado a no exceder una
-   tasa de cambio especificada. 
+  valor de entrada y proporciona una salida que se ha limitado a un
+  rango máximo/mínimo, y también limitado a no exceder una
+  tasa de cambio especificada.
 
-* "near" es un componente HAL (coma flotante) con una salida binaria
-   que dice si dos entradas son aproximadamente iguales.
+* "near" es un componente HAL (coma flotante) con una salida binaria que dice si dos entradas son aproximadamente iguales.
 
-Más información está disponible en la documentación de los componentes HAL,
-o desde las páginas del manual, simplemente escriba 'man limit2' o 'man near' en una terminal.
+Más información está disponible en la documentación de los componentes HAL, o desde las páginas del manual, simplemente escriba 'man limit2' o 'man near' en una terminal.
 *********************************************************************
 
 ----
@@ -161,15 +156,6 @@ net spindle-ready <= spindle-at-speed.out => spindle.0.at-speed
 
 === Movimiento sincronizado del husillo
 
-Spindle feedback is needed by LinuxCNC to perform any spindle coordinated
-motions like threading and constant surface speed. 
-LinuxCNC can perform synchronised motion and CSS with any of up to 8
-spindles. Which spindles are used is controlled from G-code. CSS is
-possible with several spindles simultaneously. 
-
-The StepConf Wizard can perform the connections for a single-spindle
-configuration for you if you select Encoder Phase A and Encoder Index as
-inputs.
 LinuxCNC necesita retroalimentación del husillo para realizar cualquier
 movimiento coordinado con el husillo como roscado o velocidad de superficie constante (CSS).
 LinuxCNC puede realizar movimientos sincronizados y CSS con cualquiera de hasta 8
@@ -177,7 +163,8 @@ husillos. Los husillos que se utilizan se controlan desde el código G. CSS es
 posible con varios husillos simultáneamente.
 
 El asistente StepConf puede realizar las conexiones para configurar un solo husillo
-si selecciona Encoder Fase A e Encoder Indice como entradas.
+si selecciona Encoder Fase A e Encoder Indice como
+entradas.
 
 Suposiciones de hardware:
 
@@ -216,7 +203,7 @@ net spindle-index-enable encoder.3.index-enable <=> spindle.N.index-enable
 
 # conectar las entradas del codificador HAL al codificador real.
 net spindle-phase-a encoder.3.phase-A <= parport.0.pin-10-in
-net spindle-phase-b encoder.3.phase-B 
+net spindle-phase-b encoder.3.phase-B
 net spindle-index encoder.3.phase-Z <= parport.0.pin-11-in
 ----
 

@@ -4,7 +4,7 @@
 use image:: para archivos png de ecuaciónes - no latexmath
 //////////////////////////////////////////////////////////
 
-[[cha:5-axis-kinematics]] (((5-Axis Kinematics)))
+[[cha:5-axis-kinematics]](((5-Axis Kinematics)))
 
 = Cinemática de 5 ejes
 
@@ -15,29 +15,22 @@ especial para cada tipo de máquina. Este capítulo describe algunas de las conf
 populares y luego desarrolla las transformaciones directas (desde el trabajo hasta las coordenadas de articulacion) e
 inversa (desde la articulacion hasta el trabajo) en un proceso matemático general para dos tipos de máquina.
 
-Se proporcionan los componentes cinemáticos y los modelos de simulación de vismach para demostrar su comportamiento en la
-pantalla de la computadora. También se dan ejemplos de datos de archivos HAL.
+Se proporcionan los componentes cinemáticos y los modelos de simulación de vismach para demostrar su comportamiento en la pantalla de la computadora.
+También se dan ejemplos de datos de archivos HAL.
 
 == Configuraciones de máquinas herramienta de 5 ejes
 
-En esta sección tratamos con máquinas de fresado o enrutadores típicos de 5 ejes, con cinco articulaciones o grados de
-libertad, que se controlan en base a movimientos coordinados.
+En esta sección tratamos con máquinas de fresado o enrutadores típicos de 5 ejes, con cinco articulaciones o grados de libertad, que se controlan en base a movimientos coordinados.
 
-Las máquinas herramienta de 3 ejes no pueden cambiar la orientación de la herramienta. Las máquinas herramienta de 5 ejes
-utilizan dos ejes adicionales para dotar a la herramienta de corte de una orientación adecuada para el mecanizado
-eficiente de superficies de cualquier forma.
+Las máquinas herramienta de 3 ejes no pueden cambiar la orientación de la herramienta. Las máquinas herramienta de 5 ejes utilizan dos ejes adicionales para dotar a la herramienta de corte de una orientación adecuada para el mecanizado eficiente de superficies de cualquier forma.
 
 Las configuraciones típicas de máquinas herramienta de 5 ejes se muestran en las figs. 3, 5, 7 y 9-11 [1,2] en la sección Figuras.
 
-La cinemática de las máquinas herramienta de 5 ejes es mucho más simple que la de los brazos robots de 6 ejes, puesto que
-3 de los ejes son normalmente ejes lineales y solo dos son ejes giratorios.
+La cinemática de las máquinas herramienta de 5 ejes es mucho más simple que la de los brazos robots de 6 ejes, puesto que 3 de los ejes son normalmente ejes lineales y solo dos son ejes giratorios.
 
 == Orientación y localizacion de la herramienta
 
-Generalmente se utilizan sistemas CAD/CAM para generar los modelos 3D CAD de la pieza de trabajo, así como los datos CAM
-para la entrada a la máquina CNC de 5 ejes. La herramienta o los datos de localizacion de la herramienta (CL, Cutter
-Location) se componen de la posición de la punta de la herramienta y la orientación de la misma en relación con el sistema
-de coordenadas de la pieza. Esa informacion la contienen dos vectores, como los generados por la mayoría de los sistemas CAM, y que se muestran en la Fig. 1,:
+Generalmente se utilizan sistemas CAD/CAM para generar los modelos 3D CAD de la pieza de trabajo, así como los datos CAM para la entrada a la máquina CNC de 5 ejes. La herramienta o los datos de localizacion de la herramienta (CL, Cutter Location) se componen de la posición de la punta de la herramienta y la orientación de la misma en relación con el sistema de coordenadas de la pieza. Esa informacion la contienen dos vectores, como los generados por la mayoría de los sistemas CAM, y que se muestran en la Fig. 1,:
 
 image::5-axis-figures/equation__1.png[align="center"]
 
@@ -61,7 +54,7 @@ image::5-axis-figures/equation__3.png[align="center"]
 
 La matriz T(a,b,c) implica una traslación en las direcciones de coordenadas X, Y y Z, en las cantidades a, b y c respectivamente. Las matrices R implican rotaciones del ángulo theta alrededor de los ejes de coordenadas X, Y y Z, respectivamente. Los símbolos 'C' y 'S' se refieren a las funciones coseno y seno, respectivamente.
 
-== Configuraciones  de 5 ejes con mesas giratorias/inclinables
+== Configuraciones de 5 ejes con mesas giratorias/inclinables
 
 En estas máquinas herramienta, los dos ejes giratorios se montan en la mesa de trabajo de la máquina. Se usan tipicamente dos formas:
 
@@ -69,7 +62,7 @@ En estas máquinas herramienta, los dos ejes giratorios se montan en la mesa de 
 * Una mesa inclinable que gira alrededor del eje X o Y (rotación A o B, secundaria) está montada en una mesa giratoria que gira alrededor del eje Z (rotación C, primaria), con la pieza de trabajo en el mesa basculante.
 
 .Configuración general y sistemas de coordenadas
-image::5-axis-figures/Figure-2.png[align= "center"]
+image::5-axis-figures/Figure-2.png[align="center"]
 
 Se puede considerar que una máquina multieje consiste en una serie de eslabones conectados por articulaciones. Al
 asignar un sistema de coordenadas en cada eslabon de la máquina, y usando transformaciones homogéneas, podemos describir
@@ -104,7 +97,7 @@ Luego desarrollamos las transformaciones para una configuración xyzbc-trt con o
 === Transformaciones para una máquina herramienta xyzac-trt con offsets de pieza de trabajo ===
 
 .Modelo vismach de xyzac-trt con ejes de rotación coincidentes
-image::5-axis-figures/Figure-3.png[align= "center"]
+image::5-axis-figures/Figure-3.png[align="center"]
 
 Tratamos aquí con una configuración simplificada en la que el eje basculante y el eje giratorio se cruzan en un punto
 llamado punto pivote como se muestra en la figura 4. Por lo tanto, los dos sistemas de coordenadas 'O~ws~' y 'O~wp~' de
@@ -181,7 +174,7 @@ image::5-axis-figures/equation__17.png[align="center"]
 === Transformaciones para una máquina xyzac-trt con offsets en ejes rotativos
 
 .Modelo vismach de xyzac-trt con offsets con ejes rotatorios (positivos)
-image::5-axis-figures/Figure-5.png[align= "center"]
+image::5-axis-figures/Figure-5.png[align="center"]
 
 Tratamos aquí con una configuración extendida en la que el eje basculante y el eje rotativo no se cruzan en un punto, sino
 que tienen un desplazamiento D~y~. Además, también hay un desplazamiento z entre los dos sistemas de coordenadas 'O~ws~' y
@@ -191,7 +184,7 @@ L~z~ del caso anterior  no estan incluidos. Probablemente no sean necesarios si 
 medio de la función "touch of".
 
 .Configuración inclinable/giratoria xyzac-trt, con offsets de ejes
-image::5-axis-figures/Figure-6.png[align= "center",height=350]
+image::5-axis-figures/Figure-6.png[align="center",height=350]
 
 
 ==== Transformación directa
@@ -251,14 +244,14 @@ image::5-axis-figures/equation__27.png[align="center"]
 === Transformaciones para una máquina xyzbc-trt con offsets de ejes rotativos
 
 .modelo vismach de xyzbc-trt con compensaciones de eje rotacional (negativo)
-image::5-axis-figures/Figure-7.png[align= "center"]
+image::5-axis-figures/Figure-7.png[align="center"]
 
 Tratamos aquí de nuevo con una configuración extendida en la que el eje de inclinación (alrededor del eje y) y el eje
 giratorio no se cruzan en un punto, pero tienen un desplazamiento D~x~. Además, también hay un desplazamiento z entre los
 dos sistemas de coordenadas 'O~ws~' y 'O~wp~' de la figura 2, llamado D~z~. Un modelo vismach se muestra en la fig. 7 (desplazamientos negativos en este ejemplo) y los desplazamientos positivos se muestran en la fig. 8.
 
 .Configuración inclinable/giratoria xyzbc-trt, con offsets de ejes
-image::5-axis-figures/Figure-8.png[align= "center",height=350]
+image::5-axis-figures/Figure-8.png[align="center",height=350]
 
 ==== Transformación directa
 
@@ -428,17 +421,17 @@ setp xyzac-trt-kins.z-offset 20
 == Figuras
 
 .Configuración de mesa basculante/giratoria
-image::5-axis-figures/Figure-9.png[align= "center",height=300]
+image::5-axis-figures/Figure-9.png[align="center",height=300]
 
 .Configuración con inclinación de husillo/mesa
-image::5-axis-figures/Figure-10.png[align= "center",height=300]
+image::5-axis-figures/Figure-10.png[align="center",height=300]
 
 .Configuracion husillo oscilante / giratoria
-image::5-axis-figures/Figure-11.png[align= "center",height=300]
+image::5-axis-figures/Figure-11.png[align="center",height=300]
 
-////////////////////////////////////////////////// ///
+/////////////////////////////////////////////////////
 == Referencias nope nope nope pdf nope
-////////////////////////////////////////////////// ///
+/////////////////////////////////////////////////////
 
 == REFERENCIAS
 

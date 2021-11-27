@@ -1,9 +1,9 @@
 :lang: es
-:toc:
 
 [[cha:plasma-primer]]
 
 = Basicos del Corte por Plasma para Usuarios de LinuxCNC
+:toc:
 
 == ¿Qué es el plasma?
 
@@ -36,13 +36,13 @@ Las operaciones de plasma en máquinas CNC son bastante especiales en comparaci�
 
 Un arco de plasma tiene forma ovalada y la altura de corte debe controlarse para minimizar  bordes biselados. Si la antorcha está demasiado alta o demasiado baja, los bordes pueden quedar excesivamente biselados. También es crítico que la antorcha se mantenga perpendicular a la superficie.
 
-* La distancia de la antorcha al trabajo puede afectar el bisel del borde *
+*La distancia de la antorcha al trabajo puede afectar el bisel del borde*
 
 image::images/primer_cut-angularity.png[width=50%]
 
-* Ángulo de corte negativo: * antorcha demasiado baja, aumente la distancia de la antorcha al trabajo.
+*Ángulo de corte negativo:* antorcha demasiado baja, aumente la distancia de la antorcha al trabajo.
 
-* Ángulo de corte positivo: * antorcha demasiado alta, disminuir la antorcha a la distancia de trabajo.
+*Ángulo de corte positivo:* antorcha demasiado alta, disminuir la antorcha a la distancia de trabajo.
 
 NOTA: Una ligera variación en los ángulos de corte puede ser normal, siempre que esté dentro de tolerancia.
 
@@ -120,7 +120,7 @@ El siguiente es un circuito de ejemplo que se ha demostrado que funciona y es co
 
 image::images/primer_ohmic-sensing.png[width=100%]
 
-== Hipersensibilidad con  MESA THCAD-5
+=== Hipersensibilidad con MESA THCAD-5
 
 Un método más sofisticado de detección de material que elimina los relés y diodos es usar otro THCAD-5 para monitorear el voltaje del circuito de detección de material desde una fuente de alimentación aislada. La ventaja que tiene es que el THCAD está diseñado para el entorno eléctrico de plasma hostil y aísla totalmente y con seguridad el lado lógico del lado de alto voltaje.
 
@@ -136,7 +136,7 @@ image::images/primer_hypersensing.png[width=75%]
 
 Utilizamos una Fuente de alimentación aislada de riel DIN Mean Well HDR-15 ultradelgada de 15 vatios basada en riel DIN de 24 V .. Este es un dispositivo de doble aislamiento de clase II que resistirá cualquier voltaje de arco que pueda aplicarse a los terminales.
 
-== Ejemplo de código HAL para hipersensibilidad
+.Ejemplo de código HAL para hipersensibilidad
 
 El siguiente código HAL se puede pegar en su QtPlasmaC custom.hal para habilitar la detección Ohmica en el codificador 2 de un 7i76e. Instale el archivo de bits correcto y conecte el THCAD a IDX + e IDX-. Asegúrese de cambiar la configuración de calibración para estar de acuerdo con su THCAD-5.
 
@@ -219,7 +219,7 @@ Tendrá que experimentar para obtener el tamaño exacto del agujero porque el co
 
 Esta ralentización se puede lograr manipulando la velocidad de alimentación directamente en su postprocesador o utilizando alimentación adaptativa y un pin analógico como entrada. Esto le permite usar M67 / M68 para establecer el porcentaje de alimentación deseada para cortar.
 
-- Conociendo el avance
+-- Conociendo el avance
 
 De la discusión anterior es evidente que el controlador de plasma necesita conocer la velocidad de alimentación establecida por el usuario. Esto plantea un problema con LinuxCNC porque LinuxCNC no guarda la velocidad de avance después de que el código G se almacena y analiza. Hay dos enfoques para solucionar esto:
 
@@ -254,7 +254,7 @@ Por lo general, se requieren los siguientes pines (tenga en cuenta que las conex
 * En algunas circunstancias, se puede usar el relé del husillo integrado en las tarjetas Mesa en lugar de un relé externo.
 * Generalmente conectado a 'spindle.0.on'
 
-[WARNING] Se recomienda encarecidamente que la antorcha no se pueda habilitar mientras este pin sea falso; de lo contrario, la antorcha no se apagará cuando se presione Estop;
+WARNING: Se recomienda encarecidamente que la antorcha no se pueda habilitar mientras este pin sea falso; de lo contrario, la antorcha no se apagará cuando se presione Estop;
 
 === Interruptor flotante (entrada)
 
@@ -392,9 +392,9 @@ En el lado de alto voltaje:
 
 Suponiendo que está conectado a una 7i76e, conecte la salida a la entrada del codificador de husillo:
 
-* THCAD + 5v a TB3 Pin 6 (+5 VP)
+* THCAD +5v a TB3 Pin 6 (+5 VP)
 * THCAD -5v a TB3 Pin 1 (GND)
-* THCAD FOUT + a TB3 Pin 7 (ENC A +)
+* THCAD FOUT+ a TB3 Pin 7 (ENC A+)
 * THCAD FOUT- a TB3 Pin 8 (ENC A-)
 
 === Prueba inicial de THCAD

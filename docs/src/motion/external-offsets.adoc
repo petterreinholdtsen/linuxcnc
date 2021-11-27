@@ -1,4 +1,6 @@
-[[cha:external-offsets]]
+:lang: en
+
+[[cha:external-offsets]](((externaloffsets)))
 
 = External Axis Offsets
 
@@ -23,13 +25,15 @@ For each axis letter (*L* in xyzabcuvw):
 . Default value:  0 (disables external offset).
   Consequence: omitted [AXIS_L]OFFSET_AV_RATIO disables external offset for the axis.
 . If nonzero, the  OFFSET_AV_RATIO (*r*), adjusts the conventional (planning) max
- velocity and acceleration to preserve [AXIS_L] constraints:
+  velocity and acceleration to preserve [AXIS_L] constraints:
 
+---
   planning max velocity        = (1-r) * MAX_VELOCITY
   external offset velocity     = (  r) * MAX_VELOCITY
 
   planning max acceleration    = (1-r) * MAX_ACCELERATIOIN
   external offset acceleration = (  r) * MAX_ACCELERATION
+---
 
 == Hal Pins
 
@@ -263,7 +267,7 @@ The sim config 'sim/configs/axis/external_offsets/eoffsets.ini'
 demonstrates a cartesian XYZ machine with controls to enable external
 offsets on any axis.
 
-Displays are provided to show all important position and offset 
+Displays are provided to show all important position and offset
 values.
 
 A sim_pin gui provides controls for the axis offset pins: eoffset-scale
@@ -280,7 +284,7 @@ demonstrates a jog-while-pause capability for a single (Z) coordinate:
 
 Panel LEDs are provided to show important status items.
 
-Controls are provided to set the eoffset scale factor and to 
+Controls are provided to set the eoffset scale factor and to
 increment/decrement/clear the eoffset counts.
 
 === dynamic_offsets.ini

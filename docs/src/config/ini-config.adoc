@@ -78,8 +78,7 @@ The following sections are used by LinuxCNC:
 === Variables
 
 A variable line is made up of a variable name, an equals sign (=), and
-a value. Everything from the first non-white space character after the
-= up to the end of the line is passed as the value, so you can embed
+a value. Everything from the first non-white space character after the = up to the end of the line is passed as the value, so you can embed
 spaces in string symbols if you want to or need to. A variable name is
 often called a keyword.
 
@@ -142,7 +141,7 @@ Z_SAFE_DISTANCE = -10
 ----
 
 To use the custom variables in your HAL file, put the section and
-variable name in place of the value. 
+variable name in place of the value.
 
 .HAL Example
 ----
@@ -171,8 +170,7 @@ G10 L20 P0 Z#<_ini[probe]z_offset>
 
 === Include Files
 
-An INI file may include the contents of another file by using a #INCLUDE
-directive.
+An INI file may include the contents of another file by using a #INCLUDE directive.
 
 .#INCLUDE Format
 ----
@@ -181,10 +179,10 @@ directive.
 
 The filename can be specified as:
 
- * a file in the same directory as the INI file
- * a file located relative to the working directory
- * an absolute file name (starts with a /)
- * a user-home-relative file name (starts with a ~)
+* a file in the same directory as the INI file
+* a file located relative to the working directory
+* an absolute file name (starts with a /)
+* a user-home-relative file name (starts with a ~)
 
 Multiple #INCLUDE directives are supported.
 
@@ -209,12 +207,12 @@ is .inc.  Do not use a file extension of .ini for included files.
 === [EMC] Section
 
 * 'VERSION = 1.1' - The version number for the configuration. Any value other
-    than 1.1 will cause the configuration checker to run and try to update the
-    configuration to the new style joint axes type of configuration.
+  than 1.1 will cause the configuration checker to run and try to update the
+  configuration to the new style joint axes type of configuration.
 
 * 'MACHINE = My Controller' - This is the name of the controller, which is
-    printed out at the top of most graphical interfaces. You can put whatever
-    you want here as long as you make it a single line long.
+  printed out at the top of most graphical interfaces. You can put whatever
+  you want here as long as you make it a single line long.
 
 * 'DEBUG = 0' - Debug level 0 means no messages will be printed when LinuxCNC is
   run from a <<faq:terminal,terminal>>. Debug flags are usually only useful to
@@ -260,7 +258,7 @@ User Manual.
   https://docs.python.org/2/library/string.html#format-specification-mini-language
   An error will be raised if the format can not accept a floating-point value.
 
-* 'CONE_BASESIZE = .25' - Over-ride the default cone/tool base size of .5 in 
+* 'CONE_BASESIZE = .25' - Over-ride the default cone/tool base size of .5 in
   the graphics display
 
 * 'MAX_FEED_OVERRIDE = 1.2' - The maximum feed override the user may select.
@@ -279,7 +277,7 @@ User Manual.
 
 * 'MAX_SPINDLE_0_OVERRIDE = 1.0' - The maximum feed override the user may select.
   1.2 means 120% of the programmed feed rate.
-On multi spindle machine there will be entries for each spindle number. Qtvcp only
+  On multi spindle machine there will be entries for each spindle number. Qtvcp only
 
 * 'DEFAULT_SPINDLE_SPEED = 100' - The default spindle RPM when the spindle
   is started in manual mode. if this setting is not present, this
@@ -291,10 +289,10 @@ On multi spindle machine there will be entries for each spindle number. Qtvcp on
 * 'SPINDLE_INCREMENT = 200' - The increment used when clicking increase/decrease buttons Qtvcp only
 
 * 'MIN_SPINDLE_0_SPEED = 1000' - The minimum RPM that can be manually selected.
-On multi spindle machine there will be entries for each spindle number. Qtvcp only
+  On multi spindle machine there will be entries for each spindle number. Qtvcp only
 
 * 'MAX_SPINDLE_0_SPEED = 20000' - The maximum RPM that can be manually selected.
-On multi spindle machine there will be entries for each spindle number. Qtvcp only
+  On multi spindle machine there will be entries for each spindle number. Qtvcp only
 
 * 'PROGRAM_PREFIX = ~/linuxcnc/nc_files' - The default location for g-code
   files and the location for user-defined M-codes. This location is searched
@@ -338,36 +336,36 @@ See <<cha:gmoccapy,gmoccapy>> document for Gmoccapy details.
 * 'MAX_ANGULAR_VELOCITY = 1.0' - The maximum velocity for angular jogs, in machine units per second.
 
 * 'INCREMENTS = 1 mm, .5 in, ...' - Defines the increments available for incremental jogs.
-    The INCREMENTS can be used to override the default. 
-    The values can be decimal numbers (e.g., 0.1000) or fractional numbers (e.g., 1/16),
-    optionally followed by a unit (cm, mm, um, inch, in or mil).
-    If a unit is not specified the machine unit is assumed.
-    Metric and imperial distances may be mixed:
-    INCREMENTS = 1 inch, 1 mil, 1 cm, 1 mm, 1 um is a valid entry.
+  The INCREMENTS can be used to override the default.
+  The values can be decimal numbers (e.g., 0.1000) or fractional numbers (e.g., 1/16),
+  optionally followed by a unit (cm, mm, um, inch, in or mil).
+  If a unit is not specified the machine unit is assumed.
+  Metric and imperial distances may be mixed:
+  INCREMENTS = 1 inch, 1 mil, 1 cm, 1 mm, 1 um is a valid entry.
 
 * 'GRIDS = 10 mm, 1 in, ...' - Defines the preset values for grid lines.
-    The value is interpreted the same way as 'INCREMENTS'.
+  The value is interpreted the same way as 'INCREMENTS'.
 
 * 'OPEN_FILE = /full/path/to/file.ngc' - The file to show in the preview plot when AXIS starts. Use
-   a blank string "" and no file will be loaded at start up. gmoccapy will not use this setting, as it
-   offers a corresponding entry on its settings page.
+  a blank string "" and no file will be loaded at start up. gmoccapy will not use this setting, as it
+  offers a corresponding entry on its settings page.
 
-* 'EDITOR = gedit' - The editor to use when selecting File > Edit to edit the G code 
-    from the AXIS menu. This must be configured for this menu item to
-    work. Another valid entry is gnome-terminal -e vim. This entry does not apply to gmoccapy, as gmoccapy 
-    has an integrated editor.
+* 'EDITOR = gedit' - The editor to use when selecting File > Edit to edit the G code
+  from the AXIS menu. This must be configured for this menu item to
+  work. Another valid entry is gnome-terminal -e vim. This entry does not apply to gmoccapy, as gmoccapy
+  has an integrated editor.
 
 * 'TOOL_EDITOR = tooledit' - The editor to use when editing the tool table (for example by
-    selecting "File > Edit tool table..." in Axis). Other valid
-    entries are "gedit", "gnome-terminal -e vim", and "gvim". This entry does not apply to gmoccapy, as gmoccapy 
-    has an integrated editor.
+  selecting "File > Edit tool table..." in Axis). Other valid
+  entries are "gedit", "gnome-terminal -e vim", and "gvim". This entry does not apply to gmoccapy, as gmoccapy
+  has an integrated editor.
 
-* 'PYVCP = /filename.xml' - The PyVCP panel description file. See the 
-    <<cha:pyvcp,PyVCP Chapter>> for more information.
+* 'PYVCP = /filename.xml' - The PyVCP panel description file. See the
+  <<cha:pyvcp,PyVCP Chapter>> for more information.
 
 * 'PYVCP_POSITION = BOTTOM' - The placement of the PyVCP panel in the AXIS user interface.
-    If this variable is omitted the panel will default to the right side. The only valid
-    alternative is BOTTOM. See the <<cha:pyvcp,PyVCP Chapter>> for more information.
+  If this variable is omitted the panel will default to the right side. The only valid
+  alternative is BOTTOM. See the <<cha:pyvcp,PyVCP Chapter>> for more information.
 
 * 'LATHE = 1' - Any non-empty value (including "0") causes axis to use "lathe mode" with a top view and with Radius and Diameter on the DRO.
 
@@ -376,37 +374,37 @@ See <<cha:gmoccapy,gmoccapy>> document for Gmoccapy details.
 * 'FOAM = 1' - Any non-empty value (including "0") causes axis to change the display for foam-cutter mode.
 
 * 'GEOMETRY = XYZABCUVW' - Controls the *preview* and *backplot* of motion.
-   This item consists of a sequence of axis letters and control characters:
+  This item consists of a sequence of axis letters and control characters:
 
-.  The letters X,Y,Z specify translation along the named coordinate.
-.  The letters A,B,C specify rotation about the corresponding axes X,Y,Z.
-.  The letters U,V,W specify translation along the related axes X,Y,Z.
-.  Each letter specified must occur in [TRAJ]COORDINATES to have an effect.
-.  A "*-*" character preceding any letter inverts the direction of the operation.
-.  The translation and rotation operations are evaluated *right-to-left*.
-   So using GEOMETRY=XYZBC specifies a C rotation followed by a B rotation
-   followed by Z,Y,X translations.  (The ordering of consecutive translation
-   letters is immaterial.)
-.  If the "*!*" special character appears anywhere in the sequence, rotations
-   for the A,B,C axis letters respect the offsets (G5x, G92) applied to X,Y,Z.
-.  The proper GEOMETRY string depends on the machine configuration and
-   the kinematics used to control it. The order of the letters is important.
-   For example, rotating around C then B is different than rotating
-   around B then C.
-.  Rotations are by default applied with respect to the machine origin.
-   Example: GEOMETRY=CXYZ first translates the control point to X,Y,Z and then
-   performs a C rotation about the Z axis centered at the machine origin.
-.  Rotations applied after translations may use the "*!*" provision to
-   to act with respect to the current machine offset.  Example: GEOMETRY=!CXYZ
-   translates the control point to the X,Y,Z position and then performs
-   a C rotation about the machine origin displaced by the current G5x,G92
-   X,Y,Z offsets.  (Changing offsets may require a program reload).
-.  UVW translation example: GEOMETRY=XYZUVW causes UVW to move in the coordinate
-   system of the tool and XYZ to move in the coordinate system of the material
-.  Foam-cutting machines (FOAM = 1) should specify "XY;UV" or leave the value
-   blank even though this value is presently ignored in foam-cutter mode.  A
-   future version may define what ";" means, but if it does "XY;UV" will mean
-   the same as the current foam default.
+. The letters X,Y,Z specify translation along the named coordinate.
+. The letters A,B,C specify rotation about the corresponding axes X,Y,Z.
+. The letters U,V,W specify translation along the related axes X,Y,Z.
+. Each letter specified must occur in [TRAJ]COORDINATES to have an effect.
+. A "*-*" character preceding any letter inverts the direction of the operation.
+. The translation and rotation operations are evaluated *right-to-left*.
+  So using GEOMETRY=XYZBC specifies a C rotation followed by a B rotation
+  followed by Z,Y,X translations.  (The ordering of consecutive translation
+  letters is immaterial.)
+. If the "*!*" special character appears anywhere in the sequence, rotations
+  for the A,B,C axis letters respect the offsets (G5x, G92) applied to X,Y,Z.
+. The proper GEOMETRY string depends on the machine configuration and
+  the kinematics used to control it. The order of the letters is important.
+  For example, rotating around C then B is different than rotating
+  around B then C.
+. Rotations are by default applied with respect to the machine origin.
+  Example: GEOMETRY=CXYZ first translates the control point to X,Y,Z and then
+  performs a C rotation about the Z axis centered at the machine origin.
+. Rotations applied after translations may use the "*!*" provision to
+  to act with respect to the current machine offset.  Example: GEOMETRY=!CXYZ
+  translates the control point to the X,Y,Z position and then performs
+  a C rotation about the machine origin displaced by the current G5x,G92
+  X,Y,Z offsets.  (Changing offsets may require a program reload).
+. UVW translation example: GEOMETRY=XYZUVW causes UVW to move in the coordinate
+  system of the tool and XYZ to move in the coordinate system of the material
+. Foam-cutting machines (FOAM = 1) should specify "XY;UV" or leave the value
+  blank even though this value is presently ignored in foam-cutter mode.  A
+  future version may define what ";" means, but if it does "XY;UV" will mean
+  the same as the current foam default.
 
 [NOTE]
 If no [DISPLAY]GEOMETRY is included in the inifile, a default is provided
@@ -414,18 +412,18 @@ by the [DISPLAY]DISPLAY gui program (typically "XYZABCUVW")
 
 
 * 'ARCDIVISION = 64' - Set the quality of preview of arcs. Arcs are previewed by dividing
-    them into a number of straight lines; a semicircle is divided into
-    *ARCDIVISION* parts. Larger values give a more accurate preview, but
-    take longer to
-    load and result in a more sluggish display. Smaller values give a less
-    accurate preview, but take less time to load and may result in a faster
-    display. The default value of 64 means a circle of up to 3 inches will
-    be displayed to within 1 mil (.03%).
+  them into a number of straight lines; a semicircle is divided into
+  *ARCDIVISION* parts. Larger values give a more accurate preview, but
+  take longer to
+  load and result in a more sluggish display. Smaller values give a less
+  accurate preview, but take less time to load and may result in a faster
+  display. The default value of 64 means a circle of up to 3 inches will
+  be displayed to within 1 mil (.03%).
 
 * 'MDI_HISTORY_FILE =' - The name of a local MDI history file. If this is not specified Axis
-    will save the MDI history in *.axis_mdi_history* in the user's home
-    directory. This is useful if you have multiple configurations on one
-    computer.
+  will save the MDI history in *.axis_mdi_history* in the user's home
+  directory. This is useful if you have multiple configurations on one
+  computer.
 
 * 'JOG_AXES =' - The order in which jog keys are assigned to axis letters.  The left and right arrows are assigned to the first axis letter, up and down to the second, page up/page down to the third, and left and right bracket to the fourth.  If unspecified, the default is determined from the [TRAJ]COORDINATES, [DISPLAY]LATHE and [DISPLAY]FOAM values.
 
@@ -552,7 +550,7 @@ if __name__ == "__main__":
 * 'PARAMETER_FILE = myfile.var' -
     (((PARAMETER FILE))) The file located in the same directory as the ini
     file which contains the parameters used by the interpreter (saved
-    between runs). 
+    between runs).
 
 * 'ORIENT_OFFSET = 0' -
     (((ORIENT OFFSET))) A float value added to the R word parameter
@@ -668,13 +666,13 @@ Section.
 
 === [TASK] Section
 
-* 'TASK = milltask' - 
+* 'TASK = milltask' -
     Specifies the name of the 'task' executable. The 'task' executable does various
     things, such as communicate with the UIs over NML, communicate with the
     realtime motion planner over non-HAL shared memory, and interpret gcode.
     Currently there is only one task executable that makes sense for
     99.9% of users, milltask.
-    
+
 * 'CYCLE_TIME = 0.010' -
     The period, in seconds, at which TASK will run. This parameter
     affects the polling interval when waiting for motion to complete, when
@@ -707,7 +705,7 @@ Section.
 
 * 'HALFILE = texample.tcl [arg1 [arg2] ...]]' - Execute the tcl file 'texample.tcl'
     at start up with arg1, arg2, etc as ::argv list.  Files with a .tcl suffix are
-    processed as above but use haltcl for processing  See the 
+    processed as above but use haltcl for processing  See the
     <<cha:haltcl,HALTCL Chapter>> for more information.
 
 * 'HALFILE = LIB:sys_example.hal' - Execute the system library file 'sys_example.hal'
@@ -779,7 +777,7 @@ For more information see the <<cha:hal-twopass,Hal TWOPASS>> chapter.
 
 === [HALUI] section
 
-* 'MDI_COMMAND = G53 G0 X0 Y0 Z0' - 
+* 'MDI_COMMAND = G53 G0 X0 Y0 Z0' -
      An MDI command can be executed by using halui.mdi-command-00. Increment
     the number for each command listed in the [HALUI] section.
 
@@ -920,7 +918,7 @@ on that segment, and use constant acceleration. (Setting
 ARC_BLEND_RAMP_FREQ = 1000 is equivalent to always using trapezoidal
 acceleration, if the servo loop is 1kHz).
 +
-You can characterize the worst-case loss of performance by comparing the 
+You can characterize the worst-case loss of performance by comparing the
 velocity that a trapezoidal profile reaches vs. the ramp:
 +
 # v_ripple = a_max / (4.0 * f)
@@ -929,18 +927,18 @@ velocity that a trapezoidal profile reaches vs. the ramp:
 # a_max = max axis acceleration
 # f = cutoff frequency from INI
 +
-For the aforementioned machine, the ripple for a 20Hz cutoff frequency 
-is 100 / (4 * 20) = 1.25 IPS. This seems high, but keep in mind that it 
-is only a worst-case estimate. In reality , the trapezoidal motion 
-profile is limited by other factors, such as normal acceleration or 
-requested velocity, and so the actual performance loss should be much 
-smaller. Increasing the cutoff frequency can squeeze out more 
-performance, but make the motion rougher due to acceleration 
-discontinuities. A value in the range 20Hz to 200Hz should be reasonable 
+For the aforementioned machine, the ripple for a 20Hz cutoff frequency
+is 100 / (4 * 20) = 1.25 IPS. This seems high, but keep in mind that it
+is only a worst-case estimate. In reality , the trapezoidal motion
+profile is limited by other factors, such as normal acceleration or
+requested velocity, and so the actual performance loss should be much
+smaller. Increasing the cutoff frequency can squeeze out more
+performance, but make the motion rougher due to acceleration
+discontinuities. A value in the range 20Hz to 200Hz should be reasonable
 to start.
 +
-Finally, no amount of tweaking will speed up a toolpath with lots of 
-small, tight corners, since you're limited by cornering acceleration. 
+Finally, no amount of tweaking will speed up a toolpath with lots of
+small, tight corners, since you're limited by cornering acceleration.
 
 * 'SPINDLES = 3' - The number of spindles to support. It is imperative that this
    number matches the "num_spindles" parameter passed to the motion module.
@@ -958,7 +956,7 @@ small, tight corners, since you're limited by cornering acceleration.
 * 'LINEAR_UNITS = <units>' - (((LINEAR UNITS))) Specifies the 'machine units' for linear axes.
     Possible choices are mm or inch.
     This does not affect the linear units in NC code (the G20 and G21
-    words do this). 
+    words do this).
 
 * 'ANGULAR_UNITS = <units>' - (((ANGULAR UNITS))) Specifies the 'machine units' for rotational axes.
     Possible choices are 'deg', 'degree' (360 per circle), 'rad', 'radian'
@@ -1029,7 +1027,7 @@ LinuxCNC will not know your joint travel limits when using 'NO_FORCE_HOMING = 1'
 
 === [AXIS_<letter>] Section
 The <letter> specifies one of: X Y Z A B C U V W
-   
+
 * 'MAX_VELOCITY = 1.2' -
     Maximum velocity for this axis in <<sec:traj-section,machine units>> per second.
 
@@ -1051,7 +1049,7 @@ The <letter> specifies one of: X Y Z A B C U V W
     For a rotary axis (A,B,C typ) with unlimited rotation having no MAX_LIMIT
     for that axis in the [AXIS_<letter>] section a value of 1e99 is used.
 
-* 'WRAPPED_ROTARY = 1' - 
+* 'WRAPPED_ROTARY = 1' -
     When this is set to 1 for an ANGULAR axis the axis will move 0-359.999
     degrees. Positive Numbers will move the axis in a positive direction and
     negative numbers will move the axis in the negative direction.
@@ -1156,7 +1154,7 @@ For more information on kinematics modules see the manpage: '$ man kins'
     numbers. Currently the limit inside LinuxCNC is for 256 triplets per joint.
     +
     +
-    If COMP_FILE is specified for an joint, BACKLASH is not used. A 
+    If COMP_FILE is specified for an joint, BACKLASH is not used. A
     'COMP_FILE_TYPE' must be specified for each 'COMP_FILE'.
 
 * 'COMP_FILE_TYPE = 0 or 1' - Specifies the type of compensation file. The
@@ -1260,7 +1258,7 @@ These parameters are Homing related, for a better explanation read the
     the homing process, this is the position that is assigned to that point.
     When sharing home and limit switches and using a home sequence that will
     leave the home/limit switch in the toggled state the home offset can be
-    used define the home switch position to be other than 0 if your HOME 
+    used define the home switch position to be other than 0 if your HOME
     position is desired to be 0.
 
 * 'HOME_SEARCH_VEL = 0.0' -
@@ -1306,7 +1304,7 @@ These parameters are Homing related, for a better explanation read the
      Used to indicate the joint uses an absolute encoder.  At a request
     for homing, the current joint value is set to the 'HOME_OFFSET' value.
     If the 'HOME_ABSOLUTE_ENCODER' setting is 1, the machine makes the usual
-    final move to the 'HOME' value.  
+    final move to the 'HOME' value.
     If the 'HOME_ABSOLUTE_ENCODER' setting is 2, no final move is made.
 
 * 'HOME_SEQUENCE = <n>' -
@@ -1368,79 +1366,79 @@ latexmath:[ \frac{X\, inches}{1\, encoder\, count} =
 image::images/encoder-counts-math.png[align="center"]
 
 * 'BIAS = 0.000' - This is used by hm2-servo and some others.
-    Bias is a constant amount
-    that is added to the output. In most cases it should be left at zero.
-    However, it can sometimes be useful to compensate for offsets in servo
-    amplifiers, or to balance the weight of an object that moves
-    vertically. bias is turned off when the PID loop is disabled, just like
-    all other components of the output.
+  Bias is a constant amount
+  that is added to the output. In most cases it should be left at zero.
+  However, it can sometimes be useful to compensate for offsets in servo
+  amplifiers, or to balance the weight of an object that moves
+  vertically. bias is turned off when the PID loop is disabled, just like
+  all other components of the output.
 
 * 'P = 50' - The proportional gain for the joint servo. This value
-    multiplies the
-    error between commanded and actual position in machine units, resulting
-    in a contribution to the computed voltage for the motor amplifier. The
-    units on the P gain are volts per machine unit, e.g.,
-    image:images/p-term.png[height=25]
+  multiplies the
+  error between commanded and actual position in machine units, resulting
+  in a contribution to the computed voltage for the motor amplifier. The
+  units on the P gain are volts per machine unit, e.g.,
+  image:images/p-term.png[height=25]
 
-//latexmath:[$\frac{volt}{mu}$]. 
+//latexmath:[$\frac{volt}{mu}$].
 
 * 'I = 0' - The integral gain for the joint servo. The value
-    multiplies the
-    cumulative error between commanded and actual position in machine
-    units, resulting in a contribution to the computed voltage for the
-    motor amplifier. The units on the I gain are volts per machine unit
-    second, e.g., image:images/i-term.png[height=25]
-    
+  multiplies the
+  cumulative error between commanded and actual position in machine
+  units, resulting in a contribution to the computed voltage for the
+  motor amplifier. The units on the I gain are volts per machine unit
+  second, e.g., image:images/i-term.png[height=25]
+
 //latexmath:[$\frac{volt}{mu\, s}$].
 
 * 'D = 0' - The derivative gain for the joint servo. The value
-    multiplies the
-    difference between the current and previous errors, resulting in a
-    contribution to the computed voltage for the motor amplifier. The units
-    on the D gain are volts per machine unit per second, e.g.,
-    image:images/i-term.png[height=25]
+  multiplies the
+  difference between the current and previous errors, resulting in a
+  contribution to the computed voltage for the motor amplifier. The units
+  on the D gain are volts per machine unit per second, e.g.,
+  image:images/i-term.png[height=25]
 
 // latexmath:[$\frac{volt}{mu/s}$].
 
 * 'FF0 = 0' - The 0th order feed forward gain. This number is
-    multiplied by the
-    commanded position, resulting in a contribution to the computed voltage
-    for the motor amplifier. The units on the FF0 gain are volts per
-    machine unit, e.g., image:images/p-term.png[height=25]
+  multiplied by the
+  commanded position, resulting in a contribution to the computed voltage
+  for the motor amplifier. The units on the FF0 gain are volts per
+  machine unit, e.g., image:images/p-term.png[height=25]
 
 // latexmath:[$\frac{volt}{mu}$].
 
 * 'FF1 = 0' - The 1st order feed forward gain. This number is
-    multiplied by the
-    change in commanded position per second, resulting in a contribution to
-    the computed voltage for the motor amplifier. The units on the FF1 gain
-    are volts per machine unit per second, e.g., image:images/i-term.png[height=25]
+  multiplied by the
+  change in commanded position per second, resulting in a contribution to
+  the computed voltage for the motor amplifier. The units on the FF1 gain
+  are volts per machine unit per second, e.g., image:images/i-term.png[height=25]
 
 // latexmath:[$\frac{volt}{mu\, s}$].
 
 * 'FF2 = 0' - The 2nd order feed forward gain. This number is
-    multiplied by the
-    change in commanded position per second per second, resulting in a
-    contribution to the computed voltage for the motor amplifier. The units
-    on the FF2 gain are volts per machine unit per second per second,
-    e.g., image:images/ff2.png[height=25]
-    
+  multiplied by the
+  change in commanded position per second per second, resulting in a
+  contribution to the computed voltage for the motor amplifier. The units
+  on the FF2 gain are volts per machine unit per second per second,
+  e.g., image:images/ff2.png[height=25]
+
 // latexmath:[$\frac{volt}{mu\, s^{2}}$].
 
-* 'OUTPUT_SCALE = 1.000' - 
+* 'OUTPUT_SCALE = 1.000' -
 
 * 'OUTPUT_OFFSET = 0.000' - These two values are the scale and offset factors for
-    the joint output to the motor amplifiers.
-    The second value (offset) is subtracted from
-    the computed output (in volts), and divided by the first value (scale
-    factor), before being written to the D/A converters. The units on the
-    scale value are in true volts per DAC output volts. The units on the
-    offset value are in volts. These can be used to linearize a DAC.
-     Specifically, when writing outputs, the LinuxCNC first converts the desired
-    output in quasi-SI units to raw actuator values, e.g., volts for an
-    amplifier DAC. This scaling
-    looks like: image:images/output-offset.png[]
-    
+  the joint output to the motor amplifiers.
+  The second value (offset) is subtracted from
+  the computed output (in volts), and divided by the first value (scale
+  factor), before being written to the D/A converters. The units on the
+  scale value are in true volts per DAC output volts. The units on the
+  offset value are in volts. These can be used to linearize a DAC.
+  Specifically, when writing outputs, the LinuxCNC first converts the desired
+  output in quasi-SI units to raw actuator values, e.g., volts for an
+  amplifier DAC. This scaling
+  looks like: image:images/output-offset.png[]
+
 // latexmath:[raw=\frac{output-offset}{scale}]
 
 The value for scale can be obtained analytically by doing a unit
@@ -1467,18 +1465,18 @@ To do this, follow this procedure.
 
 . Build a calibration table for the output, driving the DAC with a
    desired voltage and measuring the result.
-   
+
 . Do a least-squares linear fit to get coefficients a, b such
    that image:images/calibration-1.png[]
 . Note that we want raw output such that our measured result is
-   identical to the commanded output. This means 
+   identical to the commanded output. This means
 .. image:images/calibration-2.png[]
 .. image:images/calibration-3.png[]
 . As a result, the a and b coefficients from the linear fit can be
-   used as the scale and offset for the controller directly. 
+   used as the scale and offset for the controller directly.
 
 See the following table for an example of voltage measurements.
-   
+
 // latexmath:[ meas=a*raw+b ]
 // latexmath:[ cmd=a*raw+b ]
 // latexmath:[ raw=(cmd-b)/a ]
@@ -1535,6 +1533,7 @@ The following items might be used by a stepgen component.
 
 * 'SCALE = 4000' - in Sample configs
 * 'STEP_SCALE = 4000' - in PNCconf built configs
+
 Specifies the number of pulses that corresponds to a
 move of one machine unit as set in the [TRAJ] section.
 For stepper systems, this is
@@ -1550,20 +1549,20 @@ have:
 
 image::images/stepper-scale.png[align="center"]
 
-//latexmath:[ scale = 
+//latexmath:[ scale =
 //\frac{2\, steps}{1.8\, degree} \times \frac{360\, degree}{rev} \times \frac{10\, rev}{inch} =
 //\frac{4000\, steps}{inch} ]
 
 * 'ENCODER_SCALE = 20000' (Optionally used in PNCconf built configs) -
-Specifies the number of pulses that
-corresponds to a move of one machine unit as set in the [TRAJ] section.
-For a linear joint one machine unit will be equal to
-the setting of LINEAR_UNITS.
-For an angular joint one unit is equal to the setting in ANGULAR_UNITS.
-A second number, if specified, is ignored.
-For example, on a 2000 counts per rev encoder, and 10
-revs/inch gearing, and desired units of inch, we
-have: 
+  Specifies the number of pulses that
+  corresponds to a move of one machine unit as set in the [TRAJ] section.
+  For a linear joint one machine unit will be equal to
+  the setting of LINEAR_UNITS.
+  For an angular joint one unit is equal to the setting in ANGULAR_UNITS.
+  A second number, if specified, is ignored.
+  For example, on a 2000 counts per rev encoder, and 10
+  revs/inch gearing, and desired units of inch, we
+  have:
 
 image::images/encoder-scale.png[align="center"]
 
@@ -1573,18 +1572,17 @@ image::images/encoder-scale.png[align="center"]
 
 
 * 'STEPGEN_MAXACCEL = 21.0' -  Acceleration limit for the step generator.
-    This should be 1% to 10%
-    larger than the joint MAX_ACCELERATION. This value improves the tuning
-    of stepgen's "position loop". If you have added backlash compensation
-    to an joint then this should be 1.5 to 2 times greater than
-    MAX_ACCELERATION.
+  This should be 1% to 10%
+  larger than the joint MAX_ACCELERATION. This value improves the tuning
+  of stepgen's "position loop". If you have added backlash compensation
+  to an joint then this should be 1.5 to 2 times greater than
+  MAX_ACCELERATION.
 
 * 'STEPGEN_MAXVEL = 1.4' - Older configuration files have a velocity limit for
-    the step
-    generator as well. If specified, it should also be 1% to 10% larger
-    than the joint MAX_VELOCITY. Subsequent testing has shown that use of
-    STEPGEN_MAXVEL does not improve the tuning of stepgen's position loop.
-
+  the step
+  generator as well. If specified, it should also be 1% to 10% larger
+  than the joint MAX_VELOCITY. Subsequent testing has shown that use of
+  STEPGEN_MAXVEL does not improve the tuning of stepgen's position loop.
 
 [[sec:emcio-section]](((INI File, EMCIO Section)))
 
@@ -1593,45 +1591,43 @@ image::images/encoder-scale.png[align="center"]
 * 'EMCIO = io' - Name of IO controller program
 
 * 'CYCLE_TIME = 0.100' -
-    The period, in seconds, at which EMCIO will run. Making
-    it 0.0 or a
-    negative number will tell EMCIO not to sleep at all. There is usually
-    no need to change this number.
+  The period, in seconds, at which EMCIO will run. Making
+  it 0.0 or a
+  negative number will tell EMCIO not to sleep at all. There is usually
+  no need to change this number.
 
 * 'TOOL_TABLE = tool.tbl' -
-    The file which contains tool information, described in
-    the User Manual.
+  The file which contains tool information, described in
+  the User Manual.
 
 * 'DB_PROGRAM = db_program' -
-    Path to an executable program that manages tool data.
-    (When a DB_PROGRAM is specified, a TOOL_TABLE entry is ignored)
+  Path to an executable program that manages tool data.
+  (When a DB_PROGRAM is specified, a TOOL_TABLE entry is ignored)
 
 * 'TOOL_CHANGE_POSITION = 0 0 2' -
-    Specifies the XYZ location to move to when performing a
-    tool change if three digits are used.
-    Specifies the XYZABC location when 6 digits are used.
-    Specifies the XYZABCUVW location when 9 digits are used.
-    Tool Changes can be combined. For example if you combine the
-    quill up with change position you can move the Z first then the X and Y.
+  Specifies the XYZ location to move to when performing a
+  tool change if three digits are used.
+  Specifies the XYZABC location when 6 digits are used.
+  Specifies the XYZABCUVW location when 9 digits are used.
+  Tool Changes can be combined. For example if you combine the
+  quill up with change position you can move the Z first then the X and Y.
 
 * 'TOOL_CHANGE_WITH_SPINDLE_ON = 1' -
-    The spindle will be left on during the tool change when the value is 1.
-    Useful for lathes or machines where the material is in the spindle,
-    not the tool.
+  The spindle will be left on during the tool change when the value is 1.
+  Useful for lathes or machines where the material is in the spindle,
+  not the tool.
 
 * 'TOOL_CHANGE_QUILL_UP = 1' -
-    The Z axis will be moved to machine zero prior to the tool change when
-    the value is 1. This is the same as issuing a G0 G53 Z0.
+  The Z axis will be moved to machine zero prior to the tool change when
+  the value is 1. This is the same as issuing a G0 G53 Z0.
 
 * 'TOOL_CHANGE_AT_G30 = 1' -
-    The machine is moved to reference point defined by parameters
-    5181-5186 for G30 if the value is 1. For more information see
-    <<gcode:parameters,G-Code Parameters>> and
-    <<gcode:g30-g30.1,G-Code G30-G30.1>>.
+  The machine is moved to reference point defined by parameters
+  5181-5186 for G30 if the value is 1. For more information see
+  <<gcode:parameters,G-Code Parameters>> and
+  <<gcode:g30-g30.1,G-Code G30-G30.1>>.
 
 * 'RANDOM_TOOLCHANGER = 1' -
-    This is for machines that cannot place the tool back into the pocket
-    it came from. For example, machines that exchange the tool in the
-    active pocket with the tool in the spindle.
-
-
+  This is for machines that cannot place the tool back into the pocket
+  it came from. For example, machines that exchange the tool in the
+  active pocket with the tool in the spindle.

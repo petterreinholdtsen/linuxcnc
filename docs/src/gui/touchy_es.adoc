@@ -1,8 +1,9 @@
+[[cha:Panelui]](((Panelui)))
+
 :lang: es
-
-[[cha:touchy-gui]]
-
-= GUI táctil
+:ini: {basebackend@docbook:'':ini}
+:hal: {basebackend@docbook:'':hal}
+:ngc: {basebackend@docbook:'':ngc}
 
 Touchy es una interfaz de usuario para LinuxCNC diseñada para su uso en paneles de control de máquinas,
 y por lo tanto no requiere teclado ni mouse.
@@ -12,7 +13,7 @@ con un volante/MPG y algunos botones e interruptores.
 
 La pestaña 'Volante' tiene botones radio para seleccionar entre las funciones de 'Porcentaje de alimentación',
 'Porcentaje de husillo', 'Velocidad máxima' y 'Jogging' para la entrada del volante/MPG.
-También están previstos botones radio para la selección de eje e incrementos para jog 
+También están previstos botones radio para la selección de eje e incrementos para jog.
 
 .Touchy
 
@@ -22,10 +23,20 @@ image::images/touchy.png[align="center", alt="GUI Touchy"]
 
 === Conexiones HAL
 
+Touchy looks in the INI file, under the heading '[HAL]' for entries of 'POSTGUI_HALFILE=<filename>' +
+Typically '<filename>' would be 'touchy_postgui.hal', but can be any legal filename. +
+These commands are executed after the screen is built, guaranteeing the widget HAL
+pins are available. +
+You can have multiple line of 'POSTGUI_HALFILE=<filename>' in the INI. +
+Each will be run one after the other in the order they appear in the INI file. +
+
+
+[NOTE]
 Touchy requiere que cree un archivo llamado 'touchy.hal' en su
 directorio de configuración (el directorio en el que se encuentra su archivo ini) para
-conectar sus controles. Touchy ejecuta los comandos HAL en este archivo
-después de que haya hecho disponibles sus propios pines para la conexión.
+conectar sus controles.
+For legacy reasons
+this will continue to work, but INI based postgui files are preferred.
 
 Para obtener más información sobre los archivos HAL y el comando net, consulte el
 <<cha:basic-hal-reference,Referencia básica de HAL>>.
@@ -33,18 +44,16 @@ Para obtener más información sobre los archivos HAL y el comando net, consulte
 Touchy tiene varios pines de salida que deben conectarse al
 controlador de movimiento para controlar el jogging de volante:
 
- - 'touchy.jog.wheel.increment',
-que debe conectarse al pin 'axis.N.jog-scale' de cada eje N.
+ - 'touchy.jog.wheel.increment', que debe conectarse al pin 'axis.N.jog-scale' de cada eje N.
 
- - 'touchy.jog.wheel.N', que se debe conectar a 'axis.N.jog-enable'
-para cada eje N.
+ - 'touchy.jog.wheel.N', que se debe conectar a 'axis.N.jog-enable' para cada eje N.
 
 [NOTE] 'N' representa el número de eje 0-8.
 
  - Además de estar conectado a 'touchy.wheel-count', la cuenta del volante
-también debe estar conectada a 'axis.N.jog-count' para cada eje N. Si usa el componente 
-HAL 'ilowpass' para suavizar el jog con el volante,
-asegúrese de suavizar solo 'axis.N.jog-count' y no 'touchy.wheel-count'.
+   también debe estar conectada a 'axis.N.jog-count' para cada eje N. Si usa el componente
+   HAL 'ilowpass' para suavizar el jog con el volante,
+   asegúrese de suavizar solo 'axis.N.jog-count' y no 'touchy.wheel-count'.
 
 .Controles requeridos.
 
@@ -58,14 +67,14 @@ asegúrese de suavizar solo 'axis.N.jog-count' y no 'touchy.wheel-count'.
  - Para jog continuo, una palanca momentánea bidireccional centrada
    (o dos botones momentáneos) para cada eje, enganchados a 'touchy.jog.continuous.x.negative',
    'touchy.jog.continuous.x.positive', etc.
- - Si se desea un botón momentaneo para mover Z a la parte superior del recorrido a maxima velocidad
-   , debe conectarse a 'touchy.quill-up'.
+ - Si se desea un botón momentaneo para mover Z a la parte superior del recorrido a maxima velocidad,
+   debe conectarse a 'touchy.quill-up'.
 
 .Lámparas de panel opcionales.
 
  - 'touchy.jog.active' muestra cuando los controles de desplazamiento del panel están activos.
  - 'touchy.status-indicator' está encendido cuando la máquina está ejecutando código G,
-    y parpadea cuando la máquina está ejecutando pero está en pausa/feedhold.
+   y parpadea cuando la máquina está ejecutando pero está en pausa/feedhold.
 
 === Recomendado para cualquier configuración
 
@@ -84,7 +93,7 @@ Cuando inicie Touchy la primera vez, verifique la pestaña Preferencias.
 Si usa una pantalla táctil, para mejores resultados elija la opción de ocultar el puntero.
 
 La ventana de estado tiene una altura fija, establecida por el tamaño de una fuente fija.
-Esto puede verse afectado por el DPI de Gnome, configurado en Sistema/Preferencias/Apariencia/Fuentes/Detalles. 
+Esto puede verse afectado por el DPI de Gnome, configurado en Sistema/Preferencias/Apariencia/Fuentes/Detalles.
 Si la parte inferior de la pantalla está cortada, reducir la configuración de DPI.
 
 Todos los demás tamaños de fuente se pueden cambiar en la pestaña Preferencias.

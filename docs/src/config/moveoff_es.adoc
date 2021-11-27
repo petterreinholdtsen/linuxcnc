@@ -1,6 +1,6 @@
 ﻿:lang: es
 
-[[cha:moveoff]]
+[[cha:moveoff]](((Moveoff)))
 
 = Componente moveoff
 
@@ -69,8 +69,8 @@ no hay interruptores de límite). Se recomienda limitar la carrera con el uso de
 offset-min-M y offset-max-M. Disparar un límite fisico apagará
 la máquina - vea *Precaución* arriba.
 
-Los valores de desplazamiento en M pueden establecerse con configuraciones inifile, controladas por una GUI,
-o gestionado por otros componentes y conexiones Hal. Los valores fijos pueden ser
+Los valores de desplazamiento en M pueden establecerse con configuraciones inifile, controladas por una GUI, o
+gestionado por otros componentes y conexiones Hal. Los valores fijos pueden ser
 apropiado en casos simples donde la dirección y la cantidad de desplazamiento es
 bien definido pero se requiere un método de control para desactivar un pin de habilitación
 para devolver las compensaciones a cero. Las GUI pueden proporcionar medios para que los usuarios
@@ -83,13 +83,11 @@ componente Hal desconoce los límites impuestos por LinuxCNC en otros lugares.
 Los usuarios deben probar el uso en una aplicación de simulador y comprender todos los
 riesgos antes de su uso en hardware.
 
-
 Las configuraciones Sim que demuestran el componente y una
 gui (moveoff_gui) se encuentran en:
 
-* configs/sim/axis/moveoff (axis-ui)
+* configs/sim/axis/moveoff  (axis-ui)
 * configs/sim/touchy/ngcgui (touchy-ui)
-
 
 == Modificar una configuración existente
 
@@ -101,14 +99,10 @@ Cuando el archivo HAL del sistema (LIB:hookup_moveoff.tcl) se especifica correct
 un archivo ini de configuración, podrá:
 
 . Desconectar los pines joint.N.motor-pos-cmd and joint.N.motor-pos-fb
-. Cargar (loadrt) el componente moveoff (usando el nombre mv) con una personalidad
-  configurada para acomodar todos los ejes identificados en el archivo ini
+. Cargar (loadrt) el componente moveoff (usando el nombre mv) con una personalidad   configurada para acomodar todos los ejes identificados en el archivo ini
 . Agregar (addf) las funciones del componente moveoff en la secuencia requerida
-. Volver a conectar los pines joint.N.motor-pos-cmd y joint.N.motor-pos-fb para usar
-  el componente
-. Establecer los parámetros operativos y los límites del componente moveoff para cada eje
-  de acuerdo con la configuración adicional del archivo ini
-
+. Volver a conectar los pines joint.N.motor-pos-cmd y joint.N.motor-pos-fb para usar   el componente
+. Establecer los parámetros operativos y los límites del componente moveoff para cada eje   de acuerdo con la configuración adicional del archivo ini
 
 Nota: La aplicación moveoff_gui admite configuraciones que utilizan
 módulos de cinemática conocidos con KINEMATICS_TYPE=KINEMATICS_IDENTITY.

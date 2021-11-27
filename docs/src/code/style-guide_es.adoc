@@ -15,8 +15,7 @@ introducidos por la sangría hacen que sea más difícil seguir el
 historial de revisión del archivo.
 
 No use un editor que realice cambios innecesarios en los espacios en blanco (por ejemplo,
-reemplaza 8 espacios con un tabulador en una línea no modificada,
-o ajuste de texto en líneas no modificadas de otra manera)
+reemplaza 8 espacios con un tabulador en una línea no modificada, o ajuste de texto en líneas no modificadas de otra manera).
 
 == Tabulaciones
 
@@ -64,7 +63,7 @@ if (x == y) {
 }
 ----
 
-Esta colocación de llaves también minimiza el número de 
+Esta colocación de llaves también minimiza el número de
 líneas vacías (o casi vacias), lo que permite una mayor cantidad de código o comentarios
 visible a la vez en un terminal de un tamaño fijo.
 
@@ -240,7 +239,7 @@ NO for (i = 0, sum =0; i < 10; i++) sum += value[i];
 Del mismo modo, deben evitarse las declaraciones ejecutables en condicionales. p.ej.
 if (fd = open(nombre_archivo) es malo.
 
-Deben evitarse las declaraciones condicionales complejas - Introducir 
+Deben evitarse las declaraciones condicionales complejas - Introducir
 variables booleanas temporales en su lugar.
 
 Los paréntesis deben usarse en abundancia en las expresiones matemáticas.

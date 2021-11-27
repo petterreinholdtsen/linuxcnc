@@ -1,6 +1,6 @@
 ﻿:lang: es
 
-[[cha:stepper-config]]
+[[cha:stepper-config]](((Stepper Configuratión)))
 
 = Configuración de steppers
 
@@ -8,19 +8,19 @@
 
 La forma preferida de configurar una máquina de pasos estándar es con el
 Asistente de Configuración de Pasos. Ver el capítulo
-<<cha:stepconf-wizard, Asistente de Configuración Stepconf>> .
+<<cha:stepconf-wizard,Asistente de Configuración Stepconf>> .
 
 Este capítulo describe algunas de las configuraciones más comunes para
 sistemas basado en pasos. Estos sistemas utilizan motores paso a paso
 con controladores que aceptan señales de paso y dirección.
 
-Es una de las configuraciones más simples, porque los motores funcionan en bucle abierto 
+Es una de las configuraciones más simples, porque los motores funcionan en bucle abierto
 (la retroalimentación no proviene de los motores), pero el sistema debe ser
 configurado correctamente para que los motores no se detengan o pierdan pasos.
 
 La mayor parte de este capítulo se basa en una configuración de muestra publicada junto con
 LinuxCNC. La configuración se llama stepper_inch, y se puede encontrar ejecutando el
-<<cha:running-emc, Selector de configuración>>.
+<<cha:running-emc,Selector de configuración>>.
 
 == Velocidad de paso máxima
 
@@ -77,16 +77,16 @@ Este archivo contiene varios comandos HAL, y generalmente se ve así:
 ----
 # archivo de configuración de pinout estándar para steppers de 3 ejes
 # usando un parport para E/S
-# 
+#
 # primero carga el controlador parport
 loadrt hal_parport cfg = "0x0378"
-# 
+#
 # a continuación, conecta las funciones de parport a hilos
 # primero, leer entradas
 addf parport.0.read base-thread 1
 # lo ultimo, escribir salidas
 addf parport.0.write base-thread -1
-# 
+#
 # finalmente, conectar los pines físicos a las señales
 net Xstep => parport.0.pin-03-out
 net Xdir => parport.0.pin-02-out
@@ -162,13 +162,9 @@ guiar al lector a través del archivo.
 Hay un par de operaciones que se ejecutan cuando se ejecuta/interpreta
 standard_pinout.hal:
 
-* El controlador Parport se carga (ver el <<cha:parport,Capítulo Parport>>
-   para más detalles)
-* Las funciones de lectura y escritura del controlador parport se asignan al hilo base
-   footnote:[el subproceso más rápido en la configuración de LinuxCNC, generalmente 
-   su código se ejecuta cada pocas decenas de microsegundos]
-* Las señales de paso y dirección para los ejes X, Y, Z se vinculan a los pines en el
-   parport
+* El controlador Parport se carga (ver el <<cha:parport,Capítulo Parport>>   para más detalles)
+* Las funciones de lectura y escritura del controlador parport se asignan al hilo base   footnote:[el subproceso más rápido en la configuración de LinuxCNC, generalmente su código se ejecuta cada pocas decenas de microsegundos]
+* Las señales de paso y dirección para los ejes X, Y, Z se vinculan a los pines en el parport
 * Se conectan más señales de E /S (loopback de estop, loopback del cambiador de herramientas)
 * Se define una señal de husillo y se vincula a un pin parport
 
@@ -183,17 +179,17 @@ nombre 'parport.0.pin-XX-out':
 
 ----
 net Xstep parport.0.pin-03-out
-net Xdir parport.0.pin-02-out
+net Xdir  parport.0.pin-02-out
 ----
 
 se puede cambiar a:
 
 ----
 net Xstep parport.0.pin-02-out
-net Xdir parport.0.pin-03-out
+net Xdir  parport.0.pin-03-out
 ----
 
-o básicamente cualquier otro pin 'out' que interese.
+básicamente cualquier otro pin 'out' que interese.
 
 Sugerencia: asegúrese de no tener más de una señal conectada al mismo pin.
 
@@ -248,4 +244,3 @@ tener una sola señal/pin de habilitación para todas las unidades es una práct
 
 El archivo standard_pinout.hal supone que no hay un botón ESTOP externo. Para más
 información sobre un E-Stop externo, consulte la página del manual estop_latch.
-

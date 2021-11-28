@@ -1,8 +1,8 @@
 :lang: es
 
-= Sistemas de coordenadas
+[[cha:coordinate-system]](((Sistemas de coordenadas)))
 
-[[cha:coordinate-system]]
+= Sistemas de coordenadas
 
 == Introducción
 
@@ -19,8 +19,8 @@ Este capítulo describe los offsets tal como los utiliza LinuxCNC.
 
 Cuando se inicia LinuxCNC, las posiciones de cada eje definen el origen de la máquina. Cuando
 se hace home de un eje, el origen de la máquina para ese eje se establece en esa posición home.
-El origen máquina es el sistema de coordenadas de la máquina en el que se basan todos los demás 
-sistemas de coordenadas. El código <<gcode:g53,G53>> puede usarse para moverse en el Sistema de 
+El origen máquina es el sistema de coordenadas de la máquina en el que se basan todos los demás
+sistemas de coordenadas. El código <<gcode:g53,G53>> puede usarse para moverse en el Sistema de
 Coordenadas Máquina.
 
 == Sistemas de coordenadas
@@ -28,7 +28,7 @@ Coordenadas Máquina.
 .Ejemplo de sistemas de coordenadas
 image::images/offsets_es.png[align="center", alt="Ejemplo de sistemas de coordenadas"]
 
-Desplazamientos del sistema de coordenadas
+.Desplazamientos del sistema de coordenadas
 
 * G54 - usa el sistema de coordenadas 1
 * G55 - usa el sistema de coordenadas 2
@@ -42,7 +42,7 @@ Desplazamientos del sistema de coordenadas
 
 Los offsets del sistema de coordenadas se utilizan para desplazar cada sistema de coordenadas desde
 el Sistema de Coordenadas de la Máquina. Esto permite que el código G se programe para piezas iguales
-sin importar la ubicación de la pieza en la máquina. El uso de offsets del sistema de coordenadas 
+sin importar la ubicación de la pieza en la máquina. El uso de offsets del sistema de coordenadas
 le permitirán mecanizar piezas en múltiples ubicaciones con el mismo código G.
 
 Los valores de los offsets se almacenan en el archivo VAR solicitado por el
@@ -58,20 +58,20 @@ y reinicializando luego LinuxCNC para que lea los nuevos valores.
 Sin embargo, esta no es la forma recomendada. El uso de G10, G52, G92, G28.1,
 etc. son mejores formas de establecer las variables.
 
-Ejemplo de parámetros G55.
+.Ejemplo de parámetros G55.
 [width="40%",cols="^,^,^",options="header"]
-| ====
-| Eje | Variable | Valor
-| X | 5241 | 2.000000
-| Y | 5242 | 1.000000
-| Z | 5243 | -2.000000
-| A | 5244 | 0,000000
-| B | 5245 | 0.000000
-| C | 5246 | 0.000000
-| U | 5247 | 0.000000
-| V | 5248 | 0.000000
-| W | 5249 | 0.000000
-| ====
+|=========================
+| Eje | Variable |   Valor
+| X   | 5241     |  2.000000
+| Y   | 5242     |  1.000000
+| Z   | 5243     | -2.000000
+| A   | 5244     |  0,000000
+| B   | 5245     |  0.000000
+| C   | 5246     |  0.000000
+| U   | 5247     |  0.000000
+| V   | 5248     |  0.000000
+| W   | 5249     |  0.000000
+|=========================
 
 Debería leer esto como mover las posiciones cero de G55 a X = 2
 unidades, Y = 1 unidad, y Z = -2 unidades desde la posición de cero absoluto.
@@ -123,11 +123,9 @@ vuelva al valor predeterminado de 1.00000.
 
 El comando G10 L2x se puede usar para establecer los offsets del sistema de coordenadas:
 
-* 'G10 L2 P (1-9)' - Establece los offsets a un valor. La posición actual es irrelevante.
-                         (vea <<gcode:g10-l2,G10 L2>> para más detalles)
+* 'G10 L2 P (1-9)' - Establece los offsets a un valor. La posición actual es irrelevante (vea <<gcode:g10-l2,G10 L2>> para más detalles).
 
-* 'G10 L20 P (1-9)' - Establece los offsets de modo que la posición actual se convierte en un valor.
-                         (vea <<gcode:g10-l20,G10 L20>> para más detalles)
+* 'G10 L20 P (1-9)' - Establece los offsets de modo que la posición actual se convierte en un valor (vea <<gcode:g10-l20,G10 L20>> para más detalles).
 
 == Offsets Locales y Globales [[sec:g52-and-g92-offsets]]
 
@@ -149,9 +147,18 @@ en el palet.
 [CAUTION]
 
 En otros intérpretes de código g 'G52', como offset temporal, al establecer y salir del alcance localizado de una
-parte del programa, no persiste después del reinicio de la máquina, 'M02' o 'M30'. 
+parte del programa, no persiste después del reinicio de la máquina, 'M02' o 'M30'.
 En LinuxCNC, 'G52' comparte parámetros con 'G92' que, por razones históricas, hace *persistir*
-a estos parámetros. Ver <<sec:g92-persistence-cautions,G92 Precauciones con Persistencia>> a continuación.
+a estos parámetros.
+Ver <<sec:g92-persistence-cautions,G92 Precauciones con Persistencia>> a continuación.
+
+[CAUTION]
+
+'G52' and 'G92' share the same offset registers.  Therefore, setting
+'G52' will override any earlier 'G92' setting, and 'G52' will persist
+across machine reset when 'G92' persistence is enabled.  These
+interactions may result in unexpected offsets.
+Ver <<sec:g92-g52-interaction-cautions,G92 and G52 Precautions con Interación>> below.
 
 La programación de 'G52 X1 Y2' da offsets al sistema de coordenada actual de la pieza de trabajo,
 1 para X y 2 para Y. Por consiguiente, en el DRO,
@@ -169,16 +176,14 @@ no puesto a cero explícitamente retendrá el offset anterior.
 === Los Comandos G92[[sec:g92-commands]]
 
 'G92' se usa típicamente de dos maneras conceptualmente diferentes; como un
-"offset del sistema de coordenadas global" o como un "offset del sistema de coordenadas local". 
+"offset del sistema de coordenadas global" o como un "offset del sistema de coordenadas local".
 El conjunto de comandos 'G92' incluye:
 
-* 'G92': este comando, cuando se usa con nombres de eje, establece valores para las
-    variables de offset
+* 'G92': este comando, cuando se usa con nombres de eje, establece valores para las variables de offset
 
 * 'G92.1': este comando establece valores cero para las variables G92.
 
-* 'G92.2': este comando suspende G92, pero no pone a cero las
-    variables
+* 'G92.2': este comando suspende G92, pero no pone a cero las variables
 
 * 'G92.3': este comando aplica los valores de offset que se suspendieron.
 
@@ -201,7 +206,7 @@ de pieza pueden tener resultados inesperados.
 Como sistema de coordenadas local, 'G92' se usa como offset temporal
 dentro del sistema de coordenadas de la pieza de trabajo. Un ejemplo de uso es al
 mecanizar una pieza con varias características idénticas en diferentes
-ubicaciones. Para cada función, 'G92' se usa para establecer un punto de referencia 
+ubicaciones. Para cada función, 'G92' se usa para establecer un punto de referencia
 local, y se llama a un subprograma para mecanizar la característica a partir de
 ese punto.
 
@@ -248,7 +253,7 @@ cero. Un 'G92 X2' establecerá un offset de 0.0000 y la posición mostrada
 no cambiará. Un 'G92 X5.0000' establecerá un offset de 3.0000 para que
 la posición actual visualizada se convierte en 5.0000.
 
-=== Precauciones de Persistencia G92 [[sec:g92-persistence-cautions]]
+=== Precauciones de Persistencia G92[[sec:g92-persistence-cautions]]
 
 Por defecto, los valores de un desplazamiento 'G92' se guardarán en el archivo VAR
 y se restaurará después de un inicio o reinicio de la máquina.
@@ -289,16 +294,16 @@ programa, la mejor práctica es emitir un G92.1 al final de cualquier
 archivos de código G donde utiliza offsets G92.
 
 Cuando un programa se aborta durante el procesamiento y tiene offsets 'G92' en
-efecto, el inicio hará que se activen nuevamente. Como salvaguarda, tenga 
+efecto, el inicio hará que se activen nuevamente. Como salvaguarda, tenga
 siempre su preámbulo estableciendo el entorno como usted
 espera. Además, la persistencia 'G92' puede deshabilitarse configurando
 'DISABLE_G92_PERSISTENCE = 1' en la sección '[RS274NGC]' del
 archivo '.ini'.
 
-=== Precauciones de Interacción G92 y G52 [[sec:g92-g52-animation-cautions]]
+=== Precauciones de Interacción G92 y G52[[sec:g92-g52-animation-cautions]]
 
-'G52' y 'G92' comparten los mismos registros de desplazamiento. A menos que 
-la persistencia 'G92' está deshabilitada en el archivo '.ini' (vea <<sec:g92-commands,Comandos G92>>), 
+'G52' y 'G92' comparten los mismos registros de desplazamiento. A menos que
+la persistencia 'G92' está deshabilitada en el archivo '.ini' (vea <<sec:g92-commands,Comandos G92>>),
 los offsets 'G52' también persistirán después del reinicio de la máquina, 'M02' o 'M30'.
 Tenga en cuenta que un offset 'G52' en efecto durante un programa
 abortado puede dar lugar a desplazamientos no deseados cuando se ejecuta el siguiente programa.
@@ -312,28 +317,28 @@ Este proyecto de grabado de muestra moldea un conjunto de cuatro círculos de ra
 una forma aproximadamente de estrella alrededor de un círculo central. Podemos configurar el
 patrón de círculo individual como este.
 
--------------------------------------------------- -------------------
+---------------------------------------------------------------------
 G10 L2 P1 X0 Y0 Z0 (asegúrese de que G54 esté configurado en la máquina cero)
 G0 X-0.1 Y0 Z0
 G1 F1 Z-0.25
 G3 X-0.1 Y0 I0.1 J0
 G0 Z0
 M2
--------------------------------------------------- -------------------
+---------------------------------------------------------------------
 
 Podemos emitir un conjunto de comandos para crear offsets para los otros cuatro
 círculos, como esto:
 
--------------------------------------------------- ---------
+-----------------------------------------------------------
 G10 L2 P2 X0.5 (compensa el valor de G55 X en 0,5 pulgadas)
 G10 L2 P3 X-0.5 (compensa el valor de G56 X en -0.5 pulgadas)
 G10 L2 P4 Y0.5 (compensa el valor G57 Y en 0.5 pulgadas)
 G10 L2 P5 Y-0.5 (compensa el valor G58 Y en -0.5 pulgadas)
--------------------------------------------------- ---------
+-----------------------------------------------------------
 
 Los reunimos en el siguiente programa:
 
--------------------------------------------------- -------------------
+---------------------------------------------------------------------
 (un programa para fresar cinco círculos pequeños en forma de diamante)
 
 G10 L2 P1 X0 Y0 Z0 (asegúrese de que G54 sea la máquina cero)
@@ -368,7 +373,7 @@ G3 X-0.1 Y0 I0.1 J0
 G54 G0 X0 Y0 Z0
 
 M2
--------------------------------------------------- -------------------
+---------------------------------------------------------------------
 
 Ahora llega el momento en que podríamos aplicar un conjunto de offsets G92 a este
 programa. Verá que se está ejecutando en cada caso en Z0. Si la fresa

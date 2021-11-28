@@ -1,5 +1,6 @@
 :lang: es
-[[cha:other-codes]]
+
+[[cha:other-codes]](((Otros códigos)))
 
 = Otros códigos
 
@@ -10,7 +11,7 @@
 'Fx' - establece la velocidad de avance a 'x'. 'x' usualmente está en unidades máquina
 (pulgadas o milímetros) por minuto.
 
-La aplicación de la velocidad de alimentación es como se describe en la Sección 
+La aplicación de la velocidad de alimentación es como se describe en la Sección
 <<sub:feed-rate, Velocidad de alimentación>>, a menos que estén vigentes 'modo de velocidad de alimentación de tiempo inverso' o 'modo de avance por revolución', en cuyo caso la velocidad de avance
 es como se describe en la  Sección <<gcode:g93-g94-g95,G93 G94 G95>>.
 
@@ -46,13 +47,13 @@ líneas sin cambio de herramienta. Solo la palabra T más reciente tomará
 efecto en el siguiente cambio de herramienta.
 
 NOTA: Cuando LinuxCNC está configurado para un cambiador de herramientas no aleatorio (consulte
-la entrada para RANDOM_TOOLCHANGER en <<sec:emcio-section, EMCIO>>), 
+la entrada para RANDOM_TOOLCHANGER en <<sec:emcio-section, EMCIO>>),
 'T0' tiene un manejo especial: no se seleccionará ninguna herramienta. Esto
 es útil si desea que el husillo quede vacío después de un cambio de herramienta.
 
 NOTA: Cuando LinuxCNC está configurado para un cambiador de herramientas aleatorio (consulte
-la entrada para RANDOM_TOOLCHANGER en <<sec:emcio-section,EMCIO>>), 'T0' no recibe 
-ningún tratamiento especial: T0 es una herramienta válida como cualquier otra. Es costumbre 
+la entrada para RANDOM_TOOLCHANGER en <<sec:emcio-section,EMCIO>>), 'T0' no recibe
+ningún tratamiento especial: T0 es una herramienta válida como cualquier otra. Es costumbre
 usar T0 en un cambiador de herramientas aleatorio
 para rastrear una ranura vacía, para que se comporte como cambiador de herramientas
 no aleatorio y descargue el husillo.
@@ -60,10 +61,8 @@ no aleatorio y descargue el husillo.
 Es un error si:
 
 * se usa un número T negativo,
-
-* Se utiliza un número T que no aparece en el archivo de la tabla de herramientas (con
-    la excepción de que T0 en cambiadores de herramientas no aleatorios, que *es* aceptado
-    como se señaló anteriormente).
+* Se utiliza un número T que no aparece en el archivo de la tabla de herramientas
+  (con la excepción de que T0 en cambiadores de herramientas no aleatorios, que *es* aceptado como se señaló anteriormente).
 
 En algunas máquinas, el carrusel se moverá cuando se programe una palabra T,
 Al mismo tiempo, se está mecanizando. En tales máquinas, la programación

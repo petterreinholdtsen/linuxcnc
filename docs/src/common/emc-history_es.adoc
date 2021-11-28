@@ -1,6 +1,6 @@
-﻿:lang: es
+:lang: es
 
-[[cha:linuxcnc-history]]
+[[cha:linuxcnc-history]](((Origen)))
 
 == Origen
 
@@ -75,7 +75,7 @@ tuvo su primera reunión pública anunciada. Se celebró el lunes
 después de NAMES en el vestíbulo donde se celebró el espectáculo NAMES.
 La organización era floja, pero nació la idea de una capa de abstracción de hardware
 (HAL) y fue propuesto el movimiento para reestructurar el código para facilitar el
-desarrollo (EMC2) .
+desarrollo (EMC2).
 
 == Cambio de nombre
 
@@ -109,10 +109,8 @@ y versiones del software y la documentación, comenzando con la 2.5.0.
 NIST publicó un artículo que describe el idioma
 https://www.nist.gov/node/704046[RS274NGC] y el resumen del
 centro de mecanizado que controla, así como una implementación temprana de EMC.
-El documento también está disponible en http://linuxcnc.org/files/RS274NGCv3.pdf
+El documento también está disponible en http://linuxcnc.org/files/RS274NGCv3.pdf .
 
 NIST también publicó un artículo sobre la historia de EMC y sus
-transición a https://www.nist.gov/node/702276[open
-source]. El documento también está disponible en
+transición a https://www.nist.gov/node/702276[open source]. El documento también está disponible en
 http://linuxcnc.org/files/Use-of-Open-Source-Distribution-for-a-Machine-Tool-Controller.pdf
-

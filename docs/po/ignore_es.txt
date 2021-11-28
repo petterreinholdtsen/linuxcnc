@@ -1,2 +1,17 @@
 # Files to skip since these have content that is not in the original
 man/es/man1/iocontrol.1
+# or are just too difficult
+src/plasma/plasma-cnc-primer_es.adoc
+src/gui/gmoccapy_es.adoc
+src/gui/qtdragon_es.adoc
+src/motion/5-axis-kinematics_es.adoc
+src/user/user-intro_es.adoc
+src/user/user-concepts_es.adoc
+src/lathe/lathe-user_es.adoc
+src/install/latency-test_es.adoc
+src/config/stepper-diagnostics_es.adoc
+src/config/moveoff_es.adoc
+src/config/stepper_es.adoc
+# presuming a po4a error
+src/config/ini-config_es.adoc
+src/gcode/tool-compensation_es.adoc

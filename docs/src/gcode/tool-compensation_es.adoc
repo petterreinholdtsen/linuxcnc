@@ -1,12 +1,11 @@
-﻿:lang:es
-
-[[cha:herramienta-compensación]]
+﻿:lang: es
+[[cha:herramienta-compensación]](((Herramiena Compensación)))
 
 = Compensación de herramientas
 
 == Compensación de longitud de herramienta
 
-=== Touch Off (((Touch Off)))
+=== Touch Off(((Touch Off)))
 
 Usando Touch Off en la interfaz AXIS puede actualizar la
 tabla de herramientas de forma automática.
@@ -14,10 +13,8 @@ tabla de herramientas de forma automática.
 Los pasos típicos para actualizar la tabla de herramientas son:
 
 * Después de homing, cargue una herramienta con 'Tn M6' donde 'n' es el número de herramienta.
-* Mueva la herramienta a un punto establecido utilizando un calibre o realice un corte de prueba y
-   medida.
-* Haga clic en el botón "Touch Off" en la pestaña Control Manual (o presione el botón
-   Fin en su teclado).
+* Mueva la herramienta a un punto establecido utilizando un calibre o realice un corte de prueba y medida.
+* Haga clic en el botón "Touch Off" en la pestaña Control Manual (o presione el botón Fin en su teclado).
 * Seleccione 'Tabla de herramientas' en el cuadro desplegable Sistema de Coordenadas.
 * Ingrese el valor calibrado o la dimensión medida y seleccione OK.
 
@@ -28,37 +25,23 @@ está disponible cuando una herramienta se carga con 'Tn M6'.
 
 .Touch Off de tabla de herramientas
 
-image::images/ToolTable-TouchOff.png[align="center", alt="Touch Off de Tabla de herramientas"]
+//image::images/ToolTable-TouchOff.png["Touch Off de Tabla de herramientas",align="center"]
 
 === Usando G10 L1/L10/L11
 
 Los comandos G10 L1/L10/L11 se pueden usar para establecer las compensaciones de la tabla de herramientas:
 
-* 'G10 L1 Pn' -  Establece los offsets en un valor. Posición actual irrelevante.
-                      (vea <<gcode:g10-l1,G10 L1>> para más detalles)
-
-* 'G10 L10 Pn' - Establece los offsets de modo que la posición actual respecto a fijaciones 1-8 se convierta en un valor.
-                      (vea <<gcode:g10-l10,G10 L10>> para más detalles)
-
-* 'G10 L11 Pn' - Establece los offsets de modo que la posición actual respecto a fijacion 9 se convierta en un valor.
-                      (vea <<gcode:g10-l11,G10 L11>> para más detalles)
-
-[[sec:tool-table]]
-
-== Tabla de herramientas
+* 'G10 L1  Pn' - Establece los offsets en un valor. Posición actual irrelevante (vea <<gcode:g10-l1,G10 L1>> para más detalles).
+* 'G10 L10 Pn' - Establece los offsets de modo que la posición actual respecto a fijaciones 1-8 se convierta en un valor (vea <<gcode:g10-l10,G10 L10>> para más detalles).
+* 'G10 L11 Pn' - Establece los offsets de modo que la posición actual respecto a fijacion 9 se convierta en un valor (vea <<gcode:g10-l11,G10 L11>> para más detalles).
 
 
-La 'Tabla de herramientas' es un archivo de texto que contiene información sobre cada
-herramienta. El archivo está ubicado en el mismo directorio que su configuración
-y se llama 'tool.tbl'. Las herramientas pueden estar en un cambiador de herramientas o simplemente
-ser cambiadas manualmente. El archivo puede editarse con un editor de texto o ser
-actualizado con G10 L1. Vea la sección <<sec:lathe-tool-table, tabla de herramientas de torno>>
-para un ejemplo del formato de tabla de herramientas de torno.
-El número máximo de entradas en la tabla de herramientas es 1000.
-El número máximo de herramienta y de ranura es 99999.
+== Tabla de herramientas[[sec:tool-table]]
 
-<<cha:tooledit-gui,Tool Editor>> o un editor de texto se pueden usar para editar la
-tabla de herramientas. Si utiliza un editor de texto, asegúrese de volver a cargar la tabla en la GUI
+La 'Tabla de herramientas' es un archivo de texto que contiene información sobre cada herramienta. El archivo está ubicado en el mismo directorio que su configuración y se llama 'tool.tbl'. Las herramientas pueden estar en un cambiador de herramientas o simplemente ser cambiadas manualmente. El archivo puede editarse con un editor de texto o ser actualizado con G10 L1. Vea la sección <<sec:lathe-tool-table,tabla de herramientas de torno>> para un ejemplo del formato de tabla de herramientas de torno.  El número máximo de entradas en la tabla de herramientas es 1000.  El número máximo de herramienta y de ranura es 99999.
+
+<<cha:tooledit-gui,Tool Editor>> o un editor de texto se pueden usar para editar la tabla de herramientas.
+Si utiliza un editor de texto, asegúrese de volver a cargar la tabla en la GUI.
 
 === Formato de tabla de herramientas
 (((Tool-Table-Format)))
@@ -76,18 +59,17 @@ tabla de herramientas. Si utiliza un editor de texto, asegúrese de volver a car
 
 En general, el nuevo formato de línea de la tabla de herramientas es:
 
- -; - punto y coma de apertura, sin datos
- - T - número de herramienta, 0-99999 (los números de herramienta deben ser únicos)
- - P - número de ranura, 1-99999 (los números de ranura deben ser únicos)
- - X..W - offset de herramienta en el eje especificado - punto flotante
- - D - diámetro de la herramienta - coma flotante, valor absoluto
- - I - ángulo frontal (solo torno) - punto flotante
- - J - ángulo posterior (solo torno) - punto flotante
- - Q - orientación de la herramienta (solo torno) - entero, 0-9
- - ; - comienzo del comentario o anotacion - texto
+ - ; - punto y coma de apertura, sin datos
+ - T - numbro de herramienta (los números de herramienta deben ser únicos)
+ - P - número de ranura, 1-1000 (los números de ranura deben ser únicos)
+ - X..W - offset de herramienta en el eje especificado - punto flotante
+ - D - diámetro de la herramienta - coma flotante, valor absoluto
+ - I - ángulo frontal (solo torno) - punto flotante
+ - J - ángulo posterior (solo torno) - punto flotante
+ - Q - orientación de la herramienta (solo torno) - entero, 0-9
+ - ; - comienzo del comentario o anotacion - texto
 
-El archivo consta de un punto y coma de apertura en la primera línea,
-seguido de hasta un máximo de 1000 entradas de herramientas.
+El archivo consta de un punto y coma de apertura en la primera línea, seguido de hasta un máximo de 1000 entradas de herramientas.
 
 [NOTE]
 Aunque se permiten números de herramienta hasta 99999, el número de entradas en
@@ -161,8 +143,7 @@ orientación de la herramienta. Probablemente desee tener entradas para I (
 ángulo frontal) y J (ángulo posterior) de la herramienta. Probablemente también desee una entrada para Q
 (orientación de la herramienta).
 
-Vea el capítulo <<cha:lathe-user-information, Información del usuario de torno>> para
-mas detalles.
+Vea el capítulo <<cha:lathe-user-information,Información del usuario de torno>> para mas detalles.
 
 La columna 'Diámetro' contiene un número real. Este número solo se usa
 si la compensación del cortador está activada con esta herramienta. Si
@@ -179,9 +160,59 @@ La columna 'Comentario' puede usarse opcionalmente para describir la herramienta
 tipo de descripción estará bien. Esta columna es solo para lectores humanos.
 El comentario debe ir precedido de un punto y coma.
 
-[[sec:tool-changers]]
+=== Tool IO[[sec:tool-io]]
 
-=== Cambiadores de herramientas
+The userspace program specified by *[EMCIO]EMCIO = io* is conventionally
+used for tool changer management (and other io functions for enabling
+LinuxCNC and the control of coolant/lube hardware).  The hal pins used for
+tool management are prefixed with *iocontrol.0.*
+
+A gcode *TN* command asserts the hal output pin *iocontrol.0.tool-prepare*.
+The hal input pin, *iocontrol.0.tool-prepared*, must be set by external
+hal logic to complete tool preparation leading to a subsequent reset of
+the tool-prepare pin.
+
+A gcode *M6* command asserts the hal output pin *iocontrol.0.tool-change*.
+The related hal input pin, *iocontrol.0.tool-prepared*, must be set by
+external hal logic to indicate completion of the tool change leading
+to a subsequent reset of the tool-change pin.
+
+Tooldata is accessed by an ordered index (idx) that depends on the
+type of toolchanger specified by *[EMCIO]RANDOM_TOOLCHANGER=type*.
+
+. For *RANDOM_TOOLCHANGER = 0*, (0 is default and specifies a non-random toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
+. For *RANDOM_TOOLCHANGER = 1*, idx is the *current* pocket number for the toolnumber specified by the gcode select tool command *Tn*.
+
+The io program provides hal output pins to facilitate toolchanger management:
+
+. *iocontrol.0.tool-prep-number*
+. *iocontrol.0.tool-prep-index*
+. *iocontrol.0.tool-prep-pocket*
+
+==== IO for non-random toolchanger
+
+. Tool number N==0 indicates no tool
+. The pocket number for a tool is fixed when tooldata is loaded
+. At gcode *TN* (N != 0) command:
+..      *iocontrol.0.tool-prep-index*  = idx (index based on tooldata load sequence)
+..      *iocontrol.0.tool-prep-number* = N
+..      *iocontrol.0.tool-prep-pocket* = the fixed pocketno for N
+. At gcode *T0* (N == 0 remove) command:
+..      *iocontrol.0.tool-prep-index*  = 0
+..      *iocontrol.0.tool-prep-number* = 0
+..      *iocontrol.0.tool-prep-pocket* = 0
+
+==== IO for random toolchanger
+
+. Tool number N==0 is *not special*
+. Pocket number 0 is *special* as it indicates the *spindle*
+. The *current* pocket number for tool N is the tooldata index (idx) for tool N
+. At gcode command *TN*:
+..      *iocontrol.0.tool-prep-index*  = pocket number for tool N
+..      *iocontrol.0.tool-prep-number* = N
+..      *iocontrol.0.tool-prep-pocket* = pocket number for tool N
+
+=== Cambiadores de herramientas[[sec:tool-changers]]
 
 LinuxCNC admite tres tipos de cambiadores de herramientas: 'manual', 'ubicación aleatoria'
 y 'ubicación fija'. Información sobre la configuración de un cambiador de herramientas LinuxCNC
@@ -193,9 +224,20 @@ El cambiador manual de herramientas (cambiar la herramienta a mano) se trata com
 cambiador de herramienta de ubicación fija y el número P se ignora. Utilizar
 el cambiador manual de herramientas solo tiene sentido si tiene portaherramientas que
 permanezcan con la herramienta (Cat, NMTB, Kwik Switch, etc.) cuando se cambia
-preservando así la ubicación de la herramienta en el husillo. Máquinas con R-8
-o los portaherramientas de tipo collar de enrutadores no conservan la ubicación de
+preservando así la ubicación de la herramienta en el husillo. Máquinas con R-8 o
+los portaherramientas de tipo collar de enrutadores no conservan la ubicación de
 la herramienta y el cambiador de herramientas manual no debe usarse.
+
+Manual tool changer (you change the tool by hand) is treated like a
+fixed location tool changer.  Manual toolchanges can be aided by
+a hal configuration that employs the userspace program
+*hal_manualtoolchange* and is typically specified in an ini file
+with ini statements:
+
+----
+[HAL]
+HALFILE = axis_manualtoolchange.hal
+----
 
 .Cambiadores de herramientas de ubicación fija
 
@@ -213,9 +255,7 @@ siempre esta en un ranura diferente después de un cambio de herramienta. Cuando
 LinuxCNC reescribe el número de ranura para realizar un seguimiento de dónde están las herramientas.
 T puede ser cualquier número pero P debe ser un número que tenga sentido para la máquina.
 
-[[sec:cutter-compensation]]
-
-== Compensación del cortador
+== Compensación del cortador[[sec:cutter-compensation]]
 
 La compensación de cortador permite al programador programar la trayectoria de la herramienta
 sin conocer el diámetro exacto de la misma. La única advertencia es que
@@ -234,11 +274,11 @@ crea una esquina exterior, el movimiento será hasta el punto final de la
 línea de corte compensada. Si el siguiente movimiento crea una esquina interior el
 el movimiento se detendrá brevemente para no dañar la pieza. La siguiente figura
 muestra cómo el movimiento compensado se detendrá en diferentes puntos dependiendo
-del próximo movimiento
+del próximo movimiento.
 
 .Punto final de compensación
 
-image::images/comp-path_en.svg[align="center", alt="Punto final de compensación"]
+image::images/comp-path_en.svg["Punto final de compensación",align="center"]
 
 === Descripción general
 
@@ -246,7 +286,7 @@ image::images/comp-path_en.svg[align="center", alt="Punto final de compensación
 
 La compensación del cortador utiliza los datos de la tabla de herramientas para
 determinar el desplazamiento necesario. Los datos se pueden configurar en tiempo de ejecución con G10
-L1
+L1.
 
 .Programación de movimientos de entrada
 
@@ -263,7 +303,7 @@ movimiento de entrada.
 
 .Movimiento de entrada
 
-image::images/comp02_en.svg[alt="Movimiento de entrada"]
+image::images/comp02_en.svg["Movimiento de entrada"]
 
 .Movimientos Z
 
@@ -280,16 +320,8 @@ Se pueden programar movimientos rápidos mientras la compensación está activad
  - Inicie un programa con G40 para asegurarse de que la compensación esté desactivada.
 
 === Ejemplos
-
 .Perfil externo
-
-.Perfil externo
-
-image::images/outside-comp.png[alt="Perfil externo"]
+image::images/outside-comp.png["Perfil externo"]
 
 .Perfil interno
-
-.Perfil interno
-
-image::images/inside-comp.png[alt="Perfil interno"]
-
+image::images/inside-comp.png["Perfil interno"]

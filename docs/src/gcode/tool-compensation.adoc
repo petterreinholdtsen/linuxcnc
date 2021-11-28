@@ -1,4 +1,5 @@
-[[cha:tool-compensation]]
+:lang: en
+[[cha:tool-compensation]](((Tool Compensation)))
 
 = Tool Compensation
 
@@ -12,10 +13,8 @@ tool table automatically.
 Typical steps for updating the tool table:
 
 * After homing load a tool with 'Tn M6' where 'n' is the tool number.
-* Move tool to an established point using a gauge or take a test cut and
-   measure.
-* Click the "Touch Off" button in the Manual Control tab (or hit the
-   End button on your keyboard).
+* Move tool to an established point using a gauge or take a test cut and measure.
+* Click the "Touch Off" button in the Manual Control tab (or hit the End button on your keyboard).
 * Select 'Tool Table' in the Coordinate System drop down box.
 * Enter the gauge or measured dimension and select OK.
 
@@ -26,38 +25,23 @@ available when a tool is loaded with 'Tn M6'.
 
 .Touch Off Tool Table
 
-image::images/ToolTable-TouchOff.png[align="center", alt="Touch Off Tool Table"]
+//image::images/ToolTable-TouchOff.png["Touch Off Tool Table",align="center"]
 
 === Using G10 L1/L10/L11
 
 The G10 L1/L10/L11 commands can be used to set tool table offsets:
 
-* 'G10 L1  Pn' - Set offset(s) to a value. Current position irrelevant.
-                      (see <<gcode:g10-l1,G10 L1>> for details)
-
-* 'G10 L10 Pn' - Set offset(s) so current position w/ fixture 1-8 becomes a value.
-                      (see <<gcode:g10-l10,G10 L10>> for details)
-
-* 'G10 L11 Pn' - Set offset(s) so current position w/ fixture 9 becomes a value.
-                      (see <<gcode:g10-l11,G10 L11>> for details)
-
-[[sec:tool-table]]
-
-== Tool Table
+* 'G10 L1  Pn' - Set offset(s) to a value. Current position irrelevant (see <<gcode:g10-l1,G10 L1>> for details).
+* 'G10 L10 Pn' - Set offset(s) so current position w/ fixture 1-8 becomes a value (see <<gcode:g10-l10,G10 L10>> for details).
+* 'G10 L11 Pn' - Set offset(s) so current position w/ fixture 9 becomes a value (see <<gcode:g10-l11,G10 L11>> for details).
 
 
-The 'Tool Table' is a text file that contains information about each
-tool. The file is located in the same directory as your configuration
-and is called 'tool.tbl' by default.  A file name may be specified
-with the ini file [EMCIO]TOOL_TABLE setting.  The tools might be in a
-tool changer or just changed manually.  The file can be edited with a
-text editor or be updated using G10 L1. See the
-<<sec:lathe-tool-table,Lathe Tool Table>> Section for an example of
-the lathe tool table format.  The maximum pocket number is 1000.
+== Tool Table[[sec:tool-table]]
 
-The <<cha:tooledit-gui,Tool Editor>> or a text editor can be used to edit the
-tool table. If you use a text editor make sure you reload the tool table in
-the GUI.
+The 'Tool Table' is a text file that contains information about each tool. The file is located in the same directory as your configuration and is called 'tool.tbl' by default.  A file name may be specified with the ini file [EMCIO]TOOL_TABLE setting.  The tools might be in a tool changer or just changed manually.  The file can be edited with a text editor or be updated using G10 L1. See the <<sec:lathe-tool-table,Lathe Tool Table>> Section for an example of the lathe tool table format. The maximum pocket number is 1000.
+
+The <<cha:tooledit-gui,Tool Editor>> or a text editor can be used to edit the tool table.
+If you use a text editor make sure you reload the tool table in the GUI.
 
 === Tool Table Format
 (((Tool-Table-Format)))
@@ -67,6 +51,7 @@ the GUI.
 [width="100%", options="header"]
 |====
 |T#    |P#  |X  |Y  |Z  |A  |B  |C  |U  |V  |W  |Dia |FA |BA |Ori |Rem
+|; 15+^|(sin datos después de punto y coma)
 |T1    |P17 |X0 |Y0 |Z0 |A0 |B0 |C0 |U0 |V0 |W0 |D0  |I0 |J0 |Q0  |;rem
 |T2    |P5  |X0 |Y0 |Z0 |A0 |B0 |C0 |U0 |V0 |W0 |D0  |I0 |J0 |Q0  |;rem
 |T3    |P12 |X0 |Y0 |Z0 |A0 |B0 |C0 |U0 |V0 |W0 |D0  |I0 |J0 |Q0  |;rem
@@ -74,9 +59,9 @@ the GUI.
 
 In general, the new tool table line format is:
 
+ - ; - punto y coma de apertura, sin datos
  - T - tool number (tool numbers must be unique)
- - P - pocket number, 1-1000 (pocket numbers must be unique, Pocket 0 
-   represents the spindle)
+ - P - pocket number, 1-1000 (pocket numbers must be unique, Pocket 0 represents the spindle)
  - X..W - tool offset on specified axis - floating-point
  - D - tool diameter - floating-point, absolute value
  - I - front angle (lathe only) - floating-point
@@ -84,6 +69,13 @@ In general, the new tool table line format is:
  - Q - tool orientation (lathe only) - integer, 0-9
  - ; - beginning of comment or remark - text
 
+El archivo consta de un punto y coma de apertura en la primera línea, seguido de hasta un máximo de 1000 entradas de herramientas.
+
+[NOTE]
+Aunque se permiten números de herramienta hasta 99999, el número de entradas en
+la tabla de herramientas, por el momento, todavía está limitada a un máximo de 1000 herramientas por
+razones técnicas. Los desarrolladores de LinuxCNC planean eliminar esa limitación.
+Si tiene un cambiador de herramientas muy grande, sea paciente.
 
 Earlier versions of LinuxCNC had two different tool table formats for
 mills and lathes, but since the 2.4.x release, one tool table format
@@ -151,8 +143,7 @@ orientation of the tool. So you probably want to have entries for I (tool
 front angle) and J (tool back angle). You probably also want an entry for Q
 (tool orientation).
 
-See the <<cha:lathe-user-information,Lathe User Information>> chapter for
-more detail.
+See the <<cha:lathe-user-information,Lathe User Information>> chapter for more detail.
 
 The 'Diameter' column contains a real number. This number is used only
 if cutter compensation is turned on using this tool. If the
@@ -169,9 +160,7 @@ The 'Comment' column may optionally be used to describe the tool. Any
 type of description is OK. This column is for the benefit of human
 readers only. The comment must be preceded by a semicolon.
 
-[[sec:tool-io]]
-
-=== Tool IO
+=== Tool IO[[sec:tool-io]]
 
 The userspace program specified by *[EMCIO]EMCIO = io* is conventionally
 used for tool changer management (and other io functions for enabling
@@ -191,11 +180,8 @@ to a subsequent reset of the tool-change pin.
 Tooldata is accessed by an ordered index (idx) that depends on the
 type of toolchanger specified by *[EMCIO]RANDOM_TOOLCHANGER=type*.
 
-. For *RANDOM_TOOLCHANGER = 0*, (0 is default and specifies a non-random
-toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
-
-. For *RANDOM_TOOLCHANGER = 1*, idx is the *current* pocket number
-for the toolnumber specified by the gcode select tool command *Tn*.
+. For *RANDOM_TOOLCHANGER = 0*, (0 is default and specifies a non-random toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
+. For *RANDOM_TOOLCHANGER = 1*, idx is the *current* pocket number for the toolnumber specified by the gcode select tool command *Tn*.
 
 The io program provides hal output pins to facilitate toolchanger management:
 
@@ -226,15 +212,21 @@ The io program provides hal output pins to facilitate toolchanger management:
 ..      *iocontrol.0.tool-prep-number* = N
 ..      *iocontrol.0.tool-prep-pocket* = pocket number for tool N
 
-[[sec:tool-changers]]
-
-=== Tool Changers
+=== Tool Changers[[sec:tool-changers]]
 
 LinuxCNC supports three types of tool changers: 'manual', 'random location'
 and 'non-random or fixed location'. Information about configuring a LinuxCNC tool changer
 is in the <<sec:emcio-section,EMCIO Section>> of the INI chapter.
 
 .Manual Tool Changer
+
+El cambiador manual de herramientas (cambiar la herramienta a mano) se trata como un
+cambiador de herramienta de ubicación fija y el número P se ignora. Utilizar
+el cambiador manual de herramientas solo tiene sentido si tiene portaherramientas que
+permanezcan con la herramienta (Cat, NMTB, Kwik Switch, etc.) cuando se cambia
+preservando así la ubicación de la herramienta en el husillo. Máquinas con R-8 o
+los portaherramientas de tipo collar de enrutadores no conservan la ubicación de
+la herramienta y el cambiador de herramientas manual no debe usarse.
 
 Manual tool changer (you change the tool by hand) is treated like a
 fixed location tool changer.  Manual toolchanges can be aided by
@@ -244,10 +236,8 @@ with ini statements:
 
 ----
 [HAL]
-...
 HALFILE = axis_manualtoolchange.hal
-...
----- 
+----
 
 .Fixed Location Tool Changers
 
@@ -255,21 +245,17 @@ Fixed location tool changers always return the tools to a
 fixed position in the tool changer. This would also include
 designs like lathe turrets. When LinuxCNC is configured for a fixed
 location tool changer the 'P' number is not used internally (but read, preserved
-and rewritten) by LinuxCNC, so you can use P for any bookkeeping number you
-want.
+and rewritten) by LinuxCNC, so you can use P for any bookkeeping number you want.
 
 .Random Location Tool Changers
 
 Random location tool changers swap the tool in the spindle with the
 one in the changer. With this type of tool changer the tool will
 always be in a different pocket after a tool change. When a tool is
-changed LinuxCNC rewrites the pocket number to keep track of where the tools
-are. T can be any number but P must be a number that makes sense for
-the machine.
+changed LinuxCNC rewrites the pocket number to keep track of where the tools are.
+T can be any number but P must be a number that makes sense for the machine.
 
-[[sec:cutter-compensation]]
-
-== Cutter Compensation
+== Cutter Compensation[[sec:cutter-compensation]]
 
 Cutter Compensation allows the programmer to program the tool
 path without knowing the exact tool diameter. The only caveat is the
@@ -292,7 +278,7 @@ on the next move.
 
 .Compensation End Point
 
-image::images/comp-path_en.svg[align="center", alt="Compensation End Point"]
+image::images/comp-path_en.svg["Compensation End Point",align="center"]
 
 === Overview
 
@@ -307,8 +293,7 @@ L1.
 Any move that is long enough to perform the compensation will work as
 the entry move. The minimum length is the cutter radius. This can be a
 rapid move above the work piece. If several rapid moves are issued
-after a G41/42 only the last one will move the tool to the compensated
-position.
+after a G41/42 only the last one will move the tool to the compensated position.
 
 In the following figure you can see that the entry move is compensated
 to the right of the line. This puts the center of the tool to the right
@@ -318,14 +303,13 @@ entry move.
 
 .Entry Move
 
-image::images/comp02_en.svg[alt="Entry Move"]
+image::images/comp02_en.svg["Entry Move"]
 
 .Z Motion
 
 Z axis motion may take place while the contour is being followed in
 the XY plane. Portions of the contour may be skipped by retracting the
-Z axis above the part and by extending the Z-axis at the next start
-point.
+Z axis above the part and by extending the Z-axis at the next start point.
 
 .Rapid Moves
 
@@ -336,16 +320,7 @@ Rapid moves may be programmed while compensation is turned on.
  - Start a program with G40 to make sure compensation is off.
 
 === Examples
-
 .Outside Profile
-
-.Outside Profile
-
-image::images/outside-comp.png[alt="Outside Profile"]
-
+image::images/outside-comp.png["Outside Profile"]
 .Inside Profile
-
-.Inside Profile
-
-image::images/inside-comp.png[alt="Inside Profile"]
-
+image::images/inside-comp.png["Inside Profile"]

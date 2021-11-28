@@ -1,7 +1,6 @@
 :lang: es
-= Linux FAQ
 
-[[cha:linux-faq]]
+= Linux FAQ[[cha:linux-faq]](((Linux FAQ)))
 
 Estos son algunos comandos básicos y técnicas para nuevos usuarios de
 linux. Información más completa se puede encontrar en la web o mediante
@@ -58,9 +57,7 @@ N.T. En Debian Stretch, vaya a 'Aplicaciones > Configuracion > Administrador de 
 En la pestaña 'Autoarranque de aplicaciones', use el boton 'Añadir'. De un nombre, una descripcion y una orden similar
 al ejemplo anterior. En el proximo reinicio, LinuxCNC arrancara automaticamente.
 
-[[faq:terminal]]
-
-== Terminal
+== Terminal[[faq:terminal]]
 
 Hay que hacer muchas cosas desde la terminal, como verificar el búfer de mensajes 
 del núcleo con 'dmesg'. Ubuntu y Linux Mint tienen un atajo de teclado Ctrl + Alt + t.

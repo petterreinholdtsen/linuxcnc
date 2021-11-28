@@ -1,6 +1,6 @@
 :lang: es
 
-[[cha:hal-examples]]
+[[cha:hal-examples]](((Ejemplos HAL)))
 
 = Ejemplos HAL
 
@@ -50,7 +50,7 @@ net button-2 or2.0.in1 <= pyvcp.button-2
 net led-1 pyvcp.led-1 <= or2.0.out
 ----
 
-Cuando ejecuta este ejemplo creado con el Asistente Stepconf en 
+Cuando ejecuta este ejemplo creado con el Asistente Stepconf en
 una simulacion Axis, puede abrir un terminal y ver los pines creados con 'loadrt o2'
 escribiendo 'halcmd show pin or2' en el terminal.
 
@@ -74,7 +74,7 @@ En este ejemplo, se supone que está usando su propia
 configuración y desea agregar la ventana HAL Manual Toolchange.
 El cambio manual de herramientas HAL es principalmente útil si tiene herramientas preestablecidas y
 almacena los offsets en la tabla de herramientas. Si necesita hacer touch off para
-cada cambio de herramienta, entonces es mejor dividir su código g. 
+cada cambio de herramienta, entonces es mejor dividir su código g.
 Para usar la ventana HAL Manual Toolchange básicamente tiene que cargar el
 componente hal_manualtoolchange y luego enviar el 'cambio de herramienta' de iocontrol a
 el "cambio" de hal_manualtoolchange y devolver el cambio de hal_manualtool
@@ -85,7 +85,7 @@ Este es un ejemplo de cambio de herramienta manual 'con'
 el componente HAL Manual Toolchange:
 
 ----
-loadusr -W hal_manualtoolchange 
+loadusr -W hal_manualtoolchange
 net tool-change iocontrol.0.tool-change => hal_manualtoolchange.change
 net tool-changed iocontrol.0.tool-changed <= hal_manualtoolchange.changed
 net external-tool-changed hal_manualtoolchange.change_button <= parport.0.pin-12-in
@@ -97,9 +97,9 @@ Este es un ejemplo de cambio de herramienta manual 'sin'
 el componente HAL Manual Toolchange:
 
 ----
-net tool-number <= iocontrol.0.tool-prep-number 
-net tool-change-loopback iocontrol.0.tool.-change => iocontrol.0.tool-changed 
-net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared 
+net tool-number <= iocontrol.0.tool-prep-number
+net tool-change-loopback iocontrol.0.tool.-change => iocontrol.0.tool-changed
+net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
 ----
 
 == Cálculo de la velocidad
@@ -118,27 +118,27 @@ valor correcto. Agregue lo siguiente a su archivo custom.hal.
 Carga de componentes de tiempo real.
 
 ----
-loadrt ddt count=1 
-loadrt mult2 count=1 
-loadrt abs count=1 
+loadrt ddt count=1
+loadrt mult2 count=1
+loadrt abs count=1
 ----
 
 Agregue las funciones a un hilo para que se actualicen.
 
 ----
-addf ddt.0 servo-thread 
-addf mult2.0 servo-thread 
-addf abs.0 servo-thread 
+addf ddt.0 servo-thread
+addf mult2.0 servo-thread
+addf abs.0 servo-thread
 ----
 
 Haga las conexiones.
 
 ----
-setp mult2.in1 60 
-net xpos-cmd ddt.0.in 
-net X-IPS mult2.0.in0 <= ddt.0.out 
-net X-ABS abs.0.in <= mult2.0.out 
-net X-IPM abs.0.out 
+setp mult2.in1 60
+net xpos-cmd ddt.0.in
+net X-IPS mult2.0.in0 <= ddt.0.out
+net X-ABS abs.0.in <= mult2.0.out
+net X-IPM abs.0.out
 ----
 
 En esta última sección, se ha configurado mult2.0.in1 a 60 para convertir
@@ -185,26 +185,26 @@ Coloque lo siguiente en un archivo de texto llamado softstart.hal. Si no está
 familiarizado con Linux, coloque el archivo en su directorio de usuario.
 
 ----
-loadrt threads period1=1000000 name1=thread  
-loadrt siggen  
-loadrt lowpass  
-loadrt limit2  
-loadrt limit3  
-net square siggen.0.square => lowpass.0.in limit2.0.in limit3.0.in  
-net lowpass <= lowpass.0.out  
-net limit2 <= limit2.0.out  
-net limit3 <= limit3.0.out  
-setp siggen.0.frequency .1  
-setp lowpass.0.gain .01  
-setp limit2.0.maxv 2  
-setp limit3.0.maxv 2  
-setp limit3.0.maxa 10  
-addf siggen.0.update thread  
-addf lowpass.0 thread  
-addf limit2.0 thread  
-addf limit3.0 thread  
-start  
-loadusr halscope 
+loadrt threads period1=1000000 name1=thread
+loadrt siggen
+loadrt lowpass
+loadrt limit2
+loadrt limit3
+net square siggen.0.square => lowpass.0.in limit2.0.in limit3.0.in
+net lowpass <= lowpass.0.out
+net limit2 <= limit2.0.out
+net limit3 <= limit3.0.out
+setp siggen.0.frequency .1
+setp lowpass.0.gain .01
+setp limit2.0.maxv 2
+setp limit3.0.maxv 2
+setp limit3.0.maxa 10
+addf siggen.0.update thread
+addf lowpass.0 thread
+addf limit2.0 thread
+addf limit3.0 thread
+start
+loadusr halscope
 ----
 
 Abra una ventana de terminal y ejecute el archivo con el siguiente comando.
@@ -233,10 +233,6 @@ luego use el control deslizante Pos en el cuadro Vertical para establecer las po
 
 image::images/softstart-scope.png[alt="Softstart"]
 
-To see the effect of changing the set point values of any of the
-components you can change them in the terminal window. To see what
-different gain settings do for lowpass just type the following in the
-terminal window and try different settings.
 Para ver el efecto de cambiar los valores del punto de ajuste de cualquiera de los
 componentes, puede cambiarlos en la ventana de terminal. Para ver qué hacen
 diferentes configuraciones de ganancia para lowpass simplemente escriba lo siguiente en la
@@ -255,21 +251,11 @@ interferir con la carga de LinuxCNC.
 
 Para obtener más información sobre Halscope, consulte el manual de HAL.
 
-== Stand Alone HAL
-
-In some cases you might want to run a GladeVCP screen with just HAL. For
-example say you had a stepper driven device that all you need is to run a
-stepper motor. A simple 'Start/Stop' interface is all you need for your
-application so no need to load up and configure a full blown CNC application.
-
-In the following example we have created a simple GladeVCP panel with one 
-
-.Basic Syntax
 == HAL independiente
 
 En algunos casos, es posible que desee ejecutar una pantalla GladeVCP solo con HAL. Por
 ejemplo, digamos que tiene un dispositivo controlado por pasos que todo lo que necesita es ejecutar un
-motor paso a paso. Todo lo que necesita para su interfaz es "Iniciar/Parar", por lo que 
+motor paso a paso. Todo lo que necesita para su interfaz es "Iniciar/Parar", por lo que
 no es necesario cargar y configurar una aplicación CNC completa.
 
 En el siguiente ejemplo, hemos creado un panel GladeVCP simple.
@@ -313,7 +299,3 @@ stop
 # descarguetodos los componentes HAL antes de salir
 unloadrt all
 ----
-
-
-
-

@@ -1,3 +1,5 @@
+:lang: en
+
 [[cha:gmoccapy]]
 
 = GMOCCAPY
@@ -631,36 +633,35 @@ image::images/gmoccapy_0_9_7_sim_hardware_button.png[align="left"]
 
 === Velocities And Overrides
 
-All sliders from gmoccapy can be connected to hardware encoder or hardware
-potentiometers.
+All sliders from gmoccapy can be connected to hardware encoder or hardware potentiometers.
 
 [NOTE]
 for gmoccapy 3 the hal pin name has changed, as new controls has been implemented,
 max velocity does not exist any more, as rapid override has been implemented.
 This change has been done as many user ask for that.
 
-To connect encoders the following pin are exported:
+To connect 'encoders' the following pin are exported:
 
 [width="80%", options="header", cols="^,<,^"]
-|=======================================================================
-|              PIN                                |  TYPE    |  FUNCTION
-| gmoccapy.jog.jog-velocity.counts                | HAL_S32  | Jog velocity
-| gmoccapy.jog.jog-velocity.count-enable          | HAL_BIT  | Must be True, to enable counts
-| gmoccapy.feed.feed-override.counts              | HAL_S32  | feed override
-| gmoccapy.feed.feed-override.count-enable        | HAL_BIT  | Must be True, to enable counts
-| gmoccapy.feed.reset-feed-override               | HAL_BIT  | reset the feed override to 100%
-| gmoccapy.spindle.spindle-override.counts        | HAL_S32  | spindle override
-| gmoccapy.spindle.spindle-override.count-enable  | HAL_BIT  | Must be True, to enable counts
-| gmoccapy.spindle.reset-spindle-override         | HAL_BIT  | reset the spindle override to 100%
-| gmoccapy.rapid.rapid-override.counts            | HAL_S32  | Maximal Velocity of the machine
-| gmoccapy.rapid.rapid-override.count-enable      | HAL_BIT  | Must be True, to enable counts
-|=======================================================================
+|======================================================================
+|                   PIN                           |  TYPE   |  FUNCTION
+| gmoccapy.jog.jog-velocity.counts                | HAL_S32 | Jog velocity
+| gmoccapy.jog.jog-velocity.count-enable          | HAL_BIT | Must be True, to enable counts
+| gmoccapy.feed.feed-override.counts              | HAL_S32 | feed override
+| gmoccapy.feed.feed-override.count-enable        | HAL_BIT | Must be True, to enable counts
+| gmoccapy.feed.reset-feed-override               | HAL_BIT | reset the feed override to 100%
+| gmoccapy.spindle.spindle-override.counts        | HAL_S32 | spindle override
+| gmoccapy.spindle.spindle-override.count-enable  | HAL_BIT | Must be True, to enable counts
+| gmoccapy.spindle.reset-spindle-override         | HAL_BIT | reset the spindle override to 100%
+| gmoccapy.rapid.rapid-override.counts            | HAL_S32 | Maximal Velocity of the machine
+| gmoccapy.rapid.rapid-override.count-enable      | HAL_BIT | Must be True, to enable counts
+|======================================================================
 
-To connect potentiometers, use the following hal pin:
+To connect 'potentiometers', use the following hal pin:
 
 [width="80%", options="header", cols="^,<,^"]
 |========================================================================
-|              PIN                                |  TYPE     |  FUNCTION
+|                   PIN                           |  TYPE     |  FUNCTION
 | gmoccapy.jog.jog-velocity.direct-value          | HAL_FLOAT | To adjust the jog velocity slider
 | gmoccapy.jog.jog-velocity.analog-enable         | HAL_BIT   | Must be True, to allow analog inputs
 | gmoccapy.feed.feed-override.direct-value        | HAL_FLOAT | To adjust the feed override slider
@@ -677,33 +678,33 @@ or decrease will be, must be set in the glade file. In a future release it will
 be integrated in the settings page.
 
 [width="80%", options="header", cols="^,<,^"]
-|===============================================================
-|               PIN                 |  TYPE          |  FUNCTION
-| SPEED                             |                |
-| gmoccapy.spc_jog_vel.increase     | HAL_BIT IN     | as long as True the value of the slider will increase
-| gmoccapy.spc_jog_vel.decrease     | HAL_BIT IN     | as long as True the value of the slider will decrease
-| gmoccapy.spc_jog_vel.scale        | HAL_FLOAT IN   | A value to scale the output value (Handy to change units/min to units/sec
-| gmoccapy.spc_jog_vel.value        | HAL_FLOAT OUT  | value of the widget
-| gmoccapy.spc_jog_vel.scaled-value | HAL_FLOAT OUT  | scaled value of the widget
-| FEED                              |                |
-| gmoccapy.spc_feed.increase        | HAL_BIT IN     | as long as True the value of the slider will increase
-| gmoccapy.spc_feed.decrease        | HAL_BIT IN     | as long as True the value of the slider will decrease
-| gmoccapy.spc_feed.scale           | HAL_FLOAT IN   | A value to scale the output value (Handy to change units/min to units/sec
-| gmoccapy.spc_feed.value           | HAL_FLOAT OUT  | value of the widget
-| gmoccapy.spc_feed.scaled-value    | HAL_FLOAT OUT  | scaled value of the widget
-| SPINDLE                           |                |
-| gmoccapy.spc_spindle.increase     | HAL_BIT IN     | as long as True the value of the slider will increase
-| gmoccapy.spc_spindle.decrease     | HAL_BIT IN     | as long as True the value of the slider will decrease
-| gmoccapy.spc_spindle.scale        | HAL_FLOAT IN   | A value to scale the output value (Handy to change units/min to units/sec
-| gmoccapy.spc_spindle.value        | HAL_FLOAT OUT  | value of the widget
-| gmoccapy.spc_spindle.scaled-value | HAL_FLOAT OUT  | scaled value of the widget
-| RAPIDS                            |                |
-| gmoccapy.spc_rapid.increase       | HAL_BIT IN     | as long as True the value of the slider will increase
-| gmoccapy.spc_rapid.decrease       | HAL_BIT IN     | as long as True the value of the slider will decrease
-| gmoccapy.spc_rapid.scale          | HAL_FLOAT IN   | A value to scale the output value (Handy to change units/min to units/sec
-| gmoccapy.spc_rapid.value          | HAL_FLOAT OUT  | value of the widget
-| gmoccapy.spc_rapid.scaled-value   | HAL_FLOAT OUT  | scaled value of the widget
-|===============================================================
+|==============================================================
+|               PIN                 |  TYPE         |  FUNCTION
+| SPEED                             |               |
+| gmoccapy.spc_jog_vel.increase     | HAL_BIT IN    | as long as True the value of the slider will increase
+| gmoccapy.spc_jog_vel.decrease     | HAL_BIT IN    | as long as True the value of the slider will decrease
+| gmoccapy.spc_jog_vel.scale        | HAL_FLOAT IN  | A value to scale the output value (Handy to change units/min to units/sec
+| gmoccapy.spc_jog_vel.value        | HAL_FLOAT OUT | value of the widget
+| gmoccapy.spc_jog_vel.scaled-value | HAL_FLOAT OUT | scaled value of the widget
+| FEED                              |               |
+| gmoccapy.spc_feed.increase        | HAL_BIT IN    | as long as True the value of the slider will increase
+| gmoccapy.spc_feed.decrease        | HAL_BIT IN    | as long as True the value of the slider will decrease
+| gmoccapy.spc_feed.scale           | HAL_FLOAT IN  | A value to scale the output value (Handy to change units/min to units/sec
+| gmoccapy.spc_feed.value           | HAL_FLOAT OUT | value of the widget
+| gmoccapy.spc_feed.scaled-value    | HAL_FLOAT OUT | scaled value of the widget
+| SPINDLE                           |               |
+| gmoccapy.spc_spindle.increase     | HAL_BIT IN    | as long as True the value of the slider will increase
+| gmoccapy.spc_spindle.decrease     | HAL_BIT IN    | as long as True the value of the slider will decrease
+| gmoccapy.spc_spindle.scale        | HAL_FLOAT IN  | A value to scale the output value (Handy to change units/min to units/sec
+| gmoccapy.spc_spindle.value        | HAL_FLOAT OUT | value of the widget
+| gmoccapy.spc_spindle.scaled-value | HAL_FLOAT OUT | scaled value of the widget
+| RAPIDS                            |               |
+| gmoccapy.spc_rapid.increase       | HAL_BIT IN    | as long as True the value of the slider will increase
+| gmoccapy.spc_rapid.decrease       | HAL_BIT IN    | as long as True the value of the slider will decrease
+| gmoccapy.spc_rapid.scale          | HAL_FLOAT IN  | A value to scale the output value (Handy to change units/min to units/sec
+| gmoccapy.spc_rapid.value          | HAL_FLOAT OUT | value of the widget
+| gmoccapy.spc_rapid.scaled-value   | HAL_FLOAT OUT | scaled value of the widget
+|==============================================================
 
 The float pin do accept values from 0.0 to 1.0, being the percentage value
 you want to set the slider value.
@@ -782,6 +783,9 @@ of 10 hal pin for the increments given in the INI File, if you give more
 increments in your INI File, they will be not reachable from the GUI as they
 will not be displayed.
 
+[NOTE]
+Gmoccapy 3 utiliza diferentes nombres de pin hal
+
 If you have 6 increments in your hal you will get *7* pins:
 jog-inc-0 is unchangeable and will represent continuous jogging.
 
@@ -797,9 +801,7 @@ gmoccapy offers also a hal pint to output the selected jog invrement
 
 * gmoccapy.jog.jog-increment
 
-[[gmoccapy:hardware-unlock]]
-
-=== Hardware Unlock Pin
+=== Hardware Unlock Pin[[gmoccapy:hardware-unlock]]
 
 To be able to use a key switch to unlock the settings page the following
 pin is exported.
@@ -821,9 +823,7 @@ delete the first error and reset the gmoccapy.error pin to False after the last 
 NOTE: Messages or user infos will not affect the gmoccapy.error pin, but the gmoccapy.delete-message
 pin will delete the last message if no error is shown!
 
-[[gmoccapy:user-created-message]]
-
-=== User Created Message HAL Pins
+=== User Created Message HAL Pins[[gmoccapy:user-created-message]]
 
 gmoccapy may react to external errors, using 3 different user messages:
 All are HAL_BIT pin.
@@ -868,8 +868,7 @@ net gmoccapy-lube-fault-waiting gmoccapy.messages.lube-fault-waiting
 net gmoccapy-pin gmoccapy.messages.pin
 ----
 
-For more information on HAL files and the net command see the
-<<cha:basic-hal-reference,HAL Basics>>.
+For more information on HAL files and the net command see the <<cha:basic-hal-reference,HAL Basics>>.
 
 === Spindle Feedback Pins
 
@@ -878,10 +877,8 @@ There are two pins for spindle feedback
 * gmoccapy.spindle_feedback_bar
 * gmoccapy.spindle_at_speed_led
 
-'gmoccapy.spindle_feedback_bar' will accept an float input to show the spindle
-speed.
-'gmoccapy.spindle_at_speed_led' is an bit-in-pin to lit the GUI led if spindle is
-at speed.
+'gmoccapy.spindle_feedback_bar' will accept an float input to show the spindle speed.
+'gmoccapy.spindle_at_speed_led' is an bit-in-pin to lit the GUI led if spindle is at speed.
 
 === Pins To Indicate Program Progress Information
 
@@ -907,6 +904,8 @@ get the message to change to 'tool number 3', but also the description of that
 tool like '7.5 mm 3 flute cutter'. The information is taken from the tool
 table, so it is up to you what to display.
 
+.Manual tool change
+
 image::images/manual_toolchange.png[align="left"]
 
 * gmoccapy.toolchange-number HAL_S32 The number of the tool to be changed
@@ -927,9 +926,10 @@ Please take care, that this connections have to be done in the postgui hal file!
 
 .Tool Offset Pins
 
-This pins allows you to show the active tool offset values for X and Z in the
-tool information frame. You should know that they are only active after G43
-has been sent.
+This pins allows you to show the active tool offset values for X and Z in the tool information frame.
+You should know that they are only active after G43 has been sent.
+
+.Tool information
 
 image::images/gmoccapy_0_9_7_tool_info.png[align="left"]
 
@@ -980,6 +980,8 @@ You should follow these steps:
 
 here is a small sketch:
 
+.Tool measurement data
+
 image::images/sketch_auto_tool_measurement.png[align="left"]
 
 With the first given tool change the tool will be measured and the offset will
@@ -999,8 +1001,7 @@ Gmoccapy offers 5 pins for tool measurement purpose. The pins are mostly used
 to be read from a gcode subroutine, so the code can react to different values.
 
 * gmoccapy.toolmeasurement HAL_BIT enable or not tool measurement
-* gmoccapy.blockheight HAL_FLOAT the measured value of the top face of the
-  workpiece
+* gmoccapy.blockheight HAL_FLOAT the measured value of the top face of the workpiece
 * gmoccapy.probeheight HAL_FLOAT the probe switch height
 * gmoccapy.searchvel HAL_FLOAT the velocity to search for the tool probe switch
 * gmoccapy.probevel HAL_FLOAT the velocity to probe tool length
@@ -1066,11 +1067,9 @@ TOPLEVEL = python/toplevel.py
 
 You must copy the following files to your config directory
 
-First make a directory 'python' in your config folder from
-'your_linuxcnc-dev_directory/configs/sim/gmoccapy/python' copy 'toplevel.py' to
-your 'config_dir/python' folder. Copy 'remap.py' to your
-'config_dir/python' folder Copy 'stdglue.py' to your 'config_dir/python'
-folder.
+First make a directory 'python' in your config folder from 'your_linuxcnc-dev_directory/configs/sim/gmoccapy/python'
+copy 'toplevel.py' to your 'config_dir/python' folder.
+Copy 'remap.py' to your 'config_dir/python' folder Copy 'stdglue.py' to your 'config_dir/python' folder.
 
 From 'your_linuxcnc-dev_directory/configs/sim/gmoccapy/macros'
 copy 'on_abort.ngc' to the directory specified in the SUBROUTINE_PATH see
@@ -1078,8 +1077,8 @@ copy 'on_abort.ngc' to the directory specified in the SUBROUTINE_PATH see
 From 'your_linuxcnc-dev_directory/configs/sim/gmoccapy/macros'
 copy 'change.ngc' to the directory specified as SUBROUTINE_PATH see
 <<gmocappy:rs274ngc, RS274NGC Section>>.
-Open 'change.ngc' with a editor and uncomment the following lines
-(49 and 50):
+
+Open 'change.ngc' with a editor and uncomment the following lines (49 and 50):
 
 ----
 F #<_hal[gmoccapy.probevel]>
@@ -1118,9 +1117,7 @@ net tool-prep-number gmoccapy.toolchange-number <= iocontrol.0.tool-prep-number
 net tool-prep-loop iocontrol.0.tool-prepare <= iocontrol.0.tool-prepared
 -------
 
-[[gmoccapy:settings-page]]
-
-== The Settings Page
+== The Settings Page[[gmoccapy:settings-page]]
 
 To enter the page you will have to click on
 image:images/gmoccapy_settings_button.png[align="left"]
@@ -1130,7 +1127,7 @@ at this time you will have to edit the hidden preference file, see
 
 The page looks at the moment like so:
 
-image::images/gmoccapy_settings_appearance.png[align="left"]
+image::images/gmoccapy_settings_appearance.png[Configuration page,align="left"]
 
 The page is separated in three main tabs:
 
@@ -1194,8 +1191,7 @@ done also adding a starter to your local folder.
 
 So that the layout is set automatically on starting.
 
-For matchbox-keyboard you will have to make your own layout, for a German
-layout ask in the forum.
+For matchbox-keyboard you will have to make your own layout, for a German layout ask in the forum.
 
 On Touch Off::
     give the option to show the preview tab or the offset page tab if you enter the touch off mode by clicking the
@@ -1206,6 +1202,13 @@ On Touch Off::
 
 As the notebook tabs are shown, you are able to switch between both views in
 any case.
+
+Mostrar pantalla auxiliar::
+    Al hacer clic en este botón se abrirá una ventana adicional. Este botón solo es sensible si un archivo llamado 'Gmoccapy 3.glade'
+    se encuentra en su carpeta de configuración. Puedes construir la pantalla Aux usando Glade.
+
+[WARNING]
+'La ventana principal de la pantalla auxiliar debe llamarse window2'
 
 DRO Options::
 You have the option to select the background colors of the different DRO states.
@@ -1225,39 +1228,60 @@ The foreground color of the DRO can be selected with:
 'show dro in preview' +
 the DRO will be shown in the preview window + +
 
-'show offsets'+
+'show offsets' +
 the Offsets will be shown in the preview window + +
 
 'show DTG' +
 the distance to go will be shown in the preview window + +
  +
+'mostrar boton DRO' +
+le permitirá mostrar botones adicionales en el lado izquierdo del DRO. +
+
+Se mostrará: +
+* Un botón para cambiar de coordenadas relativas a absolutas, +
+* un botón para alternar entre la distancia a recorrer y los otros estados +
+* y un botón para alternar las unidades de métricas a imperiales y viceversa.
+
+[WARNING]
+No se recomienda usar esta opción, porque el usuario
+puede perder la opción de unidad automática, que alternará las unidades según el
+gcode activo G20/G21.
 
 [NOTE]
-*You can change through the DRO modes (absolute, relative, distance
-to go) by clicking on the DRO!*
-* if you click on the left side letter of the DRO a popup window will allow you to set the value of the axis, making it easier to set the value, as you will not need to go over the touch off bottom button. Clicking the numbers (right side of the DRO) will toggle through the DRO modes as described above. *
+You can change through the DRO modes (absolute, relative, distance to go) by clicking on the DRO!  *if you click on the left side letter of the DRO a popup window will allow you to set the value of the axis, making it easier to set the value, as you will not need to go over the touch off bottom button. Clicking the numbers (right side of the DRO) will toggle through the DRO modes as described above.*
+
+'Usar unidades automáticas' +
+permite deshabilitar la opción de unidades automáticas de la pantalla, para que pueda ejecutar un programa en pulgadas y ver el DRO en mm. + +
 
 'size' +
-allows to set the size of the DRO font, default is 28, if you use a bigger screen you may want to increase the size up to 56.
-    If you do use 4 axis, the DRO font size will be 3/4 of the value, because of space reason. + +
+allows to set the size of the DRO font, default is 28, if you use a bigger screen you may want to increase the size up to 56. If you do use 4 axis, the DRO font size will be 3/4 of the value, because of space reason. + +
 
 'digits' +
-sets the number of digits of the DRO from 1 to 5. +
+sets the number of digits of the DRO from 1 to 5.
 
-NOTE: Imperial will show one digit more that metric. So if you are in imperial machine units and set the digit value to 1, you will get no digit at all in metric.
+[NOTE]
+Imperial will show one digit more that metric.
+So if you are in imperial machine units and set the digit value to 1, you will get no digit at all in metric.
 
 'toggle DRO mode' +
 if not active, a mouse click on the DRO will not take any action. +
 By default this checkbox is active, so every click on any DRO will toggle the DRO readout from actual to relative to DTG (distance to go). +
-Neverthereless a click on the axis letter will open the popup dialog to set the axis value + +
+Neverthereless a click on the axis letter will open the popup dialog to set the axis value.
+
+.MAP THIS C1
+.MAP THIS C2
+.MAP THIS C3
+.MAP THIS C4
+.MAP THIS C5
 
 Preview::
 
-'Grid Size' Sets the grid size of the preview window. Unfortunately the size
-*has to be set in inches*, even if your machine units are metric. We do hope
-to fix that in a future release.
+'Grid Size' Sets the grid size of the preview window. Unfortunately the size *has to be set in inches*,
+even if your machine units are metric.
+We do hope to fix that in a future release.
 
-[NOTE] The grid will not be shown in perspective view.
+[NOTE]
+The grid will not be shown in perspective view.
 
 'Show DRO' +
 Will show the a DRO also in the preview window, it will be shown automatically in fullsize preview
@@ -1267,11 +1291,12 @@ preview, only if Show DRO is active and not full size preview.
 
 'Show Offsets' will show the offsets in the preview window.
 
-[NOTE] If you only check this option and leave the others unchecked, you will
+[NOTE]
+If you only check this option and leave the others unchecked, you will
 get in full size preview a offset page
 
 'Mouse Button Mode' this combobox you can select the button behavior of the
-mouse to rotate, move or zoom within the preview.
+mouse to rotate, move or zoom within the preview:
 
 * left rotate, middle move, right zoom
 * left zoom, middle move, right rotate
@@ -1304,15 +1329,15 @@ Jump to dir::
     you can set here the directory to jump to if you press the corresponding button
     in the file selection dialog.
 
-image::images/gmoccapy_file_selection_dialog_with_keyboard.png[align="left"]
+image::images/gmoccapy_file_selection_dialog_with_keyboard.png["Directory selection",align="left"]
 
 Themes and Sounds::
     This lets the user select what desktop theme to apply and what error and messages sounds should be played.
     By default "Follow System Theme" is set.
 
-=== Hardware
+=== Hardware2
 
-image::images/gmoccapy_settings_hardware.png[align="left"]
+image::images/gmoccapy_settings_hardware.png["Hardware settings",align="left"]
 
 Hardware MPG Scales::
 For the different Hal Pin to connect MPG Wheels to, you may select individual scales to be applied.
@@ -1330,8 +1355,8 @@ By default all scales are set using the calculation:
 
 Keyboard shortcuts::
 Some users want to jog there machine using the keyboard buttons and there are others that will never allow this.
-So everybody can select whether to use them or not. It is not recommended to use keyboard jogging,
-as it represents a serious risk for operator and machine.
+So everybody can select whether to use them or not.
+It is not recommended to use keyboard jogging, as it represents a serious risk for operator and machine.
 
 Default is not to use keyboard shortcuts.
 
@@ -1362,7 +1387,7 @@ There are additional keys for message handling, see
 <<gmoccapy:message-behavior,Message behavior and appearance>>
 
  * WINDOWS = Delete last message
- * <STRG><SPACE> = Delete all messages
+ * <CTRL><SPACE> = Delete all messages
 
 Unlock options::
 
@@ -1410,14 +1435,11 @@ This settings will have influence on the jog velocities.
   if in turtle mode (button pressed, showing the turtle)
 
 [NOTE]
-This button can be activated using the
-<<gmoccapy:jog-velocity,turtle-jog>> hal pin.
+This button can be activated using the <<gmoccapy:jog-velocity,turtle-jog>> hal pin.
 
-=== Advanced Settings
+=== Advanced Settings[[gmoccapy:tool-measurement]]
 
-image::images/gmoccapy_settings_advanced.png[align="left"]
-
-[[gmoccapy:tool-measurement]]
+image::images/gmoccapy_settings_advanced.png["Advanced settings",align="left"]
 
 .Tool Measurement
 
@@ -1425,7 +1447,7 @@ image::images/gmoccapy_settings_advanced.png[align="left"]
 If this part is not sensitive, you do not have a valid INI file configuration
 to use tool measurement.
 
-Please check <<gmoccapy:auto-tool-measurement, Auto Tool Measurement>>
+Please check <<gmoccapy:auto-tool-measurement,Auto Tool Measurement>>
 
 * Use auto tool measurement : If checked, after each tool change, a tool
   measurement will be done, the result will be stored in the tool table and an
@@ -1436,31 +1458,38 @@ Please check <<gmoccapy:auto-tool-measurement, Auto Tool Measurement>>
 The following information is taken from your INI file and must be given
 in absolute coordinates
 
- * X Pos. = The X position of the tool switch
- * Y Pos. = The Y position of the tool switch
- * Z Pos. = The Z position of the tool switch, we will go as rapid move to
- this coordinate
-
- * Max. Probe = is the distance to search for contact, an error will be
- launched, if no contact is given. The distance has to be given in relative
- coordinates, beginning the move from Z Pos., so you have to give a negative
- value to go down!
-
- * Probe Height = is the height of your probe switch, you can measure it.
- Just touch off the base where the probe switch is located and set that to
- zero. Then make a tool change and watch the tool_offset_z value, that is the
- height you must enter here.
+* X Pos. = The X position of the tool switch
+* Y Pos. = The Y position of the tool switch
+* Z Pos. = The Z position of the tool switch, we will go as rapid move to this coordinate
+* Max. Probe = is the distance to search for contact, an error will be launched, if no contact is given.
+  The distance has to be given in relative coordinates, beginning the move from Z Pos., so you have to give a negative value to go down!
+* Probe Height = is the height of your probe switch, you can measure it.
+  Just touch off the base where the probe switch is located and set that to zero.
+  Then make a tool change and watch the tool_offset_z value, that is the height you must enter here.
 
 .Probe velocities
 
- * Search Vel. = The velocity to search for the tool switch, after contact
- the tool will go up again and then goes toward the probe again with probe
- vel, so you will get better results.
+* Search Vel. = The velocity to search for the tool switch, after contact
+  the tool will go up again and then goes toward the probe again with probe
+  vel, so you will get better results.
 
- * Probe Vel. = Is the velocity for the second movement to the switch, it
- should be slower to get better touch results.(In sim mode, this is
- commented out in macros/change.ngc, otherwise the  user would have to click
- twice on the probe button)
+* Probe Vel. = Is the velocity for the second movement to the switch, it
+  should be slower to get better touch results.(In sim mode, this is
+  commented out in macros/change.ngc, otherwise the  user would have to click
+  twice on the probe button)
+
+.Cambiador de herramientas
+
+Si su cuarto eje 'se utiliza en un cambiador de herramientas, es posible que desee ocultar el DRO
+y todos los demás botones relacionados con ese eje.
+
+Puedes hacerlo marcando la casilla de verificación, que ocultará:
+
+* 4º eje DRO
+* 4º eje boton Jog
+* 4º eje botón de referencia (home)
+* Columna del 4º eje en la página offset.
+* Columna del 4º eje en el editor de herramientas.
 
 [[gmoccapy:reload-tool-on-start]]
 
@@ -1470,33 +1499,31 @@ The tool will be loaded after all axis are homed, because before it is not
 allowed to execute MDI commands. If you use NO_FORCE_HOMING you can not use
 this feature, because the needed all_homed_signal will never be emitted.
 
-[[gmoccapy:message-behavior]]
-
-.Message Behavior And Appearance
+.Message Behavior And Appearance[[gmoccapy:message-behavior]]
 
 This will display small pop up windows displaying the message or error text,
 the behavior is very similar to the one axis uses. You can delete a specific
 message, by clicking on it's close button, if you want to delete the last one,
 just hit the WINDOWS key on your keyboard, or delete all messages at ones
-with <STRG><SPACE>.
+with <CTRL><SPACE>.
 
 You are able to set some options:
 
- * X Pos = The position of the top left corner of the message in X counted
- in pixel from the top left corner of the screen.
- * Y Pos = The position of the top left corner of the message in Y counted
- in pixel from the top left corner of the screen.
- * Width = The width of the message box
- * max = The maximum messages you want to see at ones, if you set this to 10,
- the 11th message will delete the first one, so you will only see the last 10
- ones.
- * Font = The font and size you want to use to display the messages
- * use frames = If you activate the checkbox, each message will be displayed
- in a frame, so it is much easier to distinguish the messages. But you will
- need a little bit more space.
- * The button launch test message will just do what it is supposed to, it will
- show a message, so you can see the changes of your settings without the need
- to generate an error.
+* X Pos = The position of the top left corner of the message in X counted
+  in pixel from the top left corner of the screen.
+* Y Pos = The position of the top left corner of the message in Y counted
+  in pixel from the top left corner of the screen.
+* Width = The width of the message box
+* max = The maximum messages you want to see at ones, if you set this to 10,
+  the 11th message will delete the first one, so you will only see the last 10
+  ones.
+* Font = The font and size you want to use to display the messages
+* use frames = If you activate the checkbox, each message will be displayed
+  in a frame, so it is much easier to distinguish the messages. But you will
+  need a little bit more space.
+* The button launch test message will just do what it is supposed to, it will
+  show a message, so you can see the changes of your settings without the need
+  to generate an error.
 
 .Run From Line Option
 
@@ -1555,7 +1582,7 @@ offset and the tool table is showing all lathe relevant information.
 
 == Plasma Specific Section
 
-image::images/gmoccapy_plasma.png[align="left"]
+image::images/gmoccapy_plasma.png["Plasma GUI",align="left"]
 
 There is a very good WIKI, which is actually growing, maintained by Marius
 see http://wiki.linuxcnc.org/cgi-bin/wiki.pl?Gmoccapy_plasma[Plasma wiki page]
@@ -1604,7 +1631,7 @@ Auto Tool Measurement Machine = http://youtu.be/1arucCaDdX4
 
 If you get strange numbers in the info area of gmoccapy like:
 
-image::images/strange_numbers.png[align="left"]
+image::images/strange_numbers.png["Strange numbers",align="left"]
 
 You have made your config file using an older version of StepConfWizard.
 It has made a wrong entry in the INI file under the [TRAJ] named

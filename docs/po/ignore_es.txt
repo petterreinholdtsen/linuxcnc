@@ -1,8 +1,9 @@
 # Files to skip since these have content that is not in the original
 man/es/man1/iocontrol.1
-# or are just too difficult
-src/plasma/plasma-cnc-primer_es.adoc
-src/gui/gmoccapy_es.adoc
+src/common/linux-faq_es.adoc
+src/hal/basic-hal_es.adoc
+# or are just too difficult - needs to be revisited since BOM (byte order marker) identified
+src/ gui/gmoccapy_es.adoc
 src/gui/qtdragon_es.adoc
 src/motion/5-axis-kinematics_es.adoc
 src/user/user-intro_es.adoc
@@ -13,5 +14,11 @@ src/config/stepper-diagnostics_es.adoc
 src/config/moveoff_es.adoc
 src/config/stepper_es.adoc
 # presuming a po4a error
+#Use of uninitialized value $newchar in substitution iterator at /usr/share/perl5/Locale/Po4a/Po.pm line 1619.
+#Wide character at /usr/share/perl5/Locale/Po4a/Po.pm line 584.
+src/plasma/plasma-cnc-primer_es.adoc
+# presuming a po4a error - unknown or forgotten error
 src/config/ini-config_es.adoc
 src/gcode/tool-compensation_es.adoc
+# conceptual failure
+src/common/glossary_es.adoc - the order is wrong

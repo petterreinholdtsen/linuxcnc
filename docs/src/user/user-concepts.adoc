@@ -1,3 +1,6 @@
+:lang: en
+:toc:
+
 [[cha:important-user-concepts]](((User Concepts)))
 
 = Important User Concepts
@@ -42,11 +45,15 @@ For more information on the Trajectory Panner ini options see the
 
 A less straightforward problem is that of path following. When you
 program a corner in G Code, the trajectory planner can do several
-things, all of which are right in some cases: it can decelerate to a
-stop exactly at the coordinates of the corner, and then accelerate in
-the new direction. It can also do what is called blending, which is to
-keep the feed rate up while going through the corner, making it
-necessary to round the corner off in order to obey machine constraints.
+things, all of which are right in some cases:
+
+ * it can decelerate to a stop exactly at the coordinates of the corner,
+   and then accelerate in the new direction.
+
+ * It can also do what is called blending,
+   which is to keep the feed rate up while going through the corner,
+   making it necessary to round the corner off in order to obey machine constraints.
+
 You can see that there is a trade off here: you can slow down to get
 better path following, or keep the speed up and have worse path
 following. Depending on the particular cut, the material, the tooling,
@@ -267,9 +274,9 @@ Coordinate System from the Machine menu or program 'G10 L2 P1 X0 Y0 Z0'
 at the end of your G Code file. Change the 'P' number to suit the
 coordinate system you wish to clear the offset in.
 
- -  Offsets stored in a user coordinate system are retained when LinuxCNC is
+ - Offsets stored in a user coordinate system are retained when LinuxCNC is
    shut down.
- -  Using the 'Touch Off' button in Axis sets an offset for the chosen
+ - Using the 'Touch Off' button in Axis sets an offset for the chosen
    User Coordinate System.
 
 === When You Are Lost
@@ -299,13 +306,11 @@ moves in the opposite direction of the Cartesian coordinate system arrows
 shown by the 'Tool Direction' image. This makes the 'tool' move in the
 correct direction in relation to the material.
 
-.Mill Configuration
 image::images/mill-diagram_en.svg["Mill Configuration",align="center"]
 
 The following diagram shows a typical lathe showing direction of travel
 of the tool and limit switches.
 
-.Lathe Configuration
 image::images/lathe-diagram_en.svg["Lathe Configuration",align="center"]
 
 // vim: set syntax=asciidoc:

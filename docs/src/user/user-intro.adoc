@@ -1,16 +1,17 @@
 :lang: en
+
 [[cha:linuxcnc-user-introduction]](((introduction)))
 
 = LinuxCNC User Introduction
 
 == How LinuxCNC Works
 
-LinuxCNC is a suite of highly-customisable applications for the control of a Computer Numerically
-Controlled (CNC) mills and lathes, 3D printers, robots, laser cutters, plasma cutters and other automated
-devices. It is capable of providing coordinated control of up to 9 axes of movement.
+LinuxCNC is a suite of highly-customisable applications for the control of a
+Computer Numerically Controlled (CNC) mills and lathes, 3D printers, robots,
+laser cutters, plasma cutters and other automated devices.
+It is capable of providing coordinated control of up to 9 axes of movement.
 
-At its heart, LinuxCNC consists of several key components that are integrated together to form one
-complete system:
+At its heart, LinuxCNC consists of several key components that are integrated together to form one complete system:
 
 * a Graphical User Interface (GUI), which forms the basic interface between the operator, the software
   and the CNC machine itself;
@@ -45,11 +46,6 @@ to allow easy launching of LinuxCNC.
 For example, if the Stepper Configuration Wizard was used to create a setup for the 3-axis CNC mill
 illustrated above entitled 'My_CNC', the folders created by the wizard would typically contain the
 following files:
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 * Folder: My_CNC
 ** My_CNC.ini
@@ -86,45 +82,35 @@ following files:
 *** The nc_files folder is provided as a default location to store the G-code programs used to drive the
     mill. It also includes a number of subfolders with G-code examples.
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-
 == Graphical User Interfaces
 
 A graphical user interface is the part of the LinuxCNC that the machine tool operator interacts with.
-LinuxCNC comes with several types of user interfaces which may be chosen from by editing certain fields
-contained in the <<cha:ini-configuration,INI file>>:
+LinuxCNC comes with several types of user interfaces which may be chosen from by editing
+certain fields contained in the <<cha:ini-configuration,INI file>>:
 
-<<cha:axis-gui,'Axis'>>, the standard keyboard GUI interface. This is also the default GUI launched when a
+<<cha:axis-gui,Axis>>, the standard keyboard GUI interface. This is also the default GUI launched when a
 Configuration Wizard is used to create a desktop icon launcher:
 
 image::../gui/images/axis.png["Axis, the standard keyboard GUI interface",align="center"]
 
-<<cha:touchy-gui,'Touchy'>>, a touch screen GUI:
+<<cha:touchy-gui,Touchy>>, a touch screen GUI:
 
 image::../gui/images/touchy.png["Touchy, a touch screen GUI",align="center"]
 
-<<cha:gscreen,'Gscreen'>>, a user-configurable touch screen GUI:
+<<cha:gscreen,Gscreen>>, a user-configurable touch screen GUI:
 
 image::../gui/images/gscreen-mill.png["Gscreen, a configurable base touch screen GUI",align="center"]
 
-<<cha:gmoccapy,'GMOCCAPY'>>, a touch screen GUI based on Gscreen. GMOCCAPY is also designed to work equally
+<<cha:gmoccapy,GMOCCAPY>>, a touch screen GUI based on Gscreen. GMOCCAPY is also designed to work equally
 well in applications where a keyboard and mouse are the preferred methods of controlling the GUI:
 
 image::../gui/images/gmoccapy_3_axis.png["gmoccapy, a touch screen GUI based on Gscreen",align="center"]
 
-<<cha:ngcgui,'NGCGUI'>>, a subroutine GUI that provides wizard-style programming of G code. NGCGUI may be
+<<cha:ngcgui,NGCGUI>>, a subroutine GUI that provides wizard-style programming of G code. NGCGUI may be
 run as a standalone program or embedded into another GUI as a series of tabs. The following screen shot
 shows NGCGUI embedded into Axis:
 
 image::../gui/images/ngcgui.png["NGCGUI, a subroutine GUI that provides wizard-style programming of G code",align="center"]
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 == Virtual Control Panels
 
@@ -178,8 +164,3 @@ The AXIS user interface hides some of the distinctions between Auto and the othe
 Auto-commands available at most times. It also blurs the distinction between Manual and MDI because some
 Manual commands like Touch Off are actually implemented by sending MDI commands. It does this by
 automatically changing to the mode that is needed for the action the user has requested.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS

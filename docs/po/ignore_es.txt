@@ -2,12 +2,9 @@
 man/es/man1/iocontrol.1
 src/common/linux-faq_es.adoc
 src/hal/basic-hal_es.adoc
+src/gui/qtdragon_es.adoc - completely divergent except for the beginning
 # or are just too difficult - needs to be revisited since BOM (byte order marker) identified
-src/ gui/gmoccapy_es.adoc
-src/gui/qtdragon_es.adoc
-src/motion/5-axis-kinematics_es.adoc
-src/user/user-intro_es.adoc
-src/user/user-concepts_es.adoc
+src/ user/user-concepts_es.adoc
 src/lathe/lathe-user_es.adoc
 src/install/latency-test_es.adoc
 src/config/stepper-diagnostics_es.adoc

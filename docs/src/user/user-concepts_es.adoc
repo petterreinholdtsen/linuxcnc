@@ -1,4 +1,4 @@
-﻿:lang: es
+:lang: es
 :toc:
 
 [[cha:important-user-concepts]](((Conceptos Importantes)))
@@ -65,7 +65,7 @@ movimientos suficientemente largos para alcanzar la velocidad máxima en una má
 con baja aceleración y si no se especifica la tolerancia de ruta, puede obtener una
 esquina bastante redonda.
 
-=== Programacion del planificador (((Programacion del planificador)))
+=== Programacion del planificador(((Programacion del planificador)))
 
 Los comandos de control de trayectoria son los siguientes:
 
@@ -300,13 +300,11 @@ mesa se mueve en la dirección opuesta a las flechas del sistema de coordenadas
 cartesianas mostrado por la imagen 'Dirección Herramienta'. Esto hace que la
 herramienta 'se mueva' en el dirección correcta en relación con el material.
 
-.Configuración de fresadora
 image::images/mill-diagram_es.png["Configuración de fresadora",align="center"]
 
 El siguiente diagrama muestra un torno típico que muestra la dirección del recorrido 
 de la herramienta y los interruptores de límite.
 
-.Configuración de Torno
 image::images/lathe-diagram_es.png["Configuración de torno",align="center"]
 
 // vim: set syntax = asciidoc:

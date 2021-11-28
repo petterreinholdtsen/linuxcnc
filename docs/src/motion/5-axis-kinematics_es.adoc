@@ -408,8 +408,7 @@ KINEMATICS = kinsname
 donde "kinsname" es el nombre de su programa. Los pines HAL adicionales pueden
 ser creados por el módulo para elementos de configuración variable tales como
 D~x~, D~y~, D~z~, offset de herramienta-offset utilizado en el módulo de cinemática xyzac-trt.
-Estos pines se pueden conectar a una señal para control dinámico
-o establecer conexiones HAL como:
+Estos pines se pueden conectar a una señal para control dinámico o establecer conexiones HAL como:
 
 ----
 # establecer los parámetros de offsets

@@ -218,11 +218,6 @@ is .inc.  Do not use a file extension of .ini for included files.
   run from a <<faq:terminal,terminal>>. Debug flags are usually only useful to
   developers. See src/emc/nml_intf/debugflags.h for other settings.
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-
 [[sec:display-section]](((INI File, DISPLAY Section)))
 
 === [DISPLAY] Section
@@ -394,11 +389,6 @@ by the [DISPLAY]DISPLAY gui program (typically "XYZABCUVW")
   page up/page down to the third, and left and right bracket to the fourth.
   If unspecified, the default is determined from the [TRAJ]COORDINATES, [DISPLAY]LATHE and [DISPLAY]FOAM values.
 * 'JOG_INVERT =' - For each axis letter, the jog direction is inverted.  The default is "X" for lathes and blank otherwise.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 [NOTE]
 The settings for 'JOG_AXES' and 'JOG_INVERT' apply to world mode jogging by axis coordinate letter
@@ -738,11 +728,6 @@ gui-dependent actions (like creating gui-specific hal pins).
 
    APP = halscope -i my.halscope
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-
 [[sec:traj-section]](((INI File, TRAJ Section)))
 
 === [TRAJ] Section
@@ -856,11 +841,6 @@ planning module in 'motion'.
   performance, but make the motion rougher due to acceleration
   discontinuities. A value in the range 20Hz to 200Hz should be reasonable
   to start.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 Finally, no amount of tweaking will speed up a toolpath with lots of
 small, tight corners, since you're limited by cornering acceleration.
@@ -1429,11 +1409,6 @@ image::images/encoder-scale.png[align="center"]
 * 'STEPGEN_MAXVEL = 1.4' - Older configuration files have a velocity limit for the step generator as well.
   If specified, it should also be 1% to 10% larger than the joint MAX_VELOCITY.
   Subsequent testing has shown that use of STEPGEN_MAXVEL does not improve the tuning of stepgen's position loop.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 [[sec:emcio-section]](((INI File, EMCIO Section)))
 

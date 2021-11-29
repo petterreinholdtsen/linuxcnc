@@ -1255,12 +1255,6 @@ si está en unidades de máquinas imperiales y establece el valor de dígito en 
 Si no está activo, un clic del ratón en el DRO no realizará ninguna acción. +
 De forma predeterminada, esta casilla de verificación está activa, por lo que cada clic en cualquier DRO cambiará la lectura DRO de real a relativa a DTG (distancia a recorrer).
 
-.MAP THIS C1
-.MAP THIS C2
-.MAP THIS C3
-.MAP THIS C4
-.MAP THIS C5
-
 Vista previa::
 
 'Tamaño de cuadrícula' Establece el tamaño de cuadrícula de la ventana de vista previa. Desafortunadamente, el tamaño *debe establecerse en pulgadas*,

@@ -1031,16 +1031,7 @@ preview on certain parts that are already working OK).
 
 This display can be useful in the Axis preview when (debug,message) comments are not displayed.
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.Axisui Pins
 == Axisui
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 To improve the interaction of AXIS with physical jog wheels, the axis
 currently selected in the GUI is also reported on a pin with a name

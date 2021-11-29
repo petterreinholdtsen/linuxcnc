@@ -50,11 +50,6 @@ Un directorio de configuración de GUI puede contener subdirectorios con
 configuraciones que ilustran situaciones especiales o incrustación
 de otras aplicaciones.
 
-.MAP THIS B1
-.MAP THIS B2
-.MAP THIS B3
-.MAP THIS B4
-
 Las configuraciones 'by_interface' están organizadas en torno a interfaces hardware comunes
 compatibles como:
 
@@ -96,11 +91,6 @@ Los elementos de 'aplicaciones' son típicamente utilidades que no requieren ini
 * parport - Aplicaciones para probar el puerto paralelo.
 * pyvcp - Ejemplo de aplicaciones pyvcp.
 * xhc-hb04 - Aplicaciones para probar un MPG inalámbrico USB xhc-hb04
-
-.MAP THIS A1
-.MAP THIS A2
-.MAP THIS A3
-.MAP THIS A4
 
 [NOTE]
 En el directorio de aplicaciones, solo se ofrecen para copiar en el directorio de usuario

@@ -86,12 +86,6 @@ Luego se hace una segunda pasada para ejecutar todas las demás instrucciones HA
 Si bien puede usar las opciones 'count=' o 'names=', éstas son mutuamente
 excluyentes - solo se puede especificar un tipo para un módulo dado.
 
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-
 El procesamiento TWOPASS es más efectivo cuando se usan opciones 'names='.
 Esta opción le permite proporcionar nombres únicos que
 son mnemotécnicos o relevantes para la configuración. Por

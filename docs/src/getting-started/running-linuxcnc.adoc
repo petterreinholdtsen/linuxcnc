@@ -50,11 +50,6 @@ A gui configuration directory may contain subdirectories with
 configurations that illustrate special situations or the embedding
 of other applications.
 
-.MAP THIS B1
-.MAP THIS B2
-.MAP THIS B3
-.MAP THIS B4
-
 The 'by_interface' configurations are organized around common, supported
 interfaces like:
 
@@ -96,11 +91,6 @@ The 'apps items' are typically 1) utilities that don't require starting linuxcnc
 * parport - Applications to test parport.
 * pyvcp - Example pyvcp applications.
 * xhc-hb04 - Applications to test an xhc-hb04 USB wireless MPG
-
-.MAP THIS A1
-.MAP THIS A2
-.MAP THIS A3
-.MAP THIS A4
 
 [NOTE]
 Under the Apps directory, only applications that are usefully modified

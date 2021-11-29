@@ -1013,16 +1013,7 @@ vista previa de ciertas partes que ya están trabajando bien).
 
 Esta pantalla puede ser útil en la vista previa de Axis cuando los comentarios (debug,message) no se muestran.
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.Pines Axisui
 == Pines
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 Para mejorar la interacción de AXIS con jogwheels físicos, el eje
 actualmente seleccionado en la GUI también se reporta en un pin con un nombre

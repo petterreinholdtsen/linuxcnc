@@ -96,12 +96,6 @@ this second pass.
 While you can use either the 'count=' or 'names=' options, they are
 mutually exclusive -- only one type can be specified for a given module.
 
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-
 TWOPASS processing is most effective when using the 'names=' option.
 This option allows you to provide unique names that
 are mnemonic or otherwise relevant to the configuration.   For

@@ -218,11 +218,6 @@ es .inc. No utilice una extensión de archivo .ini para los archivos incluidos.
   ejecutandose desde un <<faq:terminal,terminal>>. Las marcas de depuración generalmente solo son útiles para
   desarrolladores. Vea src/emc/nml_intf/debugflags.h para otras configuraciones.
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-
 [[sec:display-section]](((Archivo INI, Sección DISPLAY)))
 
 === Sección [DISPLAY]
@@ -390,11 +385,6 @@ by the [DISPLAY]DISPLAY gui program (typically "XYZABCUVW")
   y corchetes izquierdo y derecho a la cuarta. Si no se especifica, el valor predeterminado se determina a partir de
   los valores de [TRAJ]COORDINATES, [DISPLAY]LATHE y [DISPLAY]FOAM.
 * 'JOG_INVERT =' - para cada letra de eje, se invierte la dirección de jog. El valor predeterminado es "X" para tornos y en blanco en el resto.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 [NOTE]
 La configuración de 'JOG_AXES' y 'JOG_INVERT' se aplican al modo de jog universal por letra de eje de coordenadas
@@ -729,11 +719,6 @@ acciones dependientes de la GUI (como crear pines hal específicos de gui).
 
    APP = halscope -i my.halscope
 
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
-
 [[sec:traj-section]](((Archivo INI,Sección TRAJ)))
 
 === [TRAJ] Sección
@@ -843,11 +828,6 @@ en 'motion'.
   menor. Aumentar la frecuencia de corte puede dar más
   rendimiento, pero hace que el movimiento sea más duro debido a discontinuidades de la aceleración.
   Un valor en el rango de 20Hz a 200Hz debería ser razonable para comenzar.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 Finalmente, ninguna cantidad de ajustes acelerará una trayectoria con muchas
 esquinas pequeñas y estrechas, ya que está limitado por la aceleración en las esquinas.
@@ -1415,11 +1395,6 @@ image::images/encoder-scale.png[align="center"]
 * 'STEPGEN_MAXVEL = 1.4' - los archivos de configuración antiguos tienen también un límite de velocidad para el generador de pasos.
   Si se especifica, también debería ser entre 1% y 10% más grande que MAX_VELOCITY de la articulación.
   Pruebas posteriores han demostrado que el uso de STEPGEN_MAXVEL no mejora el ajuste del bucle de posición de stepgen.
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 [[sec:emcio-section]](((Archivo INI, Sección EMCIO)))
 

@@ -1268,12 +1268,6 @@ if not active, a mouse click on the DRO will not take any action. +
 By default this checkbox is active, so every click on any DRO will toggle the DRO readout from actual to relative to DTG (distance to go). +
 Neverthereless a click on the axis letter will open the popup dialog to set the axis value.
 
-.MAP THIS C1
-.MAP THIS C2
-.MAP THIS C3
-.MAP THIS C4
-.MAP THIS C5
-
 Preview::
 
 'Grid Size' Sets the grid size of the preview window. Unfortunately the size *has to be set in inches*,

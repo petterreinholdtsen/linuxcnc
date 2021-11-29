@@ -190,6 +190,11 @@ debe incluir G18 en su preámbulo ya que el valor predeterminado es G17, incluso
 está en modo torno, en la interfaz de usuario Axis. Los arcos en el plano G18 XZ
 utilizan los desplazamientos I (eje X) y K (eje Z).
 
+.MAP THIS B
+.MAP THIS B
+.MAP THIS B
+.MAP THIS B
+
 === Diseno de arcos en torno
 
 Un torno típico tiene el husillo a la izquierda del operador y la
@@ -199,11 +204,15 @@ normalmente se configura con el eje Y imaginario (+) apuntando al suelo.
 Lo siguiente será cierto en este tipo de configuración:
 
 - El eje Z(+) apunta hacia la derecha, alejandose del husillo.
-- El eje X(+) apunta hacia el operador, y cuando está en el lado del operador,
-  los valores de X son positivos.
+- El eje X(+) apunta hacia el operador, y cuando está en el lado del operador, los valores de X son positivos.
 
 Algunos tornos con herramientas en la parte posterior tienen el eje Y imaginario (+)
 apuntando hacia arriba.
+
+.MAP THIS A
+.MAP THIS A
+.MAP THIS A
+.MAP THIS A
 
 Las direcciones de arco G2/G3 se basan en el eje alrededor del cual giran. En el
 caso de los tornos, se trata del eje Y imaginario. Si el eje Y (+) señala
@@ -216,12 +225,11 @@ el arco aparezca en la dirección correcta.
 Al calcular arcos en modo radio solo tiene que recordar la
 dirección de rotación que se aplica a su torno.
 
-Al calcular arcos en el modo de diámetro, X es el diámetro y el offset X (I)
-es el radio incluso si está en el modo de diámetro G7.
+Al calcular arcos en el modo de diámetro, X es el diámetro y el offset X (I) es el radio incluso si está en el modo de diámetro G7.
 
 == Ruta de la herramienta
 
-=== Punto de control
+//=== Punto de control
 
 El punto de control de la herramienta sigue el camino programado. El
 punto de control está en la intersección de las líneas paralelas a X y Z,

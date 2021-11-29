@@ -115,7 +115,7 @@ Note: if you are in Radius Mode you must enter the radius, not the diameter.
 
 === Z Touch Off
 
-The Z axis offsets can be a bit confusing at first 
+The Z axis offsets can be a bit confusing at first
 ecause there are two elements to the Z offset.
 There is the tool table offset, and the machine coordinate offset.
 First we will look at the tool table offsets.
@@ -190,6 +190,11 @@ you should include G18 in your preamble as the default is G17 even if
 you're in lathe mode, in the user interface Axis. Arcs in G18 XZ plane
 use I (X axis) and K (Z axis) offsets.
 
+.MAP THIS B
+.MAP THIS B
+.MAP THIS B
+.MAP THIS B
+
 === Arcs and Lathe Design
 
 The typical lathe has the spindle on the left of the operator and the
@@ -199,11 +204,15 @@ typically set up with the imaginary Y axis (+) pointing at the floor.
 The following will be true on this type of setup:
 
 - The Z axis (+) points to the right, away from the spindle.
-- The X axis (+) points toward the operator, and when on the operator
-  side of the spindle the X values are positive.
+- The X axis (+) points toward the operator, and when on the operator side of the spindle the X values are positive.
 
 Some lathes with tools on the back side have the imaginary Y axis (+)
 pointing up.
+
+.MAP THIS A
+.MAP THIS A
+.MAP THIS A
+.MAP THIS A
 
 G2/G3 Arc directions are based on the axis they rotate around. In the
 case of lathes, it is the imaginary Y axis. If the Y axis (+) points
@@ -216,12 +225,11 @@ arc to appear to go in the correct direction.
 When calculating arcs in radius mode you only have to remember the
 direction of rotation as it applies to your lathe.
 
-When calculating arcs in diameter mode X is diameter and the X offset
-(I) is radius even if you're in G7 diameter mode.
+When calculating arcs in diameter mode X is diameter and the X offset (I) is radius even if you're in G7 diameter mode.
 
 == Tool Path
 
-=== Control Point
+//=== Control Point
 
 The control point for the tool follows the programmed path. The
 control point is the intersection of a line parallel to the X and Z
@@ -236,6 +244,7 @@ as you might assume.
 image::images/control-point_en.svg["Control Point",align="center"]
 
 === Cutting Angles without Cutter Comp
+
 
 Now imagine we program a ramp without cutter comp. The programmed path
 is shown in the following figure. As you can see in the figure the

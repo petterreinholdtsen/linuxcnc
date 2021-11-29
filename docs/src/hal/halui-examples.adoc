@@ -1,4 +1,6 @@
-[[cha:halui-examples]]
+:lang: en
+
+[[cha:halui-examples]](((Halui Examples)))
 
 = Halui Examples
 

@@ -1,12 +1,12 @@
 :lang: es
 
-[[cha:hal-tools]]
+[[cha:hal-tools]](((Herramientas HAL)))
 
-=Herramientas HAL
+= Herramientas HAL
 
 [[sec:halcmd]]
 
-==Halcmd
+== Halcmd
 
 Halcmd es una herramienta de línea de comandos para manipular HAL. Hay una
 página del manual bastante completa para halcmd, que se instalará si
@@ -26,12 +26,12 @@ cd toplevel_directory_for_rip_build
 man halcmd
 ----
 
-El capitulo <<cha:hal-tutorial,Tutorial HAL>> es un buen tutorial para halcmd y 
+El capitulo <<cha:hal-tutorial,Tutorial HAL>> es un buen tutorial para halcmd y
 tiene varios ejemplos de uso.
 
 [[sec:halmeter]] (((Halmeter)))
 
-==Halmeter
+== Halmeter
 
 Halmeter es un 'voltímetro' para HAL. Le permite ver el valor actual de un pin,
 señal, o parámetro. Es bastante simple de usar. Comience escribiendo *halmeter* en una
@@ -44,7 +44,7 @@ parámetros. Haga clic en una pestaña, luego haga clic en un pin/señal/paráme
 haga clic en 'OK'. Las listas desaparecerán, y la ventana pequeña
 mostrará el nombre y el valor del elemento seleccionado. La pantalla se actualiza
 aproximadamente 10 veces por segundo. Si hace clic en "Aceptar" en lugar de
-'OK', la ventana pequeña mostrará el nombre y el valor del elemento seleccionado, 
+'OK', la ventana pequeña mostrará el nombre y el valor del elemento seleccionado,
 pero la ventana grande permanecerá en la pantalla. Esto es
 conveniente si desea ver una serie de elementos diferentes rápidamente.
 
@@ -76,12 +76,12 @@ loadusr halmeter pin hm2.0.stepgen.00.velocity-fb -g 0 500
 ----
 
 Vea la página man para más opciones. Vea tambien la sección <<sec:halmeter,Halmeter>>.
-  
+
 .Halmeter
 
-image::images/hal-meter01.png[alt="Halmeter"]
+image::images/hal-meter01.png["Halmeter"]
 
-image::images/hal-meter02.png[alt="Halmeter"]
+image::images/hal-meter02.png["Halmeter"]
 
 == Halshow
 
@@ -140,9 +140,9 @@ Las instrucciones de operación deben ubicarse aquí eventualmente. Por ahora,
 consulte la sección <<sec:tutorial-halscope>> en el capítulo tutorial,
 que explica los conceptos básicos.
 
-El selector del menú Archivo de halscope proporciona botones para guardar una configuración
-o abrir una configuración previamente guardada. Cuando halscope termina,
-la última configuración se guarda en un archivo llamado autosave.halscope.
+El selector del menú Archivo de halscope proporciona botones para guardar
+una configuración o abrir una configuración previamente guardada.
+Cuando halscope termina, la última configuración se guarda en un archivo llamado autosave.halscope.
 
 Los archivos de configuración también se pueden especificar al iniciar halscope desde
 la línea de comando. Ayuda de uso en linea de comandos (-h):
@@ -185,34 +185,39 @@ Pines, parámetros o señales editables. Uso:
          Si el modo comienza con una letra mayúscula,
          no se muestran los botones radio para seleccionar otros modos
 ----
+
 Para obtener información completa, consulte la página man:
+
 ----
 man sim_pin
 ----
+
 Ejemplo (con LinuxCNC ejecutándose):
+
 ----
 halcmd loadrt mux2 names=example; halcmd net sig_example example.in0
 sim_pin example.sel example.in1 sig_example &
 ----
-image::images/sim_pin.png[alt="sim_pin es una utilidad de línea de comandos para mostrar y actualizar cualquier cantidad de pines, parámetros o señales que se puedan escribir"]
+
+image::images/sim_pin.png["sim_pin es una utilidad de línea de comandos para mostrar y actualizar cualquier cantidad de pines, parámetros o señales que se puedan escribir"]
 
 == Sonda simulada
 
-simulate_probe es una gui simple para simular la activación del pin
-motion.probe-input. Uso:
+simulate_probe es una gui simple para simular la activación del pin motion.probe-input. Uso:
+
 ----
 simulate_probe &
 ----
 
-image::images/simulate_probe.png[alt="simulate_probe es una gui simple para simular la activación del pin motion.probe-input"]
+image::images/simulate_probe.png["simulate_probe es una gui simple para simular la activación del pin motion.probe-input"]
 
 == Hal Histogram
 
 hal-histogram es una utilidad de línea de comandos para mostrar histogramas para pines hal.
+
 ----
 Uso:
    hal-histograma --help | -?
-o
    hal-histogram [Opciones] [pinname]
 
 Opciones:
@@ -234,7 +239,8 @@ Notas:
      Para un hilo base, esto puede requerir el uso de:
      loadrt motmod ... base_thread_fp=1
 ----
-image::images/hal-histogram.png[alt="hal-histogram es una utilidad de línea de comandos para mostrar histogramas para pines de hal"]
+
+image::images/hal-histogram.png["hal-histogram es una utilidad de línea de comandos para mostrar histogramas para pines de hal"]
 
 == Halreport
 
@@ -260,7 +266,6 @@ un archivo de salida (o stdout si no se especifica archivo de salida):
 ----
 Uso:
   halreport -h | --help (this help)
-o
   halreport [outfilename]
 ----
 
@@ -283,10 +288,10 @@ Para cada señal en una ruta crítica, el orden addf del pin de salida
 debe ser numéricamente más bajo que el orden addf de los
 pines de entrada críticos a los que se conecta.
 
-Para rutas de señal de rutinas que manejan entradas de interruptores, pines de 
+Para rutas de señal de rutinas que manejan entradas de interruptores, pines de
 espacio de usuario, etc., el ordenamiento addf a menudo no es crítico. Además,
-el momento de los cambios de valor de pin de espacio de usuario no se puede controlar
-o garantizar en los intervalos típicamente empleados para hilos hal.
+el momento de los cambios de valor de pin de espacio de usuario no se puede controlar o
+garantizar en los intervalos típicamente empleados para hilos hal.
 
 Ejemplo de archivo de informe que muestran un bucle pid para hostmot2
 stepgen operado en modo de velocidad en una máquina Trivkins con
@@ -321,7 +326,7 @@ alias pin hm2_7i92.0.stepgen.00.position-fb h.00.position-fb
 La detección de funciones de componentes cuestionables puede ocurrir para 1)
 componentes no compatibles (obsoletos), 2) componentes creados por el usuario
 que usan múltiples funciones o nombres de funciones no convencionales, o
-3) componentes de espacio de usuario creados por GUI que carecen de 
+3) componentes de espacio de usuario creados por GUI que carecen de
 características de distinción como un prefijo basado en el nombre del programa gui.
 Las funciones cuestionables están etiquetadas con un signo de interrogación "?".
 
@@ -335,7 +340,3 @@ para ayudar en el diseño y verificación de conexiones. No se muestran
 tipos y valores actuales de pines. Para esta información use
 aplicaciones como halshow, halmeter, halscope o el comando 'show'
 disponible con el programa halcmd.
-
-
-
-

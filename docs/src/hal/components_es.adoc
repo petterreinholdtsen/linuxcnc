@@ -1,6 +1,6 @@
 :lang: es
 
-[[cha:componentes-hal]]
+[[cha:componentes-hal]](((Componentes HAL)))
 
 = Componentes HAL
 
@@ -12,10 +12,10 @@ Con estas listas se sabe qué componentes existen. Usar 'man n nombre' para obte
 Para ver la información en la página de manual, por ejemplo de Axis, escriba en una ventana de terminal:
 
 ----
-man axis (o tal vez 'man 1 axis' si su sistema lo requiere) 
+man axis (o tal vez 'man 1 axis' si su sistema lo requiere)
 ----
 
-axis:: Interfaz gráfica de usuario AXIS para LinuxCNC (The Enhanced Machine Controller) 
+axis:: Interfaz gráfica de usuario AXIS para LinuxCNC (The Enhanced Machine Controller)
 axis-remote:: Interface AXIS Remote.
 comp:: Construye, compila e instala componentes HAL de LinuxCNC.
 gladevcp:: Panel de control virtual para LinuxCNC basado en widgets Glade, Gtk y HAL.
@@ -33,13 +33,20 @@ linuxcnc:: LinuxCNC (The Enhanced Machine Controller).
 pyvcp:: Panel de control virtual para LinuxCNC.
 shuttle:: controla los pines HAL con los dispositivos ShuttleXpress y ShuttlePRO fabricados por Contour Design.
 
-[[sec:realtime-components]]
-
-== Lista de componentes en tiempo real
+== Lista de componentes en tiempo real[[sec:realtime-components]]
 
 Todos los comandos en la siguiente lista tienen páginas de manual.
 Algunos tendrán descripciones ampliadas y otros, limitadas.
-Con estas dos listas se sabe qué componentes existen. Usar 'man n name' para obtener información adicional. 
+Con estas dos listas se sabe qué componentes existen.
+Usar 'man n name' para obtener información adicional.
+
+----
+man motion (or perhaps 'man 9 motion' if your system requires it.)
+----
+
+[NOTE]
+See also the 'Man Pages' section of the link:../index.html[docs main page] or the
+link:../man/man9/[directory listing of man9].
 
 [NOTE]
 Si el componente requiere un hilo de punto flotante, suele ser el hilo servo, más lento.
@@ -67,7 +74,9 @@ or2:: (((or2))) Puerta OR de dos entradas.
 
 xor2:: (((xor2))) Puerta XOR (OR exclusivo) de dos entradas.
 
-debounce:: (((debounce))) Filtra ruido en las entradas digitales.
+dbounce:: (((dbounce)))Filter noisy digital inputs. link:../man/man9/dbounce.9.html[Details].
+
+debounce:: (((debounce))) Filtra ruido en las entradas digitales. link:../man/man9/debounce.9.html[Details]. <<sec:debounce, Description>>
 
 edge:: (((borde))) Detector de flanco.
 
@@ -82,7 +91,7 @@ lut5:: (((lut5))) Función lógica de 5 entradas basada en tabla de consulta (lo
 match8:: (((match8))) Detector de coincidencia binaria de 8 bits.
 
 select8:: (((select8))) Detector de coincidencia binaria de 8 bits.
- 
+
 === Componentes aritméticos y de punto flotante
 
 abs:: [[sub:abs]](((abs))) Calcula el valor absoluto y el signo de la señal de entrada.
@@ -95,8 +104,7 @@ constant:: (((constant))) Use un parámetro para establecer el valor de un pin.
 
 sum2:: (((sum2))) Suma de dos entradas (cada una con una ganancia) y un desplazamiento.
 
-counter:: (((counter))) Cuenta los pulsos de entrada (obsoleto).
-Utilice el componente <<sec:encoder,encoder>>.
+counter:: (((counter))) Cuenta los pulsos de entrada (obsoleto).  Utilice el componente <<sec:encoder,encoder>>.
 
 updown:: (((updown))) Cuenta hacia arriba o hacia abajo, con límites opcionales y comportamiento envolvente.
 
@@ -128,7 +136,7 @@ wcomp:: (((wcomp))) Comparador de ventana.
 
 weighted_sum:: (((weighted_sum))) Convierte un grupo de bits a un entero.
 
-biquad:: (((biquad))) Filtro Biquad IIR 
+biquad:: (((biquad))) Filtro Biquad IIR
 
 lowpass:: (((paso bajo))) filtro de paso bajo
 
@@ -172,9 +180,12 @@ conv_u32_s32:: (((conv_u32_s32))) Convierte un valor u32 a s32.
 
 === Controladores de hardware
 
+hal_ppmc:: (((hal_ppmc))) Pico Systems <<cha:pico-drivers,driver>> for analog servo, PWM and Stepper controller.
+
 hm2_7i43:: (((hm2_7i43))) Controlador HAL para tarjetas EPP Anything Mesa Electronics 7i43 EPP con HostMot2.
 
 hm2_pci:: (((hm2_pci))) controlador HAL para Mesa Electronics 5i20, 5i22, 5i23, 4i65, 4i68 o cualquier placa de E/S, con firmware HostMot2.
+(See the man page for more information)
 
 hostmot2:: (((hostmot2))) controlador HAL para el firmware Mesa Electronics HostMot2.
 
@@ -184,10 +195,9 @@ pluto_servo:: (((pluto_servo))) Controlador de hardware y firmware para la FPGA 
 
 pluto_step:: (((pluto_step))) Controlador de hardware y firmware para la FPGA de puerto paralelo Pluto-P, para utilizar con steppers.
 
-thc:: (((control de la altura de la antorcha))) Control de la altura de antorcha utilizando una tarjeta Mesa THC. 
+thc:: (((control de la altura de la antorcha))) Control de la altura de antorcha utilizando una tarjeta Mesa THC.
 
-serport:: (((serport))) Controlador de hardware para los bits de E/S digitales del puerto serie 8250 y 16550. 
-
+serport:: (((serport))) Controlador de hardware para los bits de E/S digitales del puerto serie 8250 y 16550.
 
 === Cinemática
 
@@ -204,11 +214,11 @@ genserkins:: (((genserkins))) Cinemática que puede modelar un manipulador gener
 maxkins:: (((maxkins))) Cinemática para una fresadora de 5 ejes llamada 'max' con cabezal de inclinación (eje B) y rotativo horizontal montado sobre la mesa (eje C). Proporciona movimiento UVW en el sistema de coordenadas rotado. El archivo
 fuente, maxkins.c, puede ser un punto de inicio útil para otros sistemas de 5 ejes.
 
-tripodkins:: (((tripodkins))) Las articulaciones representan la distancia del punto controlado desde tres ubicaciones 
+tripodkins:: (((tripodkins))) Las articulaciones representan la distancia del punto controlado desde tres ubicaciones
 predefinidas (los motores), dando tres grados de libertad en posición (XYZ).
 
 trivkins:: (((trivkins))) Las fresadoras y tornos estándar utilizan el módulo de cinemática trivial.
-Hay una correspondencia 1:1 entre articulaciones y ejes. 
+Hay una correspondencia 1:1 entre articulaciones y ejes.
 
 pumakins:: (((pumakins))) Cinemática para robots estilo PUMA.
 
@@ -222,7 +232,7 @@ at_pid:: (((at_pid))) Controlador proporcional/integral/derivativo con ajuste au
 
 pid:: Controlador proporcional/integral/derivativo.
 
-pwmgen:: (((pwmgen))) Software de generación PWM/PDM. 
+pwmgen:: (((pwmgen))) Software de generación PWM/PDM.
 
 encoder:: (((encoder))) Conteo por software de señales de encoder en cuadratura.
 
@@ -251,18 +261,19 @@ estop_latch:: (((estop_latch))) ESTOP latch.
 
 feedcomp:: (((feedcomp))) Multiplica la entrada por la relación de la velocidad actual a la velocidad de alimentación.
 
-gearchange:: (((gearchange))) Seleccion de uno de dos rangos de velocidad. 
+gearchange:: (((gearchange))) Seleccion de uno de dos rangos de velocidad.
 
-[[sec:ilowpass]] (((ilowpass)))
+[[sec:ilowpass]](((ilowpass)))
 
-ilowpass:: Si bien puede encontrar otras aplicaciones, este componente se escribió para crear un movimiento más suave con un MPG. 
-+ 
+ilowpass:: Si bien puede encontrar otras aplicaciones, este componente se escribió para crear un movimiento más suave con un MPG.
++
 En una máquina con alta aceleración, un jog corto puede comportarse casi como una funcion paso.
 Al poner el componente ilowpass entre l a salida de cuentas del codificador MPG
 y la entrada de jog-count del eje, se puede suavizar.
-+ 
++
 Elija la escala de forma conservadora para que durante una sesión nunca sea más de aproximadamente 2e9/escala pulsos vistos en el MPG.
-Elija la ganancia de acuerdo al nivel de suavizado deseado.  Divida los valores de axis.N.jog-scale por escala.
+Elija la ganancia de acuerdo al nivel de suavizado deseado.
+Divida los valores de axis.N.jog-scale por escala.
 
 joyhandle:: (((joyhandle))) Establece movimientos de joypad no lineales, bandas muertas y escalas.
 
@@ -406,5 +417,4 @@ rtapi_task_pause.3rtapi
 rtapi_task_resume.3rtapi
 rtapi_task_start.3rtapi
 rtapi_task_wait.3rtapi
-.... 
-
+....

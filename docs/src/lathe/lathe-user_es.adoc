@@ -35,8 +35,7 @@ Debe programarlo en el preámbulo de cada archivo gcode o
 RS274NGC_STARTUP_CODE = G18 G20 G90
 ---------------------------------------
 
-Si está usando Gmoccapy entonces vea
-<<gmoccapy:lathe-section,"la sección Torno de Gmoccapy">>.
+Si está usando Gmoccapy entonces vea <<gmoccapy:lathe-section,la sección Torno de Gmoccapy>>.
 
 == Tabla de herramientas de torno
 
@@ -50,13 +49,15 @@ El número máximo de herramienta y de ranura es 99999.
 
 Las versiones anteriores de LinuxCNC tenían dos formatos de tablas de herramientas diferentes para fresadoras y tornos,
 pero desde la versión 2.4.x, se utiliza un formato de tabla de herramientas para todas las máquinas.
-Simplemente ignore las partes de la tabla de herramientas que no pertenecen a su máquina,o que no necesite usar.
+Simplemente ignore las partes de la tabla de herramientas que no pertenecen a su
+máquina, o que no necesite usar.
 Para obtener más información sobre los detalles del formato de tabla de herramientas,
 vea la sección <<sec:tool-table,Tabla de Herramientas>>.
 
 == Orientacion de la herramienta de torno
 
-La siguiente figura muestra las orientaciones de la herramienta de torno con el ángulo de la línea central (l.c.) de cada orientación e información sobre FRONTANGLE y BACKANGLE.
+La siguiente figura muestra las orientaciones de la herramienta de torno con el
+ángulo de la línea central (l.c.) de cada orientación e información sobre FRONTANGLE y BACKANGLE.
 FRONTANGLE y BACKANGLE están en el sentido de las agujas del reloj comenzando en una línea paralela a Z+.
 
 image::images/tool-positions_es.svg["Orientaciones herramienta torno",align="center"]
@@ -84,7 +85,7 @@ mediante la ventana Touch Off. Si tiene una torreta de herramientas normalmente
 tendra seleccionado 'Touch off to fixture' al configurar su torreta. Cuando
 configura Z cero del material tendra seleccionado 'Touch off to material'.
 Para obtener más información sobre los códigos G utilizados para las herramientas, consulte
-<<mcode:m6, M6>>, <<sec:select-tool,Tn>>, y <<gcode:g43, G43>>.
+<<mcode:m6,M6>>, <<sec:select-tool,Tn>>, y <<gcode:g43,G43>>.
 Para obtener más información sobre las opciones touch off de la herramienta en Axis, consulte
 <<axis:tool-touch-off,Tool Touch Off>>.
 
@@ -93,26 +94,22 @@ Para obtener más información sobre las opciones touch off de la herramienta en
 El offset del eje X para cada herramienta es normalmente un desplazamiento
 desde la línea central del husillo.
 
-Un método es tomar su herramienta de torneado normal y
-preparar algunas piezas a un diámetro conocido.
-Usando la ventana Touch Off, ingrese el diámetro medido
-(o radio si está en modo radio) para esa herramienta.
+Un método es tomar su herramienta de torneado normal y preparar algunas piezas a un diámetro conocido.
+Usando la ventana Touch Off, ingrese el diámetro medido (o radio si está en modo radio) para esa herramienta.
 Luego, use liquido de marcado o un rotulador para cubrir la pieza.
-Lleve cada herramienta hasta que toque solo el tinte y establezca su offset X con touch off en
-el diámetro de la pieza utilizada.
+Lleve cada herramienta hasta que toque solo el tinte y establezca su offset X con touch off en el diámetro de la pieza utilizada.
 Asegúrese de que las herramientas en los cuadrantes de las esquinas tengan el radio de la punta
 establecido correctamente en la tabla de herramientas para que el punto de control sea correcto.
-Tool touch off automaticamente agrega un G43
-por lo que la herramienta actual es el offset actual.
+Tool touch off automaticamente agrega un G43 por lo que la herramienta actual es el offset actual.
 
 Una sesión típica podría ser:
 
- . homing de cada eje si no lo están.
- . Configurar la herramienta actual con 'Tn M6 G43', donde 'n' es el número de la herramienta.
- . Seleccionar el eje X en la ventana de Control Manual.
- . Mover la X a una posición conocida o realizar un corte de prueba y medir el diámetro.
- . Seleccionar Touch Off y seleccionar Tabla de herramientas, luego ingrese la posición o el diámetro.
- . Siga la misma secuencia para corregir el eje Z.
+. homing de cada eje si no lo están.
+. Configurar la herramienta actual con 'Tn M6 G43', donde 'n' es el número de la herramienta.
+. Seleccionar el eje X en la ventana de Control Manual.
+. Mover la X a una posición conocida o realizar un corte de prueba y medir el diámetro.
+. Seleccionar Touch Off y seleccionar Tabla de herramientas, luego ingrese la posición o el diámetro.
+. Siga la misma secuencia para corregir el eje Z.
 
 Nota: si está en el modo Radio, debe ingresar el radio, no el diámetro.
 
@@ -130,24 +127,18 @@ establece su offset Z sin tener que reiniciar todas las herramientas.
 
 Una sesión típica podría ser:
 
- . homing de cada eje si no lo están.
- . Asegurar de que no haya offsets en vigor para el sistema de coordenadas actual.
- . Configurar la herramienta actual con 'Tn M6 G43', donde 'n' es el número de la herramienta.
- . Seleccionar el eje Z en la ventana de Control manual.
- . Acerque la herramienta a la superficie de control. Usando un cilindro mueva el
-   Z lejos de la superficie de control hasta que el cilindro pase justo entre
-   la herramienta y la superficie de control.
- . Seleccione Touch Off y seleccione la Tabla de herramientas y establezca la posición en 0.0.
- . Repita para cada herramienta usando el mismo cilindro.
+. homing de cada eje si no lo están.
+. Asegurar de que no haya offsets en vigor para el sistema de coordenadas actual.
+. Configurar la herramienta actual con 'Tn M6 G43', donde 'n' es el número de la herramienta.
+. Seleccionar el eje Z en la ventana de Control manual.
+. Acerque la herramienta a la superficie de control. Usando un cilindro mueva el Z lejos de la superficie de control hasta que el cilindro pase justo entre la herramienta y la superficie de control.
+. Seleccione Touch Off y seleccione la Tabla de herramientas y establezca la posición en 0.0.
+. Repita para cada herramienta usando el mismo cilindro.
 
 Ahora todas las herramientas están desplazadas a la misma distancia de una posición estándar.
-Si cambia una herramienta como una broca, repita lo anterior y
-ahora estara sincronizado con el resto de las herramientas para el desplazamiento Z.
-Algunas herramientas pueden requerir un poco mas para determinar
-el punto de control desde el punto touch off.
-Por ejemplo, si tiene una herramienta de tronzado de 0.125" de ancho y
-toca con el lado izquierdo, pero quiere que el derecho sea el Z0,
-ingrese 0.125" en la ventana touch off.
+Si cambia una herramienta como una broca, repita lo anterior y ahora estara sincronizado con el resto de las herramientas para el desplazamiento Z.
+Algunas herramientas pueden requerir un poco mas para determinar el punto de control desde el punto touch off.
+Por ejemplo, si tiene una herramienta de tronzado de 0.125" de ancho y toca con el lado izquierdo, pero quiere que el derecho sea el Z0, ingrese 0.125" en la ventana touch off.
 
 === El offset Z de la maquina
 
@@ -241,8 +232,6 @@ Al tornear radios y ángulos, el filo de la herramienta no seguirá
 la ruta programada a menos que esté activada la 'compensacion del cortador'. En la siguientes
 figuras se puede ver cómo el punto de control no sigue el filo de la herramienta, como se podría suponer.
 
-.Punto de control
-
 image::images/control-point_es.svg["Punto de Control",align="center"]
 
 === Corte de angulos sin Compensacion
@@ -252,16 +241,12 @@ se muestra en la siguiente figura. Como se puede ver, la
 ruta programada y la ruta de corte deseada son una y la misma, siempre
 que nos estemos moviendo en la dirección X o Z solamente.
 
-.Rampa de entrada
-
 image::images/ramp-entry_es.svg["Entrada a Rampa",align="center"]
 
 Ahora, a medida que el punto de control avanza a lo largo del camino programado, el
 borde del cortador real no sigue ese camino como se muestra en la
 siguiente figura. Hay dos maneras de resolver esto; compensacion del cortador o
 ajustar la ruta programada para compensar el radio de la punta.
-
-.Rampa de ruta
 
 image::images/ramp-cut_es.svg["Camino en Rampa",align="center"]
 
@@ -275,8 +260,6 @@ sin compensacion. En la siguiente figura se ve la herramienta torneando el diame
 exterior de la pieza. El punto de control de la herramienta sigue el camino programado
 y la herramienta toca el diametro.
 
-.Torneado exterior
-
 image::images/radius-1_es.svg["Torneado exterior",align="center"]
 
 En la siguiente figura puede ver que a medida que la herramienta se acerca al final de la
@@ -284,19 +267,10 @@ pieza, el punto de control todavía sigue el camino pero la punta de la herramie
 la pieza y está al aire. También puede ver que aunque ha sido programado un radio,
 la pieza terminará con una esquina cuadrada.
 
-.Corte del radio
-
 image::images/radius-2_es.svg["Corte del radio",align="center"]
 
 Ahora puede ver como el punto de control sigue el radio programado
 La punta de la herramienta ha dejado la pieza y ahora está al aire.
-
-.Corte del radio
-
-.MAP THIS
-.MAP THIS
-.MAP THIS
-.MAP THIS
 
 image::images/radius-3_es.svg["Corte del radio",align="center"]
 
@@ -306,8 +280,6 @@ que si se programa el corte para que finalice en el centro de la pieza, una pequ
 cantidad de material no se cortara debido al radio de la herramienta. Para terminar
 una cara cortada en el centro de una parte, tiene que programar la herramienta para ir
 más allá del centro; como minimo, el radio de la punta de la herramienta.
-
-.Corte de la cara
 
 image::images/radius-4_es.svg["Corte de la cara",align="center"]
 

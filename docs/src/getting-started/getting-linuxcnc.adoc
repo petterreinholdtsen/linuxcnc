@@ -1,4 +1,6 @@
-[[cha:getting-linuxcnc]]
+:lang: en
+
+[[cha:getting-linuxcnc]](((Getting LinuxCNC)))
 
 = Getting LinuxCNC
 
@@ -28,14 +30,11 @@ The outline of the process looks like this:
 . Boot the Live system to test out LinuxCNC.
 . Boot the Installer to install LinuxCNC.
 
-
 == Download the image
 
-This section describes some methods for downloading the Live/Install
-Image.
+This section describes some methods for downloading the Live/Install Image.
 
-
-=== Normal Download
+=== Normal Download[[_normal_download]]
 
 For x86 PCs Download the Live/Install CD by clicking here:
 
@@ -43,8 +42,7 @@ http://www.linuxcnc.org/iso/linuxcnc-2.8.2-buster.iso
 
 For the Raspberry Pi a complete SD card image is available here:
 
-http://www.linuxcnc.org/iso/linuxcnc-2.8.1-pi4.zip (this will auto-update
-to 2.8.2 )
+http://www.linuxcnc.org/iso/linuxcnc-2.8.1-pi4.zip (this will auto-update to 2.8.2)
 
 This can be installed using the normal Pi
 https://www.raspberrypi.org/documentation/installation/installing-images/README.md[install process]
@@ -103,7 +101,7 @@ https://www.assembla.com/spaces/zsync-windows/documents
 md5sum linuxcnc-2.8.2-buster.iso
 ----
 +
-or
+\o
 +
 ----
 sha256sum linuxcnc-2.8.2-buster.iso
@@ -117,30 +115,24 @@ sha256sum: 94a6dc7ef12fbdc0bafd9259ce36797a8b3410ad22e73c4ab57b8e937a924e1a
 
 .Verify md5sum on Windows or Mac
 
-Windows and Mac OS X do not come with an md5sum program, but there are
-alternatives.  More information can be found at:
+Windows and Mac OS X do not come with an md5sum program, but there are alternatives.  More information can be found at:
 https://help.ubuntu.com/community/HowToMD5SUM[How To MD5SUM]
 
 == Write the image to a bootable device
 
-The Raspbery Pi image is a completes SD card image and should be
-written to an SD card in
+The Raspbery Pi image is a completes SD card image and should be written to an SD card in
 https://www.raspberrypi.org/documentation/installation/installing-images/README.md[the normal way]
 
 The LinuxCNC Live/Install ISO Image is a hybrid ISO image which can
 be written directly to a USB storage device (flash drive) or a DVD and
-used to boot a computer.  The image is too large to fit on a CD.
+used to boot a computer. The image is too large to fit on a CD.
 
 .Writing the image to a USB storage device in Linux
 
-. Connect a USB storage device (for example a flash drive or thumb
-  drive type device).
-. Determine the device file corresponding to the USB flash drive.
-  This information can be found in the output of `dmesg` after
-  connecting the device.  `/proc/partitions` may also be helpful.
+. Connect a USB storage device (for example a flash drive or thumb drive type device).
+. Determine the device file corresponding to the USB flash drive.  This information can be found in the output of `dmesg` after connecting the device.  `/proc/partitions` may also be helpful.
 . Use the `dd` command to write the image to your USB storage device.
-  For example, if your storage device showed up as `/dev/sde`,
-  then use this command:
+  For example, if your storage device showed up as `/dev/sde`, then use this command:
 +
 -----
 dd if=linuxcnc-2.8.2-buster.iso of=/dev/sde
@@ -176,19 +168,15 @@ sudo dd if=/path-to.iso of=/dev/rdiskN bs=1m
   window will pop up. Close this, as we will not be using it.
 . Browse to the downloaded image in the file browser.
 . Right click on the ISO image file and choose Write to Disc.
-. Select the write speed. It is recommended that you write at the lowest
-  possible speed.
+. Select the write speed. It is recommended that you write at the lowest possible speed.
 . Start the burning process.
 . If a 'choose a file name for the disc image' window pops up, just pick OK.
 
 .Writing the image to a DVD in Windows
 
-. Download and install Infra Recorder, a free and open source image
-  burning program: http://infrarecorder.org/
-. Insert a blank CD in the drive and select Do nothing or Cancel if an
-  auto-run dialog pops up.
-. Open Infra Recorder, and select the 
- 'Actions' menu, then 'Burn image'.
+. Download and install Infra Recorder, a free and open source image burning program: http://infrarecorder.org/
+. Insert a blank CD in the drive and select Do nothing or Cancel if an auto-run dialog pops up.
+. Open Infra Recorder, and select the 'Actions' menu, then 'Burn image'.
 
 .Writing the image to a DVD in Mac OSX
 
@@ -235,16 +223,17 @@ to LinuxCNC when you go on line and allow you to easily upgrade with no
 Linux knowledge needed.
 It is OK to upgrade everything except the operating system when asked to.
 
-WARNING: Do not upgrade the operating system if prompted to do so. You
+[WARNING]
+Do not upgrade the operating system if prompted to do so. You
 should accept OS _updates_ however, especially security updates.
 
 == Install Problems
 
 In rare cases you might have to reset the BIOS to default settings if
-during the Live CD install it cannot recognize the hard drive 
+during the Live CD install it cannot recognize the hard drive
 during the boot up.
 
-== Alternate Install Methods
+== Alternate Install Methods[[_alternate_install_methods]]
 
 The easiest, preferred way to install LinuxCNC is to use the Live/Install
 Image as described above.  That method is as simple and reliable as we
@@ -292,8 +281,7 @@ debian archive.  The apt source is:
 
 NOTE: Debian Wheezy and Ubuntu Precise are both extremely old, and
 are out of their support period. It is strongly advised not to use either
-for a new install, and to seriously consider upgrading an existing
-installation.
+for a new install, and to seriously consider upgrading an existing installation.
 
 The Buster / RTAI package is only available on amd64, but there are very
 few surviving systems that can not run a 64-bit OS.
@@ -311,8 +299,7 @@ project developers.
 === Installing on Debian Buster (with Preempt-RT kernel)
 
 . Install Debian Buster (Debian 10), amd64 version.
-You can download the installer here:
-  https://www.debian.org/releases/buster/
+  You can download the installer here: https://www.debian.org/releases/buster/
 
 . After burning the iso and booting up if you don't want Gnome desktop select
   'Advanced Options' > 'Alternative desktop environments' and pick the one you
@@ -333,13 +320,11 @@ sudo apt-get dist-upgrade
 +
 ----
 sudo apt-get install linux-image-rt-amd64
-
 ----
 
 . Re-boot, and select the Linux 4.19.0-9-rt-amd64 kernel. This might be
-hidden in the "Advanced options for Debian Buster" sub-menu in Grub.
-When you
-  log in, verify that `PREEMPT RT`is reported by the following command.
+  hidden in the "Advanced options for Debian Buster" sub-menu in Grub.
+  When you log in, verify that `PREEMPT RT`is reported by the following command.
 +
 ----
 uname -v
@@ -384,8 +369,7 @@ sudo apt-get install linuxcnc-uspace
 sudo apt install mesaflash
 ----
 
-[[cha:Installing-RTAI]]
-=== Installing on Debian Buster (with experimental RTAI kernel)
+=== Installing on Debian Buster (with experimental RTAI kernel)[[cha:Installing-RTAI]]
 
 WARNING: This kernel has known stability problems. It appears to run
 reliably once LinuxCNC is loaded. However kernel panics have been seen

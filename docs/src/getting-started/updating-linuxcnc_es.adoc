@@ -1,7 +1,7 @@
 :lang: es
 :toc:
 
-[[cha:updating-linuxcnc]]
+[[cha:updating-linuxcnc]](((Actualizando LinuxCNC)))
 
 = Actualizando LinuxCNC
 
@@ -26,9 +26,17 @@ Si no tiene una versión anterior de LinuxCNC para actualizar, entonces es
 mejor hacer una nueva instalación de la nueva versión como se describe en la
 sección <<cha:getting-linuxcnc,Obtener LinuxCNC>>.
 
-Para actualizar versiones principales como 2.6 a 2.7 cuando tiene una conexión de red en
+Furthermore, if you are running Ubuntu Precise or Debian Wheezy it is
+well worth considering making a backup of the "linuxcnc" directory on
+removable media and performing a
+<<cha:getting-linuxcnc,clean install of a newer OS and LinuxCNC version>>
+as these releases were EOL in 2017 and 2018 respectively.
+If you are running on Ubuntu Lucid then you will have to do this, as
+Lucid is no longer supported by LinuxCNC (it was EOL in 2013)
+
+Para actualizar versiones principales como 2.7 a 2.8 cuando tiene una conexión de red en
 la máquina, necesita deshabilitar las fuentes apt antiguas de linuxcnc.org y agregar una nueva
-fuente apt linuxcnc.org para 2.7, luego actualice LinuxCNC.
+fuente apt linuxcnc.org para 2.8, luego actualice LinuxCNC.
 
 Los detalles dependerán de la plataforma en la que se esté ejecutando. Abra un
 <<faq:terminal,terminal>> y escriba `lsb_release -ic` para encontrar esta información:
@@ -39,48 +47,38 @@ Distributor ID: Debian
 Codename:       wheezy
 ----
 
-Debería estar ejecutando Debian Wheezy (como arriba) o Ubuntu Precise,
-o Ubuntu Lucid.
+Debería estar ejecutando Debian Wheezy (como arriba) o Ubuntu Precise, o Ubuntu Lucid.
 
-[[_setting_apt_sources]]
-=== Configuracion de fuentes apt
+You will also need to check which realtime kernel is being used:
 
-* Abra la ventana `Repositorios` o 'Fuentes de software'. El proceso para hacer esto
-  se diferencia ligeramente en las tres plataformas soportadas:
+----
+uname -r
+4.19.0-9-rt-amd64
+----
 
+If you see (as above) `-rt-` in the kernel name then you are running the
+preempt-rt kernel and should install the "uspace" version of linuxcnc.
+You should also install uspace for "sim" configs on non-realtime kernels
+
+If you see `-rtai-` in the kernel name then you are running RTAI
+realtime. See below for the linuxcnc version to install.
+
+=== Configuracion de fuentes apt[[_setting_apt_sources]]
+
+* Abra la ventana `Repositorios` o 'Fuentes de software'. El proceso para hacer esto se diferencia ligeramente en las tres plataformas soportadas:
 ** Debian Wheezy:
-
-*** Haga clic en `Menú de aplicaciones`, luego en `Sistema`, luego en
-  `Gestor de Paquetes Synaptic`.
-
-*** En Synaptic, haga clic en el menú `Configuración`, luego haga clic en `Repositorios`
-  para abrir la ventana `Repositorios`.
-
-** Ubuntu Precise:
-
+*** Haga clic en `Menú de aplicaciones`, luego en `Sistema`, luego en `Gestor de Paquetes Synaptic`.
+*** En Synaptic, haga clic en el menú `Configuración`, luego haga clic en `Repositorios` para abrir la ventana `Repositorios`.
+** Ubuntu (Precise):
 *** Haga clic en el icono `Dash Home` en la esquina superior izquierda.
-
-*** En el campo `Buscar`, escriba "software", luego haga clic en el icono `Ubuntu
-  Software Center`.
-
-*** En la ventana del Centro de software de Ubuntu, haga clic en el menú `Editar`,
-  luego haga clic en `Fuentes de software ...` para abrir la ventana `Fuentes de software`.
-
-** Ubuntu Lucid:
-
-*** Haga clic en el menú `Sistema`, luego en` Administración`, luego
-  `Administrador de paquetes Synaptic`.
-
-*** En Synaptic, haga clic en el menú `Configuración`, luego haga clic en `Repositorios`
-  para abrir la ventana `Fuentes de software`.
-
+*** En el campo `Buscar`, escriba "software", luego haga clic en el icono `Ubuntu Software Center`.
+*** En la ventana del Centro de software de Ubuntu, haga clic en el menú `Editar`, luego haga clic en `Fuentes de software ...` para abrir la ventana `Fuentes de software`.
+** Ubuntu (Lucid):
+*** Haga clic en el menú `Sistema`, luego en` Administración`, luego `Administrador de paquetes Synaptic`.
+*** En Synaptic, haga clic en el menú `Configuración`, luego haga clic en `Repositorios` para abrir la ventana `Fuentes de software`.
 * En la ventana `Fuentes de software`, seleccione la pestaña `Otro software`.
-
-* Eliminar o desmarcar todas las entradas de linuxcnc.org antiguas (dejar todas
-  las demas líneas no-linuxcnc.org como estan).
-
-* Haga clic en el botón `Agregar` y agregue una nueva línea apt. La linea sera
-  ligeramente diferente en las diferentes plataformas:
+* Eliminar o desmarcar todas las entradas de linuxcnc.org antiguas (dejar todas las demas líneas no-linuxcnc.org como estan).
+* Haga clic en el botón `Agregar` y agregue una nueva línea apt. La linea sera ligeramente diferente en las diferentes plataformas:
 
 [options="header"]
 |====
@@ -94,7 +92,7 @@ o Ubuntu Lucid.
 | Debian Buster - RTAI    | `deb http://linuxcnc.org buster base 2.8-rt`
 |====
 
-image::images/upgrading-to-2.8.png[align="left", alt="Configurando las fuentes de apt"]
+image::images/upgrading-to-2.8.png["Configurando las fuentes de apt",align="left"]
 
 * Haga clic en `Agregar fuente`, luego` Cerrar` en la ventana de Fuentes de software.
   Si aparece una ventana que le dice que la información sobre
@@ -111,12 +109,13 @@ El proceso nuevamente difiere según su plataforma.
 
 Debian Wheezy y Ubuntu Lucid usan Synaptic.
 
-* Abra Synaptic usando las instrucciones en <<_setting_apt_sources,Configurando
-  fuentes apt>> más arriba.
+* Abra Synaptic usando las instrucciones en <<_setting_apt_sources,Configurando fuentes apt>> más arriba.
 
 * Haga clic en el botón "Recargar".
 
 * Use la función de búsqueda para buscar `linuxcnc`.
+
+* The package is called "linuxcnc" for RTAI kernels and "linuxcnc-uspace" for preempt-rt.
 
 * Haga clic en la casilla de verificación para marcar los nuevos paquetes linuxcnc y linuxcnc-doc-*
   para actualización. El administrador de paquetes puede seleccionar un número de
@@ -130,17 +129,11 @@ Debian Wheezy y Ubuntu Lucid usan Synaptic.
 === Ubuntu Precise
 
 * Haga clic en el icono `Dash Home` en la esquina superior izquierda.
-
-* En el campo `Buscar`, escriba "actualizar", luego haga clic en el icono
-  `Administrador de actualizaciones`.
-
+* En el campo `Buscar`, escriba "actualizar", luego haga clic en el icono `Administrador de actualizaciones`.
 * Haga clic en el botón 'Verificar' para obtener la lista de paquetes disponibles.
+* Haga clic en el botón `Instalar actualizaciones` para instalar las nuevas versiones de todos los paquetes.
 
-* Haga clic en el botón `Instalar actualizaciones` para instalar las nuevas versiones de
-  todos los paquetes.
-
-== Actualizacion sin red
-[[getting-started:update-no-network]]
+== Actualizacion sin red[[getting-started:update-no-network]]
 
 Para actualizar sin una conexión de red, necesita descargar un paquete deb y luego instalarlo.
 con dpkg. buildbot crea nuevos debs cada vez que se actualiza algo y los almacena en http://buildbot.linuxcnc.org/dists/
@@ -158,7 +151,7 @@ Codename: buster
 Elija el sistema operativo de la lista y luego elija la versión principal que desea, como 2.7-rt para
 en tiempo real o 2.7-sim solo para el simulador.
 
-A continuación, elija el tipo de computadora que tenga; i386 para 32 bits o amd64 para 64 bits.
+A continuación, elija el tipo de computadora que tenga; i386 para 32 bits o amd64 para 64 bits, binary-armhf for RaspBerry Pi.
 
 A continuación, elija la versión que desee de la parte inferior de la lista como
 'linuxcnc-uspace_2.8.0_amd64.deb'. Descargue el deb y cópielo a su
@@ -174,6 +167,13 @@ sudo dpkg -i linuxcnc_2.8.0.deb
 
 La nueva versión de LinuxCNC difiere de la versión 2.7 en algunos aspectos que
 puede requerir cambios en la configuración de su máquina.
+
+The main difference is that LinuxCNC no longer makes any assumptions about
+which joint controls which axis. This change is generally termed
+"joints-axes" after the name of the development branch where the changes
+started.
+This change has been in development since at least 2010, and has finally
+been merged.
 
 === Configuraciones de distribucion (actualizacion para las articulaciones-ejes)
 
@@ -207,7 +207,7 @@ con el nombre de la configuración original, y con el sufijo ".old" (bigmill.old
 ejemplo).
 
 El script update_ini maneja todos los elementos de usuario comunes que se encuentran en
-máquinas basicas que emplean cinemática de identidad. Elementos menos comunes usados ​​en maquinas más complejas
+máquinas basicas que emplean cinemática de identidad. Elementos menos comunes usados en maquinas más complejas
 no pueden ser convertidos automáticamente. Ejemplos de maquinas complejas incluyen:
 
 * Pórticos con dos articulaciones para un eje.
@@ -226,7 +226,7 @@ se establecerán de forma predeterminada con husillo único. Para añadir husill
 "num_spindles" del módulo motion en el archivo HAL, como la entrada [TRAJ]SPINDLES en el archivo INI
 se deben cambiar/agregar para elegir el número requerido. Ambos 'deben' coincidir.
 
-Los nombres de los pines de control del husillo se han cambiado para hacer que los husillos se parezcan 
+Los nombres de los pines de control del husillo se han cambiado para hacer que los husillos se parezcan
 más a ejes y articulaciones. Por ejemplo, motion.spindle-speed-out ahora es spindle.0.speed-out.
 El script de actualización automática se hará cargo de estos cambios.
 
@@ -237,8 +237,8 @@ personalizados para que coincidan con cualquier otro controlador de husillo múl
 Consulte los manuales de código G y código M para los cambios de código, y la pagina 'man motion'
 para los cambios en los pines HAL.
 
-=== Nombres de aceleraciones y velocidades en TRAJ 
- 
+=== Nombres de aceleraciones y velocidades en TRAJ
+
 Con la incorporación de la funcionalidad articulaciones-ejes, algunos nombres fueron
 cambiados para aclarar la nueva funcionalidad disponible.
 
@@ -306,7 +306,7 @@ el homing de la coordenada Y no utilizada. Estos arreglos ya no son ni necesario
 ni recomendados.
 
 Las configuraciones históricas de torno utilizaron las opciones predeterminadas para los módulo de cinemática
-trivkins. Estas opciones predeterminadas configuran todas las letras de los ejes (XYZABCUVW). 
+trivkins. Estas opciones predeterminadas configuran todas las letras de los ejes (XYZABCUVW).
 Con la incorporacion de articulaciones_ejes, una especificación cinemática más adecuada
 establece las coordenadas a las exactamente utilizadas (XZ) y establece el
 número de uniones en 2. No es necesario una sección de archivo ini [AXIS_Y]
@@ -389,23 +389,23 @@ con una coordenada rotativa adicional:
 -----
 
 Nota: algunos módulos de cinemática de propósito general (como trivkins) implementan
-      cinemática de identidad con soporte para especificación de coordenadas (letras de eje).
-      Las letras de eje pueden ser omitidas. Las letras de eje pueden ser duplicadas.
-      Las articulaciones se asignan a las letras de los ejes de una manera definida ('$ man trivkins').
+cinemática de identidad con soporte para especificación de coordenadas (letras de eje).
+Las letras de eje pueden ser omitidas. Las letras de eje pueden ser duplicadas.
+Las articulaciones se asignan a las letras de los ejes de una manera definida ('$ man trivkins').
 
 Nota: para la carga del módulo trivkins, no incluya espacios entre el signo = y las letras:
-
+----
       Esto es correcto:    [KINS]KINEMATICS = trivkins coordinates=XZ
-      Esto NO es correcto: [KINS]KINEMATICS = trivkins coordinates = XZ
+      Esto NO es correcto: [KINS]KINEMATICS = trivkins coordinates = X Z
+----
 
 Nota: los módulos de cinemática personalizados que implementan cinemáticas de no-identidad (como
-      lineardeltakins) definen relaciones específicas de la máquina entre un conjunto
-      de coordenadas y un conjunto de articulaciones. Normalmente, los módulos de cinemática personalizados
-      calculan las relaciones de los ejes y las articulaciones dentro del módulo personalizado, pero es
-      importante utilizar configuraciones consistentes para los elementos de ini relacionados: '[KINS]JOINTS'
-      y '[TRAJ]COORDINATES'. Los detalles serán explicados en la
-      página de manual del módulo (por ejemplo, '$ man lineardeltakins').
-
+lineardeltakins) definen relaciones específicas de la máquina entre un conjunto
+de coordenadas y un conjunto de articulaciones. Normalmente, los módulos de cinemática personalizados
+calculan las relaciones de los ejes y las articulaciones dentro del módulo personalizado, pero es
+importante utilizar configuraciones consistentes para los elementos de ini relacionados: '[KINS]JOINTS'
+y '[TRAJ]COORDINATES'. Los detalles serán explicados en la
+página de manual del módulo (por ejemplo, '$ man lineardeltakins').
 
 === Secuencias Home
 
@@ -413,7 +413,7 @@ Se pueden usar valores *negativos* para los elementos del archivo ini
 '[JOINT_n]HOME_SEQUENCE'. Antes de la incorporacion de articulaciones_ejes, un valor
 de -1, o la omisión del elemento, indicaba que no se aplicaba ninguna secuencia.
 Ahora, solo la omisión del elemento se usa para ese propósito.
-Consulte el capítulo <<cha:homing-configuration,'Configuración de Homing'>>
+Consulte el capítulo <<cha:homing-configuration,Configuración de Homing>>
 para más información.
 
 === Bloqueo de indexador rotativo (actualizaciones articulaciones-ejes)
@@ -429,7 +429,7 @@ con una configuración en el archivo ini para el eje como:
   [AXIS_L]LOCKING_INDEXER_JOINT = numero_articulacion_del_indexer
 ----
 
-Especifique que la articulacion (N es el numero_articulacion_del_indexer) es un indexador 
+Especifique que la articulacion (N es el numero_articulacion_del_indexer) es un indexador
 bloqueable con una configuración de archivo ini para la articulación como:
 
 ----
@@ -453,8 +453,8 @@ el módulo motmod. (bit0(LSB)==>joint0, bit1==>joint1, etc.)
 ----
 
 Como ejemplo, considere una máquina que utiliza cinemática trivkins con coordenadas
-XYZB, donde B es un indexador bloqueable. Para trivkins, los números de articulacion (a partir de
-0) se asignan consecutivamente a las coordenadas especificadas
+XYZB, donde B es un indexador bloqueable. Para trivkins, los números de articulacion (a partir de 0)
+se asignan consecutivamente a las coordenadas especificadas
 (las letras de eje sin uso pueden ser omitidas). Para este ejemplo, X==>joint0, Y==>joint1,
 Z==>joint2, B==>joint3. La máscara para especificar la unión 3 es 000001000(binario) == 0x08(hexadecimal)
 
@@ -487,7 +487,7 @@ haber una correspondencia uno a uno entre el eje rotativo y el número de articu
 
 (Consulte la página 'man motion' para obtener más información sobre motmod)
 
-=== Sintaxis estricta de archivos INI 
+=== Sintaxis estricta de archivos INI
 
 Las líneas con variables INI numéricas ya no pueden seguirse de texto.
 En versiones anteriores de LinuxCNC, cualquier texto después del número era
@@ -511,7 +511,7 @@ En las versiones 2.7.x, la configuración de planificación de trayectoria ([TRA
 
 ----
 [TRAJ]
-DECELULT_ACCELERATION
+DEFAULT_ACCELERATION
 MAX_ACCELERATION
 ----
 
@@ -536,7 +536,7 @@ MAX_LINEAR_ACCELERATION
 
 [NOTE]
 
-No se han implementado soporte para especificar la planificación de trayectoria angular 
+No se han implementado soporte para especificar la planificación de trayectoria angular
 predeterminada y aceleraciones máximas.
 
 
@@ -617,12 +617,9 @@ Los pines Hal se crean para los elementos del archivo ini para [JOINT_N] y [AXIS
   [AXIS_L]MAX_VELOCITY       ini.L.max_velocity
   [AXIS_L]MAX_ACCELERATION   ini.L.max_acceleration
 
-Nota: En versiones anteriores de LinuxCNC (antes de las actualizaciones de articulaciones_ejes),
-      los nombres de los pines hal 'ini.N.*' se referian a los ejes con 0==>x, 1==>y, etc.
-      (los pines fueron creados para los 9 ejes)
-      Vea la página man ('$ man milltask') para más información.
+Nota: En versiones anteriores de LinuxCNC (antes de las actualizaciones de articulaciones_ejes), los nombres de los pines hal 'ini.N.*' se referian a los ejes con 0==>x, 1==>y, etc. (los pines fueron creados para los 9 ejes) Vea la página man ('$ man milltask') para más información.
 
-== Cambios Hal (Otros)
+== Cambios Hal (Otros 2.8.2)
 
 === halcompile
 
@@ -646,7 +643,7 @@ para que puedan conectarse a señales:
 
 == Cambios de interfaz para articulaciones-ejes 2.8.x
 
-=== modulo python linuxcnc 
+=== modulo python linuxcnc
 
 La interfaz jog() incluye una 'bandera de articulacion (joint-flag)' para especificar
 jogging de articulacion (True) o teleop (False):
@@ -687,7 +684,7 @@ Moverse en el espacio universal es posible solo después de homing.
 Para máquinas simples (como fresadoras y tornos) hay una
 equivalencia uno a uno de articulaciones y ejes de coordenadas. Por ejemplo,
 en una fresadora XYZ, las relaciones son típicamente: axisX == joint0,
-axisY == joint1, axisZ = joint2. Esta correspondencia 
+axisY == joint1, axisZ = joint2. Esta correspondencia
 se caracteriza como cinemática 'IDENTIDAD' y el módulo de cinemática que
 se utiliza habitualmente es trivkins (cinemática trivial). (Ver
 página man '$ man trivkins')
@@ -696,8 +693,8 @@ El jogging de articulacion (por número de articulacion 0,1, ...) se utiliza en 
 (usado generalmente solo 'ANTES' de homing). Cuando se completa homing,
 el modo de jogging se cambia "AUTOMÁTICAMENTE" del modo articulacion al
 al modo universal y se usa el jogging de ejes (letra de coordenada X, Y, ...).
-Esto es apropiado para todos los movimientos gcode solicitados por los comandos MDI
-o por programas gcode.
+Esto es apropiado para todos los movimientos gcode solicitados por
+los comandos MDI o por programas gcode.
 
 Aunque el jogging en modo articulacion a menudo no se requiere después de
 homing, algunas guis (como Axis) proporcionan un atajo de teclado ('$')
@@ -708,15 +705,15 @@ En muchas situaciones comunes, el jogging de articulacion no es necesario ya que
 la orientación se lleva a cabo utilizando los interruptores de home y/o los diferentes
 métodos proporcionados por LinuxCNC. Simplemente se enciende
 la máquina, se emite el comando Home-All y la máquina hace home y
-cambia al modo universal automáticamente. Ver
-<<cha:homing-configuration,Configuración de Homing>>
+cambia al modo universal automáticamente.
+Ver <<cha:homing-configuration,Configuración de Homing>>
 
 Las máquinas que no usan interruptores home pueden requerir un jogging manual
 en modo articulacion antes de volver a home cada articulación. Tambien es
 posible utilizar home inmediato (ver los documentos de homing) para articulaciones
 que no requieren homing en una posición fija.
 
-Aunque una gui puede ocultar las distinciones de articulaciones/ejes para 
+Aunque una gui puede ocultar las distinciones de articulaciones/ejes para
 máquinas de cinemática 'IDENTIDAD', por lo general es importante completar homing
 para ejecutar programas o usar funciones provistas por una gui.
 
@@ -724,8 +721,8 @@ Por defecto, el módulo trivkins se declara como si tuviera cinemática de
 'IDENTIDAD'. Las distincion de operaciones articulacion/universal
 pueden hacerse visibles en la gui Axis al usar
 trivkins configurando el tipo de cinemática a un tipo 'NO-IDENTIDAD'
-utilizando 'kinstype=both'. El ajuste 'both' indica que ambas
-funciones de cinemática, directa e inversa, están disponibles y no deben ser empleadas
+utilizando 'kinstype=both'.
+El ajuste 'both' indica que ambas funciones de cinemática, directa e inversa, están disponibles y no deben ser empleadas
 las disposiciones de la gui que esconden las distinciones de articulaciones y ejes.
 Por ejemplo, para una configuración xyz, especificar:
 
@@ -794,7 +791,7 @@ con pines relacionados.
       ahora es: halui.joint.selected.on-soft-min-limit
 ----
 
-=== GUI AXIS 
+=== GUI AXIS
 
 ==== Cinematica de identidad
 
@@ -843,7 +840,7 @@ Para cinemáticas no-identidad, se muestran los íconos 'Home' para articulacion
 una articulación está homeada en modo de visualización de articulaciones. Se muestra un icono 'All-homed' para
 todas las letras de los ejes cuando TODAS las articulaciones están ubicadas en modo de visualización mundial.
 
-==== Iconos de Limite 
+==== Iconos de Limite
 
 Para las cinemáticas de identidad, se muestran los íconos de 'Límite' para las correspondientes
 letra de eje (uno a uno) cuando un límite de articulacion está activo.
@@ -863,7 +860,6 @@ Estas asignaciones pueden ser controladas por nuevas directivas inifile en la
 
 Tenga en cuenta que los parámetros utilizados para jogging pueden no ser apropiados para ambos modos
 en máquinas con cinemática no-identidad.
-
 
 === tklinuxcnc
 
@@ -916,7 +912,6 @@ La interfaz gráfica de gmoccapy sigue siendo compatible con las configuraciones
 que soportaba antes de la incorporación de articulaciones_ejes. El jogging se realiza en
 modo teleop.
 
-
 === Renombrado del Controlador `shuttlexpress` a `shuttle`
 
 El controlador HAL para el dispositivo Contour Designs ShuttleXpress ha sido
@@ -926,7 +921,6 @@ alguna variante de "loadusr shuttlexpress", reemplace "shuttlexpress" con
 
 Se ha agregado soporte para ShuttlePRO, una versión más grande de
 ShuttleXpress, por lo que el antiguo nombre del driver ya no es exacto.
-
 
 === linuxcncrsh
 
@@ -970,12 +964,10 @@ L es una letra de coordenadas del eje (X, Y, Z, A, B, C, U, V, W),
 y S es un número de husillo (0 .. 9)
 
 [NOTE]
-
 El número de husillos permitidos es 8 pero las configuraciones heredadas
 puede incluir una estrofa [SPINDLE_9] no relacionada con un número de husillo real.
 
 [NOTE]
-
 La estrofa [TUNE] puede usarse para especificar elementos ajustables
 no relevante para las otras estrofas admitidas.
 
@@ -1036,23 +1028,16 @@ JOINTS = número_de_articulaciones
 
 Las funciones soportadas incluyen:
 
-. 'ddts' - los componentes de diferenciacion hal son cargados y conectados
-para cada articulacion (xy, xyz para máquinas trivkins)
+. 'ddts' -- los componentes de diferenciacion hal son cargados y conectados para cada articulacion (xy, xyz para máquinas trivkins)
 
-. 'simulated_home' - un componente hal sim_home_switch se carga y
-conecta a cada articulación. Las condiciones de home son especificadas por los
-habituales elementos del archivo ini [JOINT_n]HOME_*.
+. 'simulated_home' -- un componente hal sim_home_switch se carga y conecta a cada articulación.
+  Las condiciones de home son especificadas por los habituales elementos del archivo ini [JOINT_n]HOME_*.
 
-. 'use_hal_manualtoolchange' - El componente de espacio de usuario hal_manualtoolchange
-se carga y se conecta.
+. 'use_hal_manualtoolchange' -- El componente de espacio de usuario hal_manualtoolchange se carga y se conecta.
 
-. 'sim_spindle' - el componente sim_spindle se carga y se conecta a
-componentes hal adicionales cargados para simular la inercia de rotación
-de la masa del husillo.
+. 'sim_spindle' -- el componente sim_spindle se carga y se conecta a componentes hal adicionales cargados para simular la inercia de rotación de la masa del husillo.
 
-Las funciones están activadas por defecto pero pueden ser excluidas usando las
-opciones: '-no_make_ddts', '-no_simulated_home', '-no_use_hal_manualtoolchange',
-'-no_sim_spindle'.
+Las funciones están activadas por defecto pero pueden ser excluidas usando las opciones: '-no_make_ddts', '-no_simulated_home', '-no_use_hal_manualtoolchange', '-no_sim_spindle'.
 
 Por ejemplo, para omitir la creación de ddts:
 
@@ -1077,17 +1062,15 @@ nombre_de_archivo_equivalente:	ejemplo_cmds.hal
 ----
 
 El archivo halfile equivalente reemplaza instancias anteriores de archivos con
-el mismo nombre de archivo. Sustituciones de variables especificadas en el inifile 
+el mismo nombre de archivo. Sustituciones de variables especificadas en el inifile
 e interpretadas por halcmd se sustituyen automáticamente en el
 halfile *_cmds.hal creado. Si hay [HAL]HALFILEs especificados antes de
 LIB:basic_sim.tcl, sus comandos halcmd también están incluidos en *_cmds.hal.
 
 El halfile equivalente se puede utilizar para crear una nueva configuración basada en
-la configuración original, pero hecha con LIB:basic_sim.tcl con los
-siguientes pasos:
+la configuración original, pero hecha con LIB:basic_sim.tcl con los siguientes pasos:
 
-1) Ejecutar la configuración del simulador para crear un nuevo halfile equivalente,
-por ejemplo: 'ejemplo_cmds.hal'.
+1) Ejecutar la configuración del simulador para crear un nuevo halfile equivalente, por ejemplo: 'ejemplo_cmds.hal'.
 
 Para utilizar este nuevo halfile equivalente en el inifile de configuración original del simulador
 (o una copia de él), edite y cambie:
@@ -1155,6 +1138,7 @@ motion.homing-inhibit (ver la página man motion)
 
 . siggen: nuevo pin 'reset' para establecer los valores de la señal de salida en un estado predefinido
 . biquad: tipo de pins,  'f0, Q, s1, s2' eran anteriormente params
+. userkins: template for user-built kinematics modules using halcompile
 
 === Soporte para volante colgante XHC-HB04
 
@@ -1207,10 +1191,164 @@ configuraciones separadas por espacios en blanco y entre comillas. Ejemplo:
 loadrt hm2_eth board_ip=10.10.10.10 config="num_encoders=2 num_pwmgens=2 num_stepgens=3"
 ----
 
+== Changes beyond 2.8.x (master branch development)
+
+The master branch is version-tagged with prerelease notation, typically
+2.9~pre*
+
+=== Python3 and GTK3
+
+2.9 changed to Python3 and GTK3. This only affects you if you have custom glade or python handlers in your config.
+
+. run py3clean in your config directory to remove any temporary files.
+. run py3clean in your linuxcnc source directory if you compile from source
+. run 2to3 -w on any .py files you have written
+. make sure the interpreter in the first line of the script is python3, not python2
+. open the ui file in glade, and save it. It should convert everything that can be converted automatically, and give you warnings.
+
+=== LinuxCNC startup
+
+The main script, *linuxcnc*, supports a new option (-H dirname) to
+specify an additional user-specified directory for Halfiles.  This
+directory is searched before the usual search of 1) theini directory
+and 2)the system halfile library directory.
+
+=== G-code changes
+G43.2 (additional offsets) now accepts transient offsets to be added by
+axis words as well as from the tool table.
+
+=== Configuration Updates
+
+==== Inifile Settings
+
+New: [JOINT_n]HOME_INDEX_NO_ENCODER_RESET -- support encoder with
+index that does not reset upon receipt of index pulse following
+assertion of index_enable.
+
+axis.py default for [DISPLAY]GEOMETRY was:"XYZBCUVW",is:"XYZABCUVW"
+
+=== Code Updates
+
+Management of the internal storage of tool data and the communication
+of same between EMCIO and TASK has been refactored to use memory mapped
+storage.  Legacy use of nml messages for tooldata is deprecated and
+may be removed before a new release.
+
+Code references to the sequential indexes for internal tooldata have
+been clarified but legacy variable names persist for *selected_pocket*
+and *current_pocket*.  Variables with these names refer to the
+sequential index for internal tooldata not an actual pocket number.
+These variable names may be renamed in the future and require changes
+to user-fielded python remap applications that modify tool handling.
+
+A new optional interface is provided to support management of
+tool data by an external database application.
+
+The ioControl_v2.cc file providing the userspace program iov2 has
+no maintainter and its use is deprecated -- it may be removed before
+the next release.
+
+==== Reverse Run
+
+Support added for reverse run in the trajectory planner, the task, and
+motion modules, the python interface, the axis gui, and the test suite.
+
+==== Number of Joints
+
+The maximum number of joints (EMCMOT_MAX_JOINTS) increased from 9
+to 16.  The axis gui now supports display of up to 16 joints.
+
+==== Extra Joints
+
+A new motmod parameter (num_extrajoints) specifies joints that are
+homed by conventional joint homing methods but controlled by new hal
+pins (joint.N.posthome-cmd) after homing.  Such joints may be
+managed by independent motion planner/controllers in hal and manipulated
+from gcode using custom M-codes.  See the motion man page for
+more info.
+
+==== Homing
+
+A homing api is provided by src/emc/motion/homing.h to support users'
+custom homing code that replaces src/emc/motion/homing.c with
+a user-customized homing.c file.
+
+==== Motion
+
+The motion module supports kinematics modules that define new
+functions kinematicsSwitchable() and kinematicsSwitch() to switch
+their kinematics type.  A hal pin, motion.switchkins-type, is
+provided for use of such kinematics modules.
+
+Provided kinematics modules that implement kinematics switching
+use the switchkins.o object to supply the required rtapi_main()
+and related functions.  Kinematics modules that do not support
+kinematics switching use the macro "KINS_NOT_SWITCHABLE"
+provided by kinematics.h.
+
+==== Switchkins Kinematics Modules
+
+Several kinematics modules are now switchable between their
+eponymous kinematics and an alternate identity kinematics mode.
+
+Kinematic modules supporting switchkins:
+
+. xyzac-trt-kins table-rotary-tilting (supersedes xyzac-trt-kins)
+. xyzbc-trt-kins table-rotary-tilting (supersedes xyzbc-trt-kins)
+. genserkins     generalized serial-link kinematics
+. genhexkins     generalized hexapod parallel kinematics
+. scarakins      scara robot
+. pumakins       puma robot
+. 5axiskins      bridgemill (xyzbcw 6axes)
+
+The switchkins modules above (and trivkins) support a
+coordinates= parameter that optionally specifies an ordered set
+of coordinate letters that are sequentially assigned to joint
+numbers (beginning with joint0).
+
+The switchkins modules above include provisions for compile-time
+support of an additional user-specified kinematics type identified
+on the make command line by the userkfuncs environmental
+variable.  (See src/Makefile)
+
+The userspace test program bin/genserkins has been isolated to
+a single file (ugenserkins.c) since its original source file
+(genserkins.c) has been refactored for switchkins support.
+The userspace test program has not been actively maintained and
+its use is deprecated.  The ugenserkins.c file may be removed
+in the future.
+
+==== Other
+
+lib/hallib/sim_lib.tcl: simulate encoder index if [JOINT_n]HOME_USE_INDEX
+is specified.
+
+lib/python/vismach.py: new hal pin vismach.plotclear
+
+=== HAL
+
+==== Components
+
+sim_home_switch: added I/O pin for index-enable
+
+==== Motion module pins
+
+motion.feed-upm -- current feed in units per minute
+
+=== Configs
+
+==== Inifile
+
+[DISPLAY]GEOMETRY settings that include  the '!' character
+specify that displayed rotations respect G5x,G92 offsets.
+
+==== Simulation Configs
+
+sim/configs/axis/axis_9axis: demonstrate simulated encoder index
+
 == Cambios 2.8.x
 
-Las versiones futuras de este documento tendrán en cuenta los cambios realizados en la rama de 
+Las versiones futuras de este documento tendrán en cuenta los cambios realizados en la rama de
 desarrollo posteriores a la ultima versión 2.8.x.
 
-// vim: establece la sintaxis = asciidoc:
-
+// vim: set syntax=asciidoc

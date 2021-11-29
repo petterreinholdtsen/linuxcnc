@@ -1,4 +1,4 @@
-﻿:lang: es
+:lang: es
 
 [[cha:moveoff]](((Moveoff)))
 
@@ -10,7 +10,8 @@ para limitaciones y advertencias IMPORTANTES.
 
 El componente moveoff se utiliza para offsets de posiciones articulares utilizando conexiones Hal personalizadas.
 Implementa una funcionalidad offset-mientras-programa-parado
-con conexiones apropiadas para los pines de entrada. Se soportan nueve articulaciones.
+con conexiones apropiadas para los pines de entrada.
+Se soportan nueve articulaciones.
 
 Los valores de los pines de offset de eje (offset-in-M) se aplican continuamente (respetando
 límites de valor, velocidad y aceleración) a los pines de salida
@@ -63,7 +64,7 @@ se vuelva a encender posteriormente.
 
 LinuxCNC generalmente no conoce este medio de offsets solo-Hal
 ni está disponible en las pantallas de vista previa de las GUI. *No se proporciona protección* para
-movimientos con offset ​​que exceden los límites soft administrados por LinuxCNC. Ya que los límites soft
+movimientos con offset que exceden los límites soft administrados por LinuxCNC. Ya que los límites soft
 no se cumplen, un movimiento de offset puede encontrar límites fisicos (o un *CHOQUE* si
 no hay interruptores de límite). Se recomienda limitar la carrera con el uso de las entradas
 offset-min-M y offset-max-M. Disparar un límite fisico apagará
@@ -141,8 +142,8 @@ MAX_VELOCITY =
 MAX_ACCELERATION =
 ----
 
-Agregar entradas de archivo ini para la configuración del componente moveoff
-(omitalo para usar los valores predeterminados):
+Agregar entradas de archivo ini para la configuración del componente moveoff (omitalo para usar los valores predeterminados):
+
 ----
 [MOVEOFF]
 EPSILON =
@@ -182,6 +183,7 @@ se crea automáticamente si es necesario.
 
 Para usar moveoff_gui, agregue una entrada en la sección del archivo ini [APPLICATIONS]
 de la siguiente manera:
+
 ----
 [APPLICATIONS]
 # Nota: puede ser requerido un retraso (especificado en segundos) si las conexiones
@@ -202,6 +204,7 @@ debe hacer conexiones adicionales. Por ejemplo, las demostraciones proporcionada
 (configs/sim/axis/moveoff/*.ini) usan un halfile de sistema simple
 (llamado LIB:moveoff_external.hal) para conectar los pines mv.move-enable, mv.offset-in-M
 mv.bactrack-enable a señales:
+
 ----
 [HAL]
 HALUI = halui
@@ -210,8 +213,8 @@ HALFILE = LIB:hookup_moveoff.tcl
 HALFILE = LIB:moveoff_external.hal
 ----
 
-Las conexiones realizadas por LIB:moveoff_external.hal (para una configuración
-de tres ejes) son:
+Las conexiones realizadas por LIB:moveoff_external.hal (para una configuración de tres ejes) son:
+
 ----
 net external_enable mv.move-enable
 
@@ -229,11 +232,13 @@ para valores de offset y estado actuales.
 
 Moveoff_gui se configura con opciones de línea de comando. Para detalles
 sobre la operación de moveoff_gui, vea la página del manual:
+
 ----
 $ man moveoff_gui
 ----
-Para obtener una breve lista de las opciones de línea de comando para moveoff_gui, use el comando
-opción de ayuda de línea:
+
+Para obtener una breve lista de las opciones de línea de comando para moveoff_gui, use el comando opción de ayuda de línea:
+
 ----
 $ moveoff_gui --help
 
@@ -248,10 +253,10 @@ Opciones:
                                   (siempre: muestra gui siempre)
 
     [-axes axisnames]        (predeterminado: xyz (sin espacios))
-                              (letras del conjunto de: x y z a b c u v w)
-                              (ejemplo: -axes z)
-                              (ejemplo: -axes xz)
-                              (ejemplo: -axes xyz)
+                             (letras del conjunto de: x y z a b c u v w)
+                              (ejemplo: -axes z)
+                              (ejemplo: -axes xz)
+                              (ejemplo: -axes xyz)
     [-inc incrementvalue]    (predeterminado: 0.001 0.01 0.10 1.0)
                               (especifique uno por cada (hasta 4))
                               (ejemplo: -inc 0.001 -inc 0.01 -inc 0.1)
@@ -264,21 +269,20 @@ Opciones:
     [-delay delay_secs]      (predeterminado: 5 (retraso de reanudación))
 
 Opciones para casos especiales:
-    [-noentry]               (predeterminado: no utilizado)
-                              (no cree widgets de entrada)
-    [-no_resume_inhibit]     (predeterminado: no utilizado)
-                              (no use un pin de reanudar inhibición)
-    [-no_pause_requirement]  (predeterminado: no utilizado)
-                              (sin verificación de halui.program.is-paused)
-    [-no_cancel_autoresume]  (predeterminado: no utilizado)
-                              (útil para retractaciones con simple)
-                              (control externo                       )
-    [-no_display]            (predeterminado: no utilizado)
-                              (Usar cuando tanto los controles externos como las pantallas)
-                              (están en uso (ver Nota)))
+    [-noentry]               (predeterminado: no utilizado)
+                              (no cree widgets de entrada)
+    [-no_resume_inhibit]     (predeterminado: no utilizado)
+                              (no use un pin de reanudar inhibición)
+    [-no_pause_requirement]  (predeterminado: no utilizado)
+                              (sin verificación de halui.program.is-paused)
+    [-no_cancel_autoresume]  (predeterminado: no utilizado)
+                              (útil para retractaciones con simple)
+                              (control externo )
+    [-no_display]            (predeterminado: no utilizado)
+                              (Usar cuando tanto los controles externos como las pantallas)
+                              (están en uso (ver Nota)))
 
 Nota: Si el pin mv.move-enable está conectado cuando
       moveoff_gui se inicia, se requieren controles externos y solo
       se proporciona pantallas.
 ----
-

@@ -1,6 +1,6 @@
 :lang: es
 
-[[cha:halui-examples]]
+[[cha:halui-examples]](((Ejemnplos Halui)))
 
 = Ejemplos Halui
 
@@ -53,15 +53,15 @@ proporcionada por dos componentes de Halui:
 
 En su archivo hal personalizado, agregue las
 dos líneas siguientes, que se conectarán a su E/S para activar
-la pausa del programa o para reanudar cuando el 
+la pausa del programa o para reanudar cuando el
 sistema externo requiera que LinuxCNC continúe.
 
     net ispaused halui.program.is-paused => "su pin de salida"
     net resume halui.program.resume <= "su pin de entrada"
 
 Sus pines de entrada y salida están conectados a los pines
-del otro controlador. Pueden ser pines de puerto paralelo
-o cualquier otro pin de E/S al que tenga acceso.
+del otro controlador. Pueden ser pines de puerto paralelo o
+cualquier otro pin de E/S al que tenga acceso.
 
 Este sistema funciona de la siguiente manera. Cuando se
 encuentra un M0 en el código G, la señal `halui.program.is-paused`

@@ -1,6 +1,6 @@
-﻿:lang: es
+:lang: es
 
-[[cha:getting-linuxcnc]]
+[[cha:getting-linuxcnc]](((Obtener LinuxCNC)))
 
 = Obtener LinuxCNC
 
@@ -15,12 +15,12 @@ tres posibilidades: preempt-rt, RTAI o Xenomai. Además hay
 dos versiones de LinuxCNC que funcionan con estos kernels. Para más detalles, vea
 la tabla mas abajo.
 
-Las instalaciones nuevas de LinuxCNC se crean fácilmente utilizando una imagen 
+Las instalaciones nuevas de LinuxCNC se crean fácilmente utilizando una imagen
 Live/Install. Esta es una imagen híbrida del sistema de archivos ISO que se puede
 grabar en un dispositivo de almacenamiento USB, o un DVD, que se usan para arrancar un
 ordenador. En el momento del arranque se le dará la opción de arrancar el sistema
-"Live" (para ejecutar LinuxCNC sin hacer ningún cambio permanente en su ordenador)
-o arrancar un Instalador (para instalar LinuxCNC y el sistema operativo en su
+"Live" (para ejecutar LinuxCNC sin hacer ningún cambio permanente en su ordenador) o
+arrancar un Instalador (para instalar LinuxCNC y el sistema operativo en su
 disco duro del ordenador).
 
 El esquema del proceso es este:
@@ -30,13 +30,11 @@ El esquema del proceso es este:
 . Arrancar el sistema Live para probar LinuxCNC.
 . Arrancar el instalador para instalar LinuxCNC.
 
-
 == Descargar la imagen
 
 Esta sección describe algunos métodos para descargar una imagen Live/Install.
 
-[[_normal_download]]
-=== Descarga Normal
+=== Descarga Normal[[_normal_download]]
 
 Descargue el CD Live/Install desde esta dirección:
 
@@ -44,7 +42,11 @@ http://www.linuxcnc.org/iso/linuxcnc-2.8.2-buster.iso
 
 Para la Raspberry Pi, una imagen completa de la tarjeta SD está disponible aquí:
 
-https://www.linuxcnc.org/iso/linuxcnc-2.8.1-pi4.zip
+https://www.linuxcnc.org/iso/linuxcnc-2.8.1-pi4.zip (this will auto-update to 2.8.2)
+
+Esto se puede instalar usando el Pi normal
+https://www.raspberrypi.org/documentation/installation/installing-images/README.md[proceso de instalación]
+incluso con la aplicación Raspberry Pi Imager.
 
 Se informa que esta imagen SD no funciona con el modelo Raspberry Pi4 de 8GB.
 Tenga en cuenta también que esta versión de la imagen SD limita la memoria disponible a
@@ -55,15 +57,10 @@ no puede arrancar después del cambio, entonces el archivo puede ser editado nue
 montar la tarjeta SD en una computadora diferente (tal vez incluso un Pi con un
 Lector de tarjetas USB)
 
-Esto se puede instalar usando el Pi normal
-https://www.raspberrypi.org/documentation/installation/installing-images/README.md[proceso de instalación]
-incluso con la aplicación Raspberry Pi Imager.
-
-
 === Descargar usando zsync
 
 zsync es una aplicación de descarga que reanuda eficientemente una descarga
-interrumpida y transfiere de manera eficiente archivos de gran tamaño con 
+interrumpida y transfiere de manera eficiente archivos de gran tamaño con
 pequeñas modificaciones (si tiene una copia local anterior). Use zsync si tiene
 problemas descargando la imagen usando el método de <<_normal_download,descarga normal>>.
 
@@ -103,7 +100,7 @@ https://www.assembla.com/spaces/zsync-windows/documents
 md5sum linuxcnc-2.8.2-buster.iso
 ----
 +
-o
+or
 +
 ----
 sha256sum linuxcnc-2.8.2-buster.iso
@@ -115,13 +112,15 @@ md5sum: 4496eae88a1d66f457205d0d5b69c3c2
 sha256sum: 94a6dc7ef12fbdc0bafd9259ce36797a8b3410ad22e73c4ab57b8e937a924e1a
 -----
 
-==== Verificar md5sum en Windows o Mac
+.Verificar md5sum en Windows o Mac
 
-Windows y Mac OS X no vienen con un programa md5sum, pero hay
-alternativas. Se puede encontrar más información en:
+Windows y Mac OS X no vienen con un programa md5sum, pero hay alternativas. Se puede encontrar más información en:
 https://help.ubuntu.com/community/HowToMD5SUM[How To MD5SUM]
 
 == Escribir la imagen en un dispositivo de arranque
+
+The Raspbery Pi image is a completes SD card image and should be written to an SD card in
+https://www.raspberrypi.org/documentation/installation/installing-images/README.md[the normal way]
 
 La imagen LinuxCNC Live/Install es una imagen ISO híbrida que se puede grabar
 directamente a un dispositivo de almacenamiento USB (unidad flash) o un DVD y se usa para arrancar
@@ -129,14 +128,10 @@ un ordenador. La imagen es demasiado grande para caber en un CD.
 
 .Escribir la imagen en un dispositivo de almacenamiento USB en Linux
 
-. Conecte un dispositivo de almacenamiento USB (por ejemplo, una unidad flash o un
-  dispositivo similar).
-. Determine el archivo de dispositivo correspondiente a la unidad flash USB.
-  Esta información se puede encontrar en la salida de 'dmesg' después
-  conectar el dispositivo. '/proc/partitions' también puede ser útil.
+. Conecte un dispositivo de almacenamiento USB (por ejemplo, una unidad flash o un dispositivo similar).
+. Determine el archivo de dispositivo correspondiente a la unidad flash USB.  Esta información se puede encontrar en la salida de 'dmesg' después conectar el dispositivo. '/proc/partitions' también puede ser útil.
 . Use el comando 'dd' para escribir la imagen en su dispositivo de almacenamiento USB.
-  Por ejemplo, si su dispositivo de almacenamiento aparece como '/dev/sde',
-  use este comando:
+  Por ejemplo, si su dispositivo de almacenamiento aparece como '/dev/sde', use este comando:
 +
 -----
 dd if=linuxcnc-2.8.2-buster.iso of=/dev/sde
@@ -168,22 +163,18 @@ sudo dd if=/path-to.iso of=/dev/rdiskN bs=1m
 
 .Grabar la imagen en un DVD en Linux
 
-. Inserte un DVD en blanco en su grabadora. Aparecera una ventana con 'CD/DVD Creator'
-  o 'Choose Disc Type'. Cierre eso, ya que no lo usaremos.
+. Inserte un DVD en blanco en su grabadora. Aparecera una ventana con 'CD/DVD Creator' o 'Choose Disc Type'.
+  Cierre eso, ya que no lo usaremos.
 . Busque la imagen descargada con el navegador de archivos.
 . Haga clic con el botón derecho en el archivo de imagen ISO y elija Escribir en Disco.
-. Seleccione la velocidad de escritura. Se recomienda que escriba a la menor
-  velocidad posible.
+. Seleccione la velocidad de escritura. Se recomienda que escriba a la menor velocidad posible.
 . Comience el proceso de grabación.
-. Si aparece una ventana para 'elegir un nombre de archivo para la imagen del disco',
-  simplemente elija Aceptar.
+. Si aparece una ventana para 'elegir un nombre de archivo para la imagen del disco', simplemente elija Aceptar.
 
 .Escribir la imagen en un DVD en Windows
 
-. Descargue e instale Infra Recorder, un programa de grabación de imagen 
-  gratuito de codigo abierto: http://infrarecorder.org/
-. Inserte un DVD en blanco en la unidad y seleccione No hacer nada o Cancelar si
-  el diálogo de ejecución automática aparece.
+. Descargue e instale Infra Recorder, un programa de grabación de imagen gratuito de codigo abierto: http://infrarecorder.org/
+. Inserte un DVD en blanco en la unidad y seleccione No hacer nada o Cancelar si el diálogo de ejecución automática aparece.
 . Abra Infra Recorder, y seleccione el menú 'Acciones', luego 'Grabar imagen'.
 
 .Escribir la imagen en un DVD en Mac OSX
@@ -199,22 +190,26 @@ Con el dispositivo de almacenamiento USB conectado o el DVD en la unidad de DVD,
 apague el ordenador y vuelva a encenderlo. Esto arrancará
 el ordenador con la imagen Live/Install y elija la opción de arranque 'Live'.
 
-
 NOTA: Si el sistema no se inicia desde el DVD o la memoria USB, podría ser
 necesario para cambiar el orden de arranque en el BIOS del PC.
 
 Una vez que el ordenador se haya iniciado, puede probar LinuxCNC sin instalarlo.
-No puede crear configuraciones personalizadas o modificar la mayoría de ajustes 
+No puede crear configuraciones personalizadas o modificar la mayoría de ajustes
 del sistema en una sesi'on Live, pero puede (y debe) correr el test de latencia.
 
-Para probar LinuxCNC, desde el menú Aplicaciones/CNC, seleccione LinuxCNC. 
+Para probar LinuxCNC, desde el menú Aplicaciones/CNC, seleccione LinuxCNC.
 Se abrirá un cuadro de diálogo desde el cual puede elegir una de entre muchas
 configuraciones de muestra. En este punto, solo tiene sentido elegir una
 configuración "sim". Algunas de las configuraciones de muestra incluyen en pantalla
 máquinas simuladas en 3D, busque "Vismach" para verlas.
 
-Para ver si su ordenador es adecuado para la generación software de pulsos de pasos 
+Para ver si su ordenador es adecuado para la generación software de pulsos de pasos
 ejecute la prueba de latencia como se muestra <<sub:latency-test,aquí>>.
+
+At the time of writing the Live-Image is only available with the
+preempt-rt kernel and a matching LinuxCNC. On some hardware this might
+not offer good enough latency. There is an experimental version available
+using the RTAI realtime kernel which will often give better latency.
 
 == Instalando LinuxCNC
 
@@ -228,17 +223,16 @@ conocimientos de Linux.
 Está bien actualizar todo, excepto el sistema operativo, cuando se le pida.
 
 [WARNING]
-No actualice el sistema operativo si se le solicita que lo haga. Debe aceptar en cambio los 
-_updates_ o actualizaciones de _su versión_ , especialmente las de seguridad. 
- 
+No actualice el sistema operativo si se le solicita que lo haga. Debe aceptar en cambio los
+_updates_ o actualizaciones de _su versión_ , especialmente las de seguridad.
 
-== Problemas de Instalacion 
+
+== Problemas de Instalacion
 
 En casos excepcionales, es posible que deba restablecer el BIOS a la configuración predeterminada si
 durante la instalación de Live CD no puede reconocer el disco duro durante el arranque.
 
-[[_alternate_install_methods]]
-== Metodos alternativos de instalacion
+== Metodos alternativos de instalacion[[_alternate_install_methods]]
 
 La manera más fácil y preferida de instalar LinuxCNC es usar la imagen Live/Install
 tal como se ha descrito arriba. Ese método es tan simple y confiable como ha sido
@@ -268,7 +262,6 @@ funcionara en cualquier sistema x86 de 64 bits)
 
 NOTA: LinuxCNC v2.8 no es compatible con Ubuntu Lucid o versiones anteriores.
 
-
 .Kernels Preempt-RT
 
 Los kernels Preempt-rt están disponibles para Debian desde el archivo regular
@@ -278,6 +271,7 @@ Simplemente instale el paquete de la misma manera que cualquier otro paquete des
 Synaptic o con apt-get en la línea de comandos.
 
 .Kernels RTAI
+
 Los kernels RTAI están disponibles para su descarga desde el archivador debian en linuxcnc.org.
 Las fuentes de apt son:
 
@@ -305,8 +299,7 @@ desarrolladores del proyecto.
 === Instalación en Debian Buster (con kernel Preempt-RT)
 
 . Instale Debian Buster (Debian 10), versión amd64.
-Puede descargar el instalador aquí:
-  https://www.debian.org/releases/buster/
+  Puede descargar el instalador aquí: https://www.debian.org/releases/buster/
 
 . Después de quemar el iso y arrancar, si no quiere el escritorio Gnome, seleccione
   'Opciones avanzadas' > 'Entornos de escritorio alternativos' y elija el que
@@ -327,13 +320,11 @@ sudo apt-get dist-upgrade
 +
 ----
 sudo apt-get install linux-image-rt-amd64
-
 ----
 
-. Reinicie y seleccione el kernel de Linux 4.19.0-9-rt-amd64. Esto podría estar
-oculto en el submenú "Opciones avanzadas para Debian Buster" en Grub.
-Cuando usted
-  inicie sesión, verifique que el siguiente comando informe `PREEMPT RT`.
+. Reinicie y seleccione el kernel de Linux 4.19.0-9-rt-amd64.
+  Esto podría estar oculto en el submenú "Opciones avanzadas para Debian Buster" en Grub.
+  Cuando usted inicie sesión, verifique que el siguiente comando informe `PREEMPT RT`.
 +
 ----
 uname -v
@@ -344,7 +335,7 @@ uname -v
   'Marcar para eliminación completa'. Reinicie.
   Esto es para forzar al sistema a arrancar desde el kernel RT. Si prefiere
   retener ambos kernels, no es necesario eliminar los otros, pero
-  se necesitarán cambios de la configuración de arranque de Grub que van 
+  se necesitarán cambios de la configuración de arranque de Grub que van
   más allá del alcance de este documento.
 
 . Agregue la clave de firma de archivo LinuxCNC a su apt keyring ejecutando
@@ -357,6 +348,7 @@ sudo apt-key adv --keyserver hkp://keys.openpgp.org --recv-key 3cb9fd148f374fef
 +
 ----
  echo deb http://linuxcnc.org/ buster base 2.8-rtpreempt | sudo tee -a /etc/apt/sources.list.d/linuxcnc.list
+ echo deb-src http://linuxcnc.org/ buster base 2.8-rtpreempt | sudo tee -a /etc/apt/sources.list.d/linuxcnc.list
 ----
 
 . Actualice la lista de paquetes desde linuxcnc.org
@@ -370,8 +362,14 @@ sudo apt-get update
 ----
 sudo apt-get install linuxcnc-uspace
 ----
-[[cha:Installing-RTAI]]
-=== Instalación en Debian Buster (con kernel experimental RTAI)
+
+. Optionally you can install mesaflash if you are using a Mesa card.
++
+----
+sudo apt install mesaflash
+----
+
+=== Instalación en Debian Buster (con kernel experimental RTAI)[[cha:Installing-RTAI]]
 
 ADVERTENCIA: Este núcleo tiene problemas de estabilidad conocidos. Parece correr
 confiablemente una vez que se carga LinuxCNC. Sin embargo, se han visto "kernel panics"
@@ -391,6 +389,7 @@ sudo apt-key adv --keyserver hkp://keys.openpgp.org --recv-key 3cb9fd148f374fef
 +
 ----
 echo deb http://linuxcnc.org/ buster base 2.8-rt | sudo tee -a /etc/apt/sources.list.d/linuxcnc.list
+echo deb-src http://linuxcnc.org/ buster base 2.8-rt | sudo tee -a /etc/apt/sources.list.d/linuxcnc.list
 ----
 
 . Actualice la lista de paquetes de linuxcnc.org
@@ -398,21 +397,13 @@ echo deb http://linuxcnc.org/ buster base 2.8-rt | sudo tee -a /etc/apt/sources.
 ----
 sudo apt-get update
 ----
-. Instale el kernel RTAI
-+
-----
-sudo apt-get install linux-image-4.19.195-rtai-amd64
-----
-. Instale la capa de aplicación RTAI
-+
-----
-sudo apt-get install rtai-modules-4.19.195
-----
-. Instale linuxcnc (puede ser necesario reiniciar antes de instalar)
+
+. Instale la capa de aplicación y kernel RTAI and the rtai version of linuxcnc
 +
 ----
 sudo apt-get install linuxcnc
 ----
+Reboot the machine, ensuring that the system boots from the new 4.19.195-rtai kernel.
 
 === Instalación en Raspbian 10
 

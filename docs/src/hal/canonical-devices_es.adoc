@@ -30,7 +30,7 @@ La entrada digital canónica (campo tipo E/S:`digin`) es bastante simple.
 
 === Funciones
 
- - (funct) *read* -- Lee el hardware y configura los pines HAL 'in' y 'in-not`.
+ - (funct) *read* -- Lee el hardware y configura los pines HAL `in` y `in-not`.
 
 == Salida digital
 
@@ -47,8 +47,7 @@ sencilla.
 
 === Funciones
 
- - (funct) *write* -- Lee *out* e *invert* y establece la salida hardware
-   en consecuencia.
+ - (funct) *write* -- Lee *out* e *invert* y establece la salida hardware en consecuencia.
 
 == Entrada Analógica
 
@@ -58,9 +57,7 @@ conviertan voltaje a un rango continuo de valores.
 
 === Pines
 
- - (float) *value* -- La lectura del hardware, escalada según los parámetros
-   *scale* y *offset*. *Value* = ((lectura de entrada, en
-   unidades dependientes del hardware) * *scale*) - *offset*
+ - (float) *value* -- La lectura del hardware, escalada según los parámetros *scale* y *offset*. *Value* = ((lectura de entrada, en unidades dependientes del hardware) * *scale*) - *offset*
 
 === Parámetros
 
@@ -81,9 +78,8 @@ conviertan voltaje a un rango continuo de valores.
 == Salida analógica
 
 La salida analógica canónica (tipo E/S: *adcout*). Esto esta pensado
-para cualquier tipo de hardware que pueda generar un
-rango de valores más o menos continuo. Los ejemplos son convertidores de digital a analógico
-o generadores PWM.
+para cualquier tipo de hardware que pueda generar un rango de valores más o menos continuo.
+Los ejemplos son convertidores de digital a analógico o generadores PWM.
 
 === Pines
 

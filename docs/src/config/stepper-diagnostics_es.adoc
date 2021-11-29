@@ -1,4 +1,4 @@
-﻿:lang: es
+:lang: es
 
 [[cha:stepper-diagnostics]](((Stepper Diagnostics)))
 
@@ -106,11 +106,11 @@ líneas G0.
 
 [source,{ngc}]
 ----
-    (programa de prueba para ver si el eje Z pierde posición)
-    (msg, prueba 1 de configuración del eje Z)
-    G20 #1000=100 (bucle 100 veces)
-    (este bucle tiene retrasos después de los movimientos)
-    (prueba ajustes de velocidad y aceleracion)
+    ( programa de prueba para ver si el eje Z pierde posición )
+    ( msg, prueba 1 de configuración del eje Z )
+    G20 #1000=100 (bucle 100 veces)
+    ( este bucle tiene retrasos después de los movimientos )
+    ( prueba ajustes de velocidad y aceleracion )
     o100 while [#1000]
     G0 Z1.000
     G4 P0.250
@@ -118,16 +118,16 @@ líneas G0.
     G4 P0.250
     #1000 = [#1000 - 1]
     o100 endwhile
-    (msg, prueba 2 de la configuración del eje Z, S para continuar)
-    M1 (para aquí)
-    #1000=100 (bucle 100 veces)
-    (el siguiente ciclo no tiene demoras después de los movimientos)
-    (prueba los tiempos de retención de dirección del controlador y también la aceleración máxima)
+    ( msg, prueba 2 de la configuración del eje Z, S para continuar )
+    M1 (para aquí)
+    #1000=100 (bucle 100 veces)
+    ( el siguiente ciclo no tiene demoras después de los movimientos )
+    ( prueba los tiempos de retención de dirección del controlador y también la aceleración máxima )
     o101 while [#1000]
     G0 Z1.000
     G0 Z0.500
     #1000 = [#1000 - 1]
     o101 endwhile
-    (msg, Listo ... Z debe estar exactamente .5" sobre la mesa)
-    M2
+    ( msg, Listo ... Z debe estar exactamente .5" sobre la mesa )
+    M2
 ----

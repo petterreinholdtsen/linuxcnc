@@ -42,8 +42,6 @@ latency-test
 
 Debería ver algo como esto:
 
-.Prueba de Latencia HAL
-
 image::../config/images/latency.png["Prueba de Latencia HAL",align="center"]
 
 Mientras se ejecuta la prueba, debe 'abusar' de la computadora.
@@ -55,7 +53,7 @@ La idea es poner al PC en aprietos mientras la prueba de latencia comprueba cuá
 [NOTE]
 No ejecute LinuxCNC o Stepconf mientras se ejecuta la prueba de latencia.
 
-Los números importantes son los de la columna "max jitter" (máxima fluctuación).
+Los números importantes son los de la columna 'max jitter' (máxima fluctuación).
 En el ejemplo anterior, son 9075 nanosegundos, o 9,075 microsegundos.
 Anote este número e ingréselo en Stepconf cuando se le solicite.
 
@@ -142,4 +140,4 @@ Notas:
   con barras finales especiales. Use --show para mostrar el conteo de
   bins fuera del grrafico [pos | neg]
 ----
-image ::../config/images/latency-histogram.png["latency-histogram muestra un histograma de latencia (jitter) para hilos base y servo"]
+image::../config/images/latency-histogram.png["latency-histogram muestra un histograma de latencia (jitter) para hilos base y servo"]

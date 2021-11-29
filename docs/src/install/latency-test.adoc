@@ -16,8 +16,7 @@ step pulses will be.
 
 Latency is far more important than CPU speed.
 A lowly Pentium II that responds to interrupts within 10 microseconds
-each and every time can give better results
-than the latest and fastest P4 Hyperthreading beast.
+each and every time can give better results than the latest and fastest P4 Hyperthreading beast.
 
 The CPU isn't the only factor in determining latency.
 Motherboards, video cards, USB ports, and
@@ -42,8 +41,6 @@ latency-test
 ----
 
 You should see something like this:
-
-.HAL Latency Test
 
 image::../config/images/latency-test_en.png["HAL Latency Test",align="center"]
 
@@ -82,8 +79,7 @@ use software stepping or not.
 
 Note that if you get high numbers, there may be ways to improve
 them. Another PC had very bad latency (several milliseconds) when
-using the onboard video. But a $5 used video card solved the
-problem.
+using the onboard video. But a $5 used video card solved the problem.
 
 [NOTE]
 LinuxCNC does not require bleeding edge hardware.

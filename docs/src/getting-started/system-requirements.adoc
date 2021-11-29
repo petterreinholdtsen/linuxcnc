@@ -1,4 +1,6 @@
-[[cha:system-requirements]]
+:lang: en
+
+[[cha:system-requirements]](((System Requirements)))
 
 = System Requirements
 
@@ -22,15 +24,13 @@ the following minimum hardware specification. These numbers are not the
 absolute minimum but will give reasonable performance for most stepper
 systems.
 
-* 700 MHz x86 processor (1.2 GHz x86 processor recommended) or Raspberry
-  Pi 4 or better.
-* To run LinuxCNC 2.8 and Debian Buster from the LiveCD the system should
-  be 64-bit capable.
+* 700 MHz x86 processor (1.2 GHz x86 processor recommended) or Raspberry Pi 4 or better.
+* To run LinuxCNC 2.8 and Debian Buster from the LiveCD the system should be 64-bit capable.
 * 512 MB or more of RAM
 * 8 GB hard disk
 * Graphics card capable of at least 1024x768 resolution, which is not
-   using the NVidia or ATI fglrx proprietary drivers. Modern onboard
-   graphic chipsets seem to generally be OK.
+  using the NVidia or ATI fglrx proprietary drivers. Modern onboard
+  graphic chipsets seem to generally be OK.
 * A network or Internet connection (not strictly needed, but very useful
   for updates and for communicating with the LinuxCNC community)
 
@@ -39,8 +39,7 @@ check the https://www.debian.org/releases/stable/amd64/ch02.en.html[Debian]
 web site for details on the LiveCD you're using. Older hardware may
 benefit from selecting an older version of the LiveCD when available.
 
-[[kernel_and_version_requirements]]
-== Kernel and Version requirements
+== Kernel and Version requirements[[kernel_and_version_requirements]]
 
 LinuxCNC requires a kernel modified for realtime use to control real
 machine hardware. It can, however run on a standard kernel in simulation
@@ -53,7 +52,9 @@ The realtime kernel options are preempt-rt, RTAI and Xenomai.
 
 You can discover the kernel version of your system with the command
 
+----
  uname -a
+----
 
 If you see (as above) `-rt-` in the kernel name then you are running the
 preempt-rt kernel and should install the "uspace" version of linuxcnc.

@@ -3,19 +3,31 @@ man/es/man1/iocontrol.1
 src/common/linux-faq_es.adoc
 src/hal/basic-hal_es.adoc
 src/gui/qtdragon_es.adoc - completely divergent except for the beginning
-# or are just too difficult - needs to be revisited since BOM (byte order marker) identified
-src/ user/user-concepts_es.adoc
-src/lathe/lathe-user_es.adoc
-src/install/latency-test_es.adoc
-src/config/stepper-diagnostics_es.adoc
-src/config/moveoff_es.adoc
-src/config/stepper_es.adoc
+
+#
 # presuming a po4a error
+#
+
 #Use of uninitialized value $newchar in substitution iterator at /usr/share/perl5/Locale/Po4a/Po.pm line 1619.
 #Wide character at /usr/share/perl5/Locale/Po4a/Po.pm line 584.
 src/plasma/plasma-cnc-primer_es.adoc
+src/install/latency-test_es.adoc
+
 # presuming a po4a error - unknown or forgotten error
 src/config/ini-config_es.adoc
 src/gcode/tool-compensation_es.adoc
+
+#Use of uninitialized value $newchar in substitution iterator at /usr/share/perl5/Locale/Po4a/Po.pm line 1619.
+#Use of uninitialized value $do_wrap in string eq at /usr/share/perl5/Locale/Po4a/Po.pm line 1694.
+#Use of uninitialized value $do_wrap in string ne at /usr/share/perl5/Locale/Po4a/Po.pm line 1707.
+#Wide character at /usr/share/perl5/Locale/Po4a/Po.pm line 584.
+src/lathe/lathe-user_es.adoc
+
+#Use of uninitialized value $newchar in substitution iterator at /usr/share/perl5/Locale/Po4a/Po.pm line 1619.
+#Wide character at /usr/share/perl5/Locale/Po4a/Po.pm line 584.
+src/getting-started/about-linuxcnc_es.adoc
+
+#
 # conceptual failure
+#
 src/common/glossary_es.adoc - the order is wrong

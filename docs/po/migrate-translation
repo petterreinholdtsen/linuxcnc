@@ -11,7 +11,7 @@ set -x
 
 cd $(dirname $0)/..
 
-do_man=true
+do_man=false
 do_adoc=true
 
 match_translation() {
@@ -35,7 +35,7 @@ match_translation() {
 	echo
 	echo "error: master $master and translation $translation structure do not match, fix translation and try again."
 	echo
-	diff -uw "$master" "$translation"
+	#diff -uw "$master" "$translation"
 	echo
 	echo "Debug using 'po4a-gettextize -f $type -M UTF-8 -m "$master" -l "$translation"'"
 	exit 1
@@ -49,7 +49,7 @@ match_translation() {
     fi
 }
 
-for l in es ; do
+for l in es; do
     if $do_man ; then
 	if [ -d man/$l ] ; then
 	    for t in man/$l/man?/*; do
@@ -63,7 +63,7 @@ for l in es ; do
 	fi
     fi
     if $do_adoc ; then
-	for t in $(find src/ -name "*_$l.adoc"); do
+	for t in $(find src/ -name "*_$l.adoc"|sort); do
 	    if grep -q $t po/ignore_${l}.txt; then
 	        echo "I: skipping $t as requested"
 	        continue

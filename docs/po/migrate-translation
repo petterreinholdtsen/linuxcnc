@@ -31,7 +31,7 @@ match_translation() {
 	return
     fi
     ls -l "$master" "$translation"
-    if ! po4a-gettextize -f $type -M UTF-8 -m "$master" -l "$translation" -p po/Documentation-new_$l-extra.po; then
+    if ! po4a-gettextize -f $type -M UTF-8 -L UTF-8 -m "$master" -l "$translation" -p po/Documentation-new_$l-extra.po; then
 	echo
 	echo "error: master $master and translation $translation structure do not match, fix translation and try again."
 	echo

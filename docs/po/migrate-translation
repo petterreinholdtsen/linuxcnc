@@ -37,7 +37,7 @@ match_translation() {
 	echo
 	#diff -uw "$master" "$translation"
 	echo
-	echo "Debug using 'po4a-gettextize -f $type -M UTF-8 -m "$master" -l "$translation"'"
+	echo "Debug using 'po4a-gettextize -f $type -M UTF-8 -L UTF-8 -m "$master" -l "$translation"'"
 	exit 1
     else
 	echo ok

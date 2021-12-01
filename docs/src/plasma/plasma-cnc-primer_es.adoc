@@ -421,7 +421,7 @@ Debido a que no es probable que haya ningún EMI significativo, debería poder i
 
 * Si tiene un divisor de voltaje, instale un THCAD-10 en su panel de control. No hemos tenido problemas con esta configuración con un cortador de plasma Thermal Dynamics de 120 amp.
 
-. Inicio HF 
+.Inicio HF 
 
 Instale el THCAD en el inverter ya que la señal de frecuencia es mucho más inmune al ruido EMI. 
 

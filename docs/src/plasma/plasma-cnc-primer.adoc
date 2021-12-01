@@ -280,7 +280,7 @@ WARNING: It is strongly recommended that the torch cannot be enabled while this 
 
 As can be seen, plasma tables are pin intensive and we have already consumed about 15 inputs before the normal estops are added. Others have other views but it is the writer's opinion that the Mesa 7i76e is preferred over the cheaper 7i96 to allow for MPG’s, scale and axis selection switch and other features you may wish to add over time. If your table uses servos, there are a number of alternatives. Whilst there are other suppliers, designing your machine around the Mesa ecosystem will simplify use of their THCAD board to read arc voltage.
 
-=== Torch Breakaway
+=== Torch Breakaway Sensor
 
 * As mentioned earlier, a breakaway sensor should be installed that is triggered if the torch crashes and falls off.
 * Usually, this would be connected to 'halui.program-pause' so the fault can be rectified and the program resumed.

@@ -190,11 +190,6 @@ you should include G18 in your preamble as the default is G17 even if
 you're in lathe mode, in the user interface Axis. Arcs in G18 XZ plane
 use I (X axis) and K (Z axis) offsets.
 
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-.MAP THIS B
-
 === Arcs and Lathe Design
 
 The typical lathe has the spindle on the left of the operator and the
@@ -208,11 +203,6 @@ The following will be true on this type of setup:
 
 Some lathes with tools on the back side have the imaginary Y axis (+)
 pointing up.
-
-.MAP THIS A
-.MAP THIS A
-.MAP THIS A
-.MAP THIS A
 
 G2/G3 Arc directions are based on the axis they rotate around. In the
 case of lathes, it is the imaginary Y axis. If the Y axis (+) points

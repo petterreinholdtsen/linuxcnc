@@ -61,20 +61,20 @@ y finalizan en el siguiente nombre de sección.
 Las siguientes secciones son utilizadas por LinuxCNC:
 
 * '[<<sec:emc-section,EMC>>]' información general
-* '[<< sec:display-section,DISPLAY>>]' configuraciones relacionadas con la interfaz gráfica de usuario
-* '[<< sec:sección de filtro,FILTER>>]' configuración de los programas de filtro de entrada
-* '[<< sec:rs274ngc-section,RS274NGC>>]' configuración utilizada por el intérprete de código g
-* '[<< sec:emcmot-section,EMCMOT>>]' configuraciones utilizadas por el controlador de movimiento en tiempo real
-* '[<< sec:task-section,TASK>>]' configuraciones utilizadas por el controlador de tareas
-* '[<< sec:hal-section,HAL>>]' especificar archivos .hal
-* '[<< sec:halui-section,HALUI >>]' comandos MDI utilizados por HALUI
-* '[<< sec:applications-section,APPLICATIONS>>]' otras aplicaciones que iniciará LinuxCNC
-* '[<< sec:traj-section,TRAJ>>]' configuraciones adicionales utilizadas por el controlador de movimiento en tiempo real
-* '[<< sec:joint-section,JOINT_n>>]' variables de articulaciones individuales
-* '[<< sec:axis-section,AXIS_n>>]' variables de eje individuales
-* '[<< sec:kins-section,KINS>>]' variables cinemáticas
+* '[<<sec:display-section,DISPLAY>>]' configuraciones relacionadas con la interfaz gráfica de usuario
+* '[<<sec:sección de filtro,FILTER>>]' configuración de los programas de filtro de entrada
+* '[<<sec:rs274ngc-section,RS274NGC>>]' configuración utilizada por el intérprete de código g
+* '[<<sec:emcmot-section,EMCMOT>>]' configuraciones utilizadas por el controlador de movimiento en tiempo real
+* '[<<sec:task-section,TASK>>]' configuraciones utilizadas por el controlador de tareas
+* '[<<sec:hal-section,HAL>>]' especificar archivos .hal
+* '[<<sec:halui-section,HALUI >>]' comandos MDI utilizados por HALUI
+* '[<<sec:applications-section,APPLICATIONS>>]' otras aplicaciones que iniciará LinuxCNC
+* '[<<sec:traj-section,TRAJ>>]' configuraciones adicionales utilizadas por el controlador de movimiento en tiempo real
+* '[<<sec:joint-section,JOINT_n>>]' variables de articulaciones individuales
+* '[<<sec:axis-section,AXIS_n>>]' variables de eje individuales
+* '[<<sec:kins-section,KINS>>]' variables cinemáticas
 
-* '[<< sec:emcio-section,EMCIO>>]' configuración utilizada por el controlador de E/S
+* '[<<sec:emcio-section,EMCIO>>]' configuración utilizada por el controlador de E/S
 
 === Variables
 
@@ -654,7 +654,6 @@ La línea LIB:halcheck.tcl debería ser el último [HAL]HALFILE.
 Especifique la opción 'nopopup' para suprimir el mensaje emergente y permitir el inicio inmediato.
 Las conexiones realizadas con un POSTGUI_HALFILE no serán chequeadas.
 
-
 * 'TWOPASS = ON'- utilice el procesamiento de dos pasos para cargar componentes HAL.
   Con el procesamiento TWOPASS, las líneas [HAL]HALFILE= se procesan en dos pasadas.
   En el primer pase (pass0), se leen todos los HALFILES y se acumulan múltiples aspectos de los comandos loadrt y loadusr.
@@ -677,20 +676,13 @@ Para obtener más información, consulte el capítulo <<cha:hal-twopass,Hal TWOP
   Las GUI que admiten halfiles postgui incluyen Touchy, Axis, Gscreen y gmoccapy.
 
   Vea la sección <<sec:pyvcp-with-axis,pyVCP con Axis>> para más información.
-* 'HALUI = halui' - agrega los pines de la interfaz de usuario de HAL.
-  Para más información, ver el capítulo <<cha:hal-user-interface,Interfaz de usuario HAL>>.
+* 'HALUI = halui' - agrega los pines de la interfaz de usuario de HAL. Para más información, ver el capítulo <<cha:hal-user-interface,Interfaz de usuario HAL>>.
 
-[[sec:halui-section]](((Archivo INI, Sección HALUI)))
+=== Sección [HALUI][[sec:halui-section]](((Archivo INI, Sección HALUI)))
 
-=== Sección [HALUI]
+* 'MDI_COMMAND = G53 G0 X0 Y0 Z0' - Se puede ejecutar un comando MDI utilizando halui.mdi-command-00. Incremente el número para cada comando que se enumera en la sección [HALUI].
 
-* 'MDI_COMMAND = G53 G0 X0 Y0 Z0' -
-  Se puede ejecutar un comando MDI utilizando halui.mdi-command-00.
-  Incremente el número para cada comando que se enumera en la sección [HALUI].
-
-[[sec:applications-section]](((Archivo INI, Sección de APLICACIONES)))
-
-=== Sección [APPLICATIONS]
+=== Sección [APPLICATIONS][[sec:applications-section]](((Archivo INI, Sección de APLICACIONES)))
 
 LinuxCNC puede iniciar otras aplicaciones antes de que se inicie la interfaz gráfica de usuario especificada.
 Las aplicaciones se pueden iniciar después de un retraso especificado para permitir
@@ -698,30 +690,32 @@ acciones dependientes de la GUI (como crear pines hal específicos de gui).
 
 * 'DELAY = valor' - segundos de espera antes de comenzar otras aplicaciones.
   Puede ser necesario un retraso si una aplicación tiene dependencias en acciones [HAL]POSTGUI_HALFILE o pines Hal creados por gui
- (retardo predeterminado = 0).
+  (retardo predeterminado = 0).
+
 * 'APP = appname [arg1 [arg2 ...]]' - Aplicación que se iniciará.
   Esta especificación se puede incluir varias veces.
-  El nombre de la aplicación puede ser dado explícitamente como un nombre de archivo especificado absoluto o tilde (primer carácter es / o ~), un nombre de archivo relativo (los primeros caracteres del nombre de archivo son ./), o como un archivo en el directorio inifile.
+  El nombre de la aplicación puede ser dado explícitamente como un nombre de archivo especificado absoluto o tilde (primer carácter es / o ~),
+  un nombre de archivo relativo (los primeros caracteres del nombre de archivo son ./), o como un archivo en el directorio inifile.
   Si no se encuentra ningún archivo ejecutable usando estos nombres, se utiliza la ruta de búsqueda del usuario para encontrar la aplicación.
 
   Ejemplos:
-** Simular las entradas a los pines hal para la prueba (usando sim_pin, una interfaz simple gráfica de usuario para configurar las entradas a los parámetros, pines no conectados o señales sin escritores):
+** Simular las entradas a los pines hal para la prueba (usando sim_pin, una interfaz simple gráfica de usuario para configurar las entradas a los parámetros,
+   pines no conectados o señales sin escritores):
 
    APP = sim_pin motion.probe-input halui.abort motion.analog-in-00
 ** Invocar halshow con una lista de observación previamente guardada.
-   Como linuxcnc establece el directorio de trabajo en el directorio para el archivo inifile, puede hacer referencia a los archivos en ese directorio (ejemplo: my.halshow):
+   Como linuxcnc establece el directorio de trabajo en el directorio para el archivo inifile,
+   puede hacer referencia a los archivos en ese directorio (ejemplo: my.halshow):
 
    APP = halshow my.halshow
-** Alternativamente, se podría especificar un archivo de lista de observación identificado con un nombre de ruta completo:
+** Alternativamente, se podría especificar un archivo de lista de observación
+   identificado con un nombre de ruta completo:
 
    APP = halshow ~/saved_shows/spindle.halshow
 ** Abrir halscope usando una configuración previamente guardada:
 
    APP = halscope -i my.halscope
-
-[[sec:traj-section]](((Archivo INI,Sección TRAJ)))
-
-=== [TRAJ] Sección
+=== [TRAJ] Sección[[sec:traj-section]](((Archivo INI,Sección TRAJ)))
 
 [WARNING]
 El nuevo Planificador de trayectoria (TP) está activado de forma predeterminada. +
@@ -1308,7 +1302,7 @@ La siguiente tabla es un ejemplo de mediciones de voltaje.
 // latexmath: [cmd = a * raw + b]
 // latexmath: [raw = (cmd-b) / a]
 
-Mediciones de voltaje de salida
+.Mediciones de voltaje de salida
 
 [width="50%", cols="2*^", options="header"]
 |===============

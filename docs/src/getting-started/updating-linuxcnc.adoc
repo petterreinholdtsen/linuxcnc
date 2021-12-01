@@ -39,8 +39,9 @@ To upgrade major versions like 2.7 to 2.8 when you have a network connection at
 the machine you need to disable the old linuxcnc.org apt sources and add a new
 linuxcnc.org apt source for 2.7, then upgrade LinuxCNC.
 
-The details will depend on which platform you're running on.
-Open a <<faq:terminal,terminal>> then type `lsb_release -ic` to find this information out:
+The details will depend on which platform you're running on.  Open a
+<<faq:terminal,terminal>> then type `lsb_release -ic` to find this information
+out:
 
 ----
 lsb_release -ic
@@ -68,20 +69,28 @@ realtime. See below for the linuxcnc version to install.
 
 === Setting apt sources[[_setting_apt_sources]]
 
-* Open the `Software Sources` window. The process for doing this differs slightly on the three supported platforms:
+* Open the `Software Sources` window. The process for doing this
+  differs slightly on the three supported platforms:
 ** Debian:
-*** Click on `Applications Menu`, then `System`, then `Synaptic Package Manager`.
-*** In Synaptic, click on the `Settings` menu, then click `Repositories` to open the `Software Sources` window.
+*** Click on `Applications Menu`, then `System`, then
+   `Synaptic Package Manager`.
+*** In Synaptic, click on the `Settings` menu, then click `Repositories`
+    to open the `Software Sources` window.
 ** Ubuntu:
 *** Click on the `Dash Home` icon in the top left.
-*** In the `Search` field, type "software", then click on the `Ubuntu Software Center` icon.
-*** In the Ubuntu Software Center window, click on the `Edit` menu, then click on `Software Sources...` to open the `Software Sources` window.
+*** In the `Search` field, type "software", then click on the `Ubuntu
+    Software Center` icon.
+*** In the Ubuntu Software Center window, click on the `Edit` menu,
+    then click on `Software Sources...` to open the `Software Sources`
+    window.
 ** Ubuntu (Lucid):
 *** Haga clic en el menú `Sistema`, luego en` Administración`, luego `Administrador de paquetes Synaptic`.
 *** En Synaptic, haga clic en el menú `Configuración`, luego haga clic en `Repositorios` para abrir la ventana `Fuentes de software`.
 * In the `Software Sources` window, select the `Other Software` tab.
-* Delete or un-check all the old linuxcnc.org entries (leave all non-linuxcnc.org lines as they are).
-* Click the `Add` button and add a new apt line. The line will be slightly different on the different platforms:
+* Delete or un-check all the old linuxcnc.org entries (leave all
+  non-linuxcnc.org lines as they are).
+* Click the `Add` button and add a new apt line. The line will be
+  slightly different on the different platforms:
 
 [options="header"]
 |====
@@ -133,9 +142,11 @@ Debian Wheezy and Stretch both use the Synaptic Package Manager.
 === Ubuntu Precise
 
 * Click on the `Dash Home` icon in the top left.
-* In the `Search` field, type "update", then click on the `Update Manager` icon.
+* In the `Search` field, type "update", then click on the `Update Manager`
+  icon.
 * Click the `Check` button to fetch the list of packages available.
-* Click the `Install Updates` button to install the new versions of all packages.
+* Click the `Install Updates` button to install the new versions of
+  all packages.
 
 == Updating without Network[[getting-started:update-no-network]]
 
@@ -505,7 +516,8 @@ be a one-to-one correspondence between the rotary axis and the joint number.
 Lines with numeric INI variables are no longer allowed to have trailing
 text.  In earlier versions of LinuxCNC any text after the number was
 silently ignored, but as of this version such text is totally disallowed.
-This includes hash characters ("#"), which in this position are a part of the value, not a comment character.
+This includes hash characters ("#"), which in this position are a part
+of the value, not a comment character.
 
 For example, lines like this will no longer be accepted:
 -----
@@ -734,10 +746,11 @@ By default, the trivkins module declares itself as having
 'IDENTITY' kinematics.  The distinctions of joint/world
 operations can be made visible in the axis gui when using
 trivkins by setting the kinemetics type to a 'non-IDENTITY' type
-using 'kinstype=both'.
-The 'both' setting indicates that both forward and inverse kinematics functions are available and gui
-provisions that hide the distinctions of joints and axis letters should not be employed.
-For example, for an xyz configuration, specify:
+using 'kinstype=both'.  The 'both' setting indicates that both
+forward and inverse kinematics functions are available and gui
+provisions that hide the distinctions of joints and axis letters
+should not be employed.  For example, for an xyz configuration,
+specify:
 
 ----
 [KINS]
@@ -1015,7 +1028,8 @@ HALFILE = simulated_home.hal
 
 Lathe configs often shared the same halfiles and used the expedient
 method of specifying 3 axes with 'Y' unused.  More complex sim configs
-provided specific sets of halfiles according to the configuration purpose.
+provided specific sets of halfiles according to the configuration
+purpose.
 
 === Post-joints_axes
 
@@ -1041,16 +1055,22 @@ JOINTS = number_of_joints
 
 Functions supported include:
 
-. 'ddts' -- differentiator hal components are loaded and connected for each joint (and xy, xyz for trivkins machines)
+. 'ddts' -- differentiator hal components are loaded and connected
+  for each joint (and xy, xyz for trivkins machines)
 
 . 'simulated_home' -- a sim_home_switch hal component is loaded and connected for each joint.
   The homing conditions are specified by the usual [JOINT_n]HOME_* ini file items.
 
-. 'use_hal_manualtoolchange' -- the user space hal_manualtoolchange component is loaded and connected.
+. 'use_hal_manualtoolchange' -- the user space hal_manualtoolchange
+  component is loaded and connected.
 
-. 'sim_spindle' -- the sim_spindle component is loaded and connected to additional loaded hal components to simulate the inertia of a rotating spindle mass.
+. 'sim_spindle' -- the sim_spindle component is loaded and connected to
+  additional loaded hal components to simulate the inertia of a rotating
+  spindle mass.
 
-The functions are activated by default but can be excluded using options: '-no_make_ddts', '-no_simulated_home', '-no_use_hal_manualtoolchange', '-no_sim_spindle'.
+The functions are activated by default but can be excluded using
+options: '-no_make_ddts', '-no_simulated_home', '-no_use_hal_manualtoolchange',
+'-no_sim_spindle'.
 
 For example, to omit creation of ddts:
 

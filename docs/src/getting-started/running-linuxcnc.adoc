@@ -8,7 +8,8 @@
 == Invoking LinuxCNC
 
 After installation, LinuxCNC starts just like any other Linux program:
-run it from the <<faq:terminal,terminal>> by issuing the command 'linuxcnc', or select it in the 'Applications -> CNC' menu.
+run it from the <<faq:terminal,terminal>> by issuing the command 'linuxcnc',
+or select it in the 'Applications -> CNC' menu.
 
 == Configuration Launcher[[sec:config-launcher]](((Configuracion Launcher)))
 
@@ -21,7 +22,8 @@ Configurations) to be copied to their home directory. Copied configurations
 will appear under My Configurations on the next invocation of the Configuration
 Selector.
 
-The Configuration Selector offers a selection of configurations organized:
+The Configuration Selector offers a selection of configurations
+organized:
 
 * 'My Configurations' - User configurations located in ~/linuxcnc/configs
 * 'Sample Configurations' - Sample configurations, when selected are copied to ~/linuxcnc/configs.
@@ -134,7 +136,11 @@ available in other GUIs as well.
 
 == Configuration Resources
 
-The Configuration Selector copies all files needed for a configuration to a new subdirectory of ~/linuxcnc/configs (equivalently: /home/username/linuxcnc/configs).  Each created directory will include at least one ini file (iniflename.ini) that is used to describe a specific configuration.
+The Configuration Selector copies all files needed
+for a configuration to a new subdirectory of ~/linuxcnc/configs
+(equivalently: /home/username/linuxcnc/configs).  Each
+created directory will include at least one ini file (iniflename.ini)
+that is used to describe a specific configuration.
 
 File resources within the copied directory will typically
 include one or more ini file (filename.ini) for related

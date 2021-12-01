@@ -115,12 +115,14 @@ sha256sum: 94a6dc7ef12fbdc0bafd9259ce36797a8b3410ad22e73c4ab57b8e937a924e1a
 
 .Verify md5sum on Windows or Mac
 
-Windows and Mac OS X do not come with an md5sum program, but there are alternatives.  More information can be found at:
+Windows and Mac OS X do not come with an md5sum program, but there are
+alternatives.  More information can be found at:
 https://help.ubuntu.com/community/HowToMD5SUM[How To MD5SUM]
 
 == Write the image to a bootable device
 
-The Raspbery Pi image is a completes SD card image and should be written to an SD card in
+The Raspbery Pi image is a completes SD card image and should be
+written to an SD card in
 https://www.raspberrypi.org/documentation/installation/installing-images/README.md[the normal way]
 
 The LinuxCNC Live/Install ISO Image is a hybrid ISO image which can
@@ -129,10 +131,14 @@ used to boot a computer. The image is too large to fit on a CD.
 
 .Writing the image to a USB storage device in Linux
 
-. Connect a USB storage device (for example a flash drive or thumb drive type device).
-. Determine the device file corresponding to the USB flash drive.  This information can be found in the output of `dmesg` after connecting the device.  `/proc/partitions` may also be helpful.
+. Connect a USB storage device (for example a flash drive or thumb
+  drive type device).
+. Determine the device file corresponding to the USB flash drive.
+  This information can be found in the output of `dmesg` after
+  connecting the device.  `/proc/partitions` may also be helpful.
 . Use the `dd` command to write the image to your USB storage device.
-  For example, if your storage device showed up as `/dev/sde`, then use this command:
+  For example, if your storage device showed up as `/dev/sde`,
+  then use this command:
 +
 -----
 dd if=linuxcnc-2.8.2-buster.iso of=/dev/sde
@@ -168,15 +174,19 @@ sudo dd if=/path-to.iso of=/dev/rdiskN bs=1m
   window will pop up. Close this, as we will not be using it.
 . Browse to the downloaded image in the file browser.
 . Right click on the ISO image file and choose Write to Disc.
-. Select the write speed. It is recommended that you write at the lowest possible speed.
+. Select the write speed. It is recommended that you write at the lowest
+  possible speed.
 . Start the burning process.
 . If a 'choose a file name for the disc image' window pops up, just pick OK.
 
 .Writing the image to a DVD in Windows
 
-. Download and install Infra Recorder, a free and open source image burning program: http://infrarecorder.org/
-. Insert a blank CD in the drive and select Do nothing or Cancel if an auto-run dialog pops up.
-. Open Infra Recorder, and select the 'Actions' menu, then 'Burn image'.
+. Download and install Infra Recorder, a free and open source image
+  burning program: http://infrarecorder.org/
+. Insert a blank CD in the drive and select Do nothing or Cancel if an
+  auto-run dialog pops up.
+. Open Infra Recorder, and select the
+  'Actions' menu, then 'Burn image'.
 
 .Writing the image to a DVD in Mac OSX
 

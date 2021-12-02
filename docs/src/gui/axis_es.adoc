@@ -9,8 +9,7 @@
 AXIS es una interfaz gráfica para LinuxCNC que cuenta con vista previa y backplot.
 Está escrito en Python y utilizaTk y OpenGL para mostrar la interfaz de usuario.
 
-.Ventana de AXIS
-image::images/axis.png[align="center"]
+image::images/axis.png["Ventana de AXIS",align="center"]
 
 == Primeros pasos
 

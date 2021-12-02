@@ -1,3 +1,4 @@
+:lang: en
 [[cha:touchygui]](((touchygui)))
 
 :ini: {basebackend@docbook:'':ini}
@@ -12,7 +13,8 @@ with a wheel/MPG and a few buttons and switches.
 
 The 'Handwheel' tab has radio buttons to select between 'Feed Override',
 'Spindle Override', 'Maximum Velocity' and 'Jogging' functions for the wheel/MPG
-input. Radio buttons for axis selection and increment for jogging are also provided.
+input. Radio buttons for axis selection and increment for jogging are also
+provided.
 
 .Touchy
 
@@ -31,8 +33,7 @@ Each will be run one after the other in the order they appear in the INI file. +
 
 [NOTE]
 Touchy used to require that you create a file named 'touchy.hal' in your
-configuration directory (the directory your INI file is in).
-For legacy reasons
+configuration directory (the directory your INI file is in). For legacy reasons
 this will continue to work, but INI based postgui files are preferred.
 
 For more information on HAL files and the net command see the

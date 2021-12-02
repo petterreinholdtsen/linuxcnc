@@ -6,19 +6,21 @@
 
 == Introduction
 
-AXIS is a graphical front-end for LinuxCNC which features a live preview and backplot.
-It is written in Python and uses Tk and OpenGL to display its user interface.
+AXIS is a graphical front-end for LinuxCNC which features a live
+preview and backplot. It is written in Python and uses
+Tk and OpenGL to display its user interface.
 
-.AXIS Window
-image::images/axis.png[align="center"]
+image::images/axis.png["AXIS Window",align="center"]
 
 == Getting Started
 
 If your configuration is not currently set up to use AXIS,
 you can change it by editing the .ini file. In the
-section '[DISPLAY]' change the 'DISPLAY' line to read 'DISPLAY = axis'.
+section '[DISPLAY]' change the 'DISPLAY' line to read
+'DISPLAY = axis'.
 
-The sample configuration 'sim/axis.ini' is already configured to use AXIS as its front-end.
+The sample configuration
+'sim/axis.ini' is already configured to use AXIS as its front-end.
 
 === INI settings
 
@@ -90,7 +92,9 @@ The AXIS window contains the following elements:
 
 === Menu Items
 
-Some menu items might be grayed out depending on how you have your .ini file configured. For more information on configuration see the <<cha:ini-configuration,INI Chapter>>.
+Some menu items might be grayed out depending on how you have your .ini
+file configured. For more information on configuration see the
+<<cha:ini-configuration,INI Chapter>>.
 
 .File Menu
 

@@ -715,7 +715,8 @@ sliders may be connected to the one or other hal connection type.
 
 [IMPORTANT] Please be aware, jog velocity depends on the turtle button state,
 it will lead to different slider scales depending on the mode
-(turtle or rabbit). Please take also a look to <<gmoccapy:jog-velocity,jog velocities and turtle-jog hal pin>> for more
+(turtle or rabbit). Please take also a look to
+<<gmoccapy:jog-velocity,jog velocities and turtle-jog hal pin>> for more
 details.
 
 .Example
@@ -868,7 +869,8 @@ net gmoccapy-lube-fault-waiting gmoccapy.messages.lube-fault-waiting
 net gmoccapy-pin gmoccapy.messages.pin
 ----
 
-For more information on HAL files and the net command see the <<cha:basic-hal-reference,HAL Basics>>.
+For more information on HAL files and the net command see the
+<<cha:basic-hal-reference,HAL Basics>>.
 
 === Spindle Feedback Pins
 
@@ -877,8 +879,10 @@ There are two pins for spindle feedback
 * gmoccapy.spindle_feedback_bar
 * gmoccapy.spindle_at_speed_led
 
-'gmoccapy.spindle_feedback_bar' will accept an float input to show the spindle speed.
-'gmoccapy.spindle_at_speed_led' is an bit-in-pin to lit the GUI led if spindle is at speed.
+'gmoccapy.spindle_feedback_bar' will accept an float input to show the spindle
+speed.
+'gmoccapy.spindle_at_speed_led' is an bit-in-pin to lit the GUI led if spindle is
+at speed.
 
 === Pins To Indicate Program Progress Information
 
@@ -926,8 +930,9 @@ Please take care, that this connections have to be done in the postgui hal file!
 
 .Tool Offset Pins
 
-This pins allows you to show the active tool offset values for X and Z in the tool information frame.
-You should know that they are only active after G43 has been sent.
+This pins allows you to show the active tool offset values for X and Z in the
+tool information frame. You should know that they are only active after G43
+has been sent.
 
 .Tool information
 
@@ -1001,7 +1006,8 @@ Gmoccapy offers 5 pins for tool measurement purpose. The pins are mostly used
 to be read from a gcode subroutine, so the code can react to different values.
 
 * gmoccapy.toolmeasurement HAL_BIT enable or not tool measurement
-* gmoccapy.blockheight HAL_FLOAT the measured value of the top face of the workpiece
+* gmoccapy.blockheight HAL_FLOAT the measured value of the top face of the
+  workpiece
 * gmoccapy.probeheight HAL_FLOAT the probe switch height
 * gmoccapy.searchvel HAL_FLOAT the velocity to search for the tool probe switch
 * gmoccapy.probevel HAL_FLOAT the velocity to probe tool length
@@ -1067,9 +1073,11 @@ TOPLEVEL = python/toplevel.py
 
 You must copy the following files to your config directory
 
-First make a directory 'python' in your config folder from 'your_linuxcnc-dev_directory/configs/sim/gmoccapy/python'
-copy 'toplevel.py' to your 'config_dir/python' folder.
-Copy 'remap.py' to your 'config_dir/python' folder Copy 'stdglue.py' to your 'config_dir/python' folder.
+First make a directory 'python' in your config folder from
+'your_linuxcnc-dev_directory/configs/sim/gmoccapy/python' copy 'toplevel.py'
+to your 'config_dir/python' folder.  Copy 'remap.py' to your
+'config_dir/python' folder Copy 'stdglue.py' to your 'config_dir/python'
+folder.
 
 From 'your_linuxcnc-dev_directory/configs/sim/gmoccapy/macros'
 copy 'on_abort.ngc' to the directory specified in the SUBROUTINE_PATH see
@@ -1078,7 +1086,8 @@ From 'your_linuxcnc-dev_directory/configs/sim/gmoccapy/macros'
 copy 'change.ngc' to the directory specified as SUBROUTINE_PATH see
 <<gmocappy:rs274ngc, RS274NGC Section>>.
 
-Open 'change.ngc' with a editor and uncomment the following lines (49 and 50):
+Open 'change.ngc' with a editor and uncomment the following lines
+(49 and 50):
 
 ----
 F #<_hal[gmoccapy.probevel]>
@@ -1191,7 +1200,8 @@ done also adding a starter to your local folder.
 
 So that the layout is set automatically on starting.
 
-For matchbox-keyboard you will have to make your own layout, for a German layout ask in the forum.
+For matchbox-keyboard you will have to make your own layout, for a German
+layout ask in the forum.
 
 On Touch Off::
     give the option to show the preview tab or the offset page tab if you enter the touch off mode by clicking the
@@ -1248,13 +1258,15 @@ puede perder la opción de unidad automática, que alternará las unidades segú
 gcode activo G20/G21.
 
 [NOTE]
-You can change through the DRO modes (absolute, relative, distance to go) by clicking on the DRO!  *if you click on the left side letter of the DRO a popup window will allow you to set the value of the axis, making it easier to set the value, as you will not need to go over the touch off bottom button. Clicking the numbers (right side of the DRO) will toggle through the DRO modes as described above.*
+You can change through the DRO modes (absolute, relative, distance
+to go) by clicking on the DRO!  *if you click on the left side letter of the DRO a popup window will allow you to set the value of the axis, making it easier to set the value, as you will not need to go over the touch off bottom button. Clicking the numbers (right side of the DRO) will toggle through the DRO modes as described above.*
 
 'Usar unidades automáticas' +
 permite deshabilitar la opción de unidades automáticas de la pantalla, para que pueda ejecutar un programa en pulgadas y ver el DRO en mm. + +
 
 'size' +
-allows to set the size of the DRO font, default is 28, if you use a bigger screen you may want to increase the size up to 56. If you do use 4 axis, the DRO font size will be 3/4 of the value, because of space reason. + +
+allows to set the size of the DRO font, default is 28, if you use a bigger screen you may want to increase the size up to 56.
+If you do use 4 axis, the DRO font size will be 3/4 of the value, because of space reason. + +
 
 'digits' +
 sets the number of digits of the DRO from 1 to 5.
@@ -1271,8 +1283,8 @@ Neverthereless a click on the axis letter will open the popup dialog to set the 
 Preview::
 
 'Grid Size' Sets the grid size of the preview window. Unfortunately the size *has to be set in inches*,
-even if your machine units are metric.
-We do hope to fix that in a future release.
+even if your machine units are metric. We do hope
+to fix that in a future release.
 
 [NOTE]
 The grid will not be shown in perspective view.
@@ -1285,8 +1297,7 @@ preview, only if Show DRO is active and not full size preview.
 
 'Show Offsets' will show the offsets in the preview window.
 
-[NOTE]
-If you only check this option and leave the others unchecked, you will
+[NOTE] If you only check this option and leave the others unchecked, you will
 get in full size preview a offset page
 
 'Mouse Button Mode' this combobox you can select the button behavior of the

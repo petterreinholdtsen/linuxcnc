@@ -39,7 +39,7 @@ con el siguiente ajuste de archivo ini:
 
 image::images/tooledit-columns.png[align="center", alt="GUI del Editor de Herramientas - Selección de columnas"]
 
-Sintaxis en archivo .INI
+.Sintaxis en archivo .INI
 ----
 [DISPLAY]
 TOOL_EDITOR = tooledit column_name column_name ...

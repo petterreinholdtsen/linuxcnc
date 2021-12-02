@@ -6,12 +6,13 @@
 
 == How LinuxCNC Works
 
-LinuxCNC is a suite of highly-customisable applications for the control of a
-Computer Numerically Controlled (CNC) mills and lathes, 3D printers, robots,
-laser cutters, plasma cutters and other automated devices.
+LinuxCNC is a suite of highly-customisable applications for the control
+of a Computer Numerically Controlled (CNC) mills and lathes, 3D printers,
+robots, laser cutters, plasma cutters and other automated devices.
 It is capable of providing coordinated control of up to 9 axes of movement.
 
-At its heart, LinuxCNC consists of several key components that are integrated together to form one complete system:
+At its heart, LinuxCNC consists of several key components that are integrated together to form one
+complete system:
 
 * a Graphical User Interface (GUI), which forms the basic interface between the operator, the software
   and the CNC machine itself;
@@ -34,7 +35,8 @@ second signal that defines the speed at which that stepper motor rotates.
 While a stepper motor system under parallel port control is illustrated, a LinuxCNC system can also take
 advantage of a wide variety of dedicated hardware motion control interfaces for increased speed and I/O
 capabilities. A full list of interfaces supported by LinuxCNC can be found on
-the http://http://wiki.linuxcnc.org/cgi-bin/wiki.pl?LinuxCNC_Supported_Hardware[Supported Hardware] page of the Wiki.
+the http://http://wiki.linuxcnc.org/cgi-bin/wiki.pl?LinuxCNC_Supported_Hardware[Supported Hardware] page of the
+Wiki.
 
 In most circumstances, users will create a configuration specific to their mill setup using either the
 <<cha:stepconf-wizard,Stepper Configuration Wizard>> (for CNC systems operating using the computers'

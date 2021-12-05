@@ -13,8 +13,10 @@ tool table automatically.
 Typical steps for updating the tool table:
 
 * After homing load a tool with 'Tn M6' where 'n' is the tool number.
-* Move tool to an established point using a gauge or take a test cut and measure.
-* Click the "Touch Off" button in the Manual Control tab (or hit the End button on your keyboard).
+* Move tool to an established point using a gauge or take a test cut and
+  measure.
+* Click the "Touch Off" button in the Manual Control tab (or hit the
+  End button on your keyboard).
 * Select 'Tool Table' in the Coordinate System drop down box.
 * Enter the gauge or measured dimension and select OK.
 
@@ -38,10 +40,18 @@ The G10 L1/L10/L11 commands can be used to set tool table offsets:
 
 == Tool Table[[sec:tool-table]]
 
-The 'Tool Table' is a text file that contains information about each tool. The file is located in the same directory as your configuration and is called 'tool.tbl' by default.  A file name may be specified with the ini file [EMCIO]TOOL_TABLE setting.  The tools might be in a tool changer or just changed manually.  The file can be edited with a text editor or be updated using G10 L1. See the <<sec:lathe-tool-table,Lathe Tool Table>> Section for an example of the lathe tool table format. The maximum pocket number is 1000.
+The 'Tool Table' is a text file that contains information about each
+tool. The file is located in the same directory as your configuration
+and is called 'tool.tbl' by default.  A file name may be specified
+with the ini file [EMCIO]TOOL_TABLE setting.  The tools might be in a
+tool changer or just changed manually.  The file can be edited with a
+text editor or be updated using G10 L1. See the
+<<sec:lathe-tool-table,Lathe Tool Table>> Section for an example of
+the lathe tool table format. The maximum pocket number is 1000.
 
-The <<cha:tooledit-gui,Tool Editor>> or a text editor can be used to edit the tool table.
-If you use a text editor make sure you reload the tool table in the GUI.
+The <<cha:tooledit-gui,Tool Editor>> or a text editor can be used to edit the
+tool table.  If you use a text editor make sure you reload the tool table in
+the GUI.
 
 === Tool Table Format
 (((Tool-Table-Format)))
@@ -61,7 +71,8 @@ In general, the new tool table line format is:
 
  - ; - punto y coma de apertura, sin datos
  - T - tool number (tool numbers must be unique)
- - P - pocket number, 1-1000 (pocket numbers must be unique, Pocket 0 represents the spindle)
+ - P - pocket number, 1-1000 (pocket numbers must be unique, Pocket 0
+   represents the spindle)
  - X..W - tool offset on specified axis - floating-point
  - D - tool diameter - floating-point, absolute value
  - I - front angle (lathe only) - floating-point
@@ -143,7 +154,8 @@ orientation of the tool. So you probably want to have entries for I (tool
 front angle) and J (tool back angle). You probably also want an entry for Q
 (tool orientation).
 
-See the <<cha:lathe-user-information,Lathe User Information>> chapter for more detail.
+See the <<cha:lathe-user-information,Lathe User Information>> chapter for
+more detail.
 
 The 'Diameter' column contains a real number. This number is used only
 if cutter compensation is turned on using this tool. If the
@@ -180,8 +192,10 @@ to a subsequent reset of the tool-change pin.
 Tooldata is accessed by an ordered index (idx) that depends on the
 type of toolchanger specified by *[EMCIO]RANDOM_TOOLCHANGER=type*.
 
-. For *RANDOM_TOOLCHANGER = 0*, (0 is default and specifies a non-random toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
-. For *RANDOM_TOOLCHANGER = 1*, idx is the *current* pocket number for the toolnumber specified by the gcode select tool command *Tn*.
+. For *RANDOM_TOOLCHANGER = 0*, (0 is default and specifies a non-random
+  toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
+. For *RANDOM_TOOLCHANGER = 1*, idx is the *current* pocket number
+  for the toolnumber specified by the gcode select tool command *Tn*.
 
 The io program provides hal output pins to facilitate toolchanger management:
 
@@ -252,8 +266,9 @@ and rewritten) by LinuxCNC, so you can use P for any bookkeeping number you want
 Random location tool changers swap the tool in the spindle with the
 one in the changer. With this type of tool changer the tool will
 always be in a different pocket after a tool change. When a tool is
-changed LinuxCNC rewrites the pocket number to keep track of where the tools are.
-T can be any number but P must be a number that makes sense for the machine.
+changed LinuxCNC rewrites the pocket number to keep track of where the tools
+are. T can be any number but P must be a number that makes sense for
+the machine.
 
 == Cutter Compensation[[sec:cutter-compensation]]
 
@@ -293,7 +308,8 @@ L1.
 Any move that is long enough to perform the compensation will work as
 the entry move. The minimum length is the cutter radius. This can be a
 rapid move above the work piece. If several rapid moves are issued
-after a G41/42 only the last one will move the tool to the compensated position.
+after a G41/42 only the last one will move the tool to the compensated
+position.
 
 In the following figure you can see that the entry move is compensated
 to the right of the line. This puts the center of the tool to the right

@@ -40,9 +40,11 @@ image::images/offsets.png[align="center", alt="Example of Coordinate Systems"]
 * G59.2 - use coordinate system 8
 * G59.3 - use coordinate system 9
 
-Coordinate system offsets are used to shift the coordinate system from the machine coordinate system.
-This allows the G code to be programmed for the part without regard to the part location on the machine.
-Using coordinate system offsets would allow you to machine parts in multiple locations with the same G code.
+Coordinate system offsets are used to shift the coordinate system from the
+machine coordinate system. This allows the G code to be programmed for the
+part without regard to the part location on the machine. Using coordinate
+system offsets would allow you to machine parts in multiple locations with the
+same G code.
 
 The values for offsets are stored in the VAR file that is requested by the INI
 file during the startup of an LinuxCNC.
@@ -239,7 +241,8 @@ cleared at machine start and after a reset or program end, may disable
 It is good practice to clear the 'G92' offsets at the end of their use
 with 'G92.1' or 'G92.2'.  When starting up LinuxCNC with 'G92'
 persistence enabled (the default), any offsets in the 'G92' variables
-will be applied when an axis is homed.  See <<sec:g92-persistence-cautions,G92 Persistence Cautions>> below.
+will be applied when an axis is homed.  See
+<<sec:g92-persistence-cautions,G92 Persistence Cautions>> below.
 
 === Setting G92 Values
 
@@ -297,8 +300,8 @@ When a program is aborted during processing that has 'G92' offsets in
 effect a startup will cause them to become active again.  As a
 safeguard, always have your preamble to set the environment as you
 expect it.  Additionally, 'G92' persistence may be disabled by setting
-'DISABLE_G92_PERSISTENCE = 1' in the '[RS274NGC]' section of
-the '.ini' file.
+'DISABLE_G92_PERSISTENCE = 1' in the '[RS274NGC]' section of the
+'.ini' file.
 
 === G92 and G52 Interaction Cautions[[sec:g92-g52-interaction-cautions]]
 

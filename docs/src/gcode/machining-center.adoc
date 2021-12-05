@@ -156,14 +156,20 @@ rate is interpreted as follows (unless 'inverse time feed' or 'feed
 per revolution' modes are being used, in which case see Section
 <<gcode:g93-g94-g95,G93-G94-G95-Mode,G93 G94 G95>>).
 
- . If any of XYZ are moving, F is in units per minute in the XYZ cartesian system, and all other axes (ABCUVW) move so as to start and stop in coordinated fashion.
- . Otherwise, if any of UVW are moving, F is in units per minute in the UVW cartesian system, and all other axes (ABC) move so as to start and stop in coordinated fashion.
- . Otherwise, the move is pure rotary motion and the F word is in rotary units in the ABC 'pseudo-cartesian' system.
+ . If any of XYZ are moving, F is in units per minute in the XYZ
+   cartesian system, and all other axes (ABCUVW) move so as to start and
+   stop in coordinated fashion.
+ . Otherwise, if any of UVW are moving, F is in units per minute in the
+   UVW cartesian system, and all other axes (ABC) move so as to start and
+   stop in coordinated fashion.
+ . Otherwise, the move is pure rotary motion and the F word is in rotary
+   units in the ABC 'pseudo-cartesian' system.
 
 === Coolant (((coolant)))
 
 Flood coolant and mist coolant may each be turned on independently.
-The RS274/NGC language turns them off together see Section <<mcode:m7-m8-m9,M7 M8 M9>>.
+The RS274/NGC language turns them off together see Section
+<<mcode:m7-m8-m9,M7 M8 M9>>.
 
 === Dwell (((dwell)))
 
@@ -198,8 +204,10 @@ any axis motion if any of several events take place:
 
 === Selected Plane
 
-There is always a 'selected plane', which must be the XY-plane, the YZ-plane, or the XZ-plane of the machining center.
-The Z-axis is, of course, perpendicular to the XY-plane, the X-axis to the YZ-plane, and the Y-axis to the XZ-plane.
+There is always a 'selected plane', which must be the XY-plane, the
+YZ-plane, or the XZ-plane of the machining center. The Z-axis is, of
+course, perpendicular to the XY-plane, the X-axis to the YZ-plane, and
+the Y-axis to the XZ-plane.
 
 === Tool Carousel
 
@@ -282,8 +290,8 @@ or
 TOOL_TABLE = EMC-AXIS-SIM.tbl
 ----
 
-For more information on the specifics of the tool table format,
-see the <<sec:tool-table,Tool Table Format>> Section.
+For more information on the specifics of the tool table format, see the
+<<sec:tool-table,Tool Table Format>> Section.
 
 == Parameters
 

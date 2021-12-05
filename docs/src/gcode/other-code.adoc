@@ -63,7 +63,8 @@ It is an error if:
 
 * a negative T number is used,
 * T number is used that does not appear in the tool table file
-  (with the exception that T0 on nonrandom toolchangers *is* accepted, as noted above).
+  (with the exception that T0 on nonrandom toolchangers *is* accepted,
+  as noted above).
 
 On some machines, the carousel will move when a T word is programmed,
 at the same time machining is occurring. On such machines, programming

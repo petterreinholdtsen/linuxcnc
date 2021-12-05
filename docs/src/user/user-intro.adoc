@@ -6,10 +6,9 @@
 
 == How LinuxCNC Works
 
-LinuxCNC is a suite of highly-customisable applications for the control
-of a Computer Numerically Controlled (CNC) mills and lathes, 3D printers,
-robots, laser cutters, plasma cutters and other automated devices.
-It is capable of providing coordinated control of up to 9 axes of movement.
+LinuxCNC is a suite of highly-customisable applications for the control of a Computer Numerically
+Controlled (CNC) mills and lathes, 3D printers, robots, laser cutters, plasma cutters and other automated
+devices. It is capable of providing coordinated control of up to 9 axes of movement.
 
 At its heart, LinuxCNC consists of several key components that are integrated together to form one
 complete system:

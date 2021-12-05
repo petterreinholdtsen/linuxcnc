@@ -21,7 +21,8 @@ The number of Analog I/O is set with num_aio. The default is 4 each.
 Pin and parameter names starting with 'axis.L' and joint.N'
 are read and updated by the motion-controller function.
 
-Motion is loaded with the motmod command. A kins should be loaded before motion.
+Motion is loaded with the motmod command. A kins should be loaded
+before motion.
 
 ----
 loadrt motmod [base_period_nsec=period] [servo_period_nsec=period]
@@ -345,11 +346,12 @@ N refers to a joint number, L refers to an axis letter
 
 [NOTE]
 The per-axis min_limit and max_limit pins are honored continuously after homing.
-The  per-axis ferror and min_ferror pins are honored when the machine is on and not in position.
+The  per-axis ferror and min_ferror pins are honored when the machine is on and
+not in position.
 The  per-axis max_velocity and max_acceleration pins are sampled when the
 machine is on and the motion_state is free (homing or jogging) but are not
-sampled when in a program is running (auto mode) or in mdi mode.
-Consequently, changing the pin values when a program is running will not have effect until
+sampled when in a program is running (auto mode) or in mdi mode.  Consequently,
+changing the pin values when a program is running will not have effect until
 the program is stopped and the motion_state is again free.
 
 * 'ini.traj_arc_blend_enable' - (bit, in) [TRAJ]ARC_BLEND_ENABLE

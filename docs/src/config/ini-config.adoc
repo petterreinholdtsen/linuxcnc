@@ -80,7 +80,8 @@ The following sections are used by LinuxCNC:
 === Variables
 
 A variable line is made up of a variable name, an equals sign (=), and
-a value. Everything from the first non-white space character after the = up to the end of the line is passed as the value, so you can embed
+a value. Everything from the first non-white space character after the =
+up to the end of the line is passed as the value, so you can embed
 spaces in string symbols if you want to or need to. A variable name is
 often called a keyword.
 
@@ -249,8 +250,8 @@ User Manual.
   an error will be raised if the format can not accept a floating-point value.
 * 'DRO_FORMAT_IN = % 4.1f' - Over-ride the default DRO formatting in imperial
   mode. (normally 4 decimal places, padded with spaces to 6 digits to the left)
-  the example above will display only one decimal digit.
-  Formatting follows Python practice.
+  the example above will display only one decimal digit. Formatting follows
+  Python practice.
   https://docs.python.org/2/library/string.html#format-specification-mini-language
   An error will be raised if the format can not accept a floating-point value.
 * 'CONE_BASESIZE = .25' - Over-ride the default cone/tool base size of .5 in
@@ -260,11 +261,9 @@ User Manual.
 * 'MIN_SPINDLE_OVERRIDE = 0.5' - The minimum spindle override the user may
   select. 0.5 means 50% of the programmed spindle speed. (This is used to
   set the minimum spindle speed).
-* 'MIN_SPINDLE_0_OVERRIDE = 0.5' - The minimum spindle override the user may select.
-  0.5 means 50% of the programmed spindle speed.
-  (This is used to set the minimum spindle speed).
-  On multi spindle machine there will be entries for each spindle number.
-  Qtvcp only.
+* 'MIN_SPINDLE_0_OVERRIDE = 0.5' - The minimum spindle override the user may
+  select. 0.5 means 50% of the programmed spindle speed.  (This is used to
+  set the minimum spindle speed). On multi spindle machine there will be entries for each spindle number. Qtvcp only.
 * 'MAX_SPINDLE_OVERRIDE = 1.0' - The maximum spindle override the user may
   select. 1.0 means 100% of the programmed spindle speed.
 * 'MAX_SPINDLE_0_OVERRIDE = 1.0' - The maximum feed override the user may select.
@@ -392,8 +391,8 @@ by the [DISPLAY]DISPLAY gui program (typically "XYZABCUVW")
 
 [NOTE]
 The settings for 'JOG_AXES' and 'JOG_INVERT' apply to world mode jogging by axis coordinate letter
-and are in effect while in world mode after successful homing.
-When operating in joint mode prior to homing, keyboard jog keys are assigned in a fixed sequence: left/right: joint0,
+and are in effect while in world mode after successful homing. When operating in joint
+mode prior to homing, keyboard jog keys are assigned in a fixed sequence: left/right: joint0,
 up/down: joint1, page up/page down: joint2, left/right bracket: joint3
 
 * 'USER_COMMAND_FILE = mycommands.py' -- The name of an optional, configuration-specific

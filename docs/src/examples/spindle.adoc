@@ -3,8 +3,10 @@
 [[cha:spindle-control]]
 
 LinuxCNC can control up to 8 spindles. The number is set in the INI file.
-The examples below all refer to a single-spindle config with spindle control pins with names like spindle.0...
-In the case of a multiple spindle machine all that changes is that additional pins exist with names such as spindle.6...
+The examples below all refer to a single-spindle config with spindle
+control pins with names like spindle.0...
+In the case of a multiple spindle machine all that changes is that
+additional pins exist with names such as spindle.6...
 
 = Spindle Control
 
@@ -17,7 +19,8 @@ If your spindle speed is controlled by an analog signal,
 you're using a DAC card like the m5i20 to output the control signal:
 
 First you need to figure the scale of spindle speed to control signal.
-For this example the spindle top speed of 5000 RPM is equal to 10 volts.
+For this example the spindle top speed of 5000 RPM is equal to 10
+volts.
 
 image::images/spindle-math.png[align="center"]
 
@@ -114,9 +117,11 @@ to the two HAL components used in the following example.
   max/min range, and also limited to not exceed a specified
   rate of change.
 
-* A "near" is a HAL component (floating point) with a binary output that says whether two inputs are approximately equal.
+* A "near" is a HAL component (floating point) with a binary output
+  that says whether two inputs are approximately equal.
 
-More info is available in the documentation for HAL components, or from the man pages, just say 'man limit2' or 'man near' in a terminal.
+More info is available in the documentation for HAL components,
+or from the man pages, just say 'man limit2' or 'man near' in a terminal.
 *********************************************************************
 
 ----

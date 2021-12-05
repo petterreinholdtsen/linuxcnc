@@ -10,14 +10,14 @@ for the IMPORTANT limitations and warnings.
 
 The moveoff component is used to offset joint positions using custom Hal
 connections.  Implementing an offset-while-program-is-paused functionality is
-supported with appropriate connections for the input pins.
-Nine joints are supported.
+supported with appropriate connections for the input pins.  Nine joints are
+supported.
 
 The axis offset pin values (offset-in-M) are continuously applied (respecting
 limits on value, velocity, and acceleration) to the output pins
 (offset-current-M, pos-plusoffset-M, fb-minusoffset-M) when both enabling input
 pins (apply-offsets and move-enable) are TRUE.  The two enabling inputs are
-anded internally.  A 'warning pin' is set and a message issued if the
+anded internally. A 'warning pin' is set and a message issued if the
 apply-offsets pin is deasserted while offsets are applied.  The warning pin
 remains TRUE until the offsets are removed or the apply-offsets pin is set.
 
@@ -99,11 +99,15 @@ settings support the use of a simple gui (moveoff_gui) for controlling offsets.
 When the system halfile (LIB:hookup_moveoff.tcl) is properly specified in
 a configuration ini file, it will:
 
-. Disconnect the original joint.N.motor-pos-cmd and joint.N.motor-pos-fb pin connections
-. Load (loadrt) the moveoff component (using the name mv) with a personality set to accommodate all axes identified in the ini file
+. Disconnect the original joint.N.motor-pos-cmd and joint.N.motor-pos-fb pin
+  connections
+. Load (loadrt) the moveoff component (using the name mv) with a personality
+  set to accommodate all axes identified in the ini file
 . Add (addf) the moveoff component functions in the required sequence
-. Reconnect the joint.N.motor-pos-cmd and joint.N.motor-pos-fb pins to use the moveoff component
-. Set the moveoff component operating parameters and limits for each axis in accordance with additional ini file settings
+. Reconnect the joint.N.motor-pos-cmd and joint.N.motor-pos-fb pins to use
+  the moveoff component
+. Set the moveoff component operating parameters and limits for each axis
+  in accordance with additional ini file settings
 
 Note: The moveoff_gui application supports configurations that use known
 kinematics modules with KINEMATICS_TYPE=KINEMATICS_IDENTITY.  Supported

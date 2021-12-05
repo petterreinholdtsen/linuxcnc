@@ -94,10 +94,11 @@ executed in the order of appearance with other commands during
 this second pass.
 
 While you can use either the 'count=' or 'names=' options, they are
-mutually exclusive -- only one type can be specified for a given module.
+mutually exclusive -- only one type can be specified for a
+given module.
 
-TWOPASS processing is most effective when using the 'names=' option.
-This option allows you to provide unique names that
+TWOPASS processing is most effective when using the 'names='
+option.  This option allows you to provide unique names that
 are mnemonic or otherwise relevant to the configuration.   For
 example, if you use a derivative component to estimate the
 velocities and accelerations on each (x,y,z) coordinate, using

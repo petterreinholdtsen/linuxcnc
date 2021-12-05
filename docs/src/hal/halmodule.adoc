@@ -161,9 +161,9 @@ another index pulse had been seen.
 == Exiting
 
 A 'halcmd unload' request for the component is delivered as a
-'KeyboardInterrupt' exception.
-When an unload request arrives, the process should either exit
-in a short time, or call the '.exit()' method on the component
+'KeyboardInterrupt' exception. When an unload request arrives, the
+process should either
+exit in a short time, or call the '.exit()' method on the component
 if substantial work (such as reading or
 writing files) must be done to complete the shutdown process.
 

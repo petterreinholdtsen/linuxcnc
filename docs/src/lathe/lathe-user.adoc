@@ -94,13 +94,18 @@ For more information on tool touch off options in Axis see
 The X axis offset for each tool is normally an offset
 from the center line of the spindle.
 
-One method is to take your normal turning tool and turn down some stock to a known diameter.
-Using the Tool Touch Off window enter the measured diameter (or radius if in radius mode) for that tool.
-Then using some layout fluid or a marker to coat the part bring each tool up
-till it just touches the dye and set it's X offset to the diameter of the part used using the tool touch off.
+One method is to take your normal turning tool and
+turn down some stock to a known diameter.
+Using the Tool Touch Off window enter the measured diameter
+(or radius if in radius mode) for that tool.
+Then using some layout fluid or a marker to coat the part
+bring each tool up
+till it just touches the dye and set it's X offset to
+the diameter of the part used using the tool touch off.
 Make sure any tools in the corner quadrants have the nose radius
 set properly in the tool table so the control point is correct.
-Tool touch off automatically adds a G43 so the current tool is the current offset.
+Tool touch off automatically adds a G43
+so the current tool is the current offset.
 
 A typical session might be:
 
@@ -131,14 +136,20 @@ A typical session might be:
  . Make sure no offsets are in effect for the current coordinate system.
  . Set the current tool with 'Tn M6 G43' where 'n' is the tool number.
  . Select the Z axis in the Manual Control window.
- . Bring the tool close to the control surface. Using a cylinder move the Z away from the control surface until the cylinder just passes between the tool and the control surface.
+ . Bring the tool close to the control surface. Using a cylinder move the
+   Z away from the control surface until the cylinder just passes between
+   the tool and the control surface.
  . Select Touch Off and pick Tool Table and set the position to 0.0.
  . Repeat for each tool using the same cylinder.
 
 Now all the tools are offset the same distance from a standard position.
-If you change a tool like a drill bit you repeat the above and it is now in sync with the rest of the tools for Z offset.
-Some tools might require a bit of cyphering to determine the control point from the touch off point.
-For example, if you have a 0.125" wide parting tool and you touch the left side off but want the right to be Z0, then enter 0.125" in the touch off window.
+If you change a tool like a drill bit you repeat the above and
+it is now in sync with the rest of the tools for Z offset.
+Some tools might require a bit of cyphering to determine
+the control point from the touch off point.
+For example, if you have a 0.125" wide parting tool and
+you touch the left side off but want the right to be Z0,
+then enter 0.125" in the touch off window.
 
 === The Z Machine Offset
 

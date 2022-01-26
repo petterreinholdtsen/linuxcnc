@@ -21,6 +21,7 @@ input to or2 is on the or2 output is off.
 For example to have two pyvcp buttons both connected to one led.
 
 .The .xml file
+
 ----
 <pyvcp>
   <button>
@@ -43,6 +44,7 @@ For example to have two pyvcp buttons both connected to one led.
 ----
 
 .The postgui.hal file
+
 ----
 loadrt or2
 addf or2.0 servo-thread
@@ -156,7 +158,9 @@ The following figure shows the result when the X axis is moving at 15
 IPM in the minus direction. Notice that we can get the absolute value
 from either the abs.0.out pin or the X-IPM signal.
 
-image::images/velocity-01.png["Velocity Example"]
+[[cap:hal-velocity-example]](((HAL: Velocity example)))
+
+image::images/velocity-01.png["HAL: Velocity Example"]
 
 == Soft Start
 
@@ -244,7 +248,7 @@ After changing a setting run the oscilloscope again to see the change.
 When you're finished type 'exit' in the terminal window to shut down
 halrun and close the halscope. Don't close the terminal window with
 halrun running as it might leave some things in memory that could
-prevent EMC from loading.
+prevent LinuxCNC from loading.
 
 For more information on Halscope see the HAL manual and the <<sec:Intro-tutoriel,tutorial>>.
 
@@ -258,6 +262,7 @@ application so no need to load up and configure a full blown CNC application.
 In the following example we have created a simple GladeVCP panel with one
 
 .Basic Syntax
+
 ----
 # load the winder.glade GUI and name it winder
 loadusr -Wn winder gladevcp -c winder -u handler.py winder.glade

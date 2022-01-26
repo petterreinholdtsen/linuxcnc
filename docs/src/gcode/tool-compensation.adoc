@@ -2,12 +2,79 @@
 :toc:
 
 [[cha:tool-compensation]](((Tool Compensation)))
+= Tool Compensations
 
-= Tool Compensation
+From _fr: Les longueurs et diamètres d'outils peuvent être lus dans une table d'outils ou provenir d'un
+mot spécifié pour activer la compensation d'outil.
 
+From _fr: La compensation d'outil peut causer beaucoup de problèmes aux
+meilleurs programmeurs. Mais elle peut aussi être une aide puissante quand
+elle est utilisée pour aider l'opérateur à obtenir une
+pièce à la cote. En réglant la longueur et le diamètre des outils dans
+une table d'outils, les décalages peuvent être utilisés pendant un
+cycle d'usinage qui tient compte des variations de taille de l'outil,
+ou pour des déviations mineures des trajectoires programmées. Et ces
+changements peuvent être faits sans que l'opérateur n'ait à changer
+quoi que ce soit dans le programme.
+
+From _fr: Tout au long de ce module, vous trouverez occasionnellement des
+références à des fonctions canoniques, là où il est nécessaire pour le
+lecteur de comprendre comment fonctionne une compensation d'outil dans
+une situation spécifique. Ces références ont pour but de donner au
+lecteur une idée de la séquences plutôt que d'exiger qu'il comprenne la
+façon dont les fonctions canoniques elles-mêmes fonctionnent dans LinuxCNC.
+
+[[sec:tool-length-offsets]](((Tool Compensation:Tool Length Offsets)))
 == Tool Length Offsets
 
-=== Touch Off(((Touch Off)))
+From _fr: Les compensations de longueur d'outil sont données comme des nombres
+positifs dans la table d'outils. Une compensation d'outil est
+programmée en utilisant G43 Hn, où n est le numéro d'index de l'outil
+souhaité dans la table d'outil. Il est prévu que toutes les entrées
+dans la table d'outils soit positives. La valeur de H est vérifiée,
+elle doit être un entier non négatif quand elle est lue. L'interpréteur
+se comporte comme suit:
+
+. From _fr: Si G43 Hn est programmé, un appel à la fonction
+USE_TOOL_LENGTH_OFFSET(longueur) est fait (où longueur est l'écart de
+longueur, lu dans la table d'outils, de l'outil indexé n),
+tool_length_offset est repositionné dans le modèle de réglages de la
+machine et la valeur de current_z dans le modèle est ajustée. Noter que
+n n'a pas besoin d'être le même que le numéro de slot de l'outil
+actuellement dans la broche.
+. From _fr: Si G49 est programmé, USE_TOOL_LENGTH_OFFSET(0.0) est appelée,
+tool_length_offset est remis à 0.0 dans le modèle de réglages de la
+machine et la valeur courante de current_z dans le modèle est ajustée.
+L'effet de la compensation de longueur d'outil est illustrée dans la
+capture ci-dessous. Noter que la longueur de l'outil est soustraite de
+Z pour que le point contrôlé programmé corresponde à la pointe de
+l'outil. Il faut également noter que l'effet de la compensation de
+longueur est immédiat quand on voit la position de Z comme une
+coordonnée relative mais il est sans effet sur la position actuelle de
+la machine jusqu'à ce qu'un mouvement en Z soit programmé.
+
+Programme de test de longueur d'outil.
+
+L'outil #1 fait un pouce de long.
+
+----
+N01 G1 F15 X0 Y0 Z0
+N02 G43 H1 Z0 X1
+N03 G49 X0 Z0
+N04 G0 X2
+N05 G1 G43 H1 G4 P10 Z0 X3
+N06 G49 X2 Z0
+N07 G0 X0
+----
+
+image:images/length1.png[]
+
+Avec ce programme, dans la plupart des cas, la machine va appliquer le
+décalage sous forme d'une rampe pendant le mouvement en xyz suivant le
+mot G43.
+
+[[sub:touch-off]](((Touch Off)))
+=== Touch Off
 
 Using the Touch Off Screen in the AXIS interface you can update the
 tool table automatically.
@@ -16,9 +83,9 @@ Typical steps for updating the tool table:
 
 * After homing load a tool with 'Tn M6' where 'n' is the tool number.
 * Move tool to an established point using a gauge or take a test cut and
-  measure.
+measure.
 * Click the "Touch Off" button in the Manual Control tab (or hit the
-  End button on your keyboard).
+End button on your keyboard).
 * Select 'Tool Table' in the Coordinate System drop down box.
 * Enter the gauge or measured dimension and select OK.
 
@@ -27,6 +94,7 @@ DRO display the correct Z position and a G43 command will be issued so
 the new tool Z length will be in effect. Tool table touch off is only
 available when a tool is loaded with 'Tn M6'.
 
+[[cap:touch-off-tool]]
 .Touch Off Tool Table
 
 //image::images/ToolTable-TouchOff.png["Touch Off Tool Table",align="center"]
@@ -39,8 +107,12 @@ The G10 L1/L10/L11 commands can be used to set tool table offsets:
 * 'G10 L10 Pn' - Set offset(s) so current position w/ fixture 1-8 becomes a value (see <<gcode:g10-l10,G10 L10>> for details).
 * 'G10 L11 Pn' - Set offset(s) so current position w/ fixture 9 becomes a value (see <<gcode:g10-l11,G10 L11>> for details).
 
+[NOTE]
+From _fr: Ceci n'est qu'une brève présentation, se reporter au guide de références du
+G-code pour des explications plus détaillées
 
-== Tool Table[[sec:tool-table]]
+[[sec:tool-table]](((Tool Table)))
+== Tool Table
 
 The 'Tool Table' is a text file that contains information about each
 tool. The file is located in the same directory as your configuration
@@ -55,7 +127,8 @@ The <<cha:tooledit-gui,Tool Editor>> or a text editor can be used to edit the
 tool table.  If you use a text editor make sure you reload the tool table in
 the GUI.
 
-=== Tool Table Format[[sec:Table-Outils]](((Tool-Table-Format)))
+[[sub:tool-table-format]](((Tool Table Format)))
+=== Tool Table Format
 
 .Tool Table Format
 
@@ -111,12 +184,12 @@ a line and a newline character at the end of each entry.
 The meanings of the entries and the type of data to be put in each are
 as follows.
 
-.Tool Number (required)
+Tool Number (required)::
 The 'T' column contains the number (unsigned integer) which
 represents a code number for the tool. The user may use any code for
 any tool, as long as the codes are unsigned integers.
 
-.Pocket Number (required)
+Pocket Number (required)::
 The 'P' column contains the number (unsigned integer) which
 represents the pocket number (slot number) of the tool changer slot
 where the tool can be found. The entries in this column must all be
@@ -130,7 +203,7 @@ say that the pocket numbers you use will be determined by the numbering
 scheme used in your tool changer, and the pocket numbers you use must
 make sense on your machine.
 
-.Data Offset Numbers (optional)
+Data Offset Numbers (optional)::
 The 'Data Offset' columns (XYZABCUVW) contain real numbers which
 represent tool offsets in each axis. This number will be used if tool
 length offsets are being used and this tool is selected.
@@ -170,7 +243,8 @@ The 'Comment' column may optionally be used to describe the tool. Any
 type of description is OK. This column is for the benefit of human
 readers only. The comment must be preceded by a semicolon.
 
-=== Tool IO[[sec:tool-io]]
+[[sub:tool-io]](((Tool IO)))
+=== Tool IO
 
 The userspace program specified by *[EMCIO]EMCIO = io* is conventionally
 used for tool changer management (and other io functions for enabling
@@ -191,9 +265,9 @@ Tooldata is accessed by an ordered index (idx) that depends on the
 type of toolchanger specified by *[EMCIO]RANDOM_TOOLCHANGER=type*.
 
 . For *RANDOM_TOOLCHANGER = 0*, (0 is default and specifies a non-random
-  toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
+toolchanger) idx is a number indicating the sequence in which tooldata was loaded.
 . For *RANDOM_TOOLCHANGER = 1*, idx is the *current* pocket number
-  for the toolnumber specified by the gcode select tool command *Tn*.
+for the toolnumber specified by the gcode select tool command *Tn*.
 
 The io program provides hal output pins to facilitate toolchanger management:
 
@@ -224,7 +298,8 @@ The io program provides hal output pins to facilitate toolchanger management:
 ..      *iocontrol.0.tool-prep-number* = N
 ..      *iocontrol.0.tool-prep-pocket* = pocket number for tool N
 
-=== Tool Changers[[sec:tool-changers]]
+[[sub:tool-changers]]
+=== Tool Changers
 
 LinuxCNC supports three types of tool changers: 'manual', 'random location'
 and 'non-random or fixed location'. Information about configuring a LinuxCNC tool changer
@@ -268,7 +343,8 @@ changed LinuxCNC rewrites the pocket number to keep track of where the tools
 are. T can be any number but P must be a number that makes sense for
 the machine.
 
-== Cutter Compensation[[sec:cutter-compensation]]
+[[sec:cutter-radius-compensation]](((Cutter Radius Compensation)))
+== Cutter Radius Compensation
 
 Cutter Compensation allows the programmer to program the tool
 path without knowing the exact tool diameter. The only caveat is the
@@ -289,19 +365,19 @@ move will stop short so to not gouge the part. The following figure
 shows how the compensated move will stop at different points depending
 on the next move.
 
-.Compensation End Point
+.Compensation End Point[[cap:compensation-end-point]]
 
 image::images/comp-path_en.svg["Compensation End Point",align="center"]
 
 === Overview
 
-.Tool Table
+==== Tool Table
 
 Cutter compensation uses the data from the tool table to
 determine the offset needed. The data can be set at run time with G10
 L1.
 
-.Programming Entry Moves
+==== Programming Entry Moves
 
 Any move that is long enough to perform the compensation will work as
 the entry move. The minimum length is the cutter radius. This can be a
@@ -315,26 +391,35 @@ of X0 in this case. If you were to program a profile and the end is at
 X0 the resulting profile would leave a bump due to the offset of the
 entry move.
 
+[[cap:entry-move]]
 .Entry Move
 
-image::images/comp02_en.svg["Entry Move"]
+image::images/comp02_en.svg["Entry Move",align="center"]
 
-.Z Motion
+==== Z Motion
 
 Z axis motion may take place while the contour is being followed in
 the XY plane. Portions of the contour may be skipped by retracting the
 Z axis above the part and by extending the Z-axis at the next start point.
 
-.Rapid Moves
+==== Rapid Moves
 
 Rapid moves may be programmed while compensation is turned on.
 
-.Good Practices
+==== Good Practices
 
- - Start a program with G40 to make sure compensation is off.
+- Start a program with G40 to make sure compensation is off.
 
 === Examples
-.Outside Profile
-image::images/outside-comp.png["Outside Profile"]
-.Inside Profile
-image::images/inside-comp.png["Inside Profile"]
+
+==== Outside Profile
+
+.Outside Profile[[cap:outside-profile]]
+
+image::images/outside-comp.png["Outside Profile",align="center"]
+
+==== Inside Profile
+
+.Inside Profile[[cap:inside-profile]]
+
+image::images/inside-comp.png["Inside Profile",align="center"]

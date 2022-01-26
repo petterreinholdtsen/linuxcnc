@@ -1,7 +1,0 @@
-[[cha:remap]]
-
-= Extension du G-code avec Remap
-
-include::../common/outdated-notice_fr.adoc[]
-
-Lien vers la xref:remap.adoc[version anglaise].

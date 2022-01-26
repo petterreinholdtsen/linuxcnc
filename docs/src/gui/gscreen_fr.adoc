@@ -1,7 +1,0 @@
-[[cha:gscreen_fr]]
-
-= Gscreen
-
-include::../common/outdated-notice_fr.adoc[]
-
-Lien vers la xref:gscreen.adoc[version anglaise].

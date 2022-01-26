@@ -1,0 +1,140 @@
+:lang: fr
+:toc:
+
+[[cha:hal-origines]](((HAL:Origines)))
+= Les réflexions qui ont abouti à la création de HAL
+
+Cette première introduction au concept de HAL peut être un peu
+déconcertante pour l'esprit. Construire quelque chose avec des blocs
+peut être un défi, pourtant certains jeux de construction avec lesquels
+nous avons joué étant enfants peuvent nous aider à construire un
+système HAL.
+
+== Une tour
+
+- Je regardais mon fils et sa petite fille de six ans construire une
+tour à partir d'une boîte pleine de blocs de différentes tailles, de
+barres et de pièces rondes, des sortes de couvercles. L'objectif était
+de voir jusqu'où la tour pouvait monter. Plus la base était étroite
+plus il restait de pièces pour monter. Mais plus la base était étroite,
+moins la tour était stable. Je les voyais étudier combien de blocs ils
+pouvaient poser et où ils devaient les poser pour conserver l'équilibre
+avec le reste de la tour.
+
+- La notion d'empilage de cartes pour voir jusqu'où on peut monter est
+une très vieille et honorable manière de passer le temps. En première
+lecture, l'intégrateur pourra avoir l'impression que construire un HAL
+est un peu comme ça. C'est possible avec une bonne planification, mais
+l'intégrateur peut avoir à construire un système stable aussi complexe
+qu'une machine actuelle l'exige.
+
+== Erector Sets
+
+footnote:[Le jeu Erector Set est une invention de AC Gilbert (Meccano en France)]
+
+C'était une grande série de boites de construction en métal, des tôles
+perforées, plates ou en cornières, toutes avaient des trous
+régulièrement espacés. Vous pouviez concevoir des tas de choses et les
+monter avec ces éléments maintenus entre eux par des petits boulons.
+
+J'ai eu ma première boîte Erector pour mon quatrième anniversaire. Je
+sais que la boîte était prévue pour des enfants beaucoup plus âgés que
+moi. Peut être que mon père se faisait vraiment un cadeau à lui même.
+J'ai eu une période difficile avec les petites vis et les petits
+écrous. J'ai vraiment eu envie d'avoir quatre bras, un pour visser avec
+le tournevis, un pour tenir la vis, les pièces et l'écrou. En
+persévérant, de même qu'en agaçant mon père, j'ai fini par avoir fait
+tous les montages du livret. Bientôt, je lorgnais vers les plus grandes
+boîtes qui étaient imprimées sur ce livret. Travailler avec ces pièces
+de taille standard m'a ouvert le monde de la construction et j'ai
+bientôt été au delà des projets illustrés. 
+
+Les composants Hal ne sont pas tous de même taille ni de même forme
+mais ils permettent d'être regroupés en larges unités qui feront bien
+du travail. C'est dans ce sens qu'ils sont comme les pièces d'un jeu
+Erector. Certains composants sont longs et minces. Ils connectent
+essentiellement les commandes de niveau supérieur aux _physical pins_.
+D'autres composants sont plus comme les plateformes rectangulaires sur
+lesquelles des machines entières pourraient être construites. Un
+intégrateur parviendra rapidement au delà des brefs exemples et
+commencera à assembler des composants entre eux d'une manière qui lui
+sera propre.
+
+=== Tinkertoys
+
+footnote:[Tinkertoy est maintenant registered trademark of the Hasbro company.]
+
+Le jouet en bois Tinkertoys est plus humain que l'acier froid de
+l'Erector. Le cœur de la construction avec TinkerToys est un
+connecteur rond avec huit trous équidistants sur la circonférence. Il a
+aussi un trou au centre, perpendiculaire aux autres trous répartis
+autour du moyeu.
+
+Les moyeux pouvaient être connectés avec des tiges rondes de
+différentes longueurs. Le constructeur pouvait faire une grosse roue à
+l'aide de rayons qui partaient du centre. 
+
+Mon projet favori était une station spatiale rotative. De courtes
+tiges rayonnaient depuis les trous du moyeu central et étaient
+connectées avec d'autres moyeux aux extrémités des rayons. Ces moyeux
+extérieurs étaient raccordés entre eux avec d'autres rayons. Je passais
+des heures à rêver de vivre dans un tel dispositif, marchant de moyeu
+en moyeu et sur la passerelle extérieure qui tournait lentement à cause
+de la gravité dans l'espace en état d'apesanteur. Les provisions
+circulaient par les rayons et les ascenseur qui les transféraient dans
+la fusée arrimée sur le rayon central pendant qu'on déchargeait sa
+précieuse cargaison.
+
+L'idée qu'une _pin_ ou qu'un _component_ est la plaque centrale pour
+de nombreuses connections est aussi une notion facile avec le HAL. Les
+exemples deux à quatre connectent le multimètre et l'oscilloscope aux 
+signaux qui sont prévus pour aller ailleurs. 
+Moins facile, la notion d'un moyeu pour plusieurs signaux
+entrants. Mais, c'est également possible avec l'utilisation appropriée
+des fonctions dans ce composant de moyeu qui manipulent les signaux
+quand ils arrivent, venant d'autres composants.
+
+Tous les détails dans le <<cha:Tutoriel-HAL, tutoriel de HAL>>.
+
+Une autre réflexion qui vient à partir de ce jouet mécanique est une
+représentation de _HAL threads_. Un _thread_ pourrait ressembler un peu
+à un chilopode, une chenille, ou un perce-oreille. Une épine dorsale,
+des _HAL components_, raccordés entre eux par des tiges, les _HAL
+signals_. Chaque composant prend dans ses propres paramètres et selon
+l'état de ses broches d'entrée, les passe sur ses broches de sortie à
+l'intention du composant suivant. Les signaux voyagent ainsi de bout en
+bout, le long de l'épine dorsale où ils sont ajoutés ou modifiés par
+chaque composant son tour venu.
+
+Les _Threads_ sont tous synchronisés et exécutent une série de tâches
+de bout en bout. Une représentation mécanique est possible avec
+Thinkertoys si on pense à la longueur du jouet comme étant la mesure du
+temps mis pour aller d'un bout à l'autre. Un thread, ou épine dorsale,
+très différent est créé en connectant le même ensemble de modules avec
+des tiges de longueur différente. La longueur totale de l'épine dorsale
+peut aussi être changée en jouant sur la longueur des tiges pour
+connecter les modules. L'ordre des opérations est le même mais le temps
+mis pour aller d'un bout à l'autre est très différent.
+
+== Un exemple en Lego
+
+footnote:[The Lego name is a trademark of the Lego company.]
+
+Lorsque les blocs de Lego sont arrivés dans nos magasins, ils étaient
+à peu près tous de la même taille et de la même forme. Bien sûr il y
+avait les demi taille et quelques uns en quart de taille mais tous
+rectangulaires. Les blocs de Lego se relient ensembles en enfonçant les
+broches mâles d'une pièce dans les trous femelles de l'autre. En
+superposant les couches, les jonctions peuvent être rendues très
+solides, même aux coins et aux tés.
+
+J'ai vu mes enfants et mes petits-enfants construire avec des pièces
+Lego (les mêmes Lego). Il y en a encore quelques milliers dans une
+vieille et lourde boîte en carton qui dort dans un coin de la salle de
+jeux. Ils sont stockés dans cette boîte car c'était trop long de les
+ranger et de les ressortir à chacune de leur visite et ils étaient
+utilisés à chaque fois. Il doit bien y avoir les pièces de deux
+douzaines de boîtes différentes de Lego. Les petits livrets qui les
+accompagnaient ont été perdus depuis longtemps, mais la magie de la
+construction avec l'imbrication de ces pièces toutes de la même taille
+est quelque chose à observer.

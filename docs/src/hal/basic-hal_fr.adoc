@@ -1,25 +1,22 @@
 :lang: fr
 :toc:
-
-[[sec:Commandes-de-HAL]]
-
-= Commandes et composants de base
-:toc:
 :toclevels: 3
+
+[[sec:basiques-hal]]
+= Basiques de HAL
 
 This document provides a reference to the basics of HAL.
 
-== Commandes de Hal[[sec:hal-commands]]
+[[sec:commandes-hal]]
+== Commandes de Hal
 
 Des informations plus détaillées peuvent être trouvées dans la man
 page en tapant 'man halcmd' dans une console.
 
-Pour voir la
-configuration de HAL ainsi que le statut de ses pins et paramètres
+Pour voir la configuration de HAL ainsi que le statut de ses pins et paramètres
 utiliser la fenêtre HAL Configuration dans le menu 'Machine' d'AXIS.
 Pour visualiser le statut des pins, ouvrir l'onglet 'Watch' puis
-cliquer dans l'arborescence sur les pins qui doivent être visualisées
-dans la fenêtre watch.
+cliquer dans l'arborescence sur les pins qui doivent être visualisées dans la fenêtre watch.
 
 image::images/HAL_Configuration.png["Fenêtre de configuration de HAL",align="center"]
 
@@ -30,7 +27,7 @@ composants temps réel doivent être ajoutés au thread temps réel pour
 être fonctionnels. Il n'est pas possible de charger un composant de
 l'espace utilisateur dans l'espace temps réel.
 
-Syntaxe et exemple:
+La syntaxe et un exemple:
 
 ----
 loadrt <component> <options>
@@ -44,63 +41,110 @@ La commande 'addf' ajoute une fonction à un thread temps réel. Si
 l'assistant StepConf a été utilisé pour créer la configuration, deux
 threads ont été créés.
 
- - base-thread (le thread haute vitesse) ce thread prends en main les
-   items nécessitant une réponse très rapide comme la génération
-   d'impulsions, la lecture et l'écriture sur le port parallèle.
- - servo-thread (le thread basse vitesse) ce thread prends en main les
-   items n'étant pas influencés par la vitesse comme le contrôleur de
-   mouvement, l'API Classic Ladder et les commandes manuelles.
+FIXME Adds function 'functname' to thread 'threadname'. Default is to add the function
+in the order they are in the file. If 'position' is specified, adds the function
+to that spot in the thread. Negative 'position' means position with respect to
+the end of the thread. For example '1' is start of thread, '-1' is the end of
+the thread, '-3' is third from the end.
 
-Syntaxe et exemple:
+FIXME Some functions it is important to load them in a certain order like the parport
+read and write functions. The function name is usually the the component name
+plus a number. In the following example the component 'or2' is loaded and 'show
+function' shows the name of the or2 function
+
+----
+$ halrun
+halcmd: loadrt or2
+halcmd: show function
+Exported Functions:
+Owner   CodeAddr  Arg       FP   Users  Name
+ 00004  f8bc5000  f8f950c8  NO       0   or2.0
+----
+
+FIXME You have to add a function from a HAL real time component to a thread
+to get the function to update at the rate of the thread.
+
+FIXME Usually there are two threads as shown in this example. Some components use
+floating point math and must be added to a thread that supports floating point
+math. The 'FP' indicates if floating point math is supported in that thread.
+
+----
+$ halrun
+halcmd: loadrt motmod base_period_nsec=55555 servo_period_nsec=1000000 num_joints=3
+halcmd: show thread
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+     995976  YES          servo-thread (        0,        0 )
+      55332  NO            base-thread (        0,        0 )
+----
+
+- base-thread (le thread haute vitesse) ce thread prends en main les
+items nécessitant une réponse très rapide comme la génération
+d'impulsions, la lecture et l'écriture sur le port parallèle.
+- servo-thread (le thread basse vitesse) ce thread prends en main les
+items n'étant pas influencés par la vitesse comme le contrôleur de
+mouvement, l'API Classic Ladder et les commandes manuelles.
+
+La syntaxe et un exemple:
+
 ----
 addf <component> <thread>
 
 addf mux4 servo-thread
 ----
 
-=== loadusr[[sec:loadusr]]
+[NOTE]
+If the component requires a floating point thread that is usually the slower
+servo-thread.
 
-La commande 'loadusr' charge un composant de HAL de l'espace
-utilisateur. Les programmes de l'espace utilisateur ont leur propre
+[[sec:loadusr]]
+=== loadusr
+
+La commande 'loadusr' charge un composant de HAL de l'espace utilisateur. Les programmes de l'espace utilisateur ont leur propre
 processus séparé qui optionnellement communique avec les autres composants
 de HAL via leurs pins et paramètres. Il n'est pas possible de charger
 un composant temps réel dans l'espace utilisateur.
 
 Les drapeaux peuvent être un ou plusieurs parmi les suivants:
 
--W::
-     pour attendre que le composant soit prêt. Le composant est supposé
-    avoir le même nom que le premier argument de la commande.
+[horizontal]
+-W:: pour attendre que le composant soit prêt. Le composant est supposé
+avoir le même nom que le premier argument de la commande.
 
--Wn <nom>::
-    pour attendre un composant, qui porte le nom donné sous la forme <nom>.
+-Wn <nom>:: pour attendre un composant, qui porte le nom donné sous la forme <nom>.
+FIXME This only applies if the component has a name option.
 
--w::
-    pour attendre la fin du programme
+-w:: pour attendre la fin du programme
 
--i::
-    pour ignorer la valeur retournée par le programme (avec -w)
+-i:: pour ignorer la valeur retournée par le programme (avec -w)
 
-Syntaxe et exemple:
+-n:: name a component when it is a valid option for that component.
+
+La syntaxe et des exemples:
+
 ----
 loadusr <component> <options>
 
 loadusr halui
+
 loadusr -Wn spindle gs2_vfd -n spindle
 ----
 
-En anglais ça donne 'loadusr wait for name spindle component gs2_vfd name spindle'.
-Le -n spindle est une partie du composant gs2_vfd et non de la commande loadusr.
+En anglais ça donne 'loadusr wait for name spindle component gs2_vfd name spindle'. Le -n spindle est une partie du composant gs2_vfd et non de la commande loadusr.
 
-=== net[[sub:net]]
+[[sub:net]]
+=== net
+ (((net)))
 
 La commande 'net' crée une 'connexion' entre un signal et une ou plusieurs pins.
-Si le signal n'existe pas, net le crée. Les flèches de direction '<=', '=>' et
-'<=>' sont seulement là pour aider à la lecture de la logique, ils ne sont pas
+Si le signal n'existe pas, net le crée.
+Les flèches de direction '<=', '=>' et '<=>'
+sont seulement là pour aider à la lecture de la logique, ils ne sont pas
 utilisés par la commande net. Un espace doit séparer les flèches de direction 
 des noms de pin.
 
 .Syntaxe et exemple:
+
 ----
 net signal-name pin-name <direction optionnelle> (<second pin-name optionnel>)
 
@@ -111,63 +155,61 @@ Dans l'exemple ci-dessus, 'home-x' est le nom du signal, 'axis.0.home-sw-in' est
 une pin de direction IN, '<=' est une flèche de direction optionnelle et
 'parport.0.pin-11-in' est une pin de direction OUT. Cela peut paraître déroutant
 mais les labels in et out, pour une broche de port parallèle, indiquent la
-direction physique dans laquelle travaille la broche et non comment elle est
-traitée dans HAL.
+direction physique dans laquelle travaille la broche et non comment elle est traitée dans HAL.
 
 Une pin peut être connectée à un signal si elle obéit aux règles suivantes:
 
 * Une pin IN peut toujours être connectée à un signal.
 * Une pin IO peut être connectée à moins qu'une pin OUT soit présente sur le signal.
 * Une pin OUT peut être connectée seulement si il n'y a pas d'autre pin OUT ou IO
-  sur le signal.
+sur le signal.
 
 Le même 'signal-name' peut être utilisé dans de multiples commandes net pour
 connecter des pins additionnelles, tant que les règles précédentes sont observées.
 
-.Direction du signal[[cap:Signal-Direction]]
+[[cap:signal-direction]]
+.Direction du signal
 
-image::images/signal-direction.png[align="left", alt="Direction du signal"]
+image::images/signal-direction.png["Direction du signal"align="center"]
 
-Voici un exemple qui montre le signal xStep avec la source qui est stepgen.0.out
-et avec deux lecteurs, parport.0.pin-02-out etparport.0.pin-08-out. Simplement
+Voici un exemple qui montre le signal xStep avec la source 
+qui est stepgen.0.out
+et avec deux lecteurs, parport.0.pin-02-out et parport.0.pin-08-out. Simplement
 la valeur de stepgen.0.out est envoyée au signal xStep et cette valeur est alors
-envoyée sur parport.0.pin-02-out.
+envoyée sur parport.0.pin-02-out et parport.0.pin-08-out.
+
 ----
-#   signal    source            destination
-net xStep stepgen.0out => parport.0.pin-02-out
+#   signal    source            destination          destination
+net xStep stepgen.0.out => parport.0.pin-02-out parport.0.pin-08-out
 ----
 
 Puisque le signal xStep contient la valeur de stepgen.0.out (la source) il est
 possible de ré-utiliser le même signal pour envoyer la valeur à d'autres lecteurs,
-utiliser simplement le signal avec les autres lecteurs sur de nouvelles lignes:
+utiliser simplement le signal avec les autres lecteurs sur de nouvelles
+lignes:
+
 ----
 #   signal       destination2
-net xStep => parport.0.pin-08-out
+net xStep => parport.0.pin-06-out
 ----
-
-Ce qui peut également s'écrire en une seule ligne:
-----
-#   signal    source            destination1          destination2
-net xStep stepgen.0.out => parport.0.pin-02-out parport.0.pin-08-out
-----
-
 
 .Pins I/O
 Les pins appelées I/O pins comme 'index-enable', ne suivent pas cette règle.
 
-=== setp[[sub:setp]]
+[[sub:setp]]
+=== setp
 (((setp)))
 
 La commande 'setp' ajuste la valeur d'une pin ou d'un paramètre. Les
 valeurs valides dépendront du type de la pin ou du paramètre.
-
 C'est une erreur si les types de donnée ne correspondent pas.
 
 Certains composants ont des paramètres qui doivent être positionnés avant
 utilisation. Il n'est pas possible d'utiliser 'setp' sur une pin connectée à
 un signal.
 
-Syntaxe et exemple:
+La syntaxe et un exemple:
+
 ----
 setp <pin/parameter-name> <value>
 
@@ -178,12 +220,13 @@ setp parport.0.pin-08-out TRUE
 
 La commande 'sets' positionne la valeur d'un signal.
 
-Syntaxe et exemple:
+La syntaxe et un exemple:
 
 ----
 sets <signal-name> <value>
 
 net mysignal and2.0.in0 pyvcp.my-led
+
 sets mysignal 1
 ----
 
@@ -199,7 +242,8 @@ La commande 'unlinkp' déconnecte la pin du signal auquel elle est connectée.
 Si aucun signal n'a été connecté à la pin avant de lancer cette commande,
 rien ne se passe.
 
-Syntaxe et exemple:
+La syntaxe et un exemple:
+
 ----
 unlinkp <pin-name>
 
@@ -210,41 +254,46 @@ unlinkp parport.0.pin-02-out
 
 Les commandes suivantes sont dépréciées et seront retirées dans les futures
 versions. Toute nouvelle configuration doit utiliser la commande <<sub:net,'net'>>.
+FIXME These commands are included so older configurations will still work.
 
-=== linksp
+.linksp
 
-La commande 'linksp' a été remplacée par la commande 'net'.
+La commande 'linksp' créait une 'connexion' entre un signal et une
+pin.
 
-La commande 'linksp' créait une 'connexion' entre un signal et une pin.
+La syntaxe et un exemple:
 
-Syntaxe et exemple:
 ----
 linksp <signal-name> <pin-name>
 
 linksp X-step parport.0.pin-02-out
 ----
 
-=== linkps
+La commande 'linksp' a été remplacée par la commande 'net'.
 
-La commande 'linkps' a été remplacée par la commande 'net'.
+.linkps
 
 La commande 'linksp' créait une 'connexion' entre une pin et un signal. C'est la
 même chose que linksp mais les arguments sont inversés.
 
-Syntaxe et exemple:
+La syntaxe et un exemple:
+
 ----
 linkps <pin-name> <signal-name>
 
 linkps parport.0.pin-02-out X-Step
 ----
 
-=== newsig
+La commande 'linkps' a été remplacée par la commande 'net'.
+
+.newsig
 
 the command 'newsig' creates a new HAL signal by the name <signame>
 and the data type of <type>. Type must be 'bit', 's32', 'u32' or
 'float'. Error if <signame> already exists.
 
-Syntaxe et exemple:
+La syntaxe et un exemple:
+
 ----
 newsig <signame> <type>
 
@@ -254,9 +303,8 @@ newsig Xstep bit
 D'autres informations peuvent être trouvées dans le manuel de HAL ou
 la man page de 'halrun'.
 
-== HAL Data[[sec:HAL-Data]] 
-footnote:[NDT la description des données de HAL reste en Anglais, elle sont
-suffisamment simples pour être comprises.]
+[[sec:HAL-Data]]
+== HAL Data
 
 === Bit (((Bit)))
 
@@ -271,7 +319,7 @@ can move as needed.
 
  - float values = a 64 bit floating point value, with approximately 53 bits of
 resolution and over 1000 bits of dynamic range.
-   
+
 For more information on floating point numbers see:
 
 http://fr.wikipedia.org/wiki/Nombre_flottant[http://fr.wikipedia.org/wiki/Nombre_flottant]
@@ -281,36 +329,34 @@ http://fr.wikipedia.org/wiki/Nombre_flottant[http://fr.wikipedia.org/wiki/Nombre
 An 's32' number is a whole number that can have a negative or positive
 value.
 
- - s32 values = integer numbers -2147483648 to 2147483647
+- s32 values = integer numbers -2147483648 to 2147483647
 
 === u32 (((u32)))
 
 A 'u32' number is a whole number that is positive only.
 
- - u32 values = integer numbers 0 to 4294967295
+- u32 values = integer numbers 0 to 4294967295
 
 == Fichiers Hal
 
 Si l'assistant StepConf a été utilisé pour générer la configuration
-trois fichiers HAL ont dû être créés dans le répertoire de la
-configuration.
+trois fichiers HAL ont dû être créés dans le répertoire de la configuration.
 
- - ma-fraiseuse.hal (si ne nom de la config est "ma-fraiseuse") Ce
-   fichier est chargé en premier, il ne doit pas être modifié sous peine
-   de ne plus pouvoir l'utiliser avec l'assistant StepConf.
- - custom.hal Ce fichier est le deuxième à être chargé et il l'est avant
-   l'interface utilisateur graphique (GUI). C'est dans ce fichier que ce
-   trouvent les commandes personnalisées de l'utilisateur devant être
-   chargées avant la GUI.
- - custom_postgui.hal Ce fichier est chargé après la GUI. C'est dans ce
-   fichier que se trouvent les commandes personnalisées de l'utilisateur
-   devant être chargées après la GUI. Toutes les commandes relatives aux
-   widgets de pyVCP doivent être placées ici.
+- ma-fraiseuse.hal (si ne nom de la config est "ma-fraiseuse") Ce
+fichier est chargé en premier, il ne doit pas être modifié sous peine de ne plus pouvoir l'utiliser avec l'assistant StepConf.
+- custom.hal Ce fichier est le deuxième à être chargé et il l'est avant
+l'interface utilisateur graphique (GUI). C'est dans ce fichier que ce
+trouvent les commandes personnalisées de l'utilisateur devant être chargées avant la GUI.
+- custom_postgui.hal Ce fichier est chargé après la GUI. C'est dans ce
+fichier que se trouvent les commandes personnalisées de l'utilisateur
+devant être chargées après la GUI. Toutes les commandes relatives aux
+widgets de pyVCP doivent être placées ici.
 
 == Composants de HAL
 
 Deux paramètres sont automatiquement ajoutés à chaque composants HAL quand il
-est créé. Ces paramètres permettent d'encadrer le temps d'exécution d'un composant.
+est créé. Ces paramètres permettent d'encadrer le temps d'exécution d'un
+composant.
 
 +.time+(((time)))
 
@@ -321,15 +367,17 @@ est créé. Ces paramètres permettent d'encadrer le temps d'exécution d'un com
 
 'tmax' est le nombre maximum de cycles du CPU qu'il a fallu pour exécuter la fonction.
 'tmax' est un paramètre en lecture/écriture, de sorte que l'utilisateur peut le
-mettre à 0 pour se débarrasser du premier temps d'initialisation de la fonction.
+mettre à 0 pour se débarrasser du premier temps d'initialisation de la
+fonction.
 
 == Composants de logiques combinatoire
 
 Hal contient plusieurs composants logiques temps réel. Les composants
 logiques suivent une tables de vérité montrant les états logiques des
 sorties en fonction de l'état des entrées. Typiquement, la manipulation
-des bits d'entrée détermine l'état électrique des sorties selon la
-table de vérité des portes.
+des bits d'entrée détermine l'état électrique des sorties selon la table de vérité des portes.
+
+FIXME For further components see <<sec:realtime-components, Realtime Components List>> or the man pages.
 
 === and2
 
@@ -337,6 +385,7 @@ Le composant 'and2' est une porte 'and' à deux entrées. Sa table de
 vérité montre la sortie pour chaque combinaison des entrées.
 
 Syntaxe
+
 ----
 and2 [count=N] or [names=name1[,name2...]]
 ----
@@ -367,6 +416,7 @@ Table de vérité
 Le composant 'not' est un simple inverseur d'état.
 
 Syntaxe
+
 ----
 not [count=n] or [names=name1[,name2...]]
 ----
@@ -395,6 +445,7 @@ Table de vérité
 Le composant 'or2' est une porte OR à deux entrées.
 
 Syntaxe
+
 ----
 or2[count=n] or [names=name1[,name2...]]
 ----
@@ -425,6 +476,7 @@ Table de vérité
 Le composant 'xor2' est une porte XOR à deux entrées (OU exclusif).
 
 Syntaxe
+
 ----
 xor2[count=n] or [names=name1[,name2...]]
 ----
@@ -450,14 +502,19 @@ Table de vérité
 |False | False | False
 |========================================
 
-=== Exemples en logique combinatoire
+== Exemples en logique combinatoire
 
 Un exemple de connexion avec un "and2", deux entrées vers une sortie.
+
 ----
 loadrt and2 count=1
+
 addf and2.0 servo-thread
+
 net my-sigin1 and2.0.in0 <= parport.0.pin-11-in
+
 net my-sigin2 and2.0.in1 <= parport.0.pin-12-in
+
 net both-on parport.0.pin-14-out <= and2.0.out
 ----
 
@@ -466,8 +523,7 @@ ajouté à servo thread. Ensuite la broche d'entrée 11 du port parallèle
 est connectée à l'entrée in0 de la porte. Puis la broche d'entrée 12 du
 port est connectée à l'entrée in1 de la porte. Enfin la sortie
 and2.0.out de la porte est connectée à la broche de sortie 14 du port
-parallèle. Ainsi en suivant la table de vérité du and2, si les broches
-11 et 12 du port sont à 1, alors sa sortie 14 est à 1 aussi.
+parallèle. Ainsi en suivant la table de vérité du and2, si les broches 11 et 12 du port sont à 1, alors sa sortie 14 est à 1 aussi.
 
 == Composants de conversion
 
@@ -479,6 +535,7 @@ au 'binaire codé décimal' mais avec plus d'options. Le bit 'hold' interrompt l
 traitement des entrées, de sorte que la valeur 'sum' ne change plus.
 
 La syntaxe suivante est utilisée pour charger le composant weighted_sum.
+
 ----
 loadrt weighted_sum wsum_sizes=size[,size,...]
 ----

@@ -1,10 +1,10 @@
 :lang: fr
 
-[[cha:stepper-diagnostics]](((Diagnostiques Pas à Pas)))
+[[cha:stepper-diagnostics]]
+= Diagnostiques Moteurs Pas à Pas
+(((Diagnostiques Pas à Pas)))
 
-= Moteurs pas à pas
-
-Si ce que vous obtenez ne correspond pas à ce que vous espériez, la plupart du
+Si ce que vous obtenez ne correspond pas à ce que vous espériez, la plupartdu
 temps c'est juste un petit manque d'expérience. Accroître son expérience permet
 souvent une meilleure compréhension globale. Porter un diagnostic sur plusieurs
 problèmes est toujours plus facile en les prenant séparément, de même qu'une
@@ -72,6 +72,9 @@ _Latency Test_ pendant une durée plus longue pour voir si vous n'avez
 pas un délai excessif quelque part, responsable de ce problème. Si
 c'est le cas réajuster alors BASE_PERIOD avec la nouvelle valeur
 obtenue.
+FIXME
+FIXME
+FIXME
 
 LinuxCNC vérifie le nombre de cycles du CPU entre les invocations du thread temps réel. Si certains éléments de votre matériel provoquent un
 délai excessif ou que les threads sont ajustés à des valeurs trop

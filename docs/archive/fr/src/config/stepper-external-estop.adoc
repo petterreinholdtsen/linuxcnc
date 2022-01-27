@@ -1,0 +1,30 @@
+== Ajouter un bouton d'Arrêt d'Urgence externe(((A/U)))
+
+Comme vous pouvez <<sec:standard-pinout.hal,le voir ici>>,
+par défaut la configuration standard n'utilise pas de bouton d'Arrêt
+d'Urgence externe. footnote:[Une explication complète sur la manière de
+gérer les circuiteries d'Arrêt d'Urgence se trouve sur le 
+http://wiki.linuxcnc.org/[ wiki(en)] et dans le Manuel de l'intégrateur.
+
+Pour ajouter un simple bouton d'AU externe (ou plusieurs en série) vous
+devez remplacer la ligne suivante:
+
+----
+net estop-loop iocontrol.0.user-enable-out iocontrol.0.emc-enable-in
+----
+
+par
+
+----
+net estop-loop parport.0.pin-01-in iocontrol.0.emc-enable-in
+----
+
+Ce qui implique qu'un bouton d'Arrêt d'Urgence soit connecté sur la
+broche 01 du port parallèle. Tant que le bouton est enfoncé (le contact
+ouvert)footnote:[Utiliser exclusivement des contacts normalement fermés
+pour les A/U.], 
+LinuxCNC restera dans l'état _Arrêt d'Urgence_ (ESTOP). Quand le bouton
+externe sera relâché, LinuxCNC passera immédiatement dans l'état 
+_Arrêt d'Urgence Relâché_ (ESTOP-RESET) vous pourrez ensuite mettre 
+la machine en marche en pressant le bouton _Marche machine_ (((marche machine)))
+et vous êtes alors prêt à continuer votre travail avec LinuxCNC.

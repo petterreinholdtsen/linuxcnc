@@ -1,14 +1,14 @@
 :lang: en
-
-[[cha:basic-hal-reference]]
-
-= HAL Basics
 :toc:
 :toclevels: 3
 
+[[cha:basic-hal-reference]]
+= HAL Basics
+
 This document provides a reference to the basics of HAL.
 
-== HAL Commands[[sec:hal-commands]]
+[[sec:hal-commands]]
+== HAL Commands
 
 More detailed information can be found in the man page for halcmd: run
 'man halcmd' in a terminal window.
@@ -36,6 +36,10 @@ loadrt mux4 count=1
 ----
 
 === addf
+
+From _fr: La commande 'addf' ajoute une fonction à un thread temps réel. Si
+l'assistant StepConf a été utilisé pour créer la configuration, deux
+threads ont été créés.
 
 Adds function 'functname' to thread 'threadname'. Default is to add the function
 in the order they are in the file. If 'position' is specified, adds the function
@@ -74,12 +78,12 @@ Realtime Threads:
       55332  NO            base-thread (        0,        0 )
 ----
 
- - base-thread (the high-speed thread): this thread handles items that
-   need a fast response, like making step pulses, and reading and writing
-   the parallel port. Does not support floating point math.
- - servo-thread (the slow-speed thread): this thread handles items that
-   can tolerate a slower response, like the motion controller,    ClassicLadder,
-   and the motion command handler and supports floating point math.
+- base-thread (the high-speed thread): this thread handles items that
+need a fast response, like making step pulses, and reading and writing
+the parallel port. Does not support floating point math.
+- servo-thread (the slow-speed thread): this thread handles items that
+can tolerate a slower response, like the motion controller,    ClassicLadder,
+and the motion command handler and supports floating point math.
 
 The syntax and an example:
 
@@ -93,6 +97,7 @@ addf mux4.0 servo-thread
 If the component requires a floating point thread that is usually the slower
 servo-thread.
 
+[[sec:loadusr]]
 === loadusr
 
 The command 'loadusr' loads a user space HAL component. User space
@@ -104,10 +109,10 @@ Flags may be one or more of the following:
 
 [horizontal]
 -W:: to wait for the component to become ready. The component is assumed to
-    have the same name as the first argument of the command.
+have the same name as the first argument of the command.
 
 -Wn <name>:: to wait for the component, which will have the given <name>.
-    This only applies if the component has a name option.
+This only applies if the component has a name option.
 
 -w:: to wait for the program to exit
 
@@ -127,9 +132,9 @@ loadusr -Wn spindle gs2_vfd -n spindle
 
 In English it means 'loadusr wait for name spindle component gs2_vfd name spindle'.
 
-[[sub:net]] (((net)))
-
+[[sub:net]]
 === net
+ (((net)))
 
 The command 'net' creates a 'connection' between a signal and one
 or more pins. If the signal does not exist net creates the new signal.
@@ -138,7 +143,8 @@ arrows '<=', '=>' and '<=>' make it easier to follow the logic when reading
 a 'net' command line and are not used by the net command. The direction arrows
 must be separated by a space from the pin names.
 
-.Syntax and Example:
+.Syntax and example:
+
 ----
 net signal-name pin-name <optional arrow> <optional second pin-name>
 
@@ -151,20 +157,20 @@ In the above example 'home-x' is the signal name, 'joint.0.home-sw-in' is a
 the in and out labels for a parallel port pin indicates the physical way the
 pin works not how it is handled in HAL.
 
-
 A pin can be connected to a signal if it obeys the following rules:
 
 * An IN pin can always be connected to a signal
 * An IO pin can be connected unless there's an OUT pin on the signal
 * An OUT pin can be connected only if there are no other OUT or IO pins
-  on the signal
+on the signal
 
 The same 'signal-name' can be used in multiple net commands to connect
 additional pins, as long as the rules above are obeyed.
 
+[[cap:signal-direction]]
 .Signal Direction
 
-image::images/signal-direction.png[align="center", alt="Signal Direction"]
+image::images/signal-direction.png["Signal Direction",align="center"]
 
 This example shows the signal xStep with the source being
 stepgen.0.out and with two readers, parport.0.pin-02-out and
@@ -183,13 +189,16 @@ reader. To do this just use the signal with the readers on another
 line.
 
 ----
-net xStep => parport.0.pin-02-out
+#   signal       destination2
+net xStep => parport.0.pin-06-out
 ----
 
 .I/O pins
 An I/O pin like encoder.N.index-enable can be read or set as allowed by the component.
 
+[[sub:setp]]
 === setp
+(((setp)))
 
 The command 'setp' sets the value of a pin or parameter. The valid
 values will depend on the type of the pin or parameter. It is an error
@@ -256,6 +265,7 @@ The syntax and an example:
 
 ----
 linksp <signal-name> <pin-name>
+
 linksp X-step parport.0.pin-02-out
 ----
 
@@ -294,22 +304,21 @@ More information can be found in the HAL manual or the man pages for
 halrun.
 
 [[sec:hal-data]]
-
 == HAL Data
 
 === Bit (((Bit)))
 
 A bit value is an on or off.
 
- - bit values = true or 1 and false or 0 (True, TRUE, true are all valid)
+- bit values = true or 1 and false or 0 (True, TRUE, true are all valid)
 
 === Float (((Float)))
 
 A 'float' is a floating point number. In other words the decimal point
 can move as needed.
 
- - float values = a 64 bit floating point value, with approximately 53 bits of
-   resolution and over 1000 bits of dynamic range.
+- float values = a 64 bit floating point value, with approximately 53 bits of
+resolution and over 1000 bits of dynamic range.
 
 For more information on floating point numbers see:
 
@@ -320,28 +329,28 @@ http://en.wikipedia.org/wiki/Floating_point[http://en.wikipedia.org/wiki/Floatin
 An 's32' number is a whole number that can have a negative or positive
 value.
 
- - s32 values = integer numbers -2147483648 to 2147483647
+- s32 values = integer numbers -2147483648 to 2147483647
 
 === u32 (((u32)))
 
 A 'u32' number is a whole number that is positive only.
 
- - u32 values = integer numbers 0 to 4294967295
+- u32 values = integer numbers 0 to 4294967295
 
 == HAL Files
 
 If you used the Stepper Config Wizard to generate your config you will
 have up to three HAL files in your config directory.
 
- -  my-mill.hal (if your config is named 'my-mill') This file is loaded
-   first and should not be changed if you used the Stepper Config Wizard.
- -  custom.hal This file is loaded next and before the GUI loads. This is
-   where you put your custom HAL commands that you want loaded before the
-   GUI is loaded. 
- -  custom_postgui.hal This file is loaded after the GUI loads. This is
-   where you put your custom HAL commands that you want loaded after the
-   GUI is loaded. Any HAL commands that use pyVCP widgets need to be
-   placed here.
+-  my-mill.hal (if your config is named 'my-mill') This file is loaded
+first and should not be changed if you used the Stepper Config Wizard.
+-  custom.hal This file is loaded next and before the GUI loads. This is
+where you put your custom HAL commands that you want loaded before the
+GUI is loaded. 
+-  custom_postgui.hal This file is loaded after the GUI loads. This is
+where you put your custom HAL commands that you want loaded after the
+GUI is loaded. Any HAL commands that use pyVCP widgets need to be
+placed here.
 
 == HAL Parameter
 
@@ -515,3 +524,50 @@ connected to the in0 bit of the and gate. Next pin 12 is connected to
 the in1 bit of the and gate. Last we connect the and2 out bit to the
 parallel port pin 14. So following the truth table for and2 if pin 11
 and pin 12 are on then the output pin 14 will be on.
+
+== From _fr: Composants de conversion
+
+=== From _fr: Somme pondérée  (weighted_sum)
+
+From _fr: La somme pondérée converti un groupe de bits en un entier. La conversion est la
+somme des 'poids' des bits présents plus n'importe quel offset. C'est similaire
+au 'binaire codé décimal' mais avec plus d'options. Le bit 'hold' interrompt le
+traitement des entrées, de sorte que la valeur 'sum' ne change plus.
+
+From _fr: La syntaxe suivante est utilisée pour charger le composant weighted_sum.
+
+----
+loadrt weighted_sum wsum_sizes=size[,size,...]
+----
+
+From _fr: Crée des groupes de weighted_sum, chacun avec le nombre donné de bits d'entrée (size).
+
+From _fr: Pour mettre à jour la weighted_sum, le process_wsums doit être attaché à un thread.
+
+----
+addf process_wsums servo-thread
+----
+
+From _fr: Ce qui met à jour le composant weighted_sum.
+
+From _fr: Dans l'exemple suivant, une copie de la fenêtre de configuration de HAL d'Axis,
+les bits '0' et '2' sont TRUE, ils n'ont pas d'offset. Le poids ('weight') du bit 0
+est 1, celui du bit 2 est 4, la somme est donc 5.
+
+.weighted_sum
+
+----
+Component Pins:
+Owner   Type  Dir         Value  Name
+    10  bit   In           TRUE  wsum.0.bit.0.in
+    10  s32   I/O             1  wsum.0.bit.0.weight
+    10  bit   In          FALSE  wsum.0.bit.1.in
+    10  s32   I/O             2  wsum.0.bit.1.weight
+    10  bit   In           TRUE  wsum.0.bit.2.in
+    10  s32   I/O             4  wsum.0.bit.2.weight
+    10  bit   In          FALSE  wsum.0.bit.3.in
+    10  s32   I/O             8  wsum.0.bit.3.weight
+    10  bit   In          FALSE  wsum.0.hold
+    10  s32   I/O             0  wsum.0.offset
+    10  s32   Out             5  wsum.0.sum
+----

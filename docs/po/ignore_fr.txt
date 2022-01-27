@@ -1,16 +1,10 @@
-# too many differences to make much fun
-src/gcode/coordinates_fr.adoc
-src/getting-started/getting-linuxcnc_fr.adoc
-src/getting-started/running-linuxcnc_fr.adoc
-src/gui/axis_fr.adoc
-src/hal/basic-hal_fr.adoc
-src/hal/hal-examples_fr.adoc
-src/hal/halshow_fr.adoc
-src/install/latency-test_fr.adoc
-src/user/user-concepts_fr.adoc
-src/user/user-intro_fr.adoc
-# French superior
-src/gcode/tool-compensation_fr.adoc
-# English not existing
+# Broken
+src/config/pncconf_fr.adoc
+src/gui/pyvcp_fr.adoc
+
+## English not existing
+src/gcode/tool-compensation-expose_fr.adoc
+src/hal/hal-origins_fr.adoc
 src/hal/halui_fr.adoc
 src/Master_User_fr.adoc
+

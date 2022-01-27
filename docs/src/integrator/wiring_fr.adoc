@@ -1,8 +1,0 @@
-[[cha:cablage]]
-
-= Bonnes pratiques de câblage
-
-include::../common/outdated-notice_fr.adoc[]
-
-Lien vers la xref:wiring.adoc[version anglaise].
-

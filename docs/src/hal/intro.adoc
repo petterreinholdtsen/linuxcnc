@@ -1,5 +1,7 @@
-[[cha:hal-introduction]]
+:lang: en
+:toc:
 
+[[cha:hal-introduction]](((HAL: Introduction)))
 = HAL Introduction
 
 HAL(((HAL))) stands for Hardware Abstraction Layer. At the highest
@@ -10,20 +12,22 @@ configure LinuxCNC for a wide variety of hardware devices. Many of the
 building blocks are drivers for hardware devices. However, HAL can do
 more than just configure hardware drivers.
 
+[[sec:hal-basics]](((HAL: Basics)))
 == HAL is based on traditional system design techniques
 
 HAL is based on the same principles that are used to design hardware
 circuits and systems, so it is useful to examine those principles
 first.
 
-Any system (including a CNC(((CNC))) machine), consists of
+Any system, including a CNC(((CNC))) machine, consists of
 interconnected components. For the CNC machine, those components might
 be the main controller, servo amps or stepper drives, motors, encoders,
 limit switches, pushbutton pendants, perhaps a VFD for the spindle
 drive, a PLC to run a toolchanger, etc. The machine builder must
 select, mount and wire these pieces together to make a complete system.
 
-.HAL Concept - Connecting like elctrical circuits.
+.HAL Concept - Connecting like electrical circuits.
+
 image::images/hal_circuit_concept.png["HAL Circuit Concept",align="left"]
 
 Figure one would be written in HAL code like this: 
@@ -33,6 +37,7 @@ net signal-blue    component.0.pin1-in      component.1.pin1-out
 net signal-red     component.0.pin3-out     component.1.pin3-in     component.1.pin4-in
 ----
 
+[[sub:hal-part-selection]](((HAL: Part selection)))
 === Part Selection
 
 The machine builder does not need to worry about how each individual
@@ -52,6 +57,7 @@ needed. Usually every interface card will require a driver. Additional
 components may be needed for software generation of step pulses, PLC
 functionality, and a wide variety of other tasks.
 
+[[sub:hal-interconnections-design]](((HAL: Interconnections Design)))
 === Interconnection Design
 
 The designer of a hardware system not only selects the parts, he also
@@ -65,6 +71,7 @@ diagram that shows how all the parts should be interconnected.
 When using HAL, components are interconnected by signals. The designer
 must decide which signals are needed, and what they should connect.
 
+[[sub:hal-implementation]](((HAL: Implementation)))
 === Implementation
 
 Once the wiring diagram is complete it is time to build the machine.
@@ -79,6 +86,7 @@ tools allow you to save a complete list of all the parts, wires, and
 other information about the system, so that it can be 'rebuilt' with a
 single command.
 
+[[sub:hal-testing]](((HAL: Testing)))
 === Testing
 
 Very few machines work right the first time. While testing, the
@@ -94,6 +102,7 @@ signal generator, and other tools needed for testing and tuning a
 system. The same commands used to build the system can be used to make
 changes as needed.
 
+[[sub:hal-basics]](((HAL: Basics Summary)))
 === Summary
 
 This document is aimed at people who already know how to do this kind
@@ -132,6 +141,7 @@ controller is what HAL is all about. If you are comfortable with the
 idea of interconnecting hardware black boxes, you will probably have
 little trouble using HAL to interconnect software black boxes.
 
+[[sec:hal-concepts]](((HAL: Concepts)))
 == HAL Concepts
 
 This section is a glossary that defines key HAL terms but it is a bit
@@ -139,86 +149,99 @@ different than a traditional glossary because these terms are not
 arranged in alphabetical order. They are arranged by their relationship
 or flow in the HAL way of things.
 
+(((HAL:Component)))
 Component::
-     (((HAL Component)))When we talked about hardware design, we referred
-    to the individual pieces as 'parts', 'building blocks', 'black boxes',
-    etc. The HAL equivalent is a 'component' or 'HAL component'. (This
-    document uses 'HAL component' when there is likely to be confusion with
-    other kinds of components, but normally just uses 'component'.) A HAL
-    component is a piece of software with well-defined inputs, outputs, and
-    behavior, that can be installed and interconnected as needed. 
+When we talked about hardware design, we referred
+to the individual pieces as 'parts', 'building blocks', 'black boxes',
+etc. The HAL equivalent is a 'component' or 'HAL component'. (This
+document uses 'HAL component' when there is likely to be confusion with
+other kinds of components, but normally just uses 'component'.) A HAL
+component is a piece of software with well-defined inputs, outputs, and
+behavior, that can be installed and interconnected as needed. 
 
+(((HAL:Parameter)))
 Parameter::
-     (((HAL Parameter)))Many hardware components have adjustments that
-    are not connected to any other components but still need to be
-    accessed. For example, servo amps often have trim pots to allow for
-    tuning adjustments, and test points where a meter or scope can be
-    attached to view the tuning results. HAL components also can have such
-    items, which are referred to as 'parameters'. There are two types of
-    parameters: Input parameters are equivalent to trim pots - they are
-    values that can be adjusted by the user, and remain fixed once they are
-    set. Output parameters cannot be adjusted by the user - they are
-    equivalent to test points that allow internal signals to be monitored.
+Many hardware components have adjustments that
+are not connected to any other components but still need to be
+accessed. For example, servo amps often have trim pots to allow for
+tuning adjustments, and test points where a meter or scope can be
+attached to view the tuning results. HAL components also can have such
+items, which are referred to as 'parameters'. There are two types of
+parameters: Input parameters are equivalent to trim pots - they are
+values that can be adjusted by the user, and remain fixed once they are
+set. Output parameters cannot be adjusted by the user - they are
+equivalent to test points that allow internal signals to be monitored.
 
+(((HAL:Pin)))
 Pin::
-     (((HAL Pin)))Hardware components have terminals which are used to
-    interconnect them. The HAL equivalent is a 'pin' or 'HAL pin'. ('HAL
-    pin' is used when needed to avoid confusion.) All HAL pins are named,
-    and the pin names are used when interconnecting them. HAL pins are
-    software entities that exist only inside the computer. 
+Hardware components have terminals which are used to
+interconnect them. The HAL equivalent is a 'pin' or 'HAL pin'. ('HAL
+pin' is used when needed to avoid confusion.) All HAL pins are named,
+and the pin names are used when interconnecting them. HAL pins are
+software entities that exist only inside the computer. 
 
+(((HAL:Physical Pin)))
 Physical_Pin::
-     (((HAL Physical-Pin)))Many I/O devices have real physical pins or
-    terminals that connect to external hardware, for example the pins of a
-    parallel port connector. To avoid confusion, these are referred to as
-    'physical pins'. These are the things that 'stick out' into the real
-    world.
+Many I/O devices have real physical pins or
+terminals that connect to external hardware, for example the pins of a
+parallel port connector. To avoid confusion, these are referred to as
+'physical pins'. These are the things that 'stick out' into the real
+world.
 
+From _fr: Vous vous demandez peut être quelle relation il y a entre les
+HAL_pins, les Physical_pins et les éléments extérieurs comme les
+codeurs ou une carte stg. Nous avons ici, affaire à des interfaces de
+type translation/conversion de données.
+
+(((HAL:Signal)))
 Signal::
-     (((HAL Signal)))In a physical machine, the terminals of real
-    hardware components are interconnected by wires. The HAL equivalent of
-    a wire is a 'signal' or 'HAL signal'. HAL signals connect HAL pins
-    together as required by the machine builder. HAL signals can be
-    disconnected and reconnected at will (even while the machine is
-    running).
+In a physical machine, the terminals of real
+hardware components are interconnected by wires. The HAL equivalent of
+a wire is a 'signal' or 'HAL signal'. HAL signals connect HAL pins
+together as required by the machine builder. HAL signals can be
+disconnected and reconnected at will (even while the machine is
+running).
 
+(((HAL:Type)))
 Type::
-     (((HAL Type)))When using real hardware, you would not connect a 24
-    volt relay output to the +/-10V analog input of a servo amp. HAL pins
-    have the same restrictions, which are based upon their type. Both pins
-    and signals have types, and signals can only be connected to pins of
-    the same type. Currently there are 4 types, as follows:
+When using real hardware, you would not connect a 24
+volt relay output to the +/-10V analog input of a servo amp. HAL pins
+have the same restrictions, which are based upon their type. Both pins
+and signals have types, and signals can only be connected to pins of
+the same type. Currently there are 4 types, as follows:
 
- - bit - a single TRUE/FALSE or ON/OFF value
- - float - a 64 bit floating point value, with approximately 53 bits of
-   resolution and over 1000 bits of dynamic range.
- - u32 - a 32 bit unsigned integer, legal values are 0 to 4,294,967,295
- - s32 - a 32 bit signed integer, legal values are -2,147,483,647 to
-   +2,147,483,647
+- bit - a single TRUE/FALSE or ON/OFF value
+- float - a 64 bit floating point value, with approximately 53 bits of
+resolution and over 1000 bits of dynamic range.
+- u32 - a 32 bit unsigned integer, legal values are 0 to 4,294,967,295
+- s32 - a 32 bit signed integer, legal values are -2,147,483,647 to
++2,147,483,647
 
+(((HAL:Function)))
 Function::
-    Real hardware components tend to
-    act immediately on their inputs. For example, if the input voltage to a
-    servo amp changes, the output also changes automatically. However
-    software components cannot act 'automatically'. Each component has
-    specific code that must be executed to do whatever that component is
-    supposed to do. In some cases, that code simply runs as part of the
-    component. However in most cases, especially in realtime components,
-    the code must run in a specific sequence and at specific intervals. For
-    example, inputs should be read before calculations are performed on the
-    input data, and outputs should not be written until the calculations
-    are done. In these cases, the code is made available to the system in
-    the form of one or more 'functions'. Each function is a block of code
-    that performs a specific action. The system integrator can use
-    'threads' to schedule a series of functions to be executed in a
-    particular order and at specific time intervals.
+Real hardware components tend to
+act immediately on their inputs. For example, if the input voltage to a
+servo amp changes, the output also changes automatically. However
+software components cannot act 'automatically'. Each component has
+specific code that must be executed to do whatever that component is
+supposed to do. In some cases, that code simply runs as part of the
+component. However in most cases, especially in realtime components,
+the code must run in a specific sequence and at specific intervals. For
+example, inputs should be read before calculations are performed on the
+input data, and outputs should not be written until the calculations
+are done. In these cases, the code is made available to the system in
+the form of one or more 'functions'. Each function is a block of code
+that performs a specific action. The system integrator can use
+'threads' to schedule a series of functions to be executed in a
+particular order and at specific time intervals.
 
+(((HAL:Thread)))
 Thread::
-    A 'thread' is a list of functions that
-    runs at specific intervals as part of a realtime task. When a thread is
-    first created, it has a specific time interval (period), but no
-    functions. Functions can be added to the thread, and will be executed
-    in order every time the thread runs.
+A 'thread' is a list of functions that
+runs at specific intervals as part of a realtime task. When a thread is
+first created, it has a specific time interval (period), but no
+functions. Functions can be added to the thread, and will be executed
+in order every time the thread runs.
 
 As an example, suppose we have a parport component named hal_parport.
 That component defines one or more HAL pins for each physical pin. The
@@ -232,6 +255,7 @@ pins, the other to take data from the HAL pins and write it to the
 physical output pins. Both of these functions are part of the parport
 driver.
 
+[[sec:hal-components]](((HAL:Components)))
 == HAL components
 
 Each HAL component is a piece of software with well-defined inputs,
@@ -240,88 +264,117 @@ needed. This section lists some of the available components and a brief
 description of what each does. Complete details for each component are
 available later in this document.
 
+[[sub:hal-external-programs]](((HAL:External Programs)))(((HAL:Hooks)))
 === External Programs with HAL hooks
 
+(((HAL:`motion`)))
 motion::
-     (((motion))) A realtime module that accepts NML
-     footnote:[Neutral Message Language provides a mechanism for handling
-     multiple types of messages in the same buffer as well as simplifying
-     the interface for encoding and decoding buffers in neutral format and
-     the configuration mechanism.] motion commands and interacts with HAL 
+A realtime module that accepts NML
+footnote:[Neutral Message Language provides a mechanism for handling
+multiple types of messages in the same buffer as well as simplifying
+the interface for encoding and decoding buffers in neutral format and
+the configuration mechanism.] motion commands and interacts with HAL.
 
+(((HAL:`iocontrol`)))
 iocontrol::
-     (((iocontrol))) A user space module that accepts NML I/O commands and
-    interacts with HAL 
+A user space module that accepts NML I/O commands and
+interacts with HAL.
 
+(((HAL:`classicladder`)))
 classicladder::
-    (((ClassicLadder))) A PLC using HAL for all I/O
+A PLC using HAL for all I/O.
 
+(((HAL:`halui`)))
 halui::
-     (((halui))) A user space program that interacts with HAL and sends NML
-    commands, it is intended to work as a full User Interface using
-    external knobs & switches 
+A user space program that interacts with HAL and sends NML
+commands, it is intended to work as a full User Interface using
+external knobs & switches.
 
+[[sub:hal-internal-components]](((HAL:Internal Componants)))
 === Internal Components
 
+(((HAL:`stepgen`)))
 stepgen::
-     Software step pulse generator with position loop. See section <<sec:stepgen, Stepgen>>(((stepgen)))
+Software step pulse generator with position loop. See section <<sec:stepgen, Stepgen>>.
 
+(((HAL:`encoder`)))
 encoder::
-     Software based encoder counter. See section <<sec:encoder, Encoder>>(((encoder)))
+Software based encoder counter. See section <<sec:encoder, Encoder>>.
 
+(((HAL:`pid`)))
 pid::
-     Proportional/Integral/Derivative control loops. See section <<sec:pid, PID>>
+Proportional/Integral/Derivative control loops. See section <<sec:pid, PID>>
 
+(((HAL:`siggen`)))
 siggen::
-     A sine/cosine/triangle/square wave generator for testing.
-    See section <<sec:siggen, Siggen>>
+A sine/cosine/triangle/square wave generator for testing.
+See section <<sec:siggen, Siggen>>.
 
+(((HAL:`supply`)))
 supply::
-     a simple source for testing(((supply)))
+A simple source for testing.
 
+(((HAL:`blocks`)))(((HAL:`mux`)))(((HAL:`demux`)))(((HAL:`or`)))(((HAL:`and`)))(((HAL:`integ`)))(((HAL:`ddt`)))(((HAL:`limit`)))(((HAL:`wcomp`)))
+blocks::
+Un assortiment de composants (mux, demux, or, and, integ,
+ddt, limit, wcomp, etc.).
 
+[[sub:hal-hardware-drivers]](((HAL:Hardware drivers)))
 === Hardware Drivers
 
+(((HAL:`hal-ax5214h`)))
 hal_ax5214h::
-     (((hal-ax5214h))) A driver for the Axiom Measurement & Control AX5241H
-    digital I/O board
+A driver for the Axiom Measurement & Control AX5241H
+digital I/O board.
 
+(((HAL:`hal-gm`)))
 hal_gm::
-    (((hal-gm))) General Mechatronics GM6-PCI board
+General Mechatronics GM6-PCI board.
 
+(((HAL:`hal-m5i20`)))
 hal_m5i20::
-    (((hal-m5i20))) Mesa Electronics 5i20 board
+Mesa Electronics 5i20 board.
 
+(((HAL:`hal-motenc`)))
 hal_motenc::
-    (((hal-motenc))) Vital Systems MOTENC-100 board
+Vital Systems MOTENC-100 board.
 
+(((HAL:`hal-parport`)))
 hal_parport::
-    (((hal-parport))) PC parallel port.
+PC parallel port.
 
+(((HAL:`hal-ppmc`)))
 hal_ppmc::
-    (((hal-ppmc))) Pico Systems family of controllers (PPMC, USC and UPC)
+Pico Systems family of controllers (PPMC, USC and UPC).
 
+(((HAL:`hal-stg`)))
 hal_stg::
-    (((hal-stg))) Servo To Go card (version 1 & 2)
+Servo To Go card (version 1 & 2).
 
+(((HAL:`hal-vti`)))
 hal_vti::
-    (((hal-vti))) Vigilant Technologies PCI ENCDAC-4 controller
+Vigilant Technologies PCI ENCDAC-4 controller.
 
+[[sub:hal-tools-utilities]](((HAL:Tools and Utilities)))
 === Tools and Utilities
 
+(((HAL:`halcmd`)))
 halcmd::
-     (((halcmd))) Command line tool for configuration and tuning. See
-    section <<sec:halcmd, Halcmd>> 
+Command line tool for configuration and tuning. See
+section <<sec:halcmd, Halcmd>>
 
+(((HAL:`halmeter`)))
 halmeter::
-     (((halmeter))) A handy multimeter for HAL signals. See section <<sec:halmeter, Halmeter>>. 
+A handy multimeter for HAL signals. See section <<sec:halmeter, Halmeter>>. 
 
+(((HAL:`halscope`)))
 halscope::
-     (((halscope))) A full featured digital storage oscilloscope for HAL
-    signals. See the <<sec:halscope,Halscope>> section.
+A full featured digital storage oscilloscope for HAL
+signals. See the <<sec:halscope,Halscope>> section.
 
 Each of these building blocks is described in detail in later chapters.
 
+[[sec:hal-timing-issues]](((HAL:Timing Issues)))
 == Timing Issues In HAL
 
 Unlike the physical wiring models between black boxes that we have
@@ -361,9 +414,9 @@ does - that is determined by which functions are
 connected to it. The real distinction is simply how often a thread
 runs.
 
-In LinuxCNC you might have a 50 us thread and a 1 ms thread. 
+In LinuxCNC you might have a 50 us thread and a 1 ms thread.
 These would be created based on BASE_PERIOD and SERVO_PERIOD, the
-actual times depend on the values in your ini file. 
+actual times depend on the values in your ini file.
 
 The next step is to decide what each thread needs to do. Some of those
 decisions are the same in (nearly) any LinuxCNC system--For instance,
@@ -373,5 +426,3 @@ Other connections would be made by the integrator. These might include
 hooking the STG driver's encoder read and DAC write functions to the
 servo thread, or hooking stepgen's function to the base-thread, along
 with the parport function(s) to write the steps to the port.
-
-

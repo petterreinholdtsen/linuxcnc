@@ -1,7 +1,0 @@
-[[cha:qtplasmac_fr]]
-
-= QtPlasmaC
-
-include::../common/outdated-notice_fr.adoc[]
-
-Lien vers la xref:qtplasmac.adoc[version anglaise].

@@ -1,7 +1,0 @@
-[[cha:cinematiques-commutables]]
-
-= Cinématiques commutables (switchkins)
-
-include::../common/outdated-notice_fr.adoc[]
-
-Lien vers la xref:switchkins.adoc[version anglaise].

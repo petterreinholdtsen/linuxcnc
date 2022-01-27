@@ -1,3 +1,6 @@
+:lang: en
+:toc:
+
 [[cha:user-foreword]]
 
 = User Foreword
@@ -21,14 +24,11 @@ unsurprisingly it is not difficult to find severe violations of most of
 the following in actual Unix practice:
 
 * Rule of Modularity: Write simple parts connected by clean interfaces.
-
 * Rule of Clarity: Clarity is better than cleverness.
-
 * Rule of Composition: Design programs to be connected to other programs.
-
 * Rule of Separation: Separate policy from mechanism; separate
-    interfaces from engines.footnote:[Found at
-    http://en.wikipedia.org/wiki/Unix_philosophy, 07/06/2008]
+interfaces from engines. footnote:[Found at
+http://en.wikipedia.org/wiki/Unix_philosophy, 07/06/2008]
 
 Mr. Raymond offered several more rules but these four describe
 essential characteristics of the LinuxCNC motion control system.
@@ -67,12 +67,10 @@ write part offsets this way rather than that way." Throughout these
 handbooks we describe the range of abilities currently available.
 
 As you begin your journey into using LinuxCNC we offer two cautionary
-notes:footnote:[Found at http://en.wikipedia.org/wiki/Unix_philosophy, 07/06/2008]
+notes: footnote:[Found at http://en.wikipedia.org/wiki/Unix_philosophy, 07/06/2008]
 
- - Paraphrasing the words of Doug Gwyn on UNIX: "LinuxCNC was not designed to
-   stop its users from doing stupid things, as that would also stop them
-   from doing clever things."
- - Likewise the words of Steven King: "LinuxCNC is user-friendly. It just
-   isn't promiscuous about which users it's friendly with."
-
-
+- Paraphrasing the words of Doug Gwyn on UNIX: "LinuxCNC was not designed to
+stop its users from doing stupid things, as that would also stop them
+from doing clever things."
+- Likewise the words of Steven King: "LinuxCNC is user-friendly. It just
+isn't promiscuous about which users it's friendly with."

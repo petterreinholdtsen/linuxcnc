@@ -1,10 +1,10 @@
 :lang: en
 :toc:
 
-[[cha:linuxcnc-user-introduction]](((introduction)))
-
+[[cha:linuxcnc-user-introduction]](((Introduction)))
 = LinuxCNC User Introduction
 
+[[sec:how-linuxcnc-works]]
 == How LinuxCNC Works
 
 LinuxCNC is a suite of highly-customisable applications for the control of a Computer Numerically
@@ -15,15 +15,17 @@ At its heart, LinuxCNC consists of several key components that are integrated to
 complete system:
 
 * a Graphical User Interface (GUI), which forms the basic interface between the operator, the software
-  and the CNC machine itself;
+and the CNC machine itself;
 * the <<cha:hal-introduction,Hardware Abstraction Layer>> (HAL), which provides a method of linking all
-  the various internal virtual signals generated and received by LinuxCNC with the outside world; and,
+the various internal virtual signals generated and received by LinuxCNC with the outside world; and,
 * the high level controllers that coordinate the generation and execution of motion control of the CNC
-  machine, namely the motion controller (EMCMOT), the discrete input/output controller (EMCIO) and the
-  task executor (EMCTASK).
+machine, namely the motion controller (EMCMOT), the discrete input/output controller (EMCIO) and the
+task executor (EMCTASK).
 
 The below illustration is a simple block diagram showing what a typical 3-axis, CNC mill with stepper
 motors might look like:
+
+.Simple LinuxCNC Controlled Machine
 
 image::images/whatstep1.png["Simple LinuxCNC Controlled Machine",align="center"]
 
@@ -52,67 +54,93 @@ following files:
 * Folder: My_CNC
 ** My_CNC.ini
 *** The INI file contains all the basic hardware information regarding the operation of the CNC mill such
-    as the number of steps each stepper motor must turn to complete one full revolution, the maximum rate at
-    which each stepper may operate at, the limits of travel of each axis or the configuration and behaviour of
-    limit switches on each axis.
+as the number of steps each stepper motor must turn to complete one full revolution, the maximum rate at
+which each stepper may operate at, the limits of travel of each axis or the configuration and behaviour of
+limit switches on each axis.
 ** My_CNC.hal
 *** This HAL file contains information that tells LinuxCNC how to link the internal virtual signals to
-    physical connections beyond the computer. For example, specifying pin 4 on the parallel port to send out
-    the Z axis step direction signal, or directing LinuxCNC to cease driving the X axis motor when a limit
-    switch is triggered on parallel port pin 13.
+physical connections beyond the computer. For example, specifying pin 4 on the parallel port to send out
+the Z axis step direction signal, or directing LinuxCNC to cease driving the X axis motor when a limit
+switch is triggered on parallel port pin 13.
 ** custom.HAL
 *** Customisations to the mill configuration beyond the scope of the wizard may be performed by including
-    further links to other virtual points within LinuxCNC in this HAL file. When starting a LinuxCNC session,
-    this file is read and processed before the GUI is loaded. An example may include initiating Modbus
-    communications to the spindle motor so that it is confirmed as operational before the GUI is displayed.
+further links to other virtual points within LinuxCNC in this HAL file. When starting a LinuxCNC session,
+this file is read and processed before the GUI is loaded. An example may include initiating Modbus
+communications to the spindle motor so that it is confirmed as operational before the GUI is displayed.
 ** custom_postgui.hal
 *** The custom_postgui HAL file allows further customisation of LinuxCNC, but differs from custom.HAL in
-    that it is processed after the GUI is displayed. For example, after establishing Modbus communications to
-    the spindle motor in custom.hal, LinuxCNC can use the custom_postgui file to link the spindle speed readout
-    from the motor drive to a bargraph displayed on the GUI.
+that it is processed after the GUI is displayed. For example, after establishing Modbus communications to
+the spindle motor in custom.hal, LinuxCNC can use the custom_postgui file to link the spindle speed readout
+from the motor drive to a bargraph displayed on the GUI.
 ** postgui_backup.hal
 *** This is provided as a backup copy of the custom_postgui.hal file to allow the user to quickly restore a
-    previously-working postgui HAL configuration. This is especially useful if the user wants to run the
-    Configuration Wizard again under the same 'My_CNC' name in order to modify some parameters of the mill.
-    Saving the mill configuration in the Wizard will overwrite the existing custom_postgui file while leaving
-    the postgui_backup file untouched.
+previously-working postgui HAL configuration. This is especially useful if the user wants to run the
+Configuration Wizard again under the same 'My_CNC' name in order to modify some parameters of the mill.
+Saving the mill configuration in the Wizard will overwrite the existing custom_postgui file while leaving
+the postgui_backup file untouched.
 ** tool.tbl
 *** A tool table file contains a parameterised list of any cutting tools used by the mill. These parameters
-    can include cutter diameter and length, and is used to provide a catalogue of data that tells LinuxCNC how
-    to compensate its motion for different sized tools within a milling operation.
+can include cutter diameter and length, and is used to provide a catalogue of data that tells LinuxCNC how
+to compensate its motion for different sized tools within a milling operation.
 * Folder: nc_files
 *** The nc_files folder is provided as a default location to store the G-code programs used to drive the
-    mill. It also includes a number of subfolders with G-code examples.
+mill. It also includes a number of subfolders with G-code examples.
 
+[[sec:graphical-user-interfaces]](((Graphical User Interfaces)))
 == Graphical User Interfaces
 
 A graphical user interface is the part of the LinuxCNC that the machine tool operator interacts with.
 LinuxCNC comes with several types of user interfaces which may be chosen from by editing
 certain fields contained in the <<cha:ini-configuration,INI file>>:
 
-<<cha:axis-gui,Axis>>, the standard keyboard GUI interface. This is also the default GUI launched when a
+Axis:: <<cha:axis-gui,Axis>>, the standard keyboard GUI interface. This is also the default GUI launched when a
 Configuration Wizard is used to create a desktop icon launcher:
+
+.AXIS graphical interface[[fig:axis-graphical-interface]]
 
 image::../gui/images/axis.png["Axis, the standard keyboard GUI interface",align="center"]
 
-<<cha:touchy-gui,Touchy>>, a touch screen GUI:
+Touchy:: <<cha:touchy-gui,Touchy>>, a touch screens GUI:
+
+.Touchy graphical interface[[fig:touchy-graphical-interface]]
 
 image::../gui/images/touchy.png["Touchy, a touch screen GUI",align="center"]
 
-<<cha:gscreen,Gscreen>>, a user-configurable touch screen GUI:
+Gscreen:: <<cha:gscreen,Gscreen>>, a user-configurable touch screen GUI:
+
+.Gscreen graphical interface[[fig:gscreen-graphical-interface]]
 
 image::../gui/images/gscreen-mill.png["Gscreen, a configurable base touch screen GUI",align="center"]
 
-<<cha:gmoccapy,GMOCCAPY>>, a touch screen GUI based on Gscreen. GMOCCAPY is also designed to work equally
+GMOCCAPY:: <<cha:gmoccapy,GMOCCAPY>>, a touch screen GUI based on Gscreen. GMOCCAPY is also designed to work equally
 well in applications where a keyboard and mouse are the preferred methods of controlling the GUI:
+
+.GMOCCAPY graphical interface[[fig:gmoccapy-graphical-interface]]
 
 image::../gui/images/gmoccapy_3_axis.png["gmoccapy, a touch screen GUI based on Gscreen",align="center"]
 
-<<cha:ngcgui,NGCGUI>>, a subroutine GUI that provides wizard-style programming of G code. NGCGUI may be
+NGCGUI:: <<cha:ngcgui,NGCGUI>>, a subroutine GUI that provides wizard-style programming of G code. NGCGUI may be
 run as a standalone program or embedded into another GUI as a series of tabs. The following screen shot
 shows NGCGUI embedded into Axis:
 
-image::../gui/images/ngcgui.png["NGCGUI, a subroutine GUI that provides wizard-style programming of G code",align="center"]
+.NGCGUI graphical interface integrated into Axis[[fig:ngcgui-graphical-interface-into-axis]]
+
+image::../gui/images/ngcgui.png["NGCGUI graphical interface integrated into Axis",align="center"]
+
+TkLinuxCNC:: From _fr: <<cha:TkLinuxCNC,_TkLinuxCNC_>>, une autre interface basée sur Tcl/Tk.
+C'est l'interface la plus populaire après Axis
+
+.TkLinuxCNC graphical interface[[fig:tklinuxcnc-graphical-interface]]
+
+image::images/tklinuxcnc_fr.png["TkLinuxCNC graphical interface",align="center"]
+
+Xemc:: From _fr: un programme X-Windows
+
+halui:: From _fr: une interface utilisateur basée sur HAL, qui permet de contrôler
+LinuxCNC en utilisant des boutons et des interrupteurs
+
+linuxcncrsh:: From _fr: une interface utilisateur basée sur telnet, qui permet 
+d'envoyer des commandes à partir d'ordinateurs distants de celui de LinuxCNC
 
 == Virtual Control Panels
 
@@ -120,14 +148,14 @@ As mentioned above, many of LinuxCNC's GUIs may be customised by the user. This 
 indicators, readouts, switches or sliders to the basic appearance of one of the GUIs for increased
 flexibility or functionality. Two styles of Virtual Control Panel are offered in LinuxCNC:
 
-<<cha:pyvcp,'PyVCP'>>, a Python-based virtual control panel that can be added to the Axis GUI. PyVCP only
+PyVCP:: <<cha:pyvcp,'PyVCP'>>, a Python-based virtual control panel that can be added to the Axis GUI. PyVCP only
 utilises virtual signals contained within the Hardware Abstraction Layer, such as the spindle-at-speed
 indicator or the Emergency Stop output signal, and has a simple no-frills appearance. This makes it an
 excellent choice if the user wants to add a Virtual Control Panel with minimal fuss.
 
 image::../gui/images/axis-pyvcp.png["PyVCP with Axis",align="center"]
 
-<<cha:glade-vcp,'GladeVCP'>>, a Glade-based virtual control panel that can be added to the Axis or Touchy
+GladeVCP:: <<cha:glade-vcp,'GladeVCP'>>, a Glade-based virtual control panel that can be added to the Axis or Touchy
 GUIs. GladeVCP has the advantage over PyVCP in that it is not limited to the display or control of HAL
 virtual signals, but can include other external interfaces outside LinuxCNC such as window or network
 events. GladeVCP is also more flexible in how it may be configured to appear on the GUI:
@@ -142,6 +170,28 @@ created, LinuxCNC will automatically use whatever native language you log in wit
 operating system. If your language has not been translated, contact a developer on the IRC, the mailing
 list or the User Forum for assistance.
 
+[[sec:thinking-operator]]
+== From _fr: Penser comme un opérateur sur CNC
+
+From _fr: Ce manuel ne prétend pas vous apprendre à utiliser un tour ou une
+fraiseuse. Devenir un opérateur expérimenté prends beaucoup de temps et
+demande beaucoup de travail. Un auteur a dit un jour, _Nous apprenons
+par l'expérience, si on la possède toute_. Les outils cassés, les étaux
+attaqués et les cicatrices sont les preuves des leçons apprises. Une
+belle finition, des tolérances serrées et la prudence pendant le
+travail sont les preuves des leçons retenues. Aucune machine, aucun
+programme ne peut remplacer l'expérience humaine.
+
+From _fr: Maintenant que vous commencez à travailler avec le programme LinuxCNC,
+vous devez vous placer dans la peau d'un opérateur. Vous devez être 
+dans le rôle de quelqu'un qui a la charge d'une machine. C'est une
+machine qui attendra vos commandes puis qui exécutera les ordres que
+vous lui donnerez. Dans ces pages, nous donnerons les explications qui
+vous aideront à devenir un bon opérateur de CNC avec LinuxCNC. Vous aurez besoin
+de bonnes informations ici, devant vous, c'est là que les pages suivantes 
+prendront tout leur sens.
+
+[[sec:modes-of-operations]]
 == Modes of Operation
 
 When LinuxCNC is running, there are three different major modes used for inputting commands. These are

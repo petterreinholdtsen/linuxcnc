@@ -176,8 +176,9 @@ $(DOC_DIR)/po/Documentation.pot: $(addprefix $(DOC_SRCDIR)/, $(DOC_SRCS_EN))
 	cd $(DOC_DIR); po4a --no-translations po4a.cfg
 pofiles: $(DOC_DIR)/po/Documentation.pot
 
-translateddocs: $(DOC_DIR)/po/Documentation.pot
+translateddocs: manpages $(DOC_DIR)/po/Documentation.pot
 	cd $(DOC_DIR); po4a --no-update po4a.cfg
+docs: translateddocs
 
 postatus::
 	@echo "info: Documentation POT and PO file status"

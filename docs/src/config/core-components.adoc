@@ -83,6 +83,7 @@ Example:
 unlock_joints_mask=0x38 selects joints 3,4,5
 ----
 
+selecciona articulaciones 3,4,5
 
 [[sec:motion-pins]]
 === Pins(((motion (HAL pins))))
@@ -173,9 +174,10 @@ order shown.
 * 'motion-controller' - Runs the LinuxCNC motion controller
 
 == Spindle
-Linuxcnc can control upto eight spindles. +
-Motion will produce the following pins: +
-The 'N' will be the integer of the spindle number. (0-7) +
+
+LinuxCNC can control upto eight spindles.
+Motion will produce the following pins:
+The 'N' will be the integer of the spindle number. (0-7)
 
 [[sec:spindle-pins]]
 === Pins(((spindle (HAL pins))))

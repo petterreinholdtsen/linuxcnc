@@ -87,7 +87,8 @@ unlock_joints_mask=0x38 selects joints 3,4,5
 [[sec:motion-pins]]
 === Pins(((motion (HAL pins))))
 
-These pins, parameters, and functions are created by the realtime 'motmod' module.
+These pins, parameters, and functions are created by the realtime 'motmod'
+module.
 
 * 'motion.adaptive-feed' - (float, in) When adaptive feed is enabled with 'M52 P1' , the
   commanded velocity is multiplied by this value. This effect is
@@ -157,10 +158,10 @@ change or removal at any time.
 * 'motion.debug-float-3' - (float, RO) This is used for debugging purposes.
 * 'motion.debug-s32-0' - (s32, RO) This is used for debugging purposes.
 * 'motion.debug-s32-1' - (s32, RO) This is used for debugging purposes.
-* 'motion.servo.last-period' - (u32, RO) The number of CPU cycles between invocations of the servo
-  thread. Typically, this number divided by the CPU speed gives the time
-  in seconds, and can be used to determine whether the realtime motion
-  controller is meeting its timing constraints
+* 'motion.servo.last-period' - (u32, RO) The number of CPU cycles between
+  invocations of the servo thread. Typically, this number divided by the
+  CPU speed gives the time in seconds, and can be used to determine whether
+  the realtime motion controller is meeting its timing constraints
 * 'motion.servo.last-period-ns' - (float, RO)
 
 === Functions
@@ -173,9 +174,10 @@ order shown.
 
 == Spindle
 
-LinuxCNC can control upto eight spindles.
-Motion will produce the following pins:
-The 'N' will be the integer of the spindle number. (0-7)
+Linuxcnc can control up to eight spindles.
+
+Motion will produce the following pins (the 'N' being the integer of the
+spindle number, 0-7):
 
 [[sec:spindle-pins]]
 === Pins(((spindle (HAL pins))))
@@ -184,7 +186,7 @@ The 'N' will be the integer of the spindle number. (0-7)
   Motion will pause until this pin is TRUE, under the following conditions:
 ** before the first feed move after each spindle start or speed change;
 ** before the start of every chain of spindle-synchronized moves;
-** and if in CSS mode, at every rapid to feed transition.
+** and if in CSS mode, at every rapid to feed transition. +
    This input can be used to ensure that the spindle is up to speed before
    starting a cut, or that a lathe spindle in CSS mode has slowed down
    after a large to small facing pass before starting the next pass at
@@ -233,9 +235,9 @@ The 'N' will be the integer of the spindle number. (0-7)
 .HAL pin usage for M19 orient spindle
 Conceptually the spindle is in one of the following modes:
 
- - rotation mode (the default)
- - searching for desired orientation mode
- - orientation complete mode.
+- rotation mode (the default)
+- searching for desired orientation mode
+- orientation complete mode.
 
 When an M19 is executed, the spindle changes to 'searching for desired
 orientation', and the `spindle.N.orient` HAL pin is asserted.
@@ -263,9 +265,9 @@ This is indicated by deasserting both the `spindle-orient` and `spindle-locked` 
 The `spindle-orient-mode` pin reflects the M19 P word and shall be
 interpreted as follows:
 
- - 0: rotate clockwise or counterclockwise for smallest angular movement
- - 1: always rotate clockwise
- - 2: always rotate counterclockwise
+- 0: rotate clockwise or counterclockwise for smallest angular movement
+- 1: always rotate clockwise
+- 2: always rotate counterclockwise
 
 It can be used with the `orient` HAL component which provides a PID
 command value based on spindle encoder position, `spindle-orient-angle`

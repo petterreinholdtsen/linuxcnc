@@ -38,7 +38,11 @@ Build-Depends:
     tcl@TCLTK_VERSION@-dev,
     tclx,
     tk@TCLTK_VERSION@-dev,
-    yapps2
+    yapps2,
+    scrot,
+    x11vnc,
+    xnee,
+    xvfb
 Build-Depends-Indep:
     @DOC_DEPENDS@,
 Standards-Version: 4.6.0

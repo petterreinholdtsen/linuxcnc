@@ -1,0 +1,143 @@
+##############################################
+#      Recording limits etc                  #
+##############################################
+
+events-to-record        1000
+data-to-record          -1
+seconds-to-record       -1
+# first-last
+
+# Record  all (including current) clients or only future ones
+all-clients
+# future-clients
+
+# Store the starting mouse position 
+# store-mouse-position
+
+
+##############################################
+#      Resolution                            #
+##############################################
+
+# Resolution
+#recorded-resolution  1280x1024
+#replay-resolution  1x1
+#resolution-adjustment  0
+
+
+##############################################
+#      Speed                                 #
+##############################################
+
+# Speed
+#speed-percent  100
+
+
+##############################################
+#      Replaying limits etc                  #
+##############################################
+
+max-threshold 20 
+min-threshold 20 
+tot-threshold 40 
+
+
+##############################################
+#      Feedback                              #
+##############################################
+#feedback-none
+#feedback-stderr
+feedback-xosd
+ 
+
+
+##############################################
+#      Various                               #
+##############################################
+
+# Plugin file 
+
+# Modes (currently not used)
+# synchronised-replay
+
+# Replay offset
+#replay-offset 0x0
+
+# Human printout of X11 data (instead of Xnee format)
+# human-printout  
+
+# Delay before starting record/replay
+# time 0
+
+# No recording of ReparentNotify
+# no-reparent-recording 
+
+# Various
+#########################################
+#          Record settings              #
+#########################################
+#   data_flags          7
+#   rState              0x56490acab2b0
+#   xids[0]             3
+#   xids[1]             0
+# Number of Ranges      2
+# RecordRange[0]
+request-range            0-0
+reply-range                   0-0 
+extension-request-major-range  0-0 
+extension-request-minor-range  0-0 
+extension-reply-major-range   0-0
+extension-reply-minor-range   0-0 
+delivered-event-range         21-21 
+device-event-range            2-6 
+error-range                   0-0 
+# RecordRange[1]
+request-range            0-0
+reply-range                   0-0 
+extension-request-major-range  0-0 
+extension-request-minor-range  0-0 
+extension-reply-major-range   0-0
+extension-reply-minor-range   0-0 
+delivered-event-range         0-0 
+device-event-range            66-71 
+error-range                   0-0 
+7,6,324,196,0,0,0,1654964170,4,'Virtual core XTEST pointer'
+7,4,0,0,1,0,0,1654964429,4,Virtual core XTEST pointer
+6,4,0,0,1,0,0,1654964429,2,Virtual core pointer
+7,5,0,0,1,0,0,1654964499,4,Virtual core XTEST pointer
+6,5,0,0,1,0,0,1654964499,2,Virtual core pointer
+7,4,0,0,1,0,0,1654964578,4,Virtual core XTEST pointer
+6,4,0,0,1,0,0,1654964578,2,Virtual core pointer
+7,5,0,0,1,0,0,1654964706,4,Virtual core XTEST pointer
+6,5,0,0,1,0,0,1654964706,2,Virtual core pointer
+7,6,322,196,0,0,0,1654966015,4,'Virtual core XTEST pointer'
+7,2,0,0,0,64,0,1654968590,5,Virtual core XTEST keyboard
+6,2,0,0,0,64,0,1654968590,3,Virtual core keyboard
+7,3,0,0,0,64,0,1654968712,5,Virtual core XTEST keyboard
+6,3,0,0,0,64,0,1654968712,3,Virtual core keyboard
+7,2,0,0,0,64,0,1654969706,5,Virtual core XTEST keyboard
+6,2,0,0,0,64,0,1654969706,3,Virtual core keyboard
+7,3,0,0,0,64,0,1654969855,5,Virtual core XTEST keyboard
+6,3,0,0,0,64,0,1654969855,3,Virtual core keyboard
+7,2,0,0,0,64,0,1654971396,5,Virtual core XTEST keyboard
+6,2,0,0,0,64,0,1654971396,3,Virtual core keyboard
+7,3,0,0,0,64,0,1654971557,5,Virtual core XTEST keyboard
+6,3,0,0,0,64,0,1654971557,3,Virtual core keyboard
+7,6,322,195,0,0,0,1654992138,4,'Virtual core XTEST pointer'
+7,6,13,0,0,0,0,1654992153,4,'Virtual core XTEST pointer'
+7,6,13,2,0,0,0,1654992201,4,'Virtual core XTEST pointer'
+7,6,13,3,0,0,0,1654992267,4,'Virtual core XTEST pointer'
+7,6,13,5,0,0,0,1654992308,4,'Virtual core XTEST pointer'
+7,6,14,6,0,0,0,1654992356,4,'Virtual core XTEST pointer'
+7,6,14,8,0,0,0,1654992425,4,'Virtual core XTEST pointer'
+7,4,0,0,1,0,0,1654992668,4,Virtual core XTEST pointer
+6,4,0,0,1,0,0,1654992668,2,Virtual core pointer
+7,5,0,0,1,0,0,1654992795,4,Virtual core XTEST pointer
+6,5,0,0,1,0,0,1654992795,2,Virtual core pointer
+7,2,0,0,0,24,0,1654994269,5,Virtual core XTEST keyboard
+6,2,0,0,0,24,0,1654994269,3,Virtual core keyboard
+7,3,0,0,0,24,0,1654994403,5,Virtual core XTEST keyboard
+6,3,0,0,0,24,0,1654994403,3,Virtual core keyboard
+7,6,14,10,0,0,0,1654996329,4,'Virtual core XTEST pointer'
+7,6,16,10,0,0,0,1654996337,4,'Virtual core XTEST pointer'
+7,6,16,8,0,0,0,1654996358,4,'Virtual core XTEST pointer'

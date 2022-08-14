@@ -740,8 +740,10 @@ void Handwheel::count(int8_t delta)
 
     std::ios init(NULL);
     init.copyfmt(*mWheelCout);
+#if 0
     *mWheelCout << mPrefix << "wheel total counts " << std::setfill(' ') << std::setw(5) << mCounters
                 << endl;
+#endif
     mWheelCout->copyfmt(init);
 }
 // ----------------------------------------------------------------------
@@ -1450,9 +1452,14 @@ bool Pendant::onJogDialEvent(const HandWheelCounters& counters, int8_t delta)
 
     FeedRotaryButton& feedButton = mCurrentButtonsState.feedButton();
 
+#if 0
+    printf("onjogdial event\n");
+#endif
     if (HandWheelCounters::CounterNameToIndex::UNDEFINED != counters.activeCounter()) // && 0 != counters.counts())
     {
+#if 0
         *mPendantCout << mPrefix << "wheel  event " << counters.counts() << endl;
+#endif
 
         if (0 != delta)
         {
@@ -1480,6 +1487,7 @@ bool Pendant::onJogDialEvent(const HandWheelCounters& counters, int8_t delta)
              }
              else if (!counters.isLeadCounterActive() && (feedButton.stepMode() == HandwheelStepmodes::Mode::CON || feedButton.stepMode() == HandwheelStepmodes::Mode::STEP))
              {      // Normal Mode
+		    printf("set jog counts\n");
                     mHal.setJogCounts(counters);
              }
         }
@@ -1517,10 +1525,12 @@ void Pendant::dispatchAxisEventToHandwheel(const KeyCode& axis, bool isActive)
     }
     else if (axis.code == KeyCodes::Axis.b.code)
     {
+	    printf("axis.b code\n");
         mHandWheel.counters().setActiveCounter(HandWheelCounters::CounterNameToIndex::AXIS_B);
     }
     else if (axis.code == KeyCodes::Axis.c.code)
     {
+	    printf("axis.c code\n");
         mHandWheel.counters().setActiveCounter(HandWheelCounters::CounterNameToIndex::AXIS_C);
     }
     else if (axis.code == KeyCodes::Axis.undefined.code)
@@ -1531,6 +1541,7 @@ void Pendant::dispatchAxisEventToHandwheel(const KeyCode& axis, bool isActive)
 // ----------------------------------------------------------------------
 void Pendant::dispatchAxisEventToHal(const KeyCode& axis, bool isActive)
 {
+    printf("dispatch axis event to hal\n");
     if (axis.code == KeyCodes::Axis.off.code)
     {
         mHal.setNoAxisActive(isActive);
@@ -1553,10 +1564,12 @@ void Pendant::dispatchAxisEventToHal(const KeyCode& axis, bool isActive)
     }
     else if (axis.code == KeyCodes::Axis.b.code)
     {
+	printf("set Axis B Active\n");
         mHal.setAxisBActive(isActive);
     }
     else if (axis.code == KeyCodes::Axis.c.code)
     {
+	printf("set Axis C Active\n");
         mHal.setAxisCActive(isActive);
     }
     else if (axis.code == KeyCodes::Axis.undefined.code)

@@ -458,6 +458,32 @@ void Hal::init(const MetaButtonCodes* metaButtons, const KeyCodes& keyCodes)
     newHalBit(HAL_OUT, &(memory->out.lubeStop), mHalCompId, "%s.halui.lube.off", mComponentPrefix);
     newHalBit(HAL_OUT, &(memory->out.lubeStart), mHalCompId, "%s.halui.lube.on", mComponentPrefix);
 
+////// mrec
+    newHalSigned32(HAL_OUT, &(memory->out.joint0JogCounts), mHalCompId, "%s.joint.0.jog-counts", mComponentPrefix);
+    newHalFloat(HAL_OUT, &(memory->out.joint0JogScale), mHalCompId, "%s.joint.0.jog-scale", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint0JogEnable), mHalCompId, "%s.joint.0.jog-enable", mComponentPrefix);
+
+    newHalSigned32(HAL_OUT, &(memory->out.joint1JogCounts), mHalCompId, "%s.joint.1.jog-counts", mComponentPrefix);
+    newHalFloat(HAL_OUT, &(memory->out.joint1JogScale), mHalCompId, "%s.joint.1.jog-scale", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint1JogEnable), mHalCompId, "%s.joint.1.jog-enable", mComponentPrefix);
+
+    newHalSigned32(HAL_OUT, &(memory->out.joint2JogCounts), mHalCompId, "%s.joint.2.jog-counts", mComponentPrefix);
+    newHalFloat(HAL_OUT, &(memory->out.joint2JogScale), mHalCompId, "%s.joint.2.jog-scale", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint2JogEnable), mHalCompId, "%s.joint.2.jog-enable", mComponentPrefix);
+
+    newHalSigned32(HAL_OUT, &(memory->out.joint3JogCounts), mHalCompId, "%s.joint.3.jog-counts", mComponentPrefix);
+    newHalFloat(HAL_OUT, &(memory->out.joint3JogScale), mHalCompId, "%s.joint.3.jog-scale", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint3JogEnable), mHalCompId, "%s.joint.3.jog-enable", mComponentPrefix);
+
+    newHalSigned32(HAL_OUT, &(memory->out.joint4JogCounts), mHalCompId, "%s.joint.4.jog-counts", mComponentPrefix);
+    newHalFloat(HAL_OUT, &(memory->out.joint4JogScale), mHalCompId, "%s.joint.4.jog-scale", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint4JogEnable), mHalCompId, "%s.joint.4.jog-enable", mComponentPrefix);
+
+    newHalSigned32(HAL_OUT, &(memory->out.joint5JogCounts), mHalCompId, "%s.joint.5.jog-counts", mComponentPrefix);
+    newHalFloat(HAL_OUT, &(memory->out.joint5JogScale), mHalCompId, "%s.joint.5.jog-scale", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint5JogEnable), mHalCompId, "%s.joint.5.jog-enable", mComponentPrefix);
+/////
+
     newHalSigned32(HAL_OUT, &(memory->out.axisXJogCounts), mHalCompId, "%s.axis.x.jog-counts", mComponentPrefix);
     newHalBit(HAL_OUT, &(memory->out.axisXJogEnable), mHalCompId, "%s.axis.x.jog-enable", mComponentPrefix);
     newHalFloat(HAL_OUT, &(memory->out.axisXJogScale), mHalCompId, "%s.axis.x.jog-scale", mComponentPrefix);
@@ -565,6 +591,20 @@ void Hal::init(const MetaButtonCodes* metaButtons, const KeyCodes& keyCodes)
     newHalBit(HAL_IN, &(memory->in.JointCisHomed), mHalCompId, "%s.halui.joint.c.is-homed", mComponentPrefix);
 
 
+    newHalBit(HAL_OUT, &(memory->out.joint0Home), mHalCompId, "%s.joint.0.home", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint1Home), mHalCompId, "%s.joint.1.home", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint2Home), mHalCompId, "%s.joint.2.home", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint3Home), mHalCompId, "%s.joint.3.home", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint4Home), mHalCompId, "%s.joint.4.home", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint5Home), mHalCompId, "%s.joint.5.home", mComponentPrefix);
+
+    newHalBit(HAL_OUT, &(memory->out.joint0Unhome), mHalCompId, "%s.joint.0.unhome", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint1Unhome), mHalCompId, "%s.joint.1.unhome", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint2Unhome), mHalCompId, "%s.joint.2.unhome", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint3Unhome), mHalCompId, "%s.joint.3.unhome", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint4Unhome), mHalCompId, "%s.joint.4.unhome", mComponentPrefix);
+    newHalBit(HAL_OUT, &(memory->out.joint5Unhome), mHalCompId, "%s.joint.5.unhome", mComponentPrefix);
+
     newHalBit(HAL_OUT, &(memory->out.doModeAuto), mHalCompId, "%s.halui.mode.auto", mComponentPrefix);
     newHalBit(HAL_OUT, &(memory->out.doModeJoint), mHalCompId, "%s.halui.mode.joint", mComponentPrefix);
     newHalBit(HAL_OUT, &(memory->out.doModeManual), mHalCompId, "%s.halui.mode.manual", mComponentPrefix);
@@ -642,6 +682,8 @@ hal_float_t Hal::getAxisCPosition(bool absolute) const
 // ----------------------------------------------------------------------
 void Hal::enableVerbose(bool enable)
 {
+    enable=true;
+ 
     if (enable)
     {
         mHalCout = &std::cout;
@@ -660,53 +702,53 @@ void Hal::setNoAxisActive(bool enabled)
 void Hal::setAxisXActive(bool enabled)
 {
     *memory->out.axisXSelect   = enabled;
-    *memory->out.axisXJogEnable = enabled;
+    *memory->out.joint0JogEnable = *memory->out.axisXJogEnable = enabled;
     *mHalCout << "hal   X axis active" << endl;
 }
 // ----------------------------------------------------------------------
 void Hal::setAxisYActive(bool enabled)
 {
     *memory->out.axisYSelect   = enabled;
-    *memory->out.axisYJogEnable = enabled;
+    *memory->out.joint1JogEnable = *memory->out.axisYJogEnable = enabled;
     *mHalCout << "hal   Y axis active" << endl;
 }
 // ----------------------------------------------------------------------
 void Hal::setAxisZActive(bool enabled)
 {
     *memory->out.axisZSelect   = enabled;
-    *memory->out.axisZJogEnable = enabled;
+    *memory->out.joint2JogEnable = *memory->out.axisZJogEnable = enabled;
     *mHalCout << "hal   Z axis active" << endl;
 }
 // ----------------------------------------------------------------------
 void Hal::setAxisAActive(bool enabled)
 {
     *memory->out.axisASelect   = enabled;
-    *memory->out.axisAJogEnable = enabled;
+    *memory->out.joint3JogEnable = *memory->out.axisAJogEnable = enabled;
     *mHalCout << "hal   A axis active" << endl;
 }
 // ----------------------------------------------------------------------
 void Hal::setAxisBActive(bool enabled)
 {
     *memory->out.axisBSelect   = enabled;
-    *memory->out.axisBJogEnable = enabled;
+    *memory->out.joint4JogEnable = *memory->out.axisBJogEnable = enabled;
     *mHalCout << "hal   B axis active" << endl;
 }
 // ----------------------------------------------------------------------
 void Hal::setAxisCActive(bool enabled)
 {
     *memory->out.axisCSelect   = enabled;
-    *memory->out.axisCJogEnable = enabled;
+    *memory->out.joint5JogEnable = *memory->out.axisCJogEnable = enabled;
     *mHalCout << "hal   C axis active" << endl;
 }
 // ----------------------------------------------------------------------
 void Hal::setStepSize(const hal_float_t stepSize)
 {
-    *memory->out.axisXJogScale = stepSize;
-    *memory->out.axisYJogScale = stepSize;
-    *memory->out.axisZJogScale = stepSize;
-    *memory->out.axisAJogScale = stepSize;
-    *memory->out.axisBJogScale = stepSize;
-    *memory->out.axisCJogScale = stepSize;
+    *memory->out.joint0JogScale = *memory->out.axisXJogScale = stepSize;
+    *memory->out.joint1JogScale = *memory->out.axisYJogScale = stepSize;
+    *memory->out.joint2JogScale = *memory->out.axisZJogScale = stepSize;
+    *memory->out.joint3JogScale = *memory->out.axisAJogScale = stepSize;
+    *memory->out.joint4JogScale = *memory->out.axisBJogScale = stepSize;
+    *memory->out.joint5JogScale = *memory->out.axisCJogScale = stepSize;
     *mHalCout << "hal   step size " << stepSize << endl;
 }
 // ----------------------------------------------------------------------
@@ -958,7 +1000,98 @@ void Hal::setSpindleOverrideMinus(bool enabled)
  */
 void Hal::setMachineHomingAll(bool enabled)
 {
-//    if (requestManualMode(enabled))
+    if (enabled) {
+	    /* pushing the button for 1 second will cause an unhome on the selected axis */
+        if (*memory->out.joint0JogEnable) {
+		//*memory->out.joint0Home = true;
+		mjoint0HomeDoHome=true;
+		mjoint0HomeStamp=now()+1000;
+	}
+	if (*memory->out.joint1JogEnable) {
+		//*memory->out.joint1Home = true;
+		mjoint1HomeDoHome=true;
+		mjoint1HomeStamp=now()+1000;
+	}
+	if (*memory->out.joint2JogEnable) {
+		//*memory->out.joint2Home = true;
+		mjoint2HomeDoHome=true;
+		mjoint2HomeStamp=now()+1000;
+	}
+	if (*memory->out.joint3JogEnable) {
+		*memory->out.joint3Home = true;
+		mjoint3HomeDoHome=true;
+		mjoint3HomeStamp=now()+1000;
+	}
+	if (*memory->out.joint4JogEnable) {
+		*memory->out.joint4Home = true;
+		mjoint4HomeDoHome=true;
+		mjoint4HomeStamp=now()+1000;
+	}
+	if (*memory->out.joint5JogEnable) {
+		*memory->out.joint5Home = true;
+		mjoint5HomeDoHome=true;
+		mjoint5HomeStamp=now()+1000;
+	}
+    } else {
+	    if (mjoint0HomeDoHome) {
+		    //*memory->out.joint0Home = false;
+		    mjoint0HomeDoHome=false;
+		    if (expired(mjoint0HomeStamp)) {
+			    *memory->out.joint0Unhome = true;
+			    mjoint0UnhomeStamp=now()+50;
+		    } else {
+			    *memory->out.joint0Home = true;
+			    mjoint0HomeStamp=now()+50;
+		    }
+	    }
+	    if (mjoint1HomeDoHome) {
+		    //*memory->out.joint1Home = false;
+		    mjoint1HomeDoHome=false;
+		    if (expired(mjoint1HomeStamp)) {
+			    *memory->out.joint1Unhome = true;
+			    mjoint1UnhomeStamp=now()+50;
+		    } else {
+			    *memory->out.joint1Home = true;
+			    mjoint1HomeStamp=now()+50;
+		    }
+	    }
+	    if (mjoint2HomeDoHome) {
+		    //*memory->out.joint2Home = false;
+		    mjoint2HomeDoHome=false;
+		    if (expired(mjoint2HomeStamp)) {
+			    *memory->out.joint2Unhome = true;
+			    mjoint2UnhomeStamp=now()+50;
+		    } else {
+			    *memory->out.joint2Home = true;
+			    mjoint2HomeStamp=now()+50;
+		    }
+	    }
+	    if (mjoint3HomeDoHome) {
+		    *memory->out.joint3Home = false;
+		    mjoint3HomeDoHome=false;
+		    if (expired(mjoint3HomeStamp)) {
+			    *memory->out.joint3Unhome = true;
+			    mjoint3UnhomeStamp=now()+50;
+		    }
+	    }
+	    if (mjoint4HomeDoHome) {
+		    *memory->out.joint4Home = false;
+		    mjoint4HomeDoHome=false;
+		    if (expired(mjoint4HomeStamp)) {
+			    *memory->out.joint4Unhome = true;
+			    mjoint4UnhomeStamp=now()+50;
+		    }
+	    }
+	    if (mjoint5HomeDoHome) {
+		    *memory->out.joint5Home = false;
+		    mjoint5HomeDoHome=false;
+		    if (expired(mjoint5HomeStamp)) {
+			    *memory->out.joint5Unhome = true;
+			    mjoint5UnhomeStamp=now()+50;
+		    }
+	    }
+    }
+	    
     if (requestJointMode(enabled))
     {
         if (enabled)
@@ -967,9 +1100,9 @@ void Hal::setMachineHomingAll(bool enabled)
         }
     }
     if (!enabled)
-{
-    setPin(enabled, KeyCodes::Buttons.machine_home.text);
-}
+    {
+	    setPin(enabled, KeyCodes::Buttons.machine_home.text);
+    }
 }
 // ----------------------------------------------------------------------
 /**
@@ -1338,28 +1471,18 @@ void Hal::setPin(bool enabled, const char* pinName)
     size_t pinNumber = mButtonNameToIdx[fullyQualifiedPinName];
     setPin(enabled, pinNumber, pinName);
 }
+
 // ----------------------------------------------------------------------
 void Hal::setJogCounts(const HandWheelCounters& counters)
 {
-    // If axis is not homed we need to ask Teleop mode but we need to bypass that if machine is homed
-    // https://forum.linuxcnc.org/49-basic-configuration/40581-how-to-configure-a-xhc-whb04b-pendant
-    if      (*memory->out.axisXSelect && false == *memory->in.JointXisHomed) {requestTeleopMode(true);}
-    else if (*memory->out.axisYSelect && false == *memory->in.JointYisHomed) {requestTeleopMode(true);}
-    else if (*memory->out.axisZSelect && false == *memory->in.JointZisHomed) {requestTeleopMode(true);}
-    else if (*memory->out.axisASelect && false == *memory->in.JointAisHomed) {requestTeleopMode(true);}
-    else if (*memory->out.axisBSelect && false == *memory->in.JointBisHomed) {requestTeleopMode(true);}
-    else if (*memory->out.axisCSelect && false == *memory->in.JointCisHomed) {requestTeleopMode(true);}
-    {requestManualMode(true);}
-
-    *memory->out.axisXJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_X);
-    *memory->out.axisYJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_Y);
-    *memory->out.axisZJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_Z);
-    *memory->out.axisAJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_A);
-    *memory->out.axisBJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_B);
-    *memory->out.axisCJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_C);
-        requestManualMode(false);
-        requestTeleopMode(false);
+    *memory->out.joint0JogCounts = *memory->out.axisXJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_X);
+    *memory->out.joint1JogCounts = *memory->out.axisYJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_Y);
+    *memory->out.joint2JogCounts = *memory->out.axisZJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_Z);
+    *memory->out.joint3JogCounts = *memory->out.axisAJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_A);
+    *memory->out.joint4JogCounts = *memory->out.axisBJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_B);
+    *memory->out.joint5JogCounts = *memory->out.axisCJogCounts = counters.counts(HandWheelCounters::CounterNameToIndex::AXIS_C);
 }
+
 // ----------------------------------------------------------------------
 void Hal::setFunction(bool enabled)
 {
@@ -1407,7 +1530,7 @@ bool Hal::requestMode(bool isRisingEdge, hal_bit_t *requestPin, hal_bit_t * mode
 	rv = waitForRequestedMode(modeFeedbackPin);
         *requestPin = false;
         usleep(mHalRequestProfile.mode.spaceMs * 1000);
-        return rv;
+        return rv; //waitForRequestedMode(modeFeedbackPin);
     }
     else
     {
@@ -1427,7 +1550,7 @@ bool Hal::waitForRequestedMode(volatile hal_bit_t * condition)
     useconds_t   timeoutMs   = mHalRequestProfile.mode.modeCheckLoopTimeoutMs;
     unsigned int maxTimeouts = mHalRequestProfile.mode.modeCheckLoops;
     unsigned int timeouts    = maxTimeouts;
-
+    
     do
     {
         if (false == *condition)
@@ -1457,6 +1580,24 @@ void Hal::monitorResetState() {
             *memory->out.spindleOverrideDoIncrease=false;
     if (*memory->out.spindleOverrideDoDecrease && expired(mToggleSpindleOverrideDecreaseStamp))
             *memory->out.spindleOverrideDoDecrease=false;
+    if (*memory->out.joint0Unhome && expired (mjoint0UnhomeStamp))
+	    *memory->out.joint0Unhome=false;
+    if (*memory->out.joint1Unhome && expired (mjoint1UnhomeStamp))
+	    *memory->out.joint1Unhome=false;
+    if (*memory->out.joint2Unhome && expired (mjoint2UnhomeStamp))
+	    *memory->out.joint2Unhome=false;
+    if (*memory->out.joint3Unhome && expired (mjoint3UnhomeStamp))
+	    *memory->out.joint3Unhome=false;
+    if (*memory->out.joint4Unhome && expired (mjoint4UnhomeStamp))
+	    *memory->out.joint4Unhome=false;
+    if (*memory->out.joint5Unhome && expired (mjoint5UnhomeStamp))
+	    *memory->out.joint5Unhome=false;
+    if (mjoint0HomeDoHome==false && *memory->out.joint0Home && expired(mjoint0HomeStamp)) 
+	    *memory->out.joint0Home=false;
+    if (mjoint1HomeDoHome==false && *memory->out.joint1Home && expired(mjoint1HomeStamp)) 
+	    *memory->out.joint1Home=false;
+    if (mjoint2HomeDoHome==false && *memory->out.joint2Home && expired(mjoint1HomeStamp)) 
+	    *memory->out.joint2Home=false;
 }
 
 bool Hal::expired(int64_t t) {

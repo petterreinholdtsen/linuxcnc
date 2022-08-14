@@ -209,6 +209,45 @@ public:
         hal_s32_t* axisBJogCounts{nullptr};
         //! to be connected to \ref axis.c.jog-counts
         hal_s32_t* axisCJogCounts{nullptr};
+        
+	//! to be connected to \ref joint.0.jog-counts
+        hal_s32_t* joint0JogCounts{nullptr};
+        //! to be connected to \ref joint.1.jog-counts
+        hal_s32_t* joint1JogCounts{nullptr};
+        //! to be connected to \ref joint.2.jog-counts
+        hal_s32_t* joint2JogCounts{nullptr};
+        //! to be connected to \ref joint.3.jog-counts
+        hal_s32_t* joint3JogCounts{nullptr};
+        //! to be connected to \ref joint.4.jog-counts
+        hal_s32_t* joint4JogCounts{nullptr};
+        //! to be connected to \ref joint.5.jog-counts
+        hal_s32_t* joint5JogCounts{nullptr};
+
+        //! to be connected to \ref axis.x.jog-scale
+        hal_float_t* joint0JogScale{nullptr};
+        //! to be connected to \ref axis.y.jog-scale
+        hal_float_t* joint1JogScale{nullptr};
+        //! to be connected to \ref axis.z.jog-scale
+        hal_float_t* joint2JogScale{nullptr};
+        //! to be connected to \ref axis.a.jog-scale
+        hal_float_t* joint3JogScale{nullptr};
+        //! to be connected to \ref axis.b.jog-scale
+        hal_float_t* joint4JogScale{nullptr};
+        //! to be connected to \ref axis.c.jog-scale
+        hal_float_t* joint5JogScale{nullptr};
+
+        //! to be connected to \ref axis.x.jog-enable
+        hal_bit_t* joint0JogEnable{nullptr};
+        //! to be connected to \ref axis.y.jog-enable
+        hal_bit_t* joint1JogEnable{nullptr};
+        //! to be connected to \ref axis.z.jog-enable
+        hal_bit_t* joint2JogEnable{nullptr};
+        //! to be connected to \ref axis.a.jog-enable
+        hal_bit_t* joint3JogEnable{nullptr};
+        //! to be connected to \ref axis.b.jog-enable
+        hal_bit_t* joint4JogEnable{nullptr};
+        //! to be connected to \ref axis.c.jog-enable
+        hal_bit_t* joint5JogEnable{nullptr};
 
         //! to be connected to \ref axis.x.jog-enable
         hal_bit_t* axisXJogEnable{nullptr};
@@ -222,6 +261,20 @@ public:
         hal_bit_t* axisBJogEnable{nullptr};
         //! to be connected to \ref axis.c.jog-enable
         hal_bit_t* axisCJogEnable{nullptr};
+
+	hal_bit_t* joint0Home{nullptr};
+	hal_bit_t* joint1Home{nullptr};
+	hal_bit_t* joint2Home{nullptr};
+	hal_bit_t* joint3Home{nullptr};
+	hal_bit_t* joint4Home{nullptr};
+	hal_bit_t* joint5Home{nullptr};
+	
+	hal_bit_t* joint0Unhome{nullptr};
+	hal_bit_t* joint1Unhome{nullptr};
+	hal_bit_t* joint2Unhome{nullptr};
+	hal_bit_t* joint3Unhome{nullptr};
+	hal_bit_t* joint4Unhome{nullptr};
+	hal_bit_t* joint5Unhome{nullptr};
 
         //! to be connected to \ref axis.x.jog-scale
         hal_float_t* axisXJogScale{nullptr};
@@ -590,6 +643,24 @@ private:
     Profiles::HalRequestProfile mHalRequestProfile;
     int64_t mToggleSpindleOverrideIncreaseStamp{0};
     int64_t mToggleSpindleOverrideDecreaseStamp{0};
+    int64_t mjoint0HomeStamp{0};
+    int64_t mjoint1HomeStamp{0};
+    int64_t mjoint2HomeStamp{0};
+    int64_t mjoint3HomeStamp{0};
+    int64_t mjoint4HomeStamp{0};
+    int64_t mjoint5HomeStamp{0};
+    int64_t mjoint0UnhomeStamp={0};
+    int64_t mjoint1UnhomeStamp={0};
+    int64_t mjoint2UnhomeStamp={0};
+    int64_t mjoint3UnhomeStamp={0};
+    int64_t mjoint4UnhomeStamp={0};
+    int64_t mjoint5UnhomeStamp={0};
+    bool mjoint0HomeDoHome{false};
+    bool mjoint1HomeDoHome{false};
+    bool mjoint2HomeDoHome{false};
+    bool mjoint3HomeDoHome{false};
+    bool mjoint4HomeDoHome{false};
+    bool mjoint5HomeDoHome{false};
 
     //! //! Allocates new hal_bit_t pin according to \ref mIsSimulationMode. If \ref mIsSimulationMode then
     //! mallocs memory, hal_pin_bit_new allocation otherwise.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import linuxcnc, hal
 import sys, os, time
@@ -48,26 +48,31 @@ while timeout > 0:
         rps = h['spindle-speed']/60
         ips = - h['Zvel']
         pitch = ips/rps
-        print "spindle velocity, revs/second: %.3f" % rps
-        print "Z velocity: %.3f" % ips
-        print "pitch: %.3f" % pitch
-        print
+        print("spindle velocity, revs/second: %.3f" % rps)
+        print("Z velocity: %.3f" % ips)
+        print("pitch: %.3f" % pitch)
+        print()
         avg_sum += pitch
         avg_count += 1
     timeout = 5 if h['running'] else timeout - 1
     time.sleep(0.1)
-avg_pitch = avg_sum/avg_count
-print "Average pitch = %.3f" % avg_pitch
+if 0 < avg_count:
+    avg_pitch = avg_sum/avg_count
+    print("Average pitch = %.3f" % avg_pitch)
+else:
+    res=166
+    print("Error: no pitch measured!")
+    avg_pitch = 0
 
 # Pitch should either be as specified (by slowing down spindle) or
 # else program should have aborted; if it didn't abort and pitch is
 # incorrect, then return the special failure result 166
 if (abs(avg_pitch - max_pitch) < 0.01):
     res = 0
-    print "OK:  average pitch = %.3f" % avg_pitch
+    print("OK:  average pitch = %.3f" % avg_pitch)
 else:
     res = 166
-    print "Error:  expected pitch = %.3f; got %.3f" % (max_pitch, avg_pitch)
+    print("Error:  expected pitch = %.3f; got %.3f" % (max_pitch, avg_pitch))
 
 # Shutdown
 c.wait_complete()

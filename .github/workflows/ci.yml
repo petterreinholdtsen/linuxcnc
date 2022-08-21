@@ -87,7 +87,8 @@ jobs:
         codename=$(lsb_release -cs)
         dch --maintmaint --distribution $codename "GitHub test package."
         eatmydata debian/configure
-        eatmydata debuild -us -uc
+        eatmydata debuild -us -uc -B
+        eatmydata debuild -us -uc -A
         sudo apt-get install ../*.deb
         ./scripts/runtests -p tests/
         eatmydata lintian --info --display-info --pedantic --display-experimental ../linuxcnc*.changes

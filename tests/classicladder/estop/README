@@ -1,0 +1,2 @@
+Simple classicladder test.  Set up ESTOP logic and verify
+that toggeling the ext-estop net will affect the ESTOP state.

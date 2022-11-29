@@ -224,7 +224,7 @@ jobs:
     strategy:
       matrix:
 #        cpu: ["i386", "amd64", "armhf", "aarch64"]
-        cpu: ["amd64", "armhf]
+        cpu: ["amd64", "armhf"]
         vendor: ["debian"]
 #        os: ["buster", "bullseye", "bookworm", "sid"]
         os: ["sid"]

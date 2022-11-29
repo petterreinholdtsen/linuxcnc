@@ -224,7 +224,7 @@ jobs:
     strategy:
       matrix:
 #        cpu: ["i386", "amd64", "armhf", "aarch64"]
-        cpu: ["amd64", "armhf"]
+        cpu: ["armhf"]
         vendor: ["debian"]
 #        os: ["buster", "bullseye", "bookworm", "sid"]
         os: ["sid"]
@@ -268,4 +268,4 @@ jobs:
         sudo docker exec linuxcnc eatmydata adduser testrunner sudo
         sudo docker exec linuxcnc eatmydata apt --yes --quiet install valgrind
         sudo docker exec linuxcnc su -c "valgrind --trace-children=yes ./scripts/runtests -p tests/classicladder/estop" testrunner
-        sudo docker exec linuxcnc su -c "eatmydata ./scripts/runtests -p ./tests" testrunner
+#        sudo docker exec linuxcnc su -c "eatmydata ./scripts/runtests -p ./tests" testrunner

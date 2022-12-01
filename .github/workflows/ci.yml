@@ -267,5 +267,5 @@ jobs:
         sudo docker exec linuxcnc eatmydata passwd -d testrunner
         sudo docker exec linuxcnc eatmydata adduser testrunner sudo
         sudo docker exec linuxcnc eatmydata apt --yes --quiet install valgrind
-        sudo docker exec linuxcnc su -c "./scripts/runtests -p tests/classicladder/estop" testrunner
-#        sudo docker exec linuxcnc su -c "eatmydata ./scripts/runtests -p ./tests" testrunner
+#        sudo docker exec linuxcnc su -c "./scripts/runtests -p tests/classicladder/estop" testrunner
+        sudo docker exec linuxcnc su -c "eatmydata ./scripts/runtests -p" testrunner

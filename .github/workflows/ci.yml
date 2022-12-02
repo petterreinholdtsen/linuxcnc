@@ -12,31 +12,41 @@ on:
 
 jobs:
 
-#  rip-and-test:
-#    runs-on: ubuntu-20.04
-#    steps:
-#    - name: Dump GitHub context
-#      env:
-#        GITHUB_CONTEXT: ${{ toJson(github) }}
-#      run: echo "$GITHUB_CONTEXT"
-#    - uses: actions/checkout@v2
-#      with:
-#        submodules: true
-#        fetch-depth: 0
-#    - run: git fetch --recurse-submodules=no https://github.com/linuxcnc/linuxcnc refs/tags/*:refs/tags/*
-#    - name: Build run-in-place & test
-#      run: |
-#        ./scripts/travis-install-build-deps.sh
-#        sudo apt-get install -y eatmydata
-#        curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
-#        sudo apt install ./po4a_0.67-2_all.deb
-#        cd src
-#        eatmydata ./autogen.sh
-#        eatmydata ./configure --with-realtime=uspace --disable-check-runtime-deps
-#        eatmydata make -O -j$((1+$(nproc))) default pycheck V=1
-#        # Note that the package build covers html docs
-#        eatmydata ../scripts/rip-environment runtests -p
-#
+  rip-and-test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        cpu: ["armhf"]
+        vendor: ["debian"]
+        os: ["sid"]
+    container:
+      image: ${{ matrix.vendor }}:${{ matrix.os }}
+      # IPC_OWNER is needed for shmget IPC_CREAT
+      # SYS_ADMIN is needed for shmctl IPC_SET
+      options: --platform linux/${{matrix.cpu}} --cpus=2 --cap-add=IPC_OWNER --cap-add=SYS_ADMIN
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
+    - run: git fetch --recurse-submodules=no https://github.com/linuxcnc/linuxcnc refs/tags/*:refs/tags/*
+    - name: Build run-in-place & test
+      run: |
+        ./scripts/travis-install-build-deps.sh
+        sudo apt-get install -y eatmydata
+        curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
+        sudo apt install ./po4a_0.67-2_all.deb
+        cd src
+        eatmydata ./autogen.sh
+        eatmydata ./configure --with-realtime=uspace --disable-check-runtime-deps
+        eatmydata make -O -j$((1+$(nproc))) default pycheck V=1
+        # Note that the package build covers html docs
+        eatmydata ../scripts/rip-environment runtests -p
+
 #  htmldocs:
 #    runs-on: ubuntu-20.04
 #    steps:
@@ -229,10 +239,6 @@ jobs:
 #        os: ["buster", "bullseye", "bookworm", "sid"]
 #        cpu: ["i386", "amd64", "armhf", "aarch64"]
     runs-on: ubuntu-22.04
-    container:
-      options: --cpus=2 --cap-add=IPC_OWNER --cap-add=SYS_ADMIN
-      # IPC_OWNER is needed for shmget IPC_CREAT
-      # SYS_ADMIN is needed for shmctl IPC_SET
     steps:
     - uses: actions/checkout@v3
       with:

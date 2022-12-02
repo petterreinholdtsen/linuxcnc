@@ -229,6 +229,10 @@ jobs:
 #        os: ["buster", "bullseye", "bookworm", "sid"]
 #        cpu: ["i386", "amd64", "armhf", "aarch64"]
     runs-on: ubuntu-22.04
+    container:
+      options: --cpus=2 --cap-add=IPC_OWNER --cap-add=SYS_ADMIN
+      # IPC_OWNER is needed for shmget IPC_CREAT
+      # SYS_ADMIN is needed for shmctl IPC_SET
     steps:
     - uses: actions/checkout@v3
       with:

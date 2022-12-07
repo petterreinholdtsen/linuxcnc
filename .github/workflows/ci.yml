@@ -145,7 +145,7 @@ jobs:
         # Possibly <URL: https://bugs.debian.org/1016422 >.
         case "${{matrix.image}}" in
             debian:sid)
-                su -c "./scripts/runtests -p ./tests" testrunner
+                su -c "./scripts/runtests -v ./tests" testrunner
                 ;;
             *)
                 su -c "eatmydata ./scripts/runtests -p ./tests" testrunner

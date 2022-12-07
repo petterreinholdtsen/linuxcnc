@@ -193,10 +193,11 @@ Unload(){
     uspace)
         rtapi_app exit 
 
-        # wait 5 seconds for rtapi_app to die and be reaped by its parent
+        timeout=20
+        # wait $timeout seconds for rtapi_app to die and be reaped by its parent
         START=$SECONDS
         local NPROCS
-        while [ 5 -gt $((SECONDS-START)) ]; do
+        while [ $timeout -gt $((SECONDS-START)) ]; do
             NPROCS=$(ps -C rtapi_app -o comm= | $GREP -v '<defunct>' | wc -l)
             if [ $NPROCS -eq 0 ]; then
                 break

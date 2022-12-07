@@ -163,8 +163,6 @@ def testProgram(prog, pin, pos, offset, bpp, dpu, program, data):
 
 def main():
     try:
-        os.system('realtime start')
-
         c = component("test")
 
         pin = {

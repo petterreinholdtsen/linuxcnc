@@ -1,0 +1,11 @@
+Testing a large paragraph
+with multiple lines.
+
+expected::
+   A file whose content is compared to the output from running the test
+scripts.
+   If the test output is identical to the content of the expected file, the
+test succeeds.
+
+If this file exist, a test failure is expected and does not cause
+ runtests to return an exit code signaling an error.

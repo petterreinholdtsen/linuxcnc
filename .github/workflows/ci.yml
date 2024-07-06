@@ -32,8 +32,7 @@ jobs:
         set -x
         sudo apt-get install -y eatmydata
         eatmydata ./scripts/travis-install-build-deps.sh
-        eatmydata curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
-        sudo eatmydata apt install --yes ./po4a_0.67-2_all.deb
+        eatmydata scripts/upgrade-po4a-if-needed
         sudo eatmydata apt --quiet --yes upgrade
         cd src
         eatmydata ./autogen.sh
@@ -60,8 +59,7 @@ jobs:
         sudo apt-get install -y eatmydata
         eatmydata ./scripts/travis-install-build-deps.sh
         sudo eatmydata apt-get install -y clang
-        eatmydata curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
-        sudo eatmydata apt install --yes ./po4a_0.67-2_all.deb
+        eatmydata scripts/upgrade-po4a-if-needed
         sudo eatmydata apt --quiet --yes upgrade
         cd src
         eatmydata ./autogen.sh
@@ -86,8 +84,7 @@ jobs:
       run: |
         ./scripts/travis-install-build-deps.sh
         sudo apt-get install -y eatmydata
-        curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
-        sudo eatmydata apt install --yes ./po4a_0.67-2_all.deb
+        eatmydata scripts/upgrade-po4a-if-needed
         sudo eatmydata apt --quiet --yes upgrade
         cd src
         eatmydata ./autogen.sh
@@ -120,8 +117,6 @@ jobs:
         set -x
         apt-get --quiet update
         apt-get --yes --quiet install eatmydata curl
-        eatmydata curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
-        eatmydata apt install --yes ./po4a_0.67-2_all.deb
         eatmydata apt --quiet --yes upgrade
         # Install stuff needed to check out the linuxcnc repo and turn it into a debian source package.
         eatmydata apt-get --yes --quiet install --no-install-suggests git lsb-release python3 devscripts
@@ -161,6 +156,7 @@ jobs:
         set -x
         eatmydata git config --global --add safe.directory "${PWD}"
         eatmydata debian/configure
+        eatmydata scripts/upgrade-po4a-if-needed
         eatmydata debian/update-dch-from-git
         eatmydata scripts/get-version-from-git | sed -re 's/^v(.*)$/\1/' >| VERSION; cat VERSION
         eatmydata git diff
@@ -204,8 +200,6 @@ jobs:
         set -x
         apt-get --quiet update
         apt-get --yes --quiet install eatmydata curl
-        eatmydata curl -O https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
-        eatmydata apt install --yes ./po4a_0.67-2_all.deb
         eatmydata apt --quiet --yes upgrade
         # Install stuff needed to check out the linuxcnc repo and turn it into a debian source package.
         eatmydata apt-get --yes --quiet install --no-install-suggests git lsb-release python3 devscripts
@@ -245,6 +239,7 @@ jobs:
         set -x
         eatmydata git config --global --add safe.directory "${PWD}"
         eatmydata debian/configure
+        eatmydata scripts/upgrade-po4a-if-needed
         eatmydata debian/update-dch-from-git
         eatmydata scripts/get-version-from-git | sed -re 's/^v(.*)$/\1/' >| VERSION; cat VERSION
         eatmydata git diff

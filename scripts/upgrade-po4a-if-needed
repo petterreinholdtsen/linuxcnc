@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+set -x
+
+po4adeburl=https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main/p/po4a/po4a_0.67-2_all.deb
+
+# Try several times
+for n in $(seq 5); do
+    curl -O $po4adeburl
+    if file po4a_0.67-2_all.deb | grep 'Debian binary package' ; then
+	sudo apt install --yes ./po4a_0.67-2_all.deb
+	exit 0
+    else
+	echo error: downloading po4a failed, this content came instead.
+	echo
+	cat po4a_0.67-2_all.deb
+	echo
+    fi
+done
+exit 1

@@ -7,7 +7,7 @@ po4adeburl=https://snapshot.debian.org/archive/debian/20220716T154603Z/pool/main
 
 # Try several times
 for n in $(seq 5); do
-    curl -O $po4adeburl
+    curl -L -O $po4adeburl
     if file po4a_0.67-2_all.deb | grep 'Debian binary package' ; then
 	sudo apt install --yes ./po4a_0.67-2_all.deb
 	exit 0

@@ -1,4 +1,3 @@
-
 [![Badge GPL2]][License]
 [![Badge LGPL]][License]
 
